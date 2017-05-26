@@ -642,7 +642,7 @@ textarea.placeholder-style::-moz-placeholder {
 }
 
 ::-webkit-input-placeholder {
-	color: #f5740a
+	color: #f2c100
 }
 
 :-moz-placeholder {

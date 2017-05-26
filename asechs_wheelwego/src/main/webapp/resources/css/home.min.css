@@ -7,6 +7,7 @@
 .subscribe_form {
     position: relative;
 }
+/*search 버튼 색*/
 .subscribe_form .subscribe {
     right: 0px;
     top: 0px;
@@ -14,11 +15,11 @@
     height: 50px;
     position: absolute;
     color: #FFF;
-    background-color: #24B7A4;
+    background-color: 	#ffcc02;
     border: medium none;
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
-    font-family: "Roboto Slab",serif;
+    font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 18px;
 }
 .subscribe_form input {
@@ -26,7 +27,7 @@
     height: 50px;
     border: none;
     width: 100%;
-    font-family: 'Lato', sans-serif;
+    font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 15px;
     border-radius: 30px;
     color: #000;
@@ -34,6 +35,7 @@
 .subscribe_form input[type=email]
 {
     padding-left: 30px;
+    color: #4a4848
 }
 
 .subscribe_form .subscribe {
@@ -152,10 +154,10 @@ hr{
 .img-centered {
    margin: 0 auto
 }
-
+/*헤더색*/
 header {
    text-align: center;
-   background: #f45148;
+   background: #ff814a ;
    color: #fff
 }
 
@@ -218,7 +220,7 @@ header .intro-text .skills {
 }
 
 .navbar-custom .navbar-nav li a:hover {
-   color: #f45148
+   color: #ff814a
 }
 
 .navbar-custom .navbar-nav li a:active, .navbar-custom .navbar-nav li a:focus
@@ -430,7 +432,7 @@ footer .footer-col {
 
 footer .footer-below {
    padding: 25px 0;
-   background-color: #233140
+   background-color: #555555
 }
 
 .btn-outline {
