@@ -11,13 +11,20 @@
                <h1 class="name">Wheel we go!</h1>
                <hr>
                </div>
-               <div class="col-lg-4"></div>
-                <div class="col-lg-4">
-			  <form class="subscribe_form" action="#" method="post">
+               <div class="col-lg-3"></div>
+            <div class="social col-lg-1">
+              <ul>
+                <li>
+                  <a href=""><i class="fa fa-map-marker fa-3x"></i></a>
+                </li>
+              </ul>
+            </div>
+               <div class="col-lg-4">
+           <form class="subscribe_form" action="#" method="post">
               <input required="" value="" placeholder="Search foodtruck!" class="email" id="email" name="email" type="email" >
               <input class="subscribe" name="email" value="Search" type="submit">
             </form>
-			  </div>
+           </div>
              <div class="col-lg-4"></div>
          </div>
       </div>
