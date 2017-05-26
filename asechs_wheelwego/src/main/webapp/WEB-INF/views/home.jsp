@@ -11,23 +11,27 @@
                <h1 class="name">Wheel we go!</h1>
                <hr>
                </div>
-                <div class="col-lg-4"></div>
-                <form class="col-lg-4 center-block">
-			    <div class="input-group">
-			     <div class="input-group-btn">
-			     <!-- <button type="button" class="btn btn-primary btn-lg sharp">Sharp</button> -->
-			        <button type="submit" class="btn btn-primary btn-lg sharp">
-			       <span class="glyphicon glyphicon-map-marker" style="color:white"></span>
-			        </button>
-			      </div>
-			      <input type="text" class="form-control" size="20" placeholder="푸드트럭명을 입력하세요" required>
-			      <div class="input-group-btn">
-			        <button type="submit" class="btn btn-danger">
-			       <span class="glyphicon glyphicon-search" style="color:white"></span>
-			        </button>
-			      </div>
-			    </div>
-			  </form>
+                <div class="col-lg-4 center-block">
+<!--                 <form class="col-lg-4 center-block">
+             <div class="input-group">
+              <div class="input-group-btn">
+                 <button type="submit" class="btn btn-danger btn-lg sharp">
+                <span class="glyphicon glyphicon-map-marker" style="color:white"></span>
+                 </button>
+               </div>
+               <input type="text" class="form-control" size="20" style="height:40px" placeholder="푸드트럭명을 입력하세요" required>
+               <div class="input-group-btn">
+                 <button type="submit" class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-search" style="color:white"></span>
+                 </button>
+               </div>
+             </div>
+           </form> -->
+           <form class="subscribe_form" action="#" method="post">
+              <input required="" value="" placeholder="Enter your email..." class="email" id="email" name="email" type="email">
+              <input class="subscribe" name="email" value="Subscribe!" type="submit">
+            </form>
+           </div>
              <div class="col-lg-4"></div>
          </div>
       </div>
@@ -40,7 +44,7 @@
          <div class="col-lg-12 text-center">
             <h2 class="page-header">recommend list</h2><br><br><br>
          </div>
-        	
+           
       <div class="row" >
          <div class="col-lg-4 col-sm-6 portfolio-item" >
             <div class="flip-container"
