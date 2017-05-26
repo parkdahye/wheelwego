@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member"> 	
+	<sql id="selectMember">
+		select id,password,name,address from spring_member
+	</sql>
+	<select id="findMemberById" resultType="memberVO">
+		<include refid="selectMember"></include>
+		where id=#{value}
+	</select>
+	<select id="getAddressKind" resultType="string">
+		select distinct address from spring_member
+	</select>
+	<select id="findMemberListByAddress" resultType="memberVO">
+ 		select id,name from spring_member
+ 		where address=#{value}
+ 	</select>
+ 	<select id="login" resultType="memberVO" parameterType="memberVO">
+ 		<include refid="selectMember"></include>
+ 		where id=#{id} and password=#{password}
+ 	</select>
+ 	<update id="updateMember" parameterType="memberVO">
+		update spring_member set password=#{password},name=#{name},address=#{address}
+		where id=#{id}
+	</update>
+	<select id="getMemberCount" resultType="int">
+ 		select count(*) from spring_member
+ 	</select>
+	<insert id="registerMember" parameterType="memberVO">
+		insert into spring_member(id,password,name,address)
+		values(#{id},#{password},#{name},#{address})
+	</insert>
+	<select id="idcheck" resultType="int">
+		select count(*) from spring_member where id=#{value}
+	</select>
+	
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
