@@ -12,23 +12,8 @@
                <hr>
                </div>
                 <div class="col-lg-4 center-block">
-<!--                 <form class="col-lg-4 center-block">
-             <div class="input-group">
-              <div class="input-group-btn">
-                 <button type="submit" class="btn btn-danger btn-lg sharp">
-                <span class="glyphicon glyphicon-map-marker" style="color:white"></span>
-                 </button>
-               </div>
-               <input type="text" class="form-control" size="20" style="height:40px" placeholder="푸드트럭명을 입력하세요" required>
-               <div class="input-group-btn">
-                 <button type="submit" class="btn btn-danger btn-sm">
-                <span class="glyphicon glyphicon-search" style="color:white"></span>
-                 </button>
-               </div>
-             </div>
-           </form> -->
-           <form class="subscribe_form" action="#" method="post">
-              <input required="" value="" placeholder="Enter your email..." class="email" id="email" name="email" type="email">
+           <form class="subscribe_form" action="#" method="post" >
+              <input required="" placeholder="Enter your email..." class="email" id="email" name="email" type="email">
               <input class="subscribe" name="email" value="Subscribe!" type="submit">
             </form>
            </div>
