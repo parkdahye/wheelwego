@@ -10,8 +10,25 @@
             <div class="intro-text">
                <h1 class="name">Wheel we go!</h1>
                <hr>
-               <span class="skills">FoodTruck Service</span>
-            </div>
+               </div>
+                <div class="col-lg-4"></div>
+                <form class="col-lg-4 center-block">
+			    <div class="input-group">
+			     <div class="input-group-btn">
+			     <!-- <button type="button" class="btn btn-primary btn-lg sharp">Sharp</button> -->
+			        <button type="submit" class="btn btn-primary btn-lg sharp">
+			       <span class="glyphicon glyphicon-map-marker" style="color:white"></span>
+			        </button>
+			      </div>
+			      <input type="text" class="form-control" size="20" placeholder="푸드트럭명을 입력하세요" required>
+			      <div class="input-group-btn">
+			        <button type="submit" class="btn btn-danger">
+			       <span class="glyphicon glyphicon-search" style="color:white"></span>
+			        </button>
+			      </div>
+			    </div>
+			  </form>
+             <div class="col-lg-4"></div>
          </div>
       </div>
    </div>
