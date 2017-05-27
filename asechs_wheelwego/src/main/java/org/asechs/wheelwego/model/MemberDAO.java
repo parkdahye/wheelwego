@@ -1,5 +1,7 @@
 package org.asechs.wheelwego.model;
 
-public interface MemberDAO {
+import org.asechs.wheelwego.model.vo.MemberVO;
 
+public interface MemberDAO {
+	 MemberVO login(MemberVO vo);
 }

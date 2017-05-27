@@ -19,7 +19,8 @@
     <script src="${pageContext.request.contextPath}/resources/js/contact_me.js"></script>
     <!-- Theme JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/js/freelancer.min.js"></script>
-    
+  
+  
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Theme CSS -->

@@ -1,5 +1,11 @@
 package org.asechs.wheelwego;
 
+import javax.annotation.Resource;
+
+import org.asechs.wheelwego.model.MemberService;
+import org.asechs.wheelwego.model.vo.CustomerVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,9 +32,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
   </dependency>  
  */  
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-*.xml"})
+@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class TestJUnit {
-
+	@Resource
+	private MemberService service;
+	@Test
+	public void test(){
+			MemberVO vo = new MemberVO();
+			vo.setId("java01");
+			vo.setPassword("java01");
+			System.out.println(vo);
+			System.out.println(service.login(vo));	
+	}
 }
 
 
