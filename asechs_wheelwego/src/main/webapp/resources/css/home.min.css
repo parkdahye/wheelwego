@@ -55,7 +55,7 @@
     border-radius: 30px;
     color: #000;
 }
-.subscribe_form input[type=email]
+.subscribe_form input[type=text]
 {
     padding-left: 30px;
     color: #4a4848
@@ -177,7 +177,7 @@ hr{
 .img-centered {
    margin: 0 auto
 }
-/*헤더색*/
+/*�뿤�뜑�깋*/
 header {
    text-align: center;
    background: #ff814a ;
