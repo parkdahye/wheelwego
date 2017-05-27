@@ -18,10 +18,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#portfolio">MyPage</a>
+                        <a href="">MyPage</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#about">Login</a>
+                        <a href="">Login</a>
                     </li>
                 </ul>
             </div>

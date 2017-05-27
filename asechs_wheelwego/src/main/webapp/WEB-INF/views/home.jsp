@@ -12,10 +12,10 @@
                <hr>
                </div>
                <div class="col-lg-3"></div>
-            <div class="social col-lg-1">
+            <div class="social col-lg-1 ">
               <ul>
                 <li>
-                  <a href=""><i class="fa fa-map-marker fa-3x"></i></a>
+                  <a href=""><i class="fa fa-map-marker fa-3x" id="gps_btn"></i></a>
                 </li>
               </ul>
             </div>
