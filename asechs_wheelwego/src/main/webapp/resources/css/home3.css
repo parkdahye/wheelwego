@@ -1884,7 +1884,7 @@ label {
 	transform: rotateY(180deg)
 }
 
-/*front, back, container 원형으로*/
+/*front, back, container �썝�삎�쑝濡�*/
 .back, .flip-container, .front {
  width:250px;
  height:250px;
