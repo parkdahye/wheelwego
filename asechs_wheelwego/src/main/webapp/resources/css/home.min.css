@@ -3,15 +3,16 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
-/*map icon*/
+
+ /*gps 아이콘*/
 .social ul li
 {
-	display: inline-block;
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	margin-right: 10px;
+   display: inline-block;
+   border-radius: 50%;
+   width: 40px;
+   height:auto;
+   line-height: 50px;
+   margin-right: 10px;
 }
 .social a i
 {
@@ -28,7 +29,8 @@
 .subscribe_form {
     position: relative;
 }
-/*search 踰꾪듉 �깋*/
+
+/*search 버튼 색*/
 .subscribe_form .subscribe {
     right: 0px;
     top: 0px;
