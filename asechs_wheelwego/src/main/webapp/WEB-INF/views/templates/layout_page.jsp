@@ -14,11 +14,6 @@
     <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <!-- Contact Form JavaScript -->
-    <script src="${pageContext.request.contextPath}/resources/js/jqBootstrapValidation.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/contact_me.js"></script>
-    <!-- Theme JavaScript -->
-    <script src="${pageContext.request.contextPath}/resources/js/freelancer.min.js"></script>
   
   
     <!-- Bootstrap Core CSS -->
@@ -31,9 +26,16 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 </head>
 <body id="page-top" class="index">
-<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
-	<div id="header"><tiles:insertAttribute name="header" /></div>
-	<div id="main" ><tiles:insertAttribute name="main" /></div>
-	<div id="footer"><tiles:insertAttribute name="footer" /></div>
+	<div id="header">
+		<tiles:insertAttribute name="header" />
+	</div>
+	<div class="container">
+	<div id="page_main">
+			<tiles:insertAttribute name="main" />
+		</div>
+	</div>
+		<div id="page_footer">
+			<tiles:insertAttribute name="footer" />
+		</div>
 </body>
 </html>

@@ -9,7 +9,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top">Wheel, We go!</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/home.do">Wheel, We go!</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,7 +19,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="">MyPage</a>
+                         <a href="${pageContext.request.contextPath}/foodtruck/foodtruck_detail.do">map폼으로이동</a>
+                    </li>
+                    <li class="page-scroll">
+                         <a href="${pageContext.request.contextPath}/member/goForm.do">일반 페이지로이동</a>
                     </li>
                     <li class="page-scroll">
                     <c:choose >

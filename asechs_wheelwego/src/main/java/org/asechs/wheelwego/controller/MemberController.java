@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MemberController {
 	@Resource
 	private MemberService memberService;
-	@RequestMapping("home.do")
-	public String home(){
-		return "home.tiles";
-	}
+
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, MemberVO vo) {		
 		MemberVO memberVO=memberService.login(vo);
@@ -26,7 +23,7 @@ public class MemberController {
 		else{
 			HttpSession session=request.getSession();
 			session.setAttribute("memberVO",memberVO);
-			return "home.tiles";
+			return "main_home.tiles";
 		}
 	}
 	@RequestMapping("logout.do")
@@ -34,6 +31,6 @@ public class MemberController {
 		HttpSession session=request.getSession(false);
 		if(session!=null)
 			session.invalidate();
-		return "home.tiles";
+		return "main_home.tiles";
 	}
 }

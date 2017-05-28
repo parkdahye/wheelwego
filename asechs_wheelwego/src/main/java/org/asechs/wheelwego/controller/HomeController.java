@@ -12,6 +12,10 @@ public class HomeController {
 	 * 우선적으로 실행되고 
 	 * 존재하지 않으면 @PathVariable 메서드가 실행된다 
 	 */
+	@RequestMapping("home.do")
+	public String home(){
+		return "main_home.tiles";
+	}
 	@RequestMapping("{viewName}.do")
 	public String showView(@PathVariable String viewName){
 		//System.out.println("@PathVariable:"+viewName);

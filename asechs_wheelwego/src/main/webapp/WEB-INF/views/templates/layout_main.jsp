@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Wheel, We go!</title>
 
-
  <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 
@@ -27,22 +26,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 </head>
 <body id="page-top" class="index">
-<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
-	<div id="header">
-		<tiles:insertAttribute name="header" />
-	</div>
-	<div  class="container">
-	<div class="row">
-	<div id="page_main" class="col-sm-7">
-			<tiles:insertAttribute name="main" />
-	</div>
-	<div id="page_right" class="col-sm-5">
-		<tiles:insertAttribute name="right" />
-	</div>
-	</div>
-	</div>
-		<div id="page_footer">
-			<tiles:insertAttribute name="footer" />
-		</div>
+	<div id="header"><tiles:insertAttribute name="header" /></div>
+	<div id="main" ><tiles:insertAttribute name="main" /></div>
+	<div id="footer"><tiles:insertAttribute name="footer" /></div>
+	
 </body>
 </html>

@@ -1,6 +1,23 @@
 @CHARSET "UTF-8";
 
-
+#page_main {
+	margin-top:100px;
+	min-height: 100%;
+	height: 100%;
+	margin-bottom: -50px
+	}
+#page_footer{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+}
+#page_right{
+	margin-top:100px;
+	min-height: 100%;
+	height: 100%;
+	margin-bottom: -50px
+}
 /*네비게이션설정*/
 
 .navbar-custom {
@@ -114,7 +131,7 @@ div#maincontent {
 }
 
 header .container {
-   padding-top: 100px;
+   padding-top: 50px;
    padding-bottom: 50px
 }
 /* 헤더 이미지 가운데에 넣을 수 있음
@@ -132,7 +149,7 @@ header .intro-text .name {
 @media ( min-width :767px) {
 	/*헤더 padding, 폰트 사이즈*/
    header .container {
-      padding-top: 200px;
+      padding-top: 130px;
       padding-bottom: 100px
    }
    header .intro-text .name {
@@ -457,6 +474,7 @@ footer {
    color: #fff
 }
 footer .footer-below {
+	bottom:0;
    padding: 25px 0;
    background-color: #555555
 }
