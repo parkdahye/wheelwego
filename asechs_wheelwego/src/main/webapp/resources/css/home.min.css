@@ -5,7 +5,6 @@
  */
 
 /*로그인 폼*/
-
 .form-signin {
   max-width: 380px;
   padding: 15px 35px 45px;
@@ -216,7 +215,7 @@ hr{
 .img-centered {
    margin: 0 auto
 }
-/*�뿤�뜑�깋*/
+/*헤더 색*/
 header {
    text-align: center;
    background: #ff814a ;
@@ -236,7 +235,7 @@ header img {
 header .intro-text .name {
    display: block;
    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-   text-transform: uppercase;
+   text-transform: uppercase; /*문자를 대문자로 변환*/
    font-weight: 700;
    font-size: 2em
 }
@@ -247,6 +246,7 @@ header .intro-text .skills {
 }
 
 @media ( min-width :768px) {
+	/*헤더 padding, 폰트 사이즈*/
    header .container {
       padding-top: 200px;
       padding-bottom: 100px
@@ -254,9 +254,7 @@ header .intro-text .skills {
    header .intro-text .name {
       font-size: 4.75em
    }
-   header .intro-text .skills {
-      font-size: 1.75em
-   }
+
 }
 
 .navbar-custom {
@@ -285,6 +283,7 @@ header .intro-text .skills {
    color: #ff814a
 }
 
+/*클랙했을 때 없어지는 현상*/
 .navbar-custom .navbar-nav li a:active, .navbar-custom .navbar-nav li a:focus
    {
    color: #fff
@@ -324,12 +323,14 @@ header .intro-text .skills {
       -moz-transition: all .3s;
       transition: all .3s
    }
+   /*
    .navbar-custom.affix {
       padding: 10px 0
    }
    .navbar-custom.affix .navbar-brand {
       font-size: 1.5em
    }
+   */
 }
 
 section {
@@ -368,22 +369,22 @@ section.success {
    margin: 0 auto
 }
 
-#portfolio .portfolio-item .portfolio-link .caption {
+/* #portfolio .portfolio-item .portfolio-link .caption {
    background-color:#eeeeee;
    position: absolute;
-/*     width:250px;
+    width:250px;
     height:250px;
     border-radius:125px;
     -moz-border-radius : 125px;
     -webkit-border-radius : 125px;
     -ms-border-radius :125px;
     -khtml-border-radius : 125px;
-    -o-border-radius :125px; */
+    -o-border-radius :125px;
    opacity: 0;
    transition: all ease .5s;
    -webkit-transition: all ease .5s;
    -moz-transition: all ease .5s
-}
+} */
 
 #portfolio .portfolio-item .portfolio-link .caption:hover {
    opacity: 0.7;

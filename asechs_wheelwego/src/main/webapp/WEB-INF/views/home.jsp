@@ -8,7 +8,7 @@
       <div class="row">
          <div class="col-lg-12">
             <div class="intro-text">
-               <h1 class="name">Wheel we go!</h1>
+               <h1 class="name">Wheel<img src="${pageContext.request.contextPath}/resources/img/포크.png">  we go!</h1>
                <hr>
                </div>
 
@@ -58,7 +58,7 @@
                   <a href="#portfolioModal1" class="portfolio-link"
                      data-toggle="modal">
                      <div class="front" >
-                        <img class="img-circle  center-block food-img"
+                        <img class="img-circle  center-block food-img img-responsive"
                            src="${pageContext.request.contextPath}/resources/img/truck3.jpg"
                            alt="" >
                      </div>
@@ -117,8 +117,7 @@
             <div class="flip-container"
                ontouchstart="this.classList.toggle('hover');"  style="margin: 0 auto;">
                <div class="flipper">
-                  <a href="#portfolioModal1" class="portfolio-link"
-                     data-toggle="modal">
+                  <a href="" class="portfolio-link">
                      <div class="front">
                         <img class="img-circle img-responsive center-block food-img"
                            src="${pageContext.request.contextPath}/resources/img/truck4.jpg"

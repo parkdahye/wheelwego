@@ -24,8 +24,7 @@
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Theme CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/home.min.css" rel="stylesheet">
- <link href="${pageContext.request.contextPath}/resources/css/home3.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/asechs.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
