@@ -16,8 +16,7 @@ function checkPwForm_submit(){
     }
 }
 </script>
- ${sessionScope.memberVO.password }   ${param.command }
-<form action="${pageContext.request.contextPath}/mypage/member_${param.command}.do" onsubmit="return checkPwForm_submit()">
+<form action="${pageContext.request.contextPath}/afterLogin_mypage/${param.command}.do" onsubmit="return checkPwForm_submit()">
    패스워드 <input type="password" name="password" id="passwordPre" size="10" required="required"><br>
    <input type="hidden" value="${param.command}">
    <input type="submit" value="확인">

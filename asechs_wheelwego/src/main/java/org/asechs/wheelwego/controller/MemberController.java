@@ -51,7 +51,7 @@ public class MemberController {
 
 	   
 	   // 강정호 회원 수정 메서드
-	   @RequestMapping(value="updateMember.do", method=RequestMethod.POST)
+	   @RequestMapping(value="afterLogin_mypage/updateMember.do", method=RequestMethod.POST)
 	   public String updateMember(MemberVO vo, HttpServletRequest request){
 	      memberService.updateMember(vo);
 	      request.getSession(false).setAttribute("memberVO", vo);
@@ -78,8 +78,8 @@ public class MemberController {
 	      return new ModelAndView("member/register_result.tiles", "memberVO", memberVO);
 	   }
 	   
-	   //김래현
-	      @RequestMapping("dropMember.do")
+	   //김래현 회원탈퇴
+	      @RequestMapping("afterLogin_mypage/deleteAccount.do")
 	      public String dropMember(HttpServletRequest request){
 	         MemberVO vo=(MemberVO) request.getSession(false).getAttribute("mvo");
 	         memberService.dropMember(vo.getId());

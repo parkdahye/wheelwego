@@ -7,7 +7,5 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class MypageController {
-	@Resource
-   private MemberService memberservice;
 
 }

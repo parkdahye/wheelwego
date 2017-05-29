@@ -33,10 +33,7 @@
                     </li>      
                     	</c:when>
                     	<c:otherwise>
-                    		<a href="${pageContext.request.contextPath}/mypage/mypage.do" >${sessionScope.memberVO.memberName} 님</a>
-                    		 <li class="page-scroll">
-                        <a href="${pageContext.request.contextPath }/member/update_form.do">회원정보수정</a>
-                    </li>
+                    		<a href="${pageContext.request.contextPath}/mypage/mypage.do" >${sessionScope.memberVO.memberName}님의 MyPage</a>
                     	</c:otherwise>
                     </c:choose>
 				</li>
