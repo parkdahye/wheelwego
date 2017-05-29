@@ -17,7 +17,7 @@
 		<a href="">예약관리</a>
 	</c:when>
 	<c:otherwise>
-		<a href="">단골트럭</a><br>
+		<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do">단골트럭</a><br>
 		<a href="">My Review List</a>
 	</c:otherwise>
 </c:choose>
