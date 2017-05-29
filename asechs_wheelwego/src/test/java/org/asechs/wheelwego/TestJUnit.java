@@ -38,11 +38,7 @@ public class TestJUnit {
 	private MemberService service;
 	@Test
 	public void test(){
-			MemberVO vo = new MemberVO();
-			vo.setId("java01");
-			vo.setPassword("java01");
-			System.out.println(vo);
-			System.out.println(service.login(vo));	
+		System.out.println(service.forgetMemberPassword(new MemberVO("java", null, "박다혜", null, "01065986262", null)));
 	}
 }
 

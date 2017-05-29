@@ -31,12 +31,12 @@ class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 </bean>
 
 <!-- Handler Interceptor 설정 -->
-<!-- <mvc:interceptors>
+<mvc:interceptors>
 	<mvc:interceptor>
-		<mvc:mapping path="/afterLogin_*.do"/>
+		<mvc:mapping path="/afterLogin_*/*.do"/>
 		<bean class="org.asechs.wheelwego.controller.LoginCheckInterceptor"></bean>
 	</mvc:interceptor>
-</mvc:interceptors> -->
+</mvc:interceptors>
 
 <!-- 파일 업로드를 위한 설정 -->
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

@@ -6,9 +6,9 @@ import org.asechs.wheelwego.model.vo.SellerVO;
 public interface MemberDAO {
 	 MemberVO login(MemberVO vo);
 
-	String findMemberId(MemberVO vo);
+	String forgetMemberId(MemberVO vo);
 
-	String findMemberPassword(MemberVO vo);
+	String forgetMemberPassword(MemberVO vo);
 
 	void updateMember(MemberVO vo);
 
@@ -19,4 +19,6 @@ public interface MemberDAO {
 	void registerCustomer(MemberVO memberVO);
 
 	void registerSeller(MemberVO memberVO, SellerVO sellerVO);
+
+	void dropMember(String id);
 }

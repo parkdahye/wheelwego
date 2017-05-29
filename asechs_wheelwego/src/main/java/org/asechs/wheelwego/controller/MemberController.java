@@ -37,18 +37,19 @@ public class MemberController {
 		return "main_home.tiles";
 	}
 	//정현지 id찾기
-	@RequestMapping(value="findMemberId.do",method = RequestMethod.POST)
-	   public ModelAndView findMemberId(MemberVO vo) {
-	      String id = memberService.findMemberId(vo);
-	      return new ModelAndView("member/find_result.tiles", "result", id);
+	@RequestMapping("forgetMemberId.do")
+	 @ResponseBody
+	   public String forgetMemberId(MemberVO vo) {
+	      return memberService.forgetMemberId(vo);
 	   }
 	//정현지 pw찾기
-	   @RequestMapping(value="findMemberPassword.do",method=RequestMethod.POST)
-	   public ModelAndView findMemberPassword(MemberVO vo) {
-	      String password = memberService.findMemberPassword(vo);
-	      return new ModelAndView("member/find_result.tiles", "result", password);
+	   @RequestMapping("forgetMemberPassword.do")
+	   @ResponseBody
+	   public String forgetMemberPassword(MemberVO vo) {
+	      return memberService.forgetMemberPassword(vo);
 	   }
 
+	   
 	   // 강정호 회원 수정 메서드
 	   @RequestMapping(value="updateMember.do", method=RequestMethod.POST)
 	   public String updateMember(MemberVO vo, HttpServletRequest request){
@@ -76,5 +77,12 @@ public class MemberController {
 	      MemberVO memberVO = memberService.findMemberById(id);
 	      return new ModelAndView("member/register_result.tiles", "memberVO", memberVO);
 	   }
-
+	   
+	   //김래현
+	      @RequestMapping("dropMember.do")
+	      public String dropMember(HttpServletRequest request){
+	         MemberVO vo=(MemberVO) request.getSession(false).getAttribute("mvo");
+	         memberService.dropMember(vo.getId());
+	         return "home.tiles";
+	}
 }

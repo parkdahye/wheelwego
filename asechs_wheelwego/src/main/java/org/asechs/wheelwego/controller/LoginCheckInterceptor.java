@@ -43,10 +43,10 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		System.out.println("***********핸들러 인터셉터 실행************"+request.getRequestURI());
 		HttpSession session=request.getSession(false);
-		if(session != null && session.getAttribute("mvo")!=null)
+		if(session != null && session.getAttribute("memberVO")!=null)
 			return true;
 		else{
-			response.sendRedirect("index.do");
+			response.sendRedirect(request.getContextPath()+"/home.do");
 			return false;
 		}
 	}
