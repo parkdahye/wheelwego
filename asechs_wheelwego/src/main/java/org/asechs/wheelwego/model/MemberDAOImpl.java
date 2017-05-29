@@ -13,4 +13,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO login(MemberVO vo){
 		return sqlSessionTemplate.selectOne("member.login",vo);			
 	}
+	  @Override
+	   public String findMemberId(MemberVO vo) {
+	      return sqlSessionTemplate.selectOne("member.findMemberId", vo);
+	   }
+	   @Override
+	   public String findMemberPassword(MemberVO vo) {
+	      return sqlSessionTemplate.selectOne("member.findMemberPassword", vo);
+	   }
 }

@@ -12,4 +12,12 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO login(MemberVO vo){
 		return memberDAO.login(vo);
 	}
+	@Override
+	   public String findMemberId(MemberVO vo){
+	      return memberDAO.findMemberId(vo);
+	   }
+	@Override
+	   public String findMemberPassword(MemberVO vo){
+	      return memberDAO.findMemberPassword(vo);
+	   }
 }

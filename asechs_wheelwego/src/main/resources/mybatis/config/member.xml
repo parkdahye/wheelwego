@@ -16,6 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select id,password,member_name,address,phonenumber,member_type from member
  		where id=#{id} and password=#{password}
  	</select>
+ 	 <select id="findMemberId" resultType="String" parameterType="memberVO">
+      select id from member where member_name=#{memberName} and
+      phonenumber=#{phoneNumber}
+   </select>
+   <select id="findMemberPassword" resultType="String" parameterType="memberVO">
+      select password from member where id=#{id} and member_name=#{memberName} and phonenumber=#{phoneNumber}
+   </select>
 </mapper>
  
  

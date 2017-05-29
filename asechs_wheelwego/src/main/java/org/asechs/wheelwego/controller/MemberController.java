@@ -9,6 +9,7 @@ import org.asechs.wheelwego.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -33,4 +34,17 @@ public class MemberController {
 			session.invalidate();
 		return "main_home.tiles";
 	}
+	//id찾기
+	@RequestMapping(value="findMemberId.do",method = RequestMethod.POST)
+	   public ModelAndView findMemberId(MemberVO vo) {
+	      String id = memberService.findMemberId(vo);
+	      return new ModelAndView("member/find_result.tiles", "result", id);
+	   }
+	//pw찾기
+	   @RequestMapping(value="findMemberPassword.do",method=RequestMethod.POST)
+	   public ModelAndView findMemberPassword(MemberVO vo) {
+	      String password = memberService.findMemberPassword(vo);
+	      return new ModelAndView("member/find_result.tiles", "result", password);
+	   }
+
 }

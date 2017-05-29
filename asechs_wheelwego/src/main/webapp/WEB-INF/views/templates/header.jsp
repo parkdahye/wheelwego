@@ -62,8 +62,8 @@
       <input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요" required="" autofocus="" /><br>
       <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력하세요" required=""/><br><br>      
         <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me<br><br>
-        <a href="/forgot_id" class="forgot-password pull-right">아이디가 생각나지 않으세요?</a><br>
-          <a href="/forgot_password" class="forgot-password pull-right" >비밀번호가 생각나지 않으세요?</a><br><br>
+        <a href="${pageContext.request.contextPath}/member/find_form.do" class="forgot-password pull-right">아이디가 생각나지 않으세요?</a><br>
+          <a href="${pageContext.request.contextPath}/member/find_form.do" class="forgot-password pull-right" >비밀번호가 생각나지 않으세요?</a><br><br>
       <button class="btn btn-lg btn-primary btn-block" type="submit" id="loginBtn">Login</button>   
     </form>
         </div>
