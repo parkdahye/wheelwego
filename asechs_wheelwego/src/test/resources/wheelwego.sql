@@ -1,16 +1,16 @@
 -------------------------------------------------------------------------------
-create drop sequence survey_seq;
-create drop sequence customerpoint_seq;
-create drop sequence booking_seq;
-create drop sequence review_seq;
-create drop sequence menu_seq;
+ drop sequence survey_seq;
+ drop sequence customerpoint_seq;
+ drop sequence booking_seq;
+ drop sequence review_seq;
+ drop sequence menu_seq;
 
-create drop sequence information_seq;
-create drop sequence informationcomment_seq;
-create drop sequence qna_seq;
-create drop sequence qnacomment_seq;
-create drop sequence freeboard_seq;
-create drop sequence freeboardcomment_seq;
+ drop sequence information_seq;
+ drop sequence informationcomment_seq;
+ drop sequence qna_seq;
+ drop sequence qnacomment_seq;
+ drop sequence freeboard_seq;
+ drop sequence freeboardcomment_seq;
 
 create sequence survey_seq;
 create sequence customerpoint_seq;
@@ -67,8 +67,8 @@ create table foodtruck(
     foodtruck_name varchar2(100) not null,
     introduction clob not null,
     foodtruck_filename1 varchar2(100) not null,
-    foodtruck_filename2 varchar2(100) not null,
-    foodtruck_filename3 varchar2(100) not null,
+    foodtruck_filename2 varchar2(100) ,
+    foodtruck_filename3 varchar2(100) ,
     latitude BINARY_DOUBLE,
     longitude BINARY_DOUBLE,
     constraint foodtruck_id_fk foreign key(seller_id) references seller(seller_id) on delete cascade

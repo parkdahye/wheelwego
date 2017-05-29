@@ -38,7 +38,7 @@ public class TestJUnit {
 	private MemberService service;
 	@Test
 	public void test(){
-		System.out.println(service.forgetMemberPassword(new MemberVO("java", null, "박다혜", null, "01065986262", null)));
+		//System.out.println(service.forgetMemberPassword(new MemberVO("java", null, "박다혜", null, "01065986262", null)));
 	}
 }
 

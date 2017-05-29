@@ -33,7 +33,7 @@
                     </li>      
                     	</c:when>
                     	<c:otherwise>
-                    		<a href="${pageContext.request.contextPath}/mypage/mypage.do" >${sessionScope.memberVO.memberName}님의 MyPage</a>
+                    		<a href="${pageContext.request.contextPath}/afterLogin_mypage/mypage.do" >${sessionScope.memberVO.memberName}님의 MyPage</a>
                     	</c:otherwise>
                     </c:choose>
 				</li>
