@@ -8,4 +8,12 @@ public interface MemberService {
 	String findMemberId(MemberVO vo);
 
 	String findMemberPassword(MemberVO vo);
+
+	void updateMember(MemberVO vo);
+
+	int idcheck(String id);
+
+	void registerMember(MemberVO memberVO, String addressDetail, String businessNumber);
+
+	MemberVO findMemberById(String id);
 }

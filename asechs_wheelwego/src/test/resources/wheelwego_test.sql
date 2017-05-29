@@ -1,8 +1,11 @@
 ----------dbTEST---------------------
 
 insert into member values ('java01', 'java01', '김래발', '판교', '010-1111-1111', '일반회원');
+update member set member_type='0' where id='java01';
 delete from member;
 select * from member;
+delete member where id='java'
+delete seller where seller_id='java'
 insert into customer values ('java01');
 delete from customer;
 select c.customer_id, m.password, m.member_name, m.address, m.phonenumber, m.member_type

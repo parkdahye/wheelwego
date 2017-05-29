@@ -1,18 +1,16 @@
 package org.asechs.wheelwego.model.vo;
 
 public class CustomerVO extends MemberVO{
-	public CustomerVO() {
-		super();
-	}
+	   public CustomerVO() {
+	      super();
+	   }
 
-	public CustomerVO(String id, String password, String memberName, String address, String phoneNumber, String memberType) {
-		super(id, password, memberName, address, phoneNumber, memberType);
-	}
+	   public CustomerVO(MemberVO memberVO) {
+	      super(memberVO.getId(), memberVO.getPassword(), memberVO.getMemberName(), memberVO.getAddress(), memberVO.getPhoneNumber(), memberVO.getMemberType());
+	   }
 
-	@Override
-	public String toString() {
-		return super.toString() + "]";
+	   @Override
+	   public String toString() {
+	      return super.toString() + "]";
+	   }
 	}
-	
-	
-}

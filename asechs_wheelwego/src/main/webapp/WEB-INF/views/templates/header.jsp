@@ -18,19 +18,25 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
+
+                    <li class="page-scroll">
+                    <c:choose >
+                    	<c:when test="${sessionScope.memberVO==null}">      
                     <li class="page-scroll">
                          <a href="${pageContext.request.contextPath}/foodtruck/foodtruck_detail.do">map폼으로이동</a>
                     </li>
                     <li class="page-scroll">
-                         <a href="${pageContext.request.contextPath}/member/goForm.do">일반 페이지로이동</a>
-                    </li>
+                         <a href="${pageContext.request.contextPath}/member/register_form.do" >회원가입</a>
+                    </li>              	
                     <li class="page-scroll">
-                    <c:choose >
-                    	<c:when test="${sessionScope.memberVO==null}">                    	
                         <a  href="#myModal" data-toggle="modal" >Login</a>
+                    </li>      
                     	</c:when>
                     	<c:otherwise>
                     		<a href="" >${sessionScope.memberVO.memberName} 님</a>
+                    		 <li class="page-scroll">
+                        <a href="${pageContext.request.contextPath }/member/update_form.do">회원정보수정</a>
+                    </li>
                     	</c:otherwise>
                     </c:choose>
 				</li>
