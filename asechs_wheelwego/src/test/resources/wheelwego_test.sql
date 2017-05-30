@@ -47,7 +47,8 @@ insert into wishlist values('java01','80나0020');
 
 -- 게시판 상세보기
 select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss')
-freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=2
-
+freeboard_timeposted,
+freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=8
 --게시물 삭제
 delete freeboard where freeboard_no=1 
+select * from 
