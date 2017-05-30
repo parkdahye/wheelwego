@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -16,6 +15,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> getFreeBoardList() {
 		return boardDAO.getFreeBoardList();
+	}
+
+	@Override
+	public BoardVO getFreeBoardDetail(String no) {
+		return boardDAO.getFreeBoardDetail(no);
+	}
+
+	@Override
+	public void freeboardDelete(String no) {
+		boardDAO.freeboardDelete(no);
 	}
 
 }

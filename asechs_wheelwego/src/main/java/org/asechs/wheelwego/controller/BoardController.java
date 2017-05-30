@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.asechs.wheelwego.model.BoardService;
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +30,26 @@ public class BoardController {
 		List<BoardVO> freeBoardList=boardService.getFreeBoardList();
 		System.out.println("BoardController에서 자유게시판 목록 받음: "+freeBoardList);
 		return new ModelAndView("board/freeboard_list.tiles","freeBoardList",freeBoardList);
+	}
+	//호겸 작성. 자유게시판 상세보기
+	@RequestMapping("board/freeboard_detail_content.do")
+	public String freeboard_detail_content(String no, Model model){
+		BoardVO bvo=boardService.getFreeBoardDetail(no);
+		model.addAttribute("detail_freeboard", bvo);
+		return "board/freeboard_detail_content.tiles";
+	}
+	//호겸 작성. 게시물 삭제
+	@RequestMapping("freeboardDelete.do")
+	public String freeboardDelete(String no){
+		boardService.freeboardDelete(no);
+		return "redirect:freeboard_list.do";
+	}
+	//호겸 작성. 게시물 수정 폼으로 가기
+	@RequestMapping("freeboard_update_form.do")
+	public String freeboard_update_form(String no,Model model){
+		BoardVO bvo=boardService.getFreeBoardDetail(no);
+		model.addAttribute("detail_freeboard", bvo);
+		return "board/freeboard_update_form.tiles";
 	}
 }
 

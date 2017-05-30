@@ -29,7 +29,7 @@
 			<c:forEach items="${requestScope.freeBoardList }" var="freeBoardList">
 				<tr>
 					<td>${freeBoardList.no }</td>
-					<td><a href="#">${freeBoardList.title }</a></td>
+					<td><a href="${pageContext.request.contextPath}/board/freeboard_detail_content.do?no=${freeBoardList.no}">${freeBoardList.title }</a></td>
 					<td>${freeBoardList.id }</td>
 					<td>${freeBoardList.timePosted }</td>
 					<td>${freeBoardList.hits }</td>

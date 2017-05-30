@@ -18,4 +18,14 @@ public class BoardDAOImpl implements BoardDAO {
 		return template.selectList("board.getFreeBoardList");
 	}
 
+	@Override
+	public BoardVO getFreeBoardDetail(String no) {
+		return template.selectOne("board.getFreeBoardDetail", no);
+	}
+
+	@Override
+	public void freeboardDelete(String no) {
+		template.delete("board.freeboardDelete", no);
+	}
+
 }

@@ -8,4 +8,8 @@ public interface BoardDAO {
 
 	List<BoardVO> getFreeBoardList();
 
+	BoardVO getFreeBoardDetail(String no);
+
+	void freeboardDelete(String no);
+
 }
