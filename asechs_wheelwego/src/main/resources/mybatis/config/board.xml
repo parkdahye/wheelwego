@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<update id="updateCount" parameterType="int">
 		update freeboard
-		set hits=hits+1 where no=#{value}
+		set freeboard_hits=freeboard_hits+1 where freeboard_no=#{value}
 	</update>
 		<update id="updateBoard" parameterType="boardVO">
 		update freeboard set
