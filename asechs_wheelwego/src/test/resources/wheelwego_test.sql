@@ -15,3 +15,15 @@ where c.customer_id = m.id;
 select id,password,member_name,address,phonenumber,member_type from member where id='java01' and password='java01'
 
 select * from member;
+select * from customer;
+select * from seller;
+
+delete from member;
+delete from customer;
+delete from seller;
+
+select password from member where id ='java01';
+
+select password from member where id = 'java01';
+
+select * from member;
