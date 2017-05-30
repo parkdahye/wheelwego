@@ -1,8 +1,20 @@
 package org.asechs.wheelwego.controller;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.asechs.wheelwego.model.FoodTruckService;
+import org.asechs.wheelwego.model.vo.TruckVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 	/*
@@ -12,10 +24,20 @@ public class HomeController {
 	 * 우선적으로 실행되고 
 	 * 존재하지 않으면 @PathVariable 메서드가 실행된다 
 	 */
+	@Resource
+	private FoodTruckService foodTruckService;
+
+	/**
+	 * 정현지 : main 랜덤 리스트
+	 * Collections.shuffle()을 사용하여 음식목록(foodList)를 랜덤으로 뿌려준다
+	 */
 	@RequestMapping("home.do")
-	public String home(){
-		return "main_home.tiles";
+	public ModelAndView foodtruckList() {
+		List<TruckVO> foodList = foodTruckService.foodtruckList();
+		Collections.shuffle(foodList); 
+		return new ModelAndView("main_home.tiles", "foodVO", foodList);
 	}
+
 	@RequestMapping("{viewName}.do")
 	public String showView(@PathVariable String viewName){
 		//System.out.println("@PathVariable:"+viewName);

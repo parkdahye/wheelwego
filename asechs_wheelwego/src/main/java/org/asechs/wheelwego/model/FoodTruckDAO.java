@@ -1,5 +1,10 @@
 package org.asechs.wheelwego.model;
 
-public interface FoodTruckDAO {
+import java.util.List;
 
+import org.asechs.wheelwego.model.vo.TruckVO;
+
+public interface FoodTruckDAO {
+	List<TruckVO> foodtruckList();
+	List<TruckVO> searchFoodTruckList(String name);
 }

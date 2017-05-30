@@ -7,7 +7,7 @@ public interface MemberService {
 
 	String forgetMemberId(MemberVO vo);
 
-	String forgetMemberPassword(MemberVO vo);
+	int forgetMemberPassword(MemberVO vo);
 
 	void updateMember(MemberVO vo);
 

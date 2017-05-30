@@ -1,6 +1,18 @@
 ----------dbTEST---------------------
 
+create table member(
+   id varchar2(100) primary key,
+   password varchar2(100) not null,
+   member_name varchar2(100) not null,
+   address varchar2(100) not null,
+   addressdetail varchar2(100) not null,
+   phonenumber varchar2(100) not null,
+   member_type varchar2(100) not null,
+   postcode varchar2(100) not null
+); 
+
 insert into member values ('java01', 'java01', '김래발', '판교','코스타', '010-1111-1111', '일반회원','1234');
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 update member set member_type='0' where id='java01';
 delete from member;
 select * from member;
@@ -13,20 +25,14 @@ from customer c, member m
 where c.customer_id = m.id;
 --로그인
 select id,password,member_name,address,phonenumber,member_type from member where id='java01' and password='java01'
-
 select * from member;
-select * from customer;
+
+
 select * from seller;
-
-delete from member;
-delete from customer;
-delete from seller;
-
-select password from member where id ='java01';
-
-select password from member where id = 'java01';
-
+select * from foodtruck;
 select * from member;
+select * from menu;
+
 --단골트럭 등록
 insert into wishlist values('java01','80나0011');
 insert into wishlist values('java01','80나0012');

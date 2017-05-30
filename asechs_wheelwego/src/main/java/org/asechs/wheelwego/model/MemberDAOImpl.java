@@ -15,26 +15,23 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO login(MemberVO vo) {
 		return sqlSessionTemplate.selectOne("member.login", vo);
 	}
-
-	@Override
-	public String forgetMemberId(MemberVO vo) {
-		return sqlSessionTemplate.selectOne("member.forgetMemberId", vo);
-	}
-
-	@Override
-	public String forgetMemberPassword(MemberVO vo) {
-		return sqlSessionTemplate.selectOne("member.forgetMemberPassword", vo);
-	}
-
-	@Override
-	public void updateMember(MemberVO vo) {
-		sqlSessionTemplate.update("member.updateMember", vo);
-	}
-
-	@Override
-	public int idcheck(String id) {
-		return sqlSessionTemplate.selectOne("member.idcheck", id);
-	}
+	
+	  @Override
+	   public String forgetMemberId(MemberVO vo) {
+	      return sqlSessionTemplate.selectOne("member.forgetMemberId", vo);
+	   }
+	   @Override
+	   public int forgetMemberPassword(MemberVO vo) {
+	      return sqlSessionTemplate.update("member.forgetMemberPassword", vo);
+	   }
+	   @Override
+	   public void updateMember(MemberVO vo) {
+		   sqlSessionTemplate.update("member.updateMember",vo);
+	   }
+	   @Override
+	   public int idcheck(String id) {
+	      return sqlSessionTemplate.selectOne("member.idcheck",id);   
+	   }
 
 	@Override
 	public MemberVO findMemberById(String id) {
