@@ -26,7 +26,7 @@
     </div>
     
     
-    <script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function(){
    $("#findpwBtn").click(function(){
       var id=$(":input[name=id]").val();
