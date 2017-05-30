@@ -2,6 +2,7 @@ package org.asechs.wheelwego;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.vo.CustomerVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
@@ -36,9 +37,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestJUnit {
 	@Resource
 	private MemberService service;
+	@Resource
+	private FoodTruckService foodservice;
 	@Test
 	public void test(){
-		System.out.println(service.forgetMemberPassword(new MemberVO("java", null, "박다혜", null, "01065986262", null)));
+		//System.out.println(service.forgetMemberPassword(new MemberVO("java", null, "박다혜", null, "01065986262", null)));
+	//System.out.println(service.forgetMemberPassword(new MemberVO("java01", "12345", "정현지", null, null, null, "01022552716", null)));
+	//System.out.println(service.findMemberById("java01"));
+		System.out.println(foodservice.searchFoodTruckList("트럭"));
 	}
 }
 

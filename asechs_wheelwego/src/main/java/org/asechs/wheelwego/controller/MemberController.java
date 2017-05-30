@@ -18,14 +18,14 @@ public class MemberController {
 	private MemberService memberService;
 	//박다혜 Login
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, MemberVO vo) {		
+	public String login(HttpServletRequest request, MemberVO vo) {	
 		MemberVO memberVO=memberService.login(vo);
 		if(memberVO==null)
 			return "member/login_fail";
 		else{
 			HttpSession session=request.getSession();
 			session.setAttribute("memberVO",memberVO);
-			return "main_home.tiles";
+			return "redirect:home.do";
 		}
 	}
 	//박다혜 logout
@@ -34,7 +34,7 @@ public class MemberController {
 		HttpSession session=request.getSession(false);
 		if(session!=null)
 			session.invalidate();
-		return "main_home.tiles";
+		return "redirect:home.do";
 	}
 	//정현지 id찾기
 	@RequestMapping("forgetMemberId.do")
@@ -42,13 +42,12 @@ public class MemberController {
 	   public String forgetMemberId(MemberVO vo) {
 	      return memberService.forgetMemberId(vo);
 	   }
-	//정현지 pw찾기
+	//정현지 새 비밀번호 설정
 	   @RequestMapping("forgetMemberPassword.do")
 	   @ResponseBody
-	   public String forgetMemberPassword(MemberVO vo) {
-	      return memberService.forgetMemberPassword(vo);
+	   public int forgetMemberPassword(MemberVO vo) {
+	     return memberService.forgetMemberPassword(vo);
 	   }
-
 	   
 	   // 강정호 회원 수정 메서드
 	   @RequestMapping(value="updateMember.do", method=RequestMethod.POST)

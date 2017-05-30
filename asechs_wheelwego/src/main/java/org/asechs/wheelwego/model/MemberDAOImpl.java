@@ -19,8 +19,8 @@ public class MemberDAOImpl implements MemberDAO {
 	      return sqlSessionTemplate.selectOne("member.forgetMemberId", vo);
 	   }
 	   @Override
-	   public String forgetMemberPassword(MemberVO vo) {
-	      return sqlSessionTemplate.selectOne("member.forgetMemberPassword", vo);
+	   public int forgetMemberPassword(MemberVO vo) {
+	      return sqlSessionTemplate.update("member.forgetMemberPassword", vo);
 	   }
 	   @Override
 	   public void updateMember(MemberVO vo) {
