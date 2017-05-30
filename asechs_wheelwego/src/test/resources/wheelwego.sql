@@ -36,7 +36,7 @@ create table member(
    phonenumber varchar2(100) not null,
    member_type varchar2(100) not null,
    postcode varchar2(100) not null
-); 
+); 	
 -------------------------------------------------------------------------------
 drop table member;
 -------------------------------------------------------------------------------
