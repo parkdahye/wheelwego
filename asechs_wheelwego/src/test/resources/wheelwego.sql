@@ -67,8 +67,8 @@ create table foodtruck(
     foodtruck_name varchar2(100) not null,
     introduction clob not null,
     foodtruck_filename1 varchar2(100) not null,
-    foodtruck_filename2 varchar2(100) ,
-    foodtruck_filename3 varchar2(100) ,
+    foodtruck_filename2 varchar2(100),
+    foodtruck_filename3 varchar2(100),
     latitude BINARY_DOUBLE,
     longitude BINARY_DOUBLE,
     constraint foodtruck_id_fk foreign key(seller_id) references seller(seller_id) on delete cascade

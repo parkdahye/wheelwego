@@ -13,4 +13,8 @@ public interface BoardService {
 
 	ListVO getQnABoardList(String pageNo);
 
+	BoardVO getFreeBoardDetail(String no);
+
+	void freeboardDelete(String no);
+
 }

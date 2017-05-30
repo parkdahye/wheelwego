@@ -14,6 +14,19 @@ where c.customer_id = m.id;
 --로그인
 select id,password,member_name,address,phonenumber,member_type from member where id='java01' and password='java01'
 
+select * from member;
+select * from customer;
+select * from seller;
+
+delete from member;
+delete from customer;
+delete from seller;
+
+select password from member where id ='java01';
+
+select password from member where id = 'java01';
+
+select * from member;
 --단골트럭 등록
 insert into wishlist values('java01','80나0011');
 insert into wishlist values('java01','80나0012');
@@ -26,3 +39,9 @@ insert into wishlist values('java01','80나0018');
 insert into wishlist values('java01','80나0019');
 insert into wishlist values('java01','80나0020');
 
+-- 게시판 상세보기
+select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss')
+freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=2
+
+--게시물 삭제
+delete freeboard where freeboard_no=1 

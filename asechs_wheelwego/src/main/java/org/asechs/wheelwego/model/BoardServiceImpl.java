@@ -56,4 +56,14 @@ public class BoardServiceImpl implements BoardService {
 		return new ListVO((List<BoardVO>) boardDAO.getQnABoardList(pagingBean),pagingBean);
 	}
 
+	@Override
+	public BoardVO getFreeBoardDetail(String no) {
+		return boardDAO.getFreeBoardDetail(no);
+	}
+
+	@Override
+	public void freeboardDelete(String no) {
+		boardDAO.freeboardDelete(no);
+	}
+
 }

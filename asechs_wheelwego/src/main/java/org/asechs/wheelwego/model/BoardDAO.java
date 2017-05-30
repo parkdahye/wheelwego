@@ -20,4 +20,8 @@ public interface BoardDAO {
 
 	List<BoardVO> getQnABoardList(PagingBean pagingBean);
 
+	BoardVO getFreeBoardDetail(String no);
+
+	void freeboardDelete(String no);
+
 }

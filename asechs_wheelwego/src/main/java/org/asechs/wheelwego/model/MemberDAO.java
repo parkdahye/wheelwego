@@ -20,5 +20,7 @@ public interface MemberDAO {
 
 	void registerSeller(MemberVO memberVO, SellerVO sellerVO);
 
-	void dropMember(String id);
+	String getMemberPassword(String id);
+
+	void deleteMember(String id);
 }
