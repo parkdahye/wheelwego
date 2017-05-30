@@ -3,8 +3,6 @@ package org.asechs.wheelwego;
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.MemberService;
-import org.asechs.wheelwego.model.vo.CustomerVO;
-import org.asechs.wheelwego.model.vo.MemberVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

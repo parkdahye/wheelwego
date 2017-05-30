@@ -13,7 +13,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<package name="org.asechs.wheelwego.model"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="mybatis/config/member.xml"/>	
+		<mapper resource="mybatis/config/member.xml"/>
+		<mapper resource="mybatis/config/board.xml"/>		
 	</mappers>
 </configuration>
 
