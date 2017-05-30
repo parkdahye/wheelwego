@@ -32,7 +32,7 @@
             </div>
                <div class="col-lg-4">
 			  <form class="subscribe_form" action="#" method="post">
-              <input required="" value="" placeholder="Search foodtruck!" class="email" id="email" name="email" type="text" >
+              <input required="required" value="" placeholder="Search foodtruck!" class="email" id="email" name="email" type="text" >
 
               <input class="subscribe" name="email" value="Search" type="submit">
             </form>
