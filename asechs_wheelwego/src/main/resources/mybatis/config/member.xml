@@ -56,10 +56,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteMember">
 		delete member where id=#{value}
 	</delete>
-			
 	<select id="getMemberPassword" resultType="string">
 		select password from member where id=#{value}
 	</select>
+	      <delete id="dropMember" parameterType="String">
+      delete member where id=#{value}
+   </delete>
 </mapper>
  
  

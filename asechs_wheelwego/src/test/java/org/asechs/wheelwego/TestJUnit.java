@@ -2,6 +2,7 @@ package org.asechs.wheelwego;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.junit.Test;
@@ -35,6 +36,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestJUnit {
 	@Resource
 	private MemberService service;
+
+	@Resource
+	private FoodTruckService foodservice;
 	@Test
 	public void test(){
 		String id = "java";
@@ -44,8 +48,8 @@ public class TestJUnit {
 		String address = "경기도 성남시 분당구";
 		String addressDetail = "삼평동";	
 		String phoneNumber = "01000000000";
-		String memberType = "customer";
-		String businessNumber = null;//"0000000000";
+		String memberType = "seller";
+		String businessNumber = "0000000000";//"0000000000";
 		
 		
 /*		String id = "java02";
@@ -58,9 +62,11 @@ public class TestJUnit {
 		String memberType = "seller";
 		String businessNumber = "0000000000";
 		*/
-		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
-		//System.out.println(service.getMemberPassword(id, password));
+
+		//service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
+		System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
+
 	}
 }
 

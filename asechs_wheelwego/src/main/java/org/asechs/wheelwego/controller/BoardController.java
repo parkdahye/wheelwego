@@ -1,12 +1,9 @@
 package org.asechs.wheelwego.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.BoardService;
 import org.asechs.wheelwego.model.vo.BoardVO;
-import org.asechs.wheelwego.model.vo.ListVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,9 +43,11 @@ public class BoardController {
 	public ModelAndView QnABoardList(String pageNo){
 		return new ModelAndView("board/qna_list.tiles","qnaBoardList",boardService.getQnABoardList(pageNo));
 	}
-	//호겸 작성. 자유게시판 상세보기
+	//호겸 작성. 자유게시판 상세보기 and 조회수
 	@RequestMapping("board/freeboard_detail_content.do")
 	public String freeboard_detail_content(String no, Model model){
+		int hits=Integer.parseInt(no);
+		boardService.updateHits(hits);
 		BoardVO bvo=boardService.getFreeBoardDetail(no);
 		model.addAttribute("detail_freeboard", bvo);
 		return "board/freeboard_detail_content.tiles";
@@ -65,6 +64,28 @@ public class BoardController {
 		BoardVO bvo=boardService.getFreeBoardDetail(no);
 		model.addAttribute("detail_freeboard", bvo);
 		return "board/freeboard_update_form.tiles";
+	}
+	//창업게시판 상세보기
+	@RequestMapping("board/business_detail_content.do")
+	public String business_detail_content(String no, Model model){
+		int hits=Integer.parseInt(no);
+		boardService.updateHitsBusiness(hits);
+		BoardVO bvo=boardService.getBusinessBoardDetail(no);
+		model.addAttribute("detail_freeboard", bvo);
+		return "board/business_detail_content.tiles";
+	}
+	//호겸 작성. 창업 게시물 삭제
+	@RequestMapping("businessDelete.do")
+	public String businessDelete(String no){
+		boardService.businessDelete(no);
+		return "redirect:business_list.do";
+	}
+	//호겸 작성. 창업 게시물 수정 폼으로 가기
+	@RequestMapping("business_update_form.do")
+	public String business_update_form(String no,Model model){
+		BoardVO bvo=boardService.getBusinessBoardDetail(no);
+		model.addAttribute("detail_freeboard", bvo);
+		return "board/business_update_form.tiles";
 	}
 }
 
