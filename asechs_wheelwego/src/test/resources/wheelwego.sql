@@ -1,16 +1,18 @@
 -------------------------------------------------------------------------------
- drop sequence survey_seq;
- drop sequence customerpoint_seq;
- drop sequence booking_seq;
- drop sequence review_seq;
- drop sequence menu_seq;
 
- drop sequence information_seq;
- drop sequence informationcomment_seq;
- drop sequence qna_seq;
- drop sequence qnacomment_seq;
- drop sequence freeboard_seq;
- drop sequence freeboardcomment_seq;
+drop sequence survey_seq;
+drop sequence customerpoint_seq;
+drop sequence booking_seq;
+drop sequence review_seq;
+drop sequence menu_seq;
+
+
+drop sequence information_seq;
+drop sequence informationcomment_seq;
+drop sequence qna_seq;
+drop sequence qnacomment_seq;
+drop sequence freeboard_seq;
+drop sequence freeboardcomment_seq;
 
 create sequence survey_seq;
 create sequence customerpoint_seq;
@@ -36,7 +38,7 @@ create table member(
    phonenumber varchar2(100) not null,
    member_type varchar2(100) not null,
    postcode varchar2(100) not null
-); 
+); 	
 -------------------------------------------------------------------------------
 drop table member;
 -------------------------------------------------------------------------------

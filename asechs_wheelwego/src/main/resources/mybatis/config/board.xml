@@ -11,11 +11,73 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="content" column="freeboard_content"/>
 		<result property="timePosted" column="freeboard_timeposted"/>
 		<result property="hits" column="freeboard_hits"/>
+		<!-- <result property="file" column="freeboard_filename1"/> -->
 	</resultMap>
-	<select id="getFreeBoardList" parameterType="boardVO" resultMap="freeBoardListRM" resultType="boardVO">
-		select freeboard_no, id, freeboard_title, freeboard_content, freeboard_timePosted, freeboard_hits
-		 from freeboard
+	<select id="getFreeBoardList" parameterType="pagingBean" resultMap="freeBoardListRM" resultType="boardVO">
+		<!-- select freeboard_no, id, freeboard_title, freeboard_content, freeboard_timePosted, freeboard_hits
+		 from freeboard -->
+		SELECT f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content, f.freeboard_timePosted, f.freeboard_hits, m.id FROM(
+		SELECT row_number() over(order by freeboard_no desc) as rnum, freeboard_no, id, freeboard_title, freeboard_content,
+		to_char(freeboard_timePosted,'YYYY.MM.DD') as freeboard_timePosted , freeboard_hits from freeboard
+		)f, member m where f.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
+		order by freeboard_no desc
 	</select>
+	<resultMap type="boardVO" id="businessInfoBoardListRM">
+		<result property="no" column="information_no"/>
+		<result property="id" column="id"/>
+		<result property="title" column="information_title"/>
+		<result property="content" column="information_content"/>
+		<result property="timePosted" column="information_timeposted"/>
+		<result property="hits" column="information_hits"/>
+	</resultMap>
+	<select id="getBusinessInfoBoardList" parameterType="pagingBean" resultMap="businessInfoBoardListRM" resultType="boardVO">
+		SELECT b.information_no, b.id, b.information_title, b.information_content, b.information_timeposted, b.information_hits, m.id FROM(
+		SELECT row_number() over(order by information_no desc) as rnum, information_no, id, information_title, information_content,
+		to_char(information_timeposted,'YYYY.MM.DD') as information_timeposted ,information_hits from information
+		)b, member m where b.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
+		order by information_no desc
+	</select>
+	<select id="getFreeBoardTotalContentCount" resultType="Integer">
+		select count(*) from freeboard
+	</select>
+	<select id="getBusinessInfoBoardTotalContentCount" resultType="Integer">
+		select count(*) from information
+	</select>
+	<select id="getQnATotalContentCount" resultType="Integer">
+		select count(*) from qna
+	</select>
+	<resultMap type="boardVO" id="QnABoardListRM">
+		<result property="no" column="qna_no"/>
+		<result property="id" column="id"/>
+		<result property="title" column="qna_title"/>
+		<result property="content" column="qna_content"/>
+		<result property="timePosted" column="qna_timeposted"/>
+		<result property="hits" column="qna_hits"/>
+	</resultMap>
+	<select id="getQnABoardList" parameterType="pagingBean" resultMap="QnABoardListRM" resultType="boardVO">
+		SELECT q.qna_no, q.id, q.qna_title, q.qna_content, q.qna_timeposted, q.qna_hits, m.id FROM(
+		SELECT row_number() over(order by qna_no desc) as rnum, qna_no, id, qna_title, qna_content,
+		to_char(qna_timeposted,'YYYY.MM.DD') as qna_timeposted , qna_hits from qna
+		)q, member m where q.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
+		order by qna_no desc
+	</select>
+	<select id="getFreeBoardDetail" resultMap="freeBoardListRM" resultType="boardVO">
+		select freeboard_no, id, freeboard_title, freeboard_content, 
+		to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm'), freeboard_hits, freeboard_filename1 
+		from freeboard where freeboard_no=#{value}
+	</select>
+	<delete id="freeboardDelete" parameterType="String">
+		delete freeboard where freeboard_no=#{value}
+	</delete>
+	<update id="updateCount" parameterType="int">
+		update freeboard
+		set hits=hits+1 where no=#{value}
+	</update>
+		<update id="updateBoard" parameterType="boardVO">
+		update freeboard set
+		title=#{title},content=#{content}
+		where no=#{no}
+	</update>
 </mapper>
  
  

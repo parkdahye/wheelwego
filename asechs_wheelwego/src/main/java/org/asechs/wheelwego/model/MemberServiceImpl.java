@@ -39,7 +39,8 @@ public class MemberServiceImpl implements MemberService {
 	      return memberDAO.forgetMemberId(vo);
 	   }
 	@Override
-	   public String forgetMemberPassword(MemberVO vo){
+	   public int forgetMemberPassword(MemberVO vo) {
+	      vo.setPassword(passwordEncoder.encode(vo.getPassword()));
 	      return memberDAO.forgetMemberPassword(vo);
 	   }
 	@Override

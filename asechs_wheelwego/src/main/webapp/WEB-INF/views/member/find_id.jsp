@@ -14,9 +14,9 @@
   <!-- 이슈 관리
   button type="submit"으로 해서 계속 페이지가 reloading 되었음. 
   button type="submit"이 아니라 input type="button" 으로 명시해줘야 했음 -->
- <input type="button" class="btn btn-primary" id="findidBtn" value="Find ID">
+ <input type="button" class="btn btn-primary" id="findidBtn" value="Find ID"><br>
+<a href="${pageContext.request.contextPath}/member/find_password.do">forgot Password?</a>
 </form>
-
 <div class="form-group">
       <div class="col-sm-10">
         <p class="form-control-static" id="result_id"></p>
@@ -47,4 +47,3 @@ $(document).ready(function(){
    }); // click
 }); // ready
 </script>
-
