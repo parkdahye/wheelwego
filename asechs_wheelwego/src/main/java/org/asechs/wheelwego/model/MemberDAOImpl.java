@@ -15,12 +15,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSessionTemplate.selectOne("member.login",vo);			
 	}
 	  @Override
-	   public String findMemberId(MemberVO vo) {
-	      return sqlSessionTemplate.selectOne("member.findMemberId", vo);
+	   public String forgetMemberId(MemberVO vo) {
+	      return sqlSessionTemplate.selectOne("member.forgetMemberId", vo);
 	   }
 	   @Override
-	   public String findMemberPassword(MemberVO vo) {
-	      return sqlSessionTemplate.selectOne("member.findMemberPassword", vo);
+	   public String forgetMemberPassword(MemberVO vo) {
+	      return sqlSessionTemplate.selectOne("member.forgetMemberPassword", vo);
 	   }
 	   @Override
 	   public void updateMember(MemberVO vo) {
@@ -47,5 +47,9 @@ public class MemberDAOImpl implements MemberDAO {
 		   sqlSessionTemplate.insert("member.registerMember", memberVO);
 		   sqlSessionTemplate.insert("member.registerSeller", sellerVO);
 	   }
-
+	   @Override
+	   public void dropMember(String id) {
+		   sqlSessionTemplate.delete("member.dropMember",id);
+	   }
+	   
 }

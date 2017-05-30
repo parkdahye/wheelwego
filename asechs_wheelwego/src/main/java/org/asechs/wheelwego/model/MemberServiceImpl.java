@@ -35,12 +35,12 @@ public class MemberServiceImpl implements MemberService {
 	   }
 
 	@Override
-	   public String findMemberId(MemberVO vo){
-	      return memberDAO.findMemberId(vo);
+	   public String forgetMemberId(MemberVO vo){
+	      return memberDAO.forgetMemberId(vo);
 	   }
 	@Override
-	   public String findMemberPassword(MemberVO vo){
-	      return memberDAO.findMemberPassword(vo);
+	   public String forgetMemberPassword(MemberVO vo){
+	      return memberDAO.forgetMemberPassword(vo);
 	   }
 	@Override
 	   public void updateMember(MemberVO vo) {
@@ -64,5 +64,10 @@ public class MemberServiceImpl implements MemberService {
 	      else
 	         memberDAO.registerSeller(memberVO, new SellerVO(memberVO, businessNumber));
 	   }
+
+	@Override
+	public void dropMember(String id) {
+		memberDAO.dropMember(id);		
+	}
 
 }

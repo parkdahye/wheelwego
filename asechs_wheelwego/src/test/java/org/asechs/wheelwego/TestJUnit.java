@@ -3,8 +3,6 @@ package org.asechs.wheelwego;
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.MemberService;
-import org.asechs.wheelwego.model.vo.CustomerVO;
-import org.asechs.wheelwego.model.vo.MemberVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -38,11 +36,7 @@ public class TestJUnit {
 	private MemberService service;
 	@Test
 	public void test(){
-			MemberVO vo = new MemberVO();
-			vo.setId("java01");
-			vo.setPassword("java01");
-			System.out.println(vo);
-			System.out.println(service.login(vo));	
+		//System.out.println(service.forgetMemberPassword(new MemberVO("java", null, "박다혜", null, "01065986262", null)));
 	}
 }
 

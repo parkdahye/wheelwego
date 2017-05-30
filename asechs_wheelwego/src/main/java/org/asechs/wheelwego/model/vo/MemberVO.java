@@ -4,7 +4,9 @@ public class MemberVO {
 	private String id;
 	private String password;
 	private String memberName;
+	private String postCode;
 	private String address;
+	private String addressDetail;
 	private String phoneNumber;
 	private String memberType;
 	
@@ -12,12 +14,15 @@ public class MemberVO {
 		super();
 	}
 
-	public MemberVO(String id, String password, String memberName, String address, String phoneNumber, String memberType) {
+	public MemberVO(String id, String password, String memberName, String postCode, String address,
+			String addressDetail, String phoneNumber, String memberType) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.memberName = memberName;
+		this.postCode = postCode;
 		this.address = address;
+		this.addressDetail = addressDetail;
 		this.phoneNumber = phoneNumber;
 		this.memberType = memberType;
 	}
@@ -46,12 +51,28 @@ public class MemberVO {
 		this.memberName = memberName;
 	}
 
+	public String getPostCode() {
+		return postCode;
+	}
+
+	public void setpostCode(String postCode) {
+		this.postCode = postCode;
+	}
+
 	public String getAddress() {
 		return address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
 	}
 
 	public String getPhoneNumber() {
@@ -72,6 +93,8 @@ public class MemberVO {
 
 	@Override
 	public String toString() {
-		return "[id=" + id + ", password=" + password + ", memberName=" + memberName + ", address=" + address+ ", phoneNumber=" + phoneNumber + ", memberType=" + memberType;
+		return "MemberVO [id=" + id + ", password=" + password + ", memberName=" + memberName + ", postCode=" + postCode
+				+ ", address=" + address + ", addressDetail=" + addressDetail + ", phoneNumber=" + phoneNumber
+				+ ", memberType=" + memberType + "]";
 	}
 }
