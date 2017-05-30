@@ -13,9 +13,11 @@ public interface MemberService {
 
 	int idcheck(String id);
 
-	void registerMember(MemberVO memberVO, String addressDetail, String businessNumber);
-
 	MemberVO findMemberById(String id);
 
-	void dropMember(String id);
+	String getMemberPassword(String id, String password);
+
+	void registerMember(MemberVO memberVO, String businessNumber);
+
+	void deleteMember(String id);
 }

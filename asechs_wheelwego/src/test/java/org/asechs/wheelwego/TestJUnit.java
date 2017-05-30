@@ -4,8 +4,6 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
-import org.asechs.wheelwego.model.vo.CustomerVO;
-import org.asechs.wheelwego.model.vo.MemberVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -41,10 +39,31 @@ public class TestJUnit {
 	private FoodTruckService foodservice;
 	@Test
 	public void test(){
-		//System.out.println(service.forgetMemberPassword(new MemberVO("java", null, "박다혜", null, "01065986262", null)));
-	//System.out.println(service.forgetMemberPassword(new MemberVO("java01", "12345", "정현지", null, null, null, "01022552716", null)));
-	//System.out.println(service.findMemberById("java01"));
-		System.out.println(foodservice.searchFoodTruckList("트럭"));
+		String id = "java01";
+		String password = "java01";
+		String memberName = "김래발";
+		String postCode = "13437";
+		String address = "경기도 성남시 분당구";
+		String addressDetail = "삼평동";	
+		String phoneNumber = "01000000000";
+		String memberType = "customer";
+		String businessNumber = null;//"0000000000";
+		
+		
+/*		String id = "java02";
+		String password = "java02";
+		String memberName = "김래발";
+		String postCode = "13437";
+		String address = "경기도 성남시 분당구";
+		String addressDetail = "삼평동";
+		String phoneNumber = "01000000000";
+		String memberType = "seller";
+		String businessNumber = "0000000000";
+		*/
+		//service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
+		System.out.println(service.getMemberPassword(id, password));
+		//service.deleteMember(id);
+
 	}
 }
 

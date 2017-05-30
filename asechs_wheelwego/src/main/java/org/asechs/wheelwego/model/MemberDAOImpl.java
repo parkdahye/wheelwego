@@ -11,9 +11,11 @@ import org.springframework.stereotype.Repository;
 public class MemberDAOImpl implements MemberDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
-	public MemberVO login(MemberVO vo){
-		return sqlSessionTemplate.selectOne("member.login",vo);			
+
+	public MemberVO login(MemberVO vo) {
+		return sqlSessionTemplate.selectOne("member.login", vo);
 	}
+	
 	  @Override
 	   public String forgetMemberId(MemberVO vo) {
 	      return sqlSessionTemplate.selectOne("member.forgetMemberId", vo);
@@ -31,25 +33,30 @@ public class MemberDAOImpl implements MemberDAO {
 	      return sqlSessionTemplate.selectOne("member.idcheck",id);   
 	   }
 
-	   @Override
-	   public MemberVO findMemberById(String id) {
-	      return sqlSessionTemplate.selectOne("member.findMemberById", id);
-	   }
+	@Override
+	public MemberVO findMemberById(String id) {
+		return sqlSessionTemplate.selectOne("member.findMemberById", id);
+	}
 
-	   @Override
-	   public void registerCustomer(MemberVO memberVO) {
-		   sqlSessionTemplate.insert("member.registerMember", memberVO);
-		   sqlSessionTemplate.insert("member.registerCustomer", memberVO.getId());
-	   }
+	@Override
+	public void registerCustomer(MemberVO memberVO) {
+		sqlSessionTemplate.insert("member.registerMember", memberVO);
+		sqlSessionTemplate.insert("member.registerCustomer", memberVO.getId());
+	}
 
-	   @Override
-	   public void registerSeller(MemberVO memberVO, SellerVO sellerVO) {
-		   sqlSessionTemplate.insert("member.registerMember", memberVO);
-		   sqlSessionTemplate.insert("member.registerSeller", sellerVO);
-	   }
-	   @Override
-	   public void dropMember(String id) {
-		   sqlSessionTemplate.delete("member.dropMember",id);
-	   }
-	   
+	@Override
+	public void registerSeller(MemberVO memberVO, SellerVO sellerVO) {
+		sqlSessionTemplate.insert("member.registerMember", memberVO);
+		sqlSessionTemplate.insert("member.registerSeller", sellerVO);
+	}
+
+	@Override
+	public String getMemberPassword(String id) {
+		return sqlSessionTemplate.selectOne("member.getMemberPassword", id);
+	}
+
+	@Override
+	public void deleteMember(String id) {
+		sqlSessionTemplate.delete("member.deleteMember", id);
+	}
 }

@@ -35,6 +35,7 @@
 			  <form class="subscribe_form" action="${pageContext.request.contextPath}/searchFoodTruckList.do" method="post">
               <input type="text" value="" placeholder="Search foodtruck!" class="email" id="search" name="name" required="" >
               <input type="submit" class="subscribe" name="search" value="Search">
+
             </form>
            </div>
              <div class="col-lg-4"></div>
