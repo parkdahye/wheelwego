@@ -25,6 +25,9 @@
                     <li class="page-scroll">
                          <a href="${pageContext.request.contextPath}/foodtruck/foodtruck_detail.do">map폼으로이동</a>
                     </li>
+                     <li class="page-scroll">
+                         <a href="${pageContext.request.contextPath}/board/boardSelectList.do">커뮤니티</a>
+                    </li>
                     <li class="page-scroll">
                          <a href="${pageContext.request.contextPath}/member/register_form.do" >회원가입</a>
                     </li>              	
