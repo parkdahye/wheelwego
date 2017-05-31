@@ -62,16 +62,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by qna_no desc
 	</select>
 	<select id="getFreeBoardDetail" resultMap="freeBoardListRM" resultType="boardVO">
-		select freeboard_no, id, freeboard_title, freeboard_content, 
-		to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm'), freeboard_hits, freeboard_filename1 
-		from freeboard where freeboard_no=#{value}
+		select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss')
+		freeboard_timeposted,
+		freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=#{value}
 	</select>
 	<delete id="freeboardDelete" parameterType="String">
 		delete freeboard where freeboard_no=#{value}
 	</delete>
 	<update id="updateCount" parameterType="int">
 		update freeboard
-		set hits=hits+1 where no=#{value}
+		set freeboard_hits=freeboard_hits+1 where freeboard_no=#{value}
 	</update>
 		<update id="updateBoard" parameterType="boardVO">
 		update freeboard set

@@ -18,9 +18,10 @@
 			}
 		})// 삭제버튼 끝
 	})//ready
-</script>
+</script> 
 <%-- 보드 css --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
+ ${requestScope.detail_freeboard}
 <table class="content">
 	<tr>
 			<td>NO : ${requestScope.detail_freeboard.no}</td>

@@ -55,4 +55,9 @@ public class BoardDAOImpl implements BoardDAO {
 		template.delete("board.freeboardDelete", no);
 	}
 
+	@Override
+	public void updateHits(int hits) {
+		template.update("board.updateCount", hits);
+	}
+
 }

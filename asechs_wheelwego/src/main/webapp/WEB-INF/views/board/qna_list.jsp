@@ -29,7 +29,7 @@
 			<c:forEach items="${requestScope.qnaBoardList.list }" var="qnaBoardList">
 				<tr>
 					<td>${qnaBoardList.no }</td>
-					<td><a href="#">${qnaBoardList.title }</a></td>
+					<td><a href="${pageContext.request.contextPath}/board/qna_detail_content.do?no=${qnaBoardList.no}">${qnaBoardList.title }</a></td>
 					<td>${qnaBoardList.id }</td>
 					<td>${qnaBoardList.timePosted }</td>
 					<td>${qnaBoardList.hits }</td>

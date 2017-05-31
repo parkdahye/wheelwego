@@ -24,4 +24,6 @@ public interface BoardDAO {
 
 	void freeboardDelete(String no);
 
+	void updateHits(int hits);
+
 }

@@ -41,6 +41,7 @@ create table member(
 ); 	
 -------------------------------------------------------------------------------
 drop table member;
+select * from member
 -------------------------------------------------------------------------------
 create table customer(
 	customer_id varchar2(100) primary key,

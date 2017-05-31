@@ -41,8 +41,8 @@ public class TestJUnit {
 	private FoodTruckService foodservice;
 	@Test
 	public void test(){
-		String id = "java01";
-		String password = "java01";
+		String id = "java";
+		String password = "1234";
 		String memberName = "김래발";
 		String postCode = "13437";
 		String address = "경기도 성남시 분당구";
