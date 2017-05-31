@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 
 public interface BoardService {
 
@@ -24,5 +25,9 @@ public interface BoardService {
 	BoardVO getBusinessBoardDetail(String no);
 
 	void businessDelete(String no);
+
+	void updateBoard(BoardVO vo);
+
+	MemberVO getNameById(String id);
 
 }

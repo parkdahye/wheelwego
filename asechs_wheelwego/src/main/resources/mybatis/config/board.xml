@@ -70,14 +70,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete freeboard where freeboard_no=#{value}
 	</delete>
 	<update id="updateCount" parameterType="int">
-		update freeboard
-		set freeboard_hits=freeboard_hits+1 where freeboard_no=#{value}
+		update freeboard set freeboard_hits=freeboard_hits+1 where freeboard_no=#{value}
 	</update>
 		<update id="updateBoard" parameterType="boardVO">
-		update freeboard set
-		title=#{title},content=#{content}
-		where no=#{no}
+		update freeboard set freeboard_title=#{title},freeboard_content=#{content},freeboard_timeposted=sysdate where freeboard_no=#{no}
 	</update>
+	<select id="getNameById" resultType="memberVO">
+	select m.member_name as membername
+	from freeboard f, member m
+	where m.id=f.id and f.id=#{value}
+	</select>
 </mapper>
  
  

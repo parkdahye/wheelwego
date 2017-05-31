@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.springframework.stereotype.Service;
 
@@ -88,6 +89,16 @@ public class BoardServiceImpl implements BoardService {
 	public void businessDelete(String no) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void updateBoard(BoardVO vo) {
+		boardDAO.updateBoard(vo);
+	}
+
+	@Override
+	public MemberVO getNameById(String id) {
+		return boardDAO.getNameById(id);
 	}
 
 }

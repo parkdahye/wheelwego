@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 
 public interface BoardDAO {
@@ -25,5 +26,9 @@ public interface BoardDAO {
 	void freeboardDelete(String no);
 
 	void updateHits(int hits);
+
+	void updateBoard(BoardVO vo);
+
+	MemberVO getNameById(String id);
 
 }
