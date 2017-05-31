@@ -11,7 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  <result property="foodtruckFilepath" column="foodtruck_filename1"/>
 </resultMap>
 <select id="foodtruckList" resultMap="truckRM">
-select * from foodtruck
+		select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number
 </select>
 <select id="searchFoodTruckList" resultMap="truckRM">
 select * from foodtruck where foodtruck_name like '%' || #{value} || '%' 
