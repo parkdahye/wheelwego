@@ -14,7 +14,8 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<TruckVO> getTruckList(String id,String trucknumber) {
 		
-		return foodtruckDAO.truckList("truck.getTruckList",id,trucknumber);
+		return foodtruckDAO.foodtruckList();
+			
 	}
 	
 

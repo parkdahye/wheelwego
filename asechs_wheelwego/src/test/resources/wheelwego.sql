@@ -1,9 +1,11 @@
 -------------------------------------------------------------------------------
+
 drop sequence survey_seq;
 drop sequence customerpoint_seq;
 drop sequence booking_seq;
 drop sequence review_seq;
 drop sequence menu_seq;
+
 
 drop sequence information_seq;
 drop sequence informationcomment_seq;
@@ -39,6 +41,7 @@ create table member(
 ); 	
 -------------------------------------------------------------------------------
 drop table member;
+select * from member
 -------------------------------------------------------------------------------
 create table customer(
 	customer_id varchar2(100) primary key,
@@ -73,6 +76,7 @@ create table foodtruck(
     longitude BINARY_DOUBLE,
     constraint foodtruck_id_fk foreign key(seller_id) references seller(seller_id) on delete cascade
 );
+select * from foodtruck
 -------------------------------------------------------------------------------
 drop table foodtruck;
 -------------------------------------------------------------------------------
