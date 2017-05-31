@@ -31,4 +31,14 @@ public interface BoardDAO {
 
 	MemberVO getNameById(String id);
 
+	void updateHitsBusiness(int hits);
+
+	BoardVO getBusinessBoardDetail(String no);
+
+	void businessDelete(String no);
+
+	void business_updateBoard(BoardVO vo);
+
+	MemberVO business_getNameById(String id);
+
 }

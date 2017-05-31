@@ -86,7 +86,9 @@ public class BoardController {
 		// 조회수 올리기
 		boardService.updateHitsBusiness(hits);
 		BoardVO bvo=boardService.getBusinessBoardDetail(no);
+		MemberVO name=boardService.business_getNameById(bvo.getId());
 		model.addAttribute("detail_freeboard", bvo);
+		model.addAttribute("name", name);
 		return "board/business_detail_content.tiles";
 	}
 	//호겸 작성. 창업 게시물 삭제
@@ -102,6 +104,12 @@ public class BoardController {
 		model.addAttribute("detail_freeboard", bvo);
 		return "board/business_update_form.tiles";
 	}
+	//호겸 작성. 창업게시물 수정 해버리기
+		@RequestMapping("business_updateBoard.do")
+		public String business_updateBoard(BoardVO vo){
+			boardService.business_updateBoard(vo);
+			return "redirect:board/business_detail_content.do?no="+vo.getNo();
+		}
 }
 
 

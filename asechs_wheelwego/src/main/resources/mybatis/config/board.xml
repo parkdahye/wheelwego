@@ -80,6 +80,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from freeboard f, member m
 	where m.id=f.id and f.id=#{value}
 	</select>
+	<!-- 창업게시판 -->
+		<select id="getBusinessBoardDetail" resultMap="businessInfoBoardListRM" resultType="boardVO">
+		select information_no, id, information_title, information_content, to_char(information_timeposted,'YYYY.MM.DD HH:mm:ss')
+		information_timeposted,
+		information_hits from information where information_no=#{value}
+	</select>
+	<delete id="businessDelete" parameterType="String">
+		delete information where information_no=#{value}
+	</delete>
+	<update id="updateHitsBusiness" parameterType="int">
+		update information set information_hits=information_hits+1 where information_no=#{value}
+	</update>
+		<update id="business_updateBoard" parameterType="boardVO">
+		update information set information_title=#{title},information_content=#{content},information_timeposted=sysdate where information_no=#{no}
+	</update>
+	<select id="business_getNameById" resultType="memberVO">
+	select m.member_name as membername
+	from information f, member m
+	where m.id=f.id and f.id=#{value}
+	</select>
 </mapper>
  
  

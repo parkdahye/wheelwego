@@ -71,4 +71,29 @@ public class BoardDAOImpl implements BoardDAO {
 		return template.selectOne("board.getNameById", id);
 	}
 
+	@Override
+	public void updateHitsBusiness(int hits) {
+		template.update("board.updateHitsBusiness", hits);
+	}
+
+	@Override
+	public BoardVO getBusinessBoardDetail(String no) {
+		return template.selectOne("board.getBusinessBoardDetail", no);
+	}
+
+	@Override
+	public void businessDelete(String no) {
+		template.delete("board.businessDelete", no);
+	}
+
+	@Override
+	public void business_updateBoard(BoardVO vo) {
+		template.update("board.business_updateBoard", vo);
+	}
+
+	@Override
+	public MemberVO business_getNameById(String id) {
+		return template.selectOne("board.business_getNameById", id);
+	}
+
 }

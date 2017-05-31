@@ -1,7 +1,5 @@
 package org.asechs.wheelwego.model;
 
-import java.util.List;
-
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
@@ -29,5 +27,7 @@ public interface BoardService {
 	void updateBoard(BoardVO vo);
 
 	MemberVO getNameById(String id);
+	void business_updateBoard(BoardVO vo);
 
+	MemberVO business_getNameById(String id);
 }
