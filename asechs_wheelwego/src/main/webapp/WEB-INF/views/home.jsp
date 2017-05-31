@@ -53,7 +53,7 @@
          
       <div class="row" >
       <!-- begin, end 값을 설정하여 전체 트럭 목록 중, 6개만 랜덤으로 뽑아낸다 -->
-      <c:forEach items="${foodVO}" begin="0" end="5" var="foodInfo">
+      <c:forEach items="${trucklist}" begin="0" end="8" var="truckVO">
          <div class="col-lg-4 col-sm-6 portfolio-item" >
             <div class="flip-container"
                ontouchstart="this.classList.toggle('hover');" style="margin: 0 auto;">
@@ -62,12 +62,12 @@
                      data-toggle="modal">
                      <div class="front" >
                         <img class="img-circle  center-block food-img img-responsive"
-                           src="resources/img/foodtruck/${foodInfo.foodtruckFilename1}"
+                           src="resources/img/foodtruck/${truckVO.foodtruckFilepath}"
                            alt="" >
                      </div>
                      <div class="back cbx-back-side">
                         <div class="text-center back-single-text">
-                           <p>${foodInfo.foodtruckName}</p><p class="truck-simple-info"><br><br><br>${foodInfo.introduction}<br>위치<br>평점</p>
+                           <p>${truckVO.foodtruckName}</p><p class="truck-simple-info"><br><br><br>${truckVO.introduction}<br>위치<br>평점</p>
                         </div>
                      </div>
                   </a>

@@ -19,22 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select id from member where member_name=#{memberName} and
 		phonenumber=#{phoneNumber}
 	</select>
-	<select id="forgetMemberPassword" resultType="String"
-		parameterType="memberVO">
-		select password from member where id=#{id} and
-		member_name=#{memberName} and
-		phonenumber=#{phoneNumber}
-	</select>
+   <update id="forgetMemberPassword" parameterType="memberVO">
+   		update member set password=#{password} where id=#{id} and member_name=#{memberName} and phonenumber=#{phoneNumber}
+   </update>
 	<update id="updateMember" parameterType="memberVO">
-		update member set
-		password=#{password}, member_name=#{memberName},
-		address=#{address},
-		phonenumber=#{phoneNumber}
-		where id=#{id}
+		update member set password=#{password}, address=#{address}, addressdetail = #{addressDetail}, phonenumber=#{phoneNumber}, postcode=#{postCode} where id=#{id}
 	</update>
 	<insert id="registerMember" parameterType="memberVO">
-		insert into member(id, password, member_name, postcode, address,
-		addressdetail, phonenumber, member_type) values
+		insert into member(id, password, member_name, postcode, address, addressdetail, phonenumber, member_type) values
 		(#{id},#{password},#{memberName},#{postCode},#{address},#{addressDetail},#{phoneNumber},#{memberType})
 	</insert>
 	<insert id="registerCustomer">
@@ -59,9 +51,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMemberPassword" resultType="string">
 		select password from member where id=#{value}
 	</select>
-	      <delete id="dropMember" parameterType="String">
-      delete member where id=#{value}
-   </delete>
+	<select id="getMemberType" resultType="string">
+		select member_type from member where id=#{value}
+	</select>
 </mapper>
  
  

@@ -36,7 +36,7 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('postCode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('address').value = fullAddr;
 
                 // 커서를 상세주소 필드로 이동한다.
@@ -51,7 +51,7 @@
    비밀번호  <input type="password" name="passwordPre" maxlength="10" id = "passwordPre" onkeypress="caps_lock(event)" required="required"><span id="capsLockCheckView"></span><br>
    비밀번호체크 <input type="password" name="password" maxlength="10" id = "password" onkeypress="caps_lock(event)" required="required"><span id="pwCheckView"></span><br>
    이름 <input type="text" name="memberName" maxlength="10" required="required"><br>
-   주소 <input type="text" id="sample6_postcode" placeholder="우편번호" readonly="readonly">
+   주소 <input type="text" id="postCode" name = "postCode" placeholder="우편번호" readonly="readonly">
        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
        <input type="text" id="address" name = "address" placeholder="주소" readonly="readonly">
        <input type="text" id="addressDetail" name = "addressDetail" maxlength="50" placeholder="상세주소" required="required"><br>

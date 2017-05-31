@@ -36,24 +36,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestJUnit {
 	@Resource
 	private MemberService service;
-
-	@Resource
-	private FoodTruckService foodservice;
 	@Test
 	public void test(){
-		String id = "java";
-		String password = "1234";
-		String memberName = "김래발";
-		String postCode = "13437";
-		String address = "경기도 성남시 분당구";
-		String addressDetail = "삼평동";	
-		String phoneNumber = "01000000000";
-		String memberType = "seller";
-		String businessNumber = "0000000000";//"0000000000";
-		
-		
-/*		String id = "java02";
-		String password = "java02";
+		String id = "seller04";
+		String password = "seller04";
 		String memberName = "김래발";
 		String postCode = "13437";
 		String address = "경기도 성남시 분당구";
@@ -61,12 +47,28 @@ public class TestJUnit {
 		String phoneNumber = "01000000000";
 		String memberType = "seller";
 		String businessNumber = "0000000000";
-		*/
+
+		/*service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
+		//System.out.println(service.getMemberPassword(id, password));
+		//service.deleteMember(id);
+		
+		String id = "java01";
+		//String password = "java02";
+		String memberName = "김래발";
+		//String postCode = "13437";
+		//String address = "경기도 성남시 분당구";
+		//String addressDetail = "삼평동";
+		String phoneNumber = "01000000000";
+		//String memberType = "seller";
+		//String businessNumber = "0000000000";
+		
+		int result = service.forgetMemberPassword(new MemberVO(id, "1234", memberName, null, null, null, phoneNumber, null));
+		System.out.println(result);*/
+
 
 		//service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
-
 	}
 }
 

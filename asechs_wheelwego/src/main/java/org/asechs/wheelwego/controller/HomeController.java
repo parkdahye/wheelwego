@@ -33,9 +33,10 @@ public class HomeController {
 	 */
 	@RequestMapping("home.do")
 	public ModelAndView foodtruckList() {
-		List<TruckVO> foodList = foodTruckService.foodtruckList();
-		Collections.shuffle(foodList); 
-		return new ModelAndView("main_home.tiles", "foodVO", foodList);
+		List<TruckVO> truckList = foodTruckService.foodtruckList();
+		Collections.shuffle(truckList); 
+		System.out.println(truckList);
+		return new ModelAndView("main_home.tiles", "trucklist", truckList);
 	}
 
 	@RequestMapping("{viewName}.do")
