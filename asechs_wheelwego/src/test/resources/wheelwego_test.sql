@@ -77,3 +77,4 @@ freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=8
 --게시물 삭제
 delete freeboard where freeboard_no=1 
 select * from 
+create sequence freeboard_seq start with 52;

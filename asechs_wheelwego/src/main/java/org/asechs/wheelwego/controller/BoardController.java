@@ -1,9 +1,12 @@
 package org.asechs.wheelwego.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.asechs.wheelwego.model.BoardService;
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,6 +90,14 @@ public class BoardController {
 		model.addAttribute("detail_freeboard", bvo);
 		return "board/business_update_form.tiles";
 	}
+	
+	//강정호 자유게시판 글 등록 메서드
+	@RequestMapping("freeboard_write.do")
+		public ModelAndView freeboardWrite(BoardVO bvo, HttpServletRequest request){
+			boardService.freeboardWrite(bvo,request);
+			
+			return new ModelAndView("redirect:freeboard_list.do");
+		}
 }
 
 

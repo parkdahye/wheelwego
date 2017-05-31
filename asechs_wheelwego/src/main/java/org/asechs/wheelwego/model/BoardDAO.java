@@ -26,4 +26,6 @@ public interface BoardDAO {
 
 	void updateHits(int hits);
 
+	void freeboardWrite(BoardVO bvo);
+
 }

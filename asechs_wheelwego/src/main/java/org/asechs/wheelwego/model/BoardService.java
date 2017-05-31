@@ -2,6 +2,8 @@ package org.asechs.wheelwego.model;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 
@@ -24,5 +26,7 @@ public interface BoardService {
 	BoardVO getBusinessBoardDetail(String no);
 
 	void businessDelete(String no);
+
+	void freeboardWrite(BoardVO bvo, HttpServletRequest request);
 
 }

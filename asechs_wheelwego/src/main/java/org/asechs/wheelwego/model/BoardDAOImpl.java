@@ -60,4 +60,10 @@ public class BoardDAOImpl implements BoardDAO {
 		template.update("board.updateCount", hits);
 	}
 
+	@Override
+	public void freeboardWrite(BoardVO bvo) {
+		template.insert("board.freeboardWrite",bvo);
+		
+	}
+
 }

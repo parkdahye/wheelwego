@@ -41,21 +41,16 @@
 <div class="panel-body">
 
 <div class="container"> 
-<form action="" method="post">  
+<form action="${pageContext.request.contextPath }/freeboard_write.do" method="post">  
 		<div class="row"> 
-			<div class="col-md-6">
-			<div class="form-group"> 
-			<label for="name">글번호</label> 
-			<input type="text" class="form-control" name="no" id="no" value="" readonly> 
-			</div> 
-			</div> 
 			
 			<div class="col-md-6"> 
 			<div class="form-group"> 
 			<label for="writer">작성자</label> 
-			<input type="text" class="form-control" name="writer" id="writer" value="" readonly> 
+			<input type="text" class="form-control" name="writer" id="writer" value="${sessionScope.memberVO.memberName }" readonly> 
 			</div> 
-			</div> 
+			</div>
+			<input type="hidden" id="id" name="id" value="${sessionScope.memberVO.id }">
 		</div> 
 
 		<div class="form-group"> 
