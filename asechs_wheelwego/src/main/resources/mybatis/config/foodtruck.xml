@@ -4,14 +4,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="foodtruck"> 	
-	  <resultMap type="truckVO" id="truckRM">
+<resultMap type="truckVO" id="truckRM">
       <result property="foodtruckNumber" column="foodtruck_number" />
+      <result property="foodtruckName" column="foodtruck_name"></result>
       <result property="sellerId" column="seller_id" />
-	  <result property="foodtruckName" column="foodtruck_name"/>
-	  <result property="foodtruckFilename1" column="foodtruck_filename1"/>
-	  <result property="foodtruckFilename2" column="foodtruck_filename2"/>
-	  <result property="foodtruckFilename3" column="foodtruck_filename3"/>
-   </resultMap>
+	  <result property="foodtruckFilepath" column="foodtruck_filename1"/>
+</resultMap>
 <select id="foodtruckList" resultMap="truckRM">
 select * from foodtruck
 </select>

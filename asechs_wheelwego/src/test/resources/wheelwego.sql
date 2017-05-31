@@ -76,6 +76,7 @@ create table foodtruck(
     longitude BINARY_DOUBLE,
     constraint foodtruck_id_fk foreign key(seller_id) references seller(seller_id) on delete cascade
 );
+select * from foodtruck
 -------------------------------------------------------------------------------
 drop table foodtruck;
 -------------------------------------------------------------------------------
