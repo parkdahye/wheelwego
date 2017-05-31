@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -58,6 +59,16 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void updateHits(int hits) {
 		template.update("board.updateCount", hits);
+	}
+
+	@Override
+	public void updateBoard(BoardVO vo) {
+		template.update("board.updateBoard",vo);
+	}
+
+	@Override
+	public MemberVO getNameById(String id) {
+		return template.selectOne("board.getNameById", id);
 	}
 
 }

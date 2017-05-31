@@ -77,3 +77,7 @@ freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=8
 --게시물 삭제
 delete freeboard where freeboard_no=1 
 select * from 
+
+select m.member_name as membername
+from freeboard f, member m
+where m.id=f.id and f.id='java9'
