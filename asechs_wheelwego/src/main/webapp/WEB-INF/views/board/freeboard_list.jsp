@@ -24,7 +24,7 @@
 			<tr>
 				<th class="no">NO</th>
 				<th class="title">제목</th>
-				<th class="name">이름</th>
+				<th class="name">아이디</th>
 				<th class="date">작성일</th>
 				<th class="hit">HIT</th>
 			</tr>
@@ -34,7 +34,7 @@
 				<tr>
 					<td>${freeBoardList.no }</td>
 					<td><a href="${pageContext.request.contextPath}/board/freeboard_detail_content.do?no=${freeBoardList.no}">${freeBoardList.title }</a></td>
-					<td>${freeBoardList.id }</td>
+					<td>${freeBoardList.id}</td>
 					<td>${freeBoardList.timePosted }</td>
 					<td>${freeBoardList.hits }</td>
 				</tr>

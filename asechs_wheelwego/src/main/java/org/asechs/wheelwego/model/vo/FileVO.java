@@ -1,16 +1,16 @@
 package org.asechs.wheelwego.model.vo;
 
 public class FileVO {
-	//강정호. BoardVO에서 쓰기 위해 만들었음
 	private String no;
-	private String filePath;
+	private String filepath;
 	public FileVO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	public FileVO(String no, String filePath) {
+	public FileVO(String no, String filepath) {
 		super();
 		this.no = no;
-		this.filePath = filePath;
+		this.filepath = filepath;
 	}
 	public String getNo() {
 		return no;
@@ -18,15 +18,15 @@ public class FileVO {
 	public void setNo(String no) {
 		this.no = no;
 	}
-	public String getFilePath() {
-		return filePath;
+	public String getFilepath() {
+		return filepath;
 	}
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
 	}
 	@Override
 	public String toString() {
-		return "FileVO [no=" + no + ", filePath=" + filePath + "]";
+		return "FileVO [no=" + no + ", filepath=" + filepath + "]";
 	}
 	
 }

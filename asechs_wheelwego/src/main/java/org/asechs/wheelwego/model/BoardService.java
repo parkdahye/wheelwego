@@ -1,11 +1,15 @@
 package org.asechs.wheelwego.model;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+=======
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 
 public interface BoardService {
 
@@ -29,4 +33,10 @@ public interface BoardService {
 
 	void freeboardWrite(BoardVO bvo, HttpServletRequest request);
 
+	void updateBoard(BoardVO vo);
+
+	MemberVO getNameById(String id);
+	void business_updateBoard(BoardVO vo);
+
+	MemberVO business_getNameById(String id);
 }

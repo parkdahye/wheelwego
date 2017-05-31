@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+	<resultMap type="truckVO" id="truckRM">
+		<result column="foodtruck_number" property="foodtruckNumber"/>
+		<result column="seller_id" property="sellerId"/>
+		<result column="foodtruck_name" property="foodtruckName"/>
+		<result column="foodtruck_filepath" property="fileVO.filepath"/>
+	</resultMap>
+	<insert id="registerFoodtruck" parameterType="truckVO">
+		insert into foodtruck(foodtruck_number,seller_id,foodtruck_name,introduction)
+		 values(#{foodtruckNumber},#{sellerId},#{foodtruckName},#{introduction})
+	</insert>
+	<select id="showMyTruckpage" resultMap="truckRM">
+	select t.foodtruck_number, t.seller_id, t.foodtruck_name, t.introduction,f.foodtruck_filepath from(
+		select foodtruck_number,seller_id,foodtruck_name,introduction from foodtruck where seller_id=#{value}
+		)t, foodtruckfile f where t.foodtruck_number=f.foodtruck_number
+	
+	</select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

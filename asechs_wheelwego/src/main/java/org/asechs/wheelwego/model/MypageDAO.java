@@ -1,5 +1,10 @@
 package org.asechs.wheelwego.model;
 
-public interface MypageDAO {
+import org.asechs.wheelwego.model.vo.MemberVO;
+import org.asechs.wheelwego.model.vo.TruckVO;
 
+public interface MypageDAO {
+	void registerFoodtruck(TruckVO tvo);
+
+	TruckVO showMyTruckpage(MemberVO mvo);
 }

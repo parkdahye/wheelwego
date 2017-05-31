@@ -62,6 +62,16 @@ public class BoardServiceImpl implements BoardService {
 		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());*/
 		return new ListVO((List<BoardVO>) boardDAO.getQnABoardList(pagingBean),pagingBean);
 	}
+/*-------------------자유게시판--------------------------------------------------*/
+	@Override
+	public void updateBoard(BoardVO vo) {
+		boardDAO.updateBoard(vo);
+	}
+
+	@Override
+	public MemberVO getNameById(String id) {
+		return boardDAO.getNameById(id);
+	}
 
 	@Override
 	public BoardVO getFreeBoardDetail(String no) {
@@ -76,24 +86,26 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updateHits(int hits) {
 		boardDAO.updateHits(hits);
-		
 	}
-
+/*-------------------창업게시판-------------------------------------------------*/
 	@Override
 	public void updateHitsBusiness(int hits) {
-		// TODO Auto-generated method stub
-		
+		boardDAO.updateHitsBusiness(hits);
 	}
 
 	@Override
 	public BoardVO getBusinessBoardDetail(String no) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDAO.getBusinessBoardDetail(no);
 	}
 
 	@Override
 	public void businessDelete(String no) {
-		// TODO Auto-generated method stub
+		boardDAO.businessDelete(no);
+	}
+
+	@Override
+	public void business_updateBoard(BoardVO vo) {
+		boardDAO.business_updateBoard(vo);
 		
 	}
 
@@ -122,6 +134,8 @@ public class BoardServiceImpl implements BoardService {
 				}
 			}
 		}
+	public MemberVO business_getNameById(String id) {
+		return boardDAO.business_getNameById(id);
 	}
 
 }

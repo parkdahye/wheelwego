@@ -26,6 +26,9 @@ function checkDelete(){
 <c:choose>
 	<c:when test="${sessionScope.memberVO.memberType=='seller'}">
 		<a href="${pageContext.request.contextPath}/afterLogin_mypage/myfoodtruck_page.do">MYTRUCK 설정</a><br>
+		<a href="${pageContext.request.contextPath}/afterLogin_mypage/registerMyfoodtruck.do">MYTRUCK 등록</a><br>
+		<a href="${pageContext.request.contextPath}/afterLogin_myp.age/showMyfoodtruck.do">MYTRUCK 보기</a><br>
+		<a href="${pageContext.request.contextPath}/afterLogin_mypage/myfoodtruck_menuList.do">메뉴 관리</a><br>
 		<a href="">예약관리</a>
 	</c:when>
 	<c:otherwise>

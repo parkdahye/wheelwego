@@ -18,7 +18,6 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-
                     <c:choose >
                     	<c:when test="${sessionScope.memberVO==null}">
                     <li class="page-scroll">
@@ -35,10 +34,12 @@
                     </li>      
                     	</c:when>
                     	<c:otherwise>
-                    		<a href="${pageContext.request.contextPath}/afterLogin_mypage/mypage.do" >${sessionScope.memberVO.memberName}님의 MyPage</a>
-                    		   <li class="page-scroll">
-                        	 <a href="${pageContext.request.contextPath}/board/boardSelectList.do">커뮤니티</a>
-                  				 </li>
+                    		<li class="page-scroll">
+                        <a href="${pageContext.request.contextPath}/afterLogin_mypage/mypage.do" >${sessionScope.memberVO.memberName}님의 MyPage</a>
+                   </li>
+                    	<li class="page-scroll">
+                         <a href="${pageContext.request.contextPath}/board/boardSelectList.do">커뮤니티</a>
+                   </li>
                     	</c:otherwise>
                     </c:choose>
 				<c:if test="${sessionScope.memberVO!=null }">
