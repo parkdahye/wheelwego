@@ -1,4 +1,4 @@
-	package org.asechs.wheelwego.controller;
+/*	package org.asechs.wheelwego.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,4 +76,4 @@ public class MypageController {
 	public ModelAndView showWishList(){
 		return new ModelAndView();
 	}
-}
+}*/
