@@ -78,7 +78,6 @@ public class BoardDAOImpl implements BoardDAO {
 		template.insert("board.freeboardWriteFileUpload", boardVO);
 		
 	}
-	
 		
 	public void updateBoard(BoardVO vo) {
 		template.update("board.updateBoard",vo);
