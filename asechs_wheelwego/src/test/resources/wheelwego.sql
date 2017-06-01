@@ -11,7 +11,7 @@ drop sequence information_seq;
 drop sequence informationcomment_seq;
 drop sequence qna_seq;
 drop sequence qnacomment_seq;
-drop sequence freeboard_seq;
+drop sequence freeboard_seq ;
 drop sequence freeboardcomment_seq;
 
 create sequence survey_seq;
@@ -24,7 +24,7 @@ create sequence information_seq;
 create sequence informationcomment_seq;
 create sequence qna_seq;
 create sequence qnacomment_seq;
-create sequence freeboard_seq;
+create sequence freeboard_seq start with 15;
 create sequence freeboardcomment_seq;
 -------------------------------------------------------------------------------
 

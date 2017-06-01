@@ -73,7 +73,7 @@
 		</div> 
 		<div class="form-group"> 
 		<label for="File">첨부파일 3</label> 
-		<input type="file" name="file[3]"> 
+		<input type="file" name="file[2]"> 
 		</div> 
 		
 		<div class="center-block" style='width:200px'> 
