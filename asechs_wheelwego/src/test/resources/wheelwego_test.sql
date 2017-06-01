@@ -88,7 +88,32 @@ select * from File
 select * from freeboardfile
 insert into freeboardfile(freeboard_no, freeboard_filepath) values ('93','한입만모모.jpg');
 
-select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as f.freeboard_timeposted,
-       f.freeboard_hits, file.freeboard_no, file.freeboardfile_filepath 
+
+select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
+		 to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as f.freeboard_timeposted,
+		 f.freeboard_hits, file.freeboard_no, file.freeboardfile_filepath 
 from freeboard f, freeboardfile file 
 where f.freeboard_no=file.freeboard_no and f.freeboard_no='112'
+
+select b.freeboard_no, b.id, b.freeboard_title, b.freeboard_content, to_char(b.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+b.freeboard_hits, f.freeboard_no, f.freeboardfile_filepath 
+from freeboard b, freeboardfile f where b.freeboard_no=f.freeboard_no and f.freeboard_no='112'
+
+select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
+       to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted, f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath
+from freeboard f, freeboardfile fi 
+where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
+
+md
+cm
+
+
+
+
+
+
+
+
+
+
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
