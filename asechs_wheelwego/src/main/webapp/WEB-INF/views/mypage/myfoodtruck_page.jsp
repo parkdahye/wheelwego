@@ -7,10 +7,10 @@
     <form class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMyfoodtruck.do" method="post" enctype="multipart/form-data">
     <div class="_ljqf0 col-lg-12">
     		<div  class="col-lg-6" style="margin-right: 5px">
-    		<button id="profileBtn" type="button" onclick=document.all.file.click();>
+    		<button id="profileBtn" type="button" onclick=document.all.file.click(); >
     			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}">
     		</button>
-		<input type="file" name="foodtruckFile" id="file" style="display: none;" /> 
+		<input type="file" name="foodtruckFile" id="file" style="display: none;" required="required"/> 
 		</div>
 				<div class="col-lg-6">
 					<h1>${sessionScope.memberVO.id }</h1>
@@ -42,8 +42,8 @@
     		</div>
     	</div>
 	<br>
-   
-    		<input type="submit" value="등록"> 
+    		<input type="button" id="registerTruckBtn" value="트럭 등록"> 
+   			<input type="button" id="deleteTruckBtn" value="트럭 삭제"> 
    </form>
    </div>
    <br><br>
@@ -68,6 +68,18 @@
       $("#file").change(function(){
           alert(this.value); //선택한 이미지 경로 표시
           readURL(this);
+      });
+      $("#registerTruckBtn").click(function(){
+    	  var file=$("#file").val();
+    	  if(file==""){
+    		  
+    	  }
+      });
+      
+      $("#deleteTruckBtn").click(function(){
+    	  if(confirm("트럭을 삭제하시겠습니까?")){
+    	  location.href="${pageContext.request.contextPath}/afterLogin_mypage/deleteMyTruck.do?foodtruckNumber=${truckVO.foodtruckNumber}";
+    	  }
       });
    });
 </script>

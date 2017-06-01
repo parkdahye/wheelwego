@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
-import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -66,5 +65,9 @@ public class MypageDAOImpl implements MypageDAO {
 	public void updateMenuFilepath(FileVO fileVO) {
 		sqlSessionTemplate.update("mypage.updateMenuFilepath", fileVO);
 		
+	}
+	@Override
+	public void deleteMyTruck(String foodtruckNumber) {
+		sqlSessionTemplate.delete("mypage.deleteMyTruck", foodtruckNumber);
 	}
 }

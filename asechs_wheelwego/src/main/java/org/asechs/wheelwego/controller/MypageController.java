@@ -13,6 +13,7 @@ import org.asechs.wheelwego.model.vo.TruckVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -38,7 +39,7 @@ public class MypageController {
 		ModelAndView mv=new ModelAndView("");
 			MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 			String truckNumber=mypageService.findtruckNumberBySellerId(memberVO.getId());
-			mv.addObject("truckNumber", truckNumber);
+				mv.addObject("truckNumber", truckNumber);
 		mv.setViewName("mypage/mypage.tiles");
 		return mv;
 	}
@@ -91,6 +92,18 @@ public class MypageController {
 		MemberVO memberVO=(MemberVO)request.getSession(false).getAttribute("memberVO");
 		String truckNumber=mypageService.findtruckNumberBySellerId(memberVO.getId());
 		mypageService.registerMenuList(truckVO.getFoodList(),truckNumber);
-		return"";
+		return"redirect:/afterLogin_mypage/myfoodtruck_menuList.do";
+	}
+	@RequestMapping("afterLogin_mypage/updateMenu.do")
+	public String updateMenu(TruckVO truckVO, HttpServletRequest request){
+		System.out.println("updateMenu : "+truckVO);
+		mypageService.updateMenu(truckVO);
+		return "redirect:/afterLogin_mypage/myfoodtruck_menuList.do";
+	}
+	
+	@RequestMapping("afterLogin_mypage/deleteMyTruck.do")
+	public String deleteMyTruck(String foodtruckNumber){
+		mypageService.deleteMyTruck(foodtruckNumber);
+		return "redirect:/afterLogin_mypage/mypage.do";
 	}
 }

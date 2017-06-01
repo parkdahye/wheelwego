@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 values(#{foodtruckNumber},#{sellerId},#{foodtruckName},#{introduction})
 	</insert>
 	<select id="showMyTruckpage" resultMap="truckRM">
-	select t.foodtruck_number, t.seller_id, t.foodtruck_name, t.introduction,f.foodtruck_filepath from(
+		select t.foodtruck_number, t.seller_id, t.foodtruck_name, t.introduction,f.foodtruck_filepath from(
 		select foodtruck_number,seller_id,foodtruck_name,introduction from foodtruck where seller_id=#{value}
 		)t, foodtruckfile f where t.foodtruck_number=f.foodtruck_number
 	
@@ -66,55 +66,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from menu where menu_id=#{value}
 	</delete>
 	<update id="updateMenu" parameterType="foodVO">
-		update menu set menu_name=#{menuName}, menu_price=#{menuPrice} where menu_id=#{menuId}
+		update menu set menu_name=#{menuName}, menu_price=#{menuPrice}
+		 where menu_id=#{menuId}
 	</update>
 	<select id="findMenuByMenuId" resultMap="foodRM">
 		select * from menu where menu_id=#{value}
 	</select>
 	<update id="updateMenuFilepath" parameterType="fileVO">
-		update menu set menu_filename=#{filepath} where menu_id=#{no}
+		update menu set menu_filename=#{filepath}
+		 where menu_id=#{no}
 	</update>
+	<delete id="deleteMyTruck">
+		delete from foodtruck where foodtruck_number=#{value}
+	</delete>
 </mapper>
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

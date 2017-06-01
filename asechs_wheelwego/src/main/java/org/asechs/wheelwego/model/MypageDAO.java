@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
-import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 
 public interface MypageDAO {
@@ -30,7 +29,9 @@ public interface MypageDAO {
 	
 	void updateMenu(FoodVO foodVO); //메뉴 수정하기
 	
-	void updateMenuFilepath(FileVO fileVO);
-	
 	FoodVO findMenuByMenuId(String menuId);
+	
+	void updateMenuFilepath(FileVO fileVO);
+
+	void deleteMyTruck(String foodtruckNumber);
 }

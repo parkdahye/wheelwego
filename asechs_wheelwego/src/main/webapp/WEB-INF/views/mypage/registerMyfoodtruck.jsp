@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <div class="_40h7m" >
-    <form class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/registerFoodtruck.do" method="post" enctype="multipart/form-data">
+    <form id="registerForm" class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/registerFoodtruck.do" method="post" enctype="multipart/form-data">
     <div class="_ljqf0 col-lg-12">
     		<div  class="col-lg-6" style="margin-right: 5px">
     		<button id="profileBtn" type="button" onclick=document.all.file.click();>
-    			<img id="profileImg">
+    			<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/defaultTruck.jpg">
     		</button>
 		<input type="file" name="foodtruckFile" id="file" style="display: none;" /> 
 		</div>
