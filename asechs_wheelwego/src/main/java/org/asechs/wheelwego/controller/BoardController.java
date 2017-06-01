@@ -1,9 +1,13 @@
 package org.asechs.wheelwego.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.asechs.wheelwego.model.BoardService;
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +51,13 @@ public class BoardController {
 	@RequestMapping("board/freeboard_detail_content.do")
 	public String freeboard_detail_content(String no, Model model){
 		int hits=Integer.parseInt(no);
+		// 조회수 올리기
 		boardService.updateHits(hits);
 		BoardVO bvo=boardService.getFreeBoardDetail(no);
+		//작성자 이름 갖고오기
+		MemberVO name=boardService.getNameById(bvo.getId());
 		model.addAttribute("detail_freeboard", bvo);
+		model.addAttribute("name", name);
 		return "board/freeboard_detail_content.tiles";
 	}
 	//호겸 작성. 게시물 삭제
@@ -65,13 +73,24 @@ public class BoardController {
 		model.addAttribute("detail_freeboard", bvo);
 		return "board/freeboard_update_form.tiles";
 	}
+	//호겸 작성. 게시물 수정 해버리기
+	@RequestMapping("updateBoard.do")
+	public String updateBoard(BoardVO vo){
+		System.out.println(vo.getNo());
+		System.out.println(vo);
+		boardService.updateBoard(vo);
+		return "redirect:board/freeboard_detail_content.do?no="+vo.getNo();
+	}
 	//창업게시판 상세보기
 	@RequestMapping("board/business_detail_content.do")
 	public String business_detail_content(String no, Model model){
 		int hits=Integer.parseInt(no);
+		// 조회수 올리기
 		boardService.updateHitsBusiness(hits);
 		BoardVO bvo=boardService.getBusinessBoardDetail(no);
+		MemberVO name=boardService.business_getNameById(bvo.getId());
 		model.addAttribute("detail_freeboard", bvo);
+		model.addAttribute("name", name);
 		return "board/business_detail_content.tiles";
 	}
 	//호겸 작성. 창업 게시물 삭제
@@ -87,6 +106,20 @@ public class BoardController {
 		model.addAttribute("detail_freeboard", bvo);
 		return "board/business_update_form.tiles";
 	}
+	//강정호 자유게시판 글 등록 메서드
+	@RequestMapping("freeboard_write.do")
+		public ModelAndView freeboardWrite(BoardVO bvo, HttpServletRequest request){
+			boardService.freeboardWrite(bvo,request);
+			
+			return new ModelAndView("redirect:freeboard_list.do");
+	}
+
+	//호겸 작성. 창업게시물 수정 해버리기
+		@RequestMapping("business_updateBoard.do")
+		public String business_updateBoard(BoardVO vo){
+			boardService.business_updateBoard(vo);
+			return "redirect:board/business_detail_content.do?no="+vo.getNo();
+		}
 }
 
 

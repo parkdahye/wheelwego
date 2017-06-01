@@ -553,3 +553,25 @@ body {
     -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
     justify-content: flex-start;
+}
+/*profileBtn*/
+#profileBtn{
+	    background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent;
+    border: none;
+    color: #FFFFFF;
+    outline: none;
+}
+
+#profileImg{
+ width:150px;
+ height:150px;
+ border-radius:75px;
+ -moz-border-radius : 75px;
+ -webkit-border-radius : 75px;
+ -ms-border-radius :75px;
+ -khtml-border-radius : 75px;
+ -o-border-radius :75px;
+ margin: 0 auto;
+ }
