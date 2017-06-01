@@ -73,24 +73,22 @@ values ('80나0015', 'seller04', '스파르타쿡스', '전설의 불떡볶이�
 -- 게시판 상세보기
 select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss')
 freeboard_timeposted,
-freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=8
+freeboard_hits  from freeboard where freeboard_no=8
 --게시물 삭제
 delete freeboard where freeboard_no=1 
 select * from 
-<<<<<<< HEAD
-create sequence freeboard_seq start with 52;
-=======
+create sequence freeboard_seq;
+
 
 select m.member_name as membername
 from freeboard f, member m
 where m.id=f.id and f.id='java9'
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
 select * from File
 select * from freeboardfile
 insert into freeboardfile(freeboard_no, freeboard_filepath) values ('93','한입만모모.jpg');
 
-select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
-       to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as f.freeboard_timeposted,
+select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as f.freeboard_timeposted,
        f.freeboard_hits, file.freeboard_no, file.freeboardfile_filepath 
 from freeboard f, freeboardfile file 
 where f.freeboard_no=file.freeboard_no and f.freeboard_no='112'
