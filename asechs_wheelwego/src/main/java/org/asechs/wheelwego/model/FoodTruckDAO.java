@@ -7,4 +7,5 @@ import org.asechs.wheelwego.model.vo.TruckVO;
 public interface FoodTruckDAO {
 	List<TruckVO> foodtruckList();
 	List<TruckVO> searchFoodTruckList(String name);
+	List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo);
 }

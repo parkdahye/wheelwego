@@ -21,4 +21,9 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	public List<TruckVO> searchFoodTruckList(String name){
 		return foodTruckDAO.searchFoodTruckList(name);
 	}
+
+	@Override
+	public List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo) {
+		return foodTruckDAO.searchFoodTruckByGPS(gpsInfo);
+	}
 }

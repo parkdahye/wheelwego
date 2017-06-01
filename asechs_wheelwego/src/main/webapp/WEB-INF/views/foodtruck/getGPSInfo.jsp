@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <div id="map" style="width:100%;height:400px;"></div>
+
+<c:forEach items="${truckList}" var="truckInfo">
+	${truckInfo.latitude}, ${truckInfo.longitude}
+</c:forEach>
 
 <script>
 var HOME_PATH = window.HOME_PATH || '.';
@@ -20,29 +24,12 @@ var symbolMarker = new naver.maps.Marker({
     position: position,
     map: map,
     icon: {
-        url: "${pageContext.request.contextPath}/resources/img/location.png",
+    	url: "${pageContext.request.contextPath}/resources/img/location.png",
         size: new naver.maps.Size(40, 35),
         origin: new naver.maps.Point(0, 0),
         anchor: new naver.maps.Point(11, 35)        	
     }
 });
-
-var test = [
-	<c:forEach items="${truckList}" var="truckInfo" varStatus="status">
-       {
-    	   latitude : "${truckInfo.latitude}",
-    	   longtitude : "${truckInfo.longitude}"
-       }
-       <c:if test="${not status.last}">,</c:if>
-    </c:forEach>
-];
-
-for (var i = 0; i < test.length; i++)
-{
-	alert(test[i].latitude + "," + test[i].longtitude);
-}	
-
-
 
 /*태평*/
 /* var latlngs = [
@@ -143,3 +130,5 @@ for (var i=0, ii=markers.length; i<ii; i++) {
     naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 }
 </script>
+</body>
+</html>

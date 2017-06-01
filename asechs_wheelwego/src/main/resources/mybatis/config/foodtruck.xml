@@ -16,6 +16,11 @@ select * from foodtruck
 <select id="searchFoodTruckList" resultMap="truckRM">
 select * from foodtruck where foodtruck_name like '%' || #{value} || '%' 
 </select>
+<select id="searchFoodTruckByGPS" resultMap="truckRM" parameterType="truckVO">
+select * from (
+select * from foodtruck
+where (latitude between #{latitude}-0.009 and #{latitude}+0.009) and (longitude between #{longitude}-0.012 and #{longitude}+0.012)) TMP 
+</select>
 
 </mapper>
  
