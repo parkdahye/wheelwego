@@ -1,7 +1,11 @@
 package org.asechs.wheelwego.model;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.vo.FileVO;
+import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,7 +19,52 @@ public class MypageDAOImpl implements MypageDAO {
 		sqlSessionTemplate.insert("mypage.registerFoodtruck", tvo);
 	}
 	@Override
-	public TruckVO showMyTruckpage(MemberVO mvo) {
-		return sqlSessionTemplate.selectOne("mypage.showMyTruckpage", mvo.getId());
+	public TruckVO findtruckInfoByTruckNumber(String truckNumber) {
+		return sqlSessionTemplate.selectOne("mypage.findtruckInfoByTruckNumber", truckNumber);
+	}
+	@Override
+	public void saveFilePath(FileVO fileVO) {
+		sqlSessionTemplate.insert("mypage.saveFilePath", fileVO);
+	}
+	@Override
+	public void updateMyfoodtruck(TruckVO truckVO) {
+		sqlSessionTemplate.update("mypage.updateMyfoodtruck", truckVO);
+	}
+	@Override
+	public void updateFilePath(FileVO fileVO) {
+		sqlSessionTemplate.update("mypage.updateFilePath", fileVO);
+	}
+	@Override
+	public String findtruckNumberBySellerId(String sellerId) {
+		return sqlSessionTemplate.selectOne("mypage.findtruckNumberBySellerId", sellerId);
+	}
+	@Override
+	public List<FoodVO> showMenuList(String truckNumber) {
+		return sqlSessionTemplate.selectList("mypage.showMenuList", truckNumber);
+	}
+	@Override
+	public void deleteAllMenu(String truckNumber) {
+		sqlSessionTemplate.delete("mypage.deleteAllMenu", truckNumber);
+	}
+	@Override
+	public void registerMenu(FoodVO foodVO) {
+		sqlSessionTemplate.insert("mypage.registerMenu", foodVO);
+	}
+	@Override
+	public void deleteMenu(String menuId) {
+		sqlSessionTemplate.delete("mypage.deleteMenu", menuId);
+	}
+	@Override
+	public void updateMenu(FoodVO foodVO) {
+		sqlSessionTemplate.update("mypage.updateMenu", foodVO);
+	}
+	@Override
+	public FoodVO findMenuByMenuId(String menuId) {
+		return sqlSessionTemplate.selectOne("mypage.findMenuByMenuId", menuId);
+	}
+	@Override
+	public void updateMenuFilepath(FileVO fileVO) {
+		sqlSessionTemplate.update("mypage.updateMenuFilepath", fileVO);
+		
 	}
 }

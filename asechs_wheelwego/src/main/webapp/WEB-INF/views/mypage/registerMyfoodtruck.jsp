@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-   <div class=" text-center"> <h1 class="page-header">MY TRUCK</h1> </div>
-    <a href="${pageContext.request.contextPath}/afterLogin_mypage/foodtruck" >푸드트럭 상세보기</a>
-    <div class="_40h7m" >
-    <form class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMyfoodtruck.do" method="post" enctype="multipart/form-data">
+     <div class="_40h7m" >
+    <form class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/registerFoodtruck.do" method="post" enctype="multipart/form-data">
     <div class="_ljqf0 col-lg-12">
     		<div  class="col-lg-6" style="margin-right: 5px">
     		<button id="profileBtn" type="button" onclick=document.all.file.click();>
-    			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}">
+    			<img id="profileImg">
     		</button>
 		<input type="file" name="foodtruckFile" id="file" style="display: none;" /> 
 		</div>
@@ -22,33 +19,35 @@
     			<label for="foodtruckName">이름</label>
     		</aside>
     		<div>
-    				<input type="text" name="foodtruckName" placeholder="푸드트럭 이름을 입력해주세요" class="form-control" value="${truckVO.foodtruckName}">
+    				<input type="text" name="foodtruckName" placeholder="푸드트럭 이름을 입력해주세요" class="form-control" >
     		</div>
     	</div>
+    	<br>
     	<div>
     		<aside>
     			<label for="foodtruck">푸드트럭 넘버</label>
     		</aside>
     		<div>
-    				<input type="text" name="foodtruckNumber" placeholder="푸드트럭 넘버를 입력해주세요" class="form-control" value="${truckVO.foodtruckNumber}" readonly="readonly">
+    				<input type="text" name="foodtruckNumber" placeholder="푸드트럭 넘버를 입력해주세요" class="form-control" >
     		</div>
     	</div>
+    	<br>
     	<div>
     		<aside>
     			<label for="foodtruck">푸드트럭 소개</label>
     		</aside>
     		<div>
-    				<textarea rows="4" cols="50"  name="introduction" placeholder="푸드트럭을 소개해주세요!" style="resize: none;" class="form-control" >${truckVO.introduction}</textarea>
+    				<textarea rows="4" cols="50"  name="introduction" placeholder="푸드트럭을 소개해주세요!" style="resize: none;" class="form-control" ></textarea>
     		</div>
     	</div>
-	<br>
-   
-    		<input type="submit" value="등록"> 
-   </form>
-   </div>
-   <br><br>
-   
-  <script type="text/javascript">
+	<br><br>
+	<input type="submit" value="등록">
+	</form>
+	</div>
+	<br><br>
+	
+	
+	  <script type="text/javascript">
   $(document).ready(function(){
       function readURL(input) {
           if (input.files && input.files[0]) {
@@ -71,4 +70,3 @@
       });
    });
 </script>
-
