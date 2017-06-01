@@ -11,6 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="content" column="freeboard_content"/>
 		<result property="timePosted" column="freeboard_timeposted"/>
 		<result property="hits" column="freeboard_hits"/>
+		<result property="fileVO.no" column="freeboard_no"/>
+		<result property="fileVO.filepath" column="freeboardfile_filepath"/>
 		<!-- <result property="file" column="freeboard_filename1"/> -->
 	</resultMap>
 	<select id="getFreeBoardList" parameterType="pagingBean" resultMap="freeBoardListRM" resultType="boardVO">
@@ -62,8 +64,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by qna_no desc
 	</select>
 	<select id="getFreeBoardDetail" resultMap="freeBoardListRM" resultType="boardVO" parameterType="String">
-		select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
-		freeboard_hits from freeboard where freeboard_no=#{value}
+		<!-- select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		freeboard_hits from freeboard where freeboard_no=#{value} -->
+		select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
+		 to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		 f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath 
+		 from freeboard f, freeboardfile fi where f.freeboard_no=fi.freeboard_no and f.freeboard_no=#{value}
 	</select>
 	<delete id="freeboardDelete" parameterType="String">
 		delete freeboard where freeboard_no=#{value}

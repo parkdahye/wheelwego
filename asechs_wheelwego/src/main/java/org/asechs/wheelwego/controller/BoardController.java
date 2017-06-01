@@ -58,10 +58,12 @@ public class BoardController {
 	// 호겸 작성. 자유게시판 상세보기 and 조회수
 	@RequestMapping("board/freeboard_detail_content.do")
 	public String freeboard_detail_content(String no, Model model) {
+		System.out.println("강정호 상세보기 컨트롤러 통과"+no);
 		int hits = Integer.parseInt(no);
 		// 조회수 올리기
 		boardService.updateHits(hits);
 		BoardVO bvo = boardService.getFreeBoardDetail(no);
+		System.out.println("강정호 업데이트수정"+bvo);
 		// 작성자 이름 갖고오기
 		MemberVO name = boardService.getNameById(bvo.getId());
 		model.addAttribute("detail_freeboard", bvo);
@@ -125,7 +127,9 @@ public class BoardController {
 	@RequestMapping("freeboard_write.do")
 	public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
 		System.out.println("1번. freeboardWrite 컨트롤러 통과");
+		System.out.println(bvo.toString());
 		boardService.freeboardWrite(bvo, request);
+		System.out.println("6번 freeboardWrite 파일업로드까지 완성하고 돌아옴");
 		return "redirect:freeboard_list.do";
 	}
 
