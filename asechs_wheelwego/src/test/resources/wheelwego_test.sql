@@ -85,3 +85,6 @@ select m.member_name as membername
 from freeboard f, member m
 where m.id=f.id and f.id='java9'
 >>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+select * from File
+select * from freeboardfile
+insert into freeboardfile(freeboard_no, freeboard_filepath) values ('93','한입만모모.jpg');

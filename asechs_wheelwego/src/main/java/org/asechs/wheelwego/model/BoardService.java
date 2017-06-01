@@ -1,12 +1,7 @@
 package org.asechs.wheelwego.model;
 
-<<<<<<< HEAD
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
-=======
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;

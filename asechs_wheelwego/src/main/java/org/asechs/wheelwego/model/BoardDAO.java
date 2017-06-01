@@ -1,5 +1,6 @@
 package org.asechs.wheelwego.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
@@ -27,7 +28,7 @@ public interface BoardDAO {
 
 	void updateHits(int hits);
 
-	void freeboardWrite(BoardVO bvo);
+	String freeboardWrite(BoardVO bvo);
 
 	void updateBoard(BoardVO vo);
 
@@ -42,5 +43,8 @@ public interface BoardDAO {
 	void business_updateBoard(BoardVO vo);
 
 	MemberVO business_getNameById(String id);
+
+	void freeboardWriteFileUpload(BoardVO boardVO);
+
 
 }
