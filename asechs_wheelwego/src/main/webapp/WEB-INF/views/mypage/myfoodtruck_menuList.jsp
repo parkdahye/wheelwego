@@ -4,7 +4,7 @@
         <div class="_40h7m" >
         <c:choose>
         	<c:when test="${menuList!='[]'}">
-       <form class="menuForm" method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMenu.do" enctype="multipart/form-data">
+       <form class="menuForm" onsubmit="return checkFunction()" method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMenu.do" enctype="multipart/form-data">
         	<c:forEach items="${menuList}" var="foodVO" begin="0" end="2" varStatus="status">
         <table style="border: none; padding: 15px">
          	<tr>
@@ -26,7 +26,7 @@
          	</form>
         	</c:when>
         	<c:otherwise>
-         <form  class="menuForm" method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/registerMenuList.do" enctype="multipart/form-data">
+         <form  class="menuForm" onsubmit="return checkFunction()" method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/registerMenuList.do" enctype="multipart/form-data">
         	<table style="border: none; padding: 15px">
         		<tr>
         	 	<td>대표 메뉴</td>
@@ -64,6 +64,17 @@
    </div>
    <br><br>
 <script type="text/javascript">
+
+function checkFunction(){
+	  var menuPrice=document.getElementsByClassName("menuPrice");
+	  var menuForm=document.getElementsByClassName("menuForm");
+	  for(var i=0;i<menuPrice.length;i++){
+		if(isNaN(menuPrice[i].value)==true){
+			alert("가격을 숫자로 입력해주시기 바랍니다.");
+			return false;
+		}
+	  }
+}
 	$(document).ready(function(){
 	      function readURL(input,object) {
 		  var menuImg=object.parent().parent().children().find(".menuImg");
@@ -85,6 +96,8 @@
 	          alert(this.value); //선택한 이미지 경로 표시
 	          readURL(this,$(this));
 	      });
+
+
 	
 		$(".resetBtn").click(function(){
 			var menuName=$(this).parent().parent().children().find("input.menuName");

@@ -22,7 +22,7 @@
     			<label for="foodtruckName">이름</label>
     		</aside>
     		<div>
-    				<input type="text" name="foodtruckName" placeholder="푸드트럭 이름을 입력해주세요" class="form-control" value="${truckVO.foodtruckName}">
+    				<input type="text" name="foodtruckName" placeholder="푸드트럭 이름을 입력해주세요" class="form-control" value="${truckVO.foodtruckName}" required="required">
     		</div>
     	</div>
     	<div>
@@ -38,11 +38,11 @@
     			<label for="foodtruck">푸드트럭 소개</label>
     		</aside>
     		<div>
-    				<textarea rows="4" cols="50"  name="introduction" placeholder="푸드트럭을 소개해주세요!" style="resize: none;" class="form-control" >${truckVO.introduction}</textarea>
+    				<textarea rows="4" cols="50"  name="introduction" placeholder="푸드트럭을 소개해주세요!" style="resize: none;" class="form-control"  required="required">${truckVO.introduction}</textarea>
     		</div>
     	</div>
 	<br>
-    		<input type="button" id="registerTruckBtn" value="트럭 등록"> 
+    		<input type="submit" id="registerTruckBtn" value="수정"> 
    			<input type="button" id="deleteTruckBtn" value="트럭 삭제"> 
    </form>
    </div>
@@ -69,13 +69,7 @@
           alert(this.value); //선택한 이미지 경로 표시
           readURL(this);
       });
-      $("#registerTruckBtn").click(function(){
-    	  var file=$("#file").val();
-    	  if(file==""){
-    		  
-    	  }
-      });
-      
+
       $("#deleteTruckBtn").click(function(){
     	  if(confirm("트럭을 삭제하시겠습니까?")){
     	  location.href="${pageContext.request.contextPath}/afterLogin_mypage/deleteMyTruck.do?foodtruckNumber=${truckVO.foodtruckNumber}";

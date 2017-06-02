@@ -17,8 +17,6 @@ public class MypageDAOImpl implements MypageDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	@Override
 	public List<WishlistVO> myWishList(String id) {
-		//System.out.println("강정호 MyPageDAOImpl test"+sqlSessionTemplate.selectList("foodtruck.myWishList", wvo));
-		System.out.println("MyDAO 통과");
 		return sqlSessionTemplate.selectList("mypage.myWishList", id);
 	}
 	@Override
