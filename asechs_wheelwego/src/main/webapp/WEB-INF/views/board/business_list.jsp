@@ -26,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.businessInfoBoardList.list }" var="businessInfoBoardList">
+			<c:forEach items="${requestScope.businessInfoBoardList.boardList }" var="businessInfoBoardList">
 				<tr>
 					<td>${businessInfoBoardList.no }</td>
 					<td><a href="${pageContext.request.contextPath}/board/business_detail_content.do?no=${businessInfoBoardList.no}">${businessInfoBoardList.title }</a></td>
