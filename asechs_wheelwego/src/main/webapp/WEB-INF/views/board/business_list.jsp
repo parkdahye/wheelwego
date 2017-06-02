@@ -24,7 +24,7 @@
 				<th class="date">작성일</th>
 				<th class="hit">HIT</th>
 			</tr>
-		</thead>
+		</thead> 
 		<tbody>
 			<c:forEach items="${requestScope.businessInfoBoardList.boardList }" var="businessInfoBoardList">
 				<tr>

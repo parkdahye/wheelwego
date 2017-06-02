@@ -78,7 +78,7 @@ create table foodtruckfile(
 drop table foodtruckfile;
 -------------------------------------------------------------------------------
 create table review(
-    review_no varchar2(100) not null,
+    review_no number not null,
     foodtruck_number varchar2(100) not null,
     customer_id varchar2(100) not null,
     review_content clob not null,
@@ -103,7 +103,7 @@ create table menu(
 drop table menu;
 -------------------------------------------------------------------------------
 create table booking(
-    booking_number varchar2(100) not null,
+    booking_number number not null,
     customer_id varchar2(100) not null,
     menu_id varchar2(100) not null,
     booking_quantity number not null,
@@ -128,7 +128,7 @@ create table customerpoint(
 drop table customerpoint;
 -------------------------------------------------------------------------------
 create table survey(
-    survey_no varchar2(100) not null,
+    survey_no number not null,
     customer_id varchar2(100) not null,
     suervey_date date not null,
     constraint survey_id_fk foreign key(customer_id) references customer(customer_id) on delete cascade,
