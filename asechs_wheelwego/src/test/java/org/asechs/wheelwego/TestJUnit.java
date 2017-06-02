@@ -2,9 +2,11 @@ package org.asechs.wheelwego;
 
 import javax.annotation.Resource;
 
-import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
+import org.asechs.wheelwego.model.MypageDAO;
+import org.asechs.wheelwego.model.vo.ReviewVO;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,45 +40,20 @@ public class TestJUnit {
 	@Resource
 	private FoodTruckService foodService;
 	@Resource
-	private BoardDAO boardDAO;
+	private MypageDAO mypageDAO;
+	@Test
 	public void test(){
-/*		String id = "customer01";
-		String password = "1234";
-		String memberName = "김래발";
-		String postCode = "13437";
-		String address = "경기도 성남시 분당구";
-		String addressDetail = "삼평동";
-		String phoneNumber = "01000000000";
-		String memberType = "customer";
-		String businessNumber = null;
-
-		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
-		//System.out.println(service.getMemberPassword(id, password));
-		//service.deleteMember(id);
-		
-		/*String id = "seller07";
-		String password = "1234";
-		String memberName = "김래발";
-		String postCode = "13437";
-		String address = "경기도 성남시 분당구";
-		String addressDetail = "삼평동";
-		String phoneNumber = "01000000000";
-		String memberType = "seller";
-		/*service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
-		//System.out.println(service.getMemberPassword(id, password));
-		//service.deleteMember(id);
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
-		
-		//int result = service.forgetMemberPassword(new MemberVO(id, "1234", memberName, null, null, null, phoneNumber, null));
-		
-
-
-		//service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
-		//System.out.println(service.getMemberPassword(id, password));
-		//service.deleteMember(id);
-		
-		System.out.println(foodService.searchFoodTruckList("끼니"));*/
-		
+		System.out.println(mypageDAO.showMyReviewList("customer1"));
+		ReviewVO reviewVO=new ReviewVO();
+		reviewVO.setReviewNo("1");
+		reviewVO.setCustomerId("customer1");
+		reviewVO.setFoodtruckNumber("2523");
+		reviewVO.setGrade(4);
+		reviewVO.setReviewContent("베ㄹㅣ굿");
+		mypageDAO.updateMyReview(reviewVO);
+		System.out.println(mypageDAO.showMyReviewList("customer1"));
+		mypageDAO.deleteMyReview("1");
+		System.out.println(mypageDAO.showMyReviewList("customer1"));
 	}
 }
 
