@@ -33,9 +33,9 @@ public class MypageController {
 			ModelAndView mv = new ModelAndView();
 			MemberVO sessionMemberVO = (MemberVO) session.getAttribute("memberVO");
 			List<WishlistVO> wishlist = mypageService.myWishList(sessionMemberVO.getId());
- 
+/* 
 			for (int i = 0; i < wishlist.size(); i++)
-				System.out.println(wishlist.get(i));
+				System.out.println(wishlist.get(i));*/
 
 			return new ModelAndView("mypage/mypage_wishlist.tiles", "wishlist", wishlist);
 		}
@@ -43,7 +43,6 @@ public class MypageController {
 	@RequestMapping(value = "afterLogin_mypage/deleteWishList.do", method = RequestMethod.POST)
 	//@RequestMapping("afterLogin_mypage/deleteWishList.do")
 	public ModelAndView deleteWishList(String id, String foodTruckNumber){
-		System.out.println(id + "," + foodTruckNumber);
 		WishlistVO wishlistVO = new WishlistVO(foodTruckNumber, id);
 		mypageService.deleteWishList(wishlistVO);
 		return new ModelAndView();
@@ -72,7 +71,7 @@ public class MypageController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("afterLogin_mypage/registerFoodtruck.do")
+	@RequestMapping(method=RequestMethod.POST,value="afterLogin_mypage/registerFoodtruck.do")
 	public String registerFoodtruck(TruckVO truckVO, HttpServletRequest request){
 		MemberVO memberVO=(MemberVO)request.getSession(false).getAttribute("memberVO");
 		truckVO.setSellerId(memberVO.getId());
@@ -94,7 +93,7 @@ public class MypageController {
 	 * 푸드트럭 정보를 업데이트
 	 * @return
 	 */
-	@RequestMapping("afterLogin_mypage/updateMyfoodtruck.do")
+	@RequestMapping(method=RequestMethod.POST,value="afterLogin_mypage/updateMyfoodtruck.do")
 	public String updateMyfoodtruck(TruckVO truckVO, HttpServletRequest request){
 		mypageService.updateMyfoodtruck(truckVO);
 		return "redirect:/afterLogin_mypage/myfoodtruck_page.do";
@@ -105,12 +104,10 @@ public class MypageController {
 		MemberVO memberVO=(MemberVO)request.getSession(false).getAttribute("memberVO");
 		String truckNumber=mypageService.findtruckNumberBySellerId(memberVO.getId());
 		List<FoodVO> menuList=mypageService.showMenuList(truckNumber);
-		System.out.println("menuList : "+menuList);
 		return new ModelAndView("mypage/myfoodtruck_menuList.tiles","menuList",menuList);
 	}
 	@RequestMapping(method=RequestMethod.POST,value="afterLogin_mypage/registerMenuList.do")
-	public String updateMenuList(HttpServletRequest request, TruckVO truckVO){
-		System.out.println(truckVO);
+	public String RegisterMenuList(HttpServletRequest request, TruckVO truckVO){
 		MemberVO memberVO=(MemberVO)request.getSession(false).getAttribute("memberVO");
 		String truckNumber=mypageService.findtruckNumberBySellerId(memberVO.getId());
 		mypageService.registerMenuList(truckVO.getFoodList(),truckNumber);
@@ -118,9 +115,8 @@ public class MypageController {
 	}
 	@RequestMapping("afterLogin_mypage/updateMenu.do")
 	public String updateMenu(TruckVO truckVO, HttpServletRequest request){
-		System.out.println("updateMenu : "+truckVO);
 		mypageService.updateMenu(truckVO);
-		return "redirect:/afterLogin_mypage/myfoodtruck_menuList.do";
+		return "mypage/updateMenu_result.tiles";
 	}
 	
 	@RequestMapping("afterLogin_mypage/deleteMyTruck.do")
