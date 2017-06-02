@@ -1,11 +1,34 @@
 ----------dbTEST---------------------
 
+<<<<<<< HEAD
+create table member(
+   id varchar2(100) primary key,
+   password varchar2(100) not null,
+   member_name varchar2(100) not null,
+   address varchar2(100) not null,
+   addressdetail varchar2(100) not null,
+   phonenumber varchar2(100) not null,
+   member_type varchar2(100) not null,
+   postcode varchar2(100) not null
+); 
+	SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck
+		)f where rnum between 1 and 5
+
+insert into member values ('java01', 'java01', '김래발', '판교','코스타', '010-1111-1111', '일반회원','1234');
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+=======
 insert into member values ('seller02', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 update member set member_type='0' where id='java01';
 delete from member;
+<<<<<<< HEAD
+select * from foodtruck;
+=======
 delete from member where id = 'seller02';
 select * from member;
 select * from seller;
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 delete member where id='java'
 delete seller where seller_id='java'
 insert into customer values ('java01');
@@ -74,6 +97,15 @@ freeboard_timeposted,
 freeboard_hits  from freeboard where freeboard_no=8
 --게시물 삭제
 delete freeboard where freeboard_no=1 
+<<<<<<< HEAD
+select foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name like '%' || '트럭' || '%' 
+select row_number() over(order by foodtruck_number desc)as rnum, foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name like '%' || '트럭' || '%' 
+SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck 
+		where foodtruck_name like '%' || '트럭' || '%'
+		)f  where rnum between 1 and 5
+ 
+=======
 
 select * from 
 
@@ -129,4 +161,9 @@ from freeboard b, freeboardfile f where b.freeboard_no=f.freeboard_no and f.free
 select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
        to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted, f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath
 from freeboard f, freeboardfile fi 
+<<<<<<< HEAD
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
+=======
+where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git

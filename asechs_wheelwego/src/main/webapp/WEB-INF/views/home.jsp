@@ -1,6 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+var x = document.getElementById("demo");
+
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+</script>
 
 <!-- GPS(위도, 경도) 가져오기 --- by 황윤상 -->
 <script type="text/javascript">
@@ -77,6 +111,7 @@ function geoFindMe() {
     }
 </script>
 
+
 <!-- Header -->
 <header>
    <div class="container" id="maincontent" tabindex="-1">
@@ -91,12 +126,12 @@ function geoFindMe() {
             <div class="social col-lg-1">
               <ul>
                 <li>
-                  <!-- <a href=""><i class="fa fa-map-marker fa-3x"></i></a> -->
                  <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-map-marker fa-3x"></i></a>
-                 <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-                 
-                 <button onclick="sample6_execDaumPostcode()">수동</button>&nbsp;
-                 <button onclick="geoFindMe()">자동</button>
+                 <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;" id="roundCorner">
+	              <form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
+					   <button class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style=""/>
+					  <button class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" type="submit" value="현재위치 자동검색" />
+					</form>				
                  
 <!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
 					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
@@ -105,17 +140,16 @@ function geoFindMe() {
 					  <label class="string optional" for="user_remember_me"> Remember me</label>
 					  <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="TEST" />
 				  </form> -->
+
 	            </div>
                 </li>
               </ul>
             </div>
                <div class="col-lg-4">
 			  <!-- 푸드트럭 검색 폼 -->
-<!--              	 <input type="text" value="" placeholder="Search foodtruck!" class="email" id="name" name="name" required="required">
-             	 <input type="button" class="subscribe" name="search" value="Search" onclick="geoFindMe()"> --> 	 			  
-		    <form class="subscribe_form">
-              <input type="text" value="" placeholder="Search foodtruck!" class="email" id="name" name="name" required="required">
-              <input type="button" class="subscribe" name="search" value="Search" onclick="geoFindMe()">
+			<form class="subscribe_form" action="${pageContext.request.contextPath}/searchFoodTruckList.do" method="post">
+              <input type="text" value="" placeholder="Search foodtruck!" class="email" id="search" name="name" required="required">
+              <input type="submit" class="subscribe" name="search" value="Search">
             </form>
            </div>
              <div class="col-lg-4"></div>
