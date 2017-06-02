@@ -37,16 +37,11 @@ public class TestJUnit {
 	@Resource
 	private MemberService service;
 	@Resource
-<<<<<<< HEAD
-	private BoardDAO boardDAO;
-	
-	
-	@Test
-=======
+
 	private FoodTruckService foodService;
 	@Resource
 	private BoardDAO boardDAO;
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
 	public void test(){
 /*		String id = "customer01";
 		String password = "1234";
