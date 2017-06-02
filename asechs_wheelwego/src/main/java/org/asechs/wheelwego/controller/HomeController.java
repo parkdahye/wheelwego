@@ -35,20 +35,17 @@ public class HomeController {
 	public ModelAndView foodtruckList() {
 		List<TruckVO> truckList = foodTruckService.foodtruckList();
 		Collections.shuffle(truckList); 
-		System.out.println(truckList);
 		return new ModelAndView("main_home.tiles", "trucklist", truckList);
 	}
 
 	@RequestMapping("{viewName}.do")
 	public String showView(@PathVariable String viewName){
-		//System.out.println("@PathVariable:"+viewName);
 		return viewName+".tiles";
 	}
 	/*로그인 인증 서비스 없이 사용 가능한 요청*/
 	@RequestMapping("{dirName}/{viewName}.do")
 	public String showView(@PathVariable String dirName,
 			@PathVariable String viewName){
-		//System.out.println("@PathVariable:"+dirName+"/"+viewName);
 		System.out.println("no check session");
 		return dirName+"/"+viewName+".tiles";
 	}
@@ -56,7 +53,6 @@ public class HomeController {
 	@RequestMapping("afterLogin_{dirName}/{viewName}.do")
 	public String showViewAfterLogin(@PathVariable String dirName,
 			@PathVariable String viewName){
-		//System.out.println("@PathVariable:"+dirName+"/"+viewName);
 		System.out.println("AfterLogin");
 		return dirName+"/"+viewName+".tiles";
 	}
