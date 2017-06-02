@@ -11,7 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  <result property="foodtruckFilepath" column="foodtruck_filename1"/>
 </resultMap>
 <select id="foodtruckList" resultMap="truckRM">
-select * from foodtruck
+		select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number
 </select>
 <select id="searchFoodTruckList" resultMap="truckRM">
 select foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name like '%' || #{value} || '%' 
@@ -23,6 +25,11 @@ select foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name l
 SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
 		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck)
 		f where rnum between #{startRowNumber} and #{endRowNumber}
+</select>
+<select id="searchFoodTruckByGPS" resultMap="truckRM" parameterType="truckVO">
+select * from (
+select * from foodtruck
+where (latitude between #{latitude}-0.009 and #{latitude}+0.009) and (longitude between #{longitude}-0.012 and #{longitude}+0.012)) TMP 
 </select>
 </mapper>
  

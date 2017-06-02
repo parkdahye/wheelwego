@@ -9,6 +9,6 @@ public interface FoodTruckService {
 	List<TruckVO> foodtruckList();
 	List<TruckVO> searchFoodTruckList(String name);
 	ListVO pagingTruckList(String pageNo);
-	//정호가 테스트
 	ListVO resultFoodTruckList(List<TruckVO> searchTruckList, String pageNo);
+	List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo);
 }

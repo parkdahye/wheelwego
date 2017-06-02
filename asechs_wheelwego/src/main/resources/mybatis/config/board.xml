@@ -11,6 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="content" column="freeboard_content"/>
 		<result property="timePosted" column="freeboard_timeposted"/>
 		<result property="hits" column="freeboard_hits"/>
+		<result property="fileVO.no" column="freeboard_no"/>
+		<result property="fileVO.filepath" column="freeboardfile_filepath"/>
 		<!-- <result property="file" column="freeboard_filename1"/> -->
 	</resultMap>
 	<select id="getFreeBoardList" parameterType="pagingBean" resultMap="freeBoardListRM" resultType="boardVO">
@@ -61,23 +63,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)q, member m where q.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
 		order by qna_no desc
 	</select>
-	<select id="getFreeBoardDetail" resultMap="freeBoardListRM" resultType="boardVO">
-		select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss')
-		freeboard_timeposted,
-		freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=#{value}
+	<select id="getFreeBoardDetail" resultMap="freeBoardListRM" resultType="boardVO" parameterType="String">
+		<!-- select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		freeboard_hits from freeboard where freeboard_no=#{value} -->
+		select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
+		 to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		 f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath 
+		 from freeboard f, freeboardfile fi where f.freeboard_no=fi.freeboard_no and f.freeboard_no=#{value}
 	</select>
 	<delete id="freeboardDelete" parameterType="String">
 		delete freeboard where freeboard_no=#{value}
 	</delete>
 	<update id="updateCount" parameterType="int">
-		update freeboard
-		set freeboard_hits=freeboard_hits+1 where freeboard_no=#{value}
+		update freeboard set freeboard_hits=freeboard_hits+1 where freeboard_no=#{value}
 	</update>
 		<update id="updateBoard" parameterType="boardVO">
-		update freeboard set
-		title=#{title},content=#{content}
-		where no=#{no}
+		update freeboard set freeboard_title=#{title},freeboard_content=#{content},freeboard_timeposted=sysdate where freeboard_no=#{no}
 	</update>
+
+	<insert id="freeboardWrite" parameterType="boardVO">
+		<selectKey keyProperty="no" resultType="String" order="BEFORE">
+			select freeboard_seq.nextval from dual
+		</selectKey>
+		insert into freeboard(freeboard_no, id, freeboard_title, freeboard_content, freeboard_timePosted, freeboard_hits)
+		values(#{no}, #{id},#{title},#{content},sysdate,#{hits})
+	</insert>
+	<resultMap type="boardVO" id="freeboardWriteFileUploadRM">
+		<result property="fileVO.no" column="freeboard_no"/>
+		<result property="fileVO.filePath" column="freeboardfile_filepath"/>
+	</resultMap>
+	<insert id="freeboardWriteFileUpload" parameterType="boardVO">
+		insert into freeboardfile(freeboard_no, freeboard_filepath)values(#{fileVO.no},#{fileVO.filepath})
+	</insert>
+	
+	<select id="getNameById" resultType="memberVO">
+	select m.member_name as membername
+	from freeboard f, member m
+	where m.id=f.id and f.id=#{value}
+	</select>
+	<!-- 창업게시판 -->
+		<select id="getBusinessBoardDetail" resultMap="businessInfoBoardListRM" resultType="boardVO">
+		select information_no, id, information_title, information_content, to_char(information_timeposted,'YYYY.MM.DD HH:mm:ss')
+		information_timeposted,
+		information_hits from information where information_no=#{value}
+	</select>
+	<delete id="businessDelete" parameterType="String">
+		delete information where information_no=#{value}
+	</delete>
+	<update id="updateHitsBusiness" parameterType="int">
+		update information set information_hits=information_hits+1 where information_no=#{value}
+	</update>
+		<update id="business_updateBoard" parameterType="boardVO">
+		update information set information_title=#{title},information_content=#{content},information_timeposted=sysdate where information_no=#{no}
+	</update>
+	<select id="business_getNameById" resultType="memberVO">
+	select m.member_name as membername
+	from information f, member m
+	where m.id=f.id and f.id=#{value}
+	</select>
 </mapper>
  
  

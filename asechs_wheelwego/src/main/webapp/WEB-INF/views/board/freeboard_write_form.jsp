@@ -24,7 +24,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.min.js"></script> 
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#cancelBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/freeboard_list.do"
+		});//취소버튼 작동
+		
+		
+	});//ready
+</script>
 
 <div class="panel panel-default"> 
 <!-- Default panel contents --> 
@@ -33,66 +41,50 @@
 <div class="panel-body">
 
 <div class="container"> 
-<form action="" method="post">  
+<form enctype="multipart/form-data" action="${pageContext.request.contextPath }/freeboard_write.do" method="post">  
+		<div class="row"> 
+			
+			<div class="col-md-6"> 
+			<div class="form-group"> 
+			<label for="writer">작성자</label> 
+			<input type="text" class="form-control" name="writer" id="writer" value="${sessionScope.memberVO.memberName }" readonly> 
+			</div> 
+			</div>
+			<input type="hidden" id="id" name="id" value="${sessionScope.memberVO.id }">
+		</div> 
 
-	<form role="form"> 
-	
-	<div class="row"> 
-		<div class="col-md-6">
 		<div class="form-group"> 
-		<label for="name">NAME</label> 
-		<input type="text" class="form-control" name="name" id="name" placeholder="Enter name"> 
-		</div> 
-		</div> 
+		<label for="title">글제목</label> 
+		<input type="text" class="form-control" name ="title" id="title" value="" required="required"> 
+		</div>  
 		
-		
-		
-		<div class="col-md-6"> 
 		<div class="form-group"> 
-		<label for="pass">Password</label> 
-		<input type="password" class="form-control" name="pass" id="pass" placeholder="Enter password"> 
+		<label for="content">글내용</label> 
+		<textarea class="form-control" rows="10" name="content" id="content" required="required"></textarea> 
 		</div> 
+		
+		<div class="form-group"> 
+		<label for="File">첨부파일 1</label> 
+		<input type="file" name="file[0]"> 
 		</div> 
-	</div> 
-	
-	
-	<div class="form-group"> 
-	<label for="email">Email address</label> 
-	<input type="email" class="form-control" name ="email" id="email" placeholder="Enter email"> 
-	</div> 
-	
-	
-	<div class="form-group"> 
-	<label for="subject">Title</label> 
-	<input type="text" class="form-control" name ="subject" id="subject" placeholder="Enter title"> 
-	</div>  
-	
-	
-	<div class="form-group"> 
-	<label for="content">Comment:</label> 
-	<textarea class="form-control" rows="10" name="content" id="content"></textarea> 
-	
-	</div> 
-	
-	<div class="form-group"> 
-	<label for="File">File input</label> 
-	<input type="file" id="File"> 
-	</div> 
-	
-	
-	<div class="center-block" style='width:200px'> 
-	<input type="submit" value="저장하기">
-	<input type="reset" value="다시쓰기">
-	<input type="button" value="취소" onclick=""></div> 
-	
-	</form> 
+		<div class="form-group"> 
+		<label for="File">첨부파일 2</label> 
+		<input type="file" name="file[1]"> 
+		</div> 
+		<div class="form-group"> 
+		<label for="File">첨부파일 3</label> 
+		<input type="file" name="file[2]"> 
+		</div> 
+		
+		<div class="center-block" style='width:200px'> 
+		<input type="submit" value="등록하기">
+		<input type="reset" value="다시쓰기">
+		<input type="button" value="취소" id="cancelBtn"></div> 
 </form> 
 
 
 </div> 
 </div> <!--panel end--> 
-</div> 
-
 </div> 
 </body> 
 

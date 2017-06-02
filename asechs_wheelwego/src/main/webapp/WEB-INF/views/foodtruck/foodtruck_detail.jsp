@@ -20,6 +20,7 @@ body, html {
 }
 </style>
 
+<<<<<<< HEAD
 <!-- Header -->
 <header class="bgimg w3-display-container" id="home">
   <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
@@ -167,3 +168,13 @@ document.getElementById("myLink").click();
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
 
+=======
+<div class="container">
+  <div class="list-group col-lg-3 text-center">
+  <h4>Search Result</h4>
+  <c:forEach items="${truckList}" var="truckInfo">
+    <a href="#" class="list-group-item">${truckInfo.foodtruckName}</a>
+    </c:forEach>
+  </div>
+</div>
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git

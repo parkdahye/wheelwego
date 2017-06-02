@@ -37,7 +37,16 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			session.invalidate();
-		return "redirect:home.do";
+		return "main_home.tiles";
+	}
+
+
+	// 강정호 회원 수정 메서드
+	@RequestMapping(value = "afterLogin_mypage/updateMember.do", method = RequestMethod.POST)
+	public String updateMember(MemberVO vo, HttpServletRequest request) {
+		memberService.updateMember(vo);
+		request.getSession(false).setAttribute("memberVO", vo);
+		return "redirect:" + "/home.do";
 	}
 
 	// 정현지 id찾기
@@ -53,13 +62,6 @@ public class MemberController {
 	     return memberService.forgetMemberPassword(vo);
 	   }
 	   
-	   // 강정호 회원 수정 메서드
-	   @RequestMapping(value="updateMember.do", method=RequestMethod.POST)
-	   public String updateMember(MemberVO vo, HttpServletRequest request){
-	      memberService.updateMember(vo);
-	      request.getSession(false).setAttribute("memberVO", vo);
-	      return "redirect:home.do";
-	   }
 	   //황윤상 id체크
 	   @RequestMapping("idcheckAjax.do")
 	   @ResponseBody
@@ -72,6 +74,7 @@ public class MemberController {
 	// 황윤상 registerMember
 	@RequestMapping(value = "registerMember.do", method = RequestMethod.POST)
 	public String register(MemberVO memberVO, String businessNumber) {
+		System.out.println(memberVO);
 		memberService.registerMember(memberVO, businessNumber);
 		return "redirect:registerResultView.do?id=" + memberVO.getId();
 	}

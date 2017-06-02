@@ -7,7 +7,7 @@ public interface MemberService {
 
 	String forgetMemberId(MemberVO vo);
 
-	int forgetMemberPassword(MemberVO vo);
+	public int forgetMemberPassword(MemberVO vo);
 
 	void updateMember(MemberVO vo);
 
@@ -20,4 +20,6 @@ public interface MemberService {
 	void registerMember(MemberVO memberVO, String businessNumber);
 
 	void deleteMember(String id);
+
+	String getMemberType(String id);
 }

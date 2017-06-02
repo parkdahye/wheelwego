@@ -15,23 +15,21 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO login(MemberVO vo) {
 		return sqlSessionTemplate.selectOne("member.login", vo);
 	}
-	
-	  @Override
-	   public String forgetMemberId(MemberVO vo) {
-	      return sqlSessionTemplate.selectOne("member.forgetMemberId", vo);
-	   }
-	   @Override
-	   public int forgetMemberPassword(MemberVO vo) {
-	      return sqlSessionTemplate.update("member.forgetMemberPassword", vo);
-	   }
-	   @Override
-	   public void updateMember(MemberVO vo) {
-		   sqlSessionTemplate.update("member.updateMember",vo);
-	   }
-	   @Override
-	   public int idcheck(String id) {
-	      return sqlSessionTemplate.selectOne("member.idcheck",id);   
-	   }
+
+	@Override
+	public String forgetMemberId(MemberVO vo) {
+		return sqlSessionTemplate.selectOne("member.forgetMemberId", vo);
+	}
+
+	@Override
+	public void updateMember(MemberVO vo) {
+		sqlSessionTemplate.update("member.updateMember", vo);
+	}
+
+	@Override
+	public int idcheck(String id) {
+		return sqlSessionTemplate.selectOne("member.idcheck", id);
+	}
 
 	@Override
 	public MemberVO findMemberById(String id) {
@@ -59,4 +57,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public void deleteMember(String id) {
 		sqlSessionTemplate.delete("member.deleteMember", id);
 	}
+
+	@Override
+	public String getMemberType(String id) {
+		return sqlSessionTemplate.selectOne("member.getMemberType", id);
+	}
+	
+    @Override
+    public int forgetMemberPassword(MemberVO vo) {
+       return sqlSessionTemplate.update("member.forgetMemberPassword", vo);
+    }
 }

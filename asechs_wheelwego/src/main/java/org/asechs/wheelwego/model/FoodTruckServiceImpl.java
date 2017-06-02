@@ -24,6 +24,7 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	public List<TruckVO> searchFoodTruckList(String name){
 		return foodTruckDAO.searchFoodTruckList(name);
 	}
+	
 	/* pagingBean 적용된 검색 결과 푸드트럭 리스트 */
 	@Override
 	public ListVO pagingTruckList(String pageNo){
@@ -51,5 +52,10 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		list.setTruckList(searchTruckList);
 		list.setPagingBean(pagingBean);
 		return list;
+	}
+	
+	@Override
+	public List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo) {
+		return foodTruckDAO.searchFoodTruckByGPS(gpsInfo);
 	}
 }

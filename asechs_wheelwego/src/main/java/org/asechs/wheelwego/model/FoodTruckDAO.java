@@ -10,4 +10,5 @@ public interface FoodTruckDAO {
 	List<TruckVO> searchFoodTruckList(String name);
 	List<TruckVO> pagingTruckList(PagingBean pagingBean);
 	int getTruckListTotalContentCount();
+	List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo);
 }

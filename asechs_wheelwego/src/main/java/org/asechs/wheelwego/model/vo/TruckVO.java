@@ -9,8 +9,8 @@ public class TruckVO {
 	private String sellerId;
 	private String foodtruckName;
 	private String introduction;
-	private MultipartFile foodtruckFile; // 웹에서 이미지 받아오기 위한 변수 (coulmn X)
-	private String foodtruckFilepath; //DB에 저장되는 파일 경로 (column: foodtruck_filename1)
+	private List<MultipartFile> foodtruckFile; // 웹에서 이미지 받아오기 위한 변수 (coulmn X)
+	private FileVO fileVO;
 	private List<FoodVO> foodList;
 	private double latitude;
 	private double longitude;
@@ -21,7 +21,7 @@ public class TruckVO {
 	}
 
 	public TruckVO(String foodtruckNumber, String sellerId, String foodtruckName, String introduction,
-			MultipartFile foodtruckFile, String foodtruckFilepath, List<FoodVO> foodList, double latitude,
+			List<MultipartFile> foodtruckFile, FileVO fileVO, List<FoodVO> foodList, double latitude,
 			double longitude) {
 		super();
 		this.foodtruckNumber = foodtruckNumber;
@@ -29,7 +29,7 @@ public class TruckVO {
 		this.foodtruckName = foodtruckName;
 		this.introduction = introduction;
 		this.foodtruckFile = foodtruckFile;
-		this.foodtruckFilepath = foodtruckFilepath;
+		this.fileVO = fileVO;
 		this.foodList = foodList;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -67,20 +67,20 @@ public class TruckVO {
 		this.introduction = introduction;
 	}
 
-	public MultipartFile getFoodtruckFile() {
+	public List<MultipartFile> getFoodtruckFile() {
 		return foodtruckFile;
 	}
 
-	public void setFoodtruckFile(MultipartFile foodtruckFile) {
+	public void setFoodtruckFile(List<MultipartFile> foodtruckFile) {
 		this.foodtruckFile = foodtruckFile;
 	}
 
-	public String getFoodtruckFilepath() {
-		return foodtruckFilepath;
+	public FileVO getFileVO() {
+		return fileVO;
 	}
 
-	public void setFoodtruckFilepath(String foodtruckFilepath) {
-		this.foodtruckFilepath = foodtruckFilepath;
+	public void setFileVO(FileVO fileVO) {
+		this.fileVO = fileVO;
 	}
 
 	public List<FoodVO> getFoodList() {
@@ -110,9 +110,8 @@ public class TruckVO {
 	@Override
 	public String toString() {
 		return "TruckVO [foodtruckNumber=" + foodtruckNumber + ", sellerId=" + sellerId + ", foodtruckName="
-				+ foodtruckName + ", introduction=" + introduction + ", foodtruckFile=" + foodtruckFile
-				+ ", foodtruckFilepath=" + foodtruckFilepath + ", foodList=" + foodList + ", latitude=" + latitude
-				+ ", longitude=" + longitude + "]";
+				+ foodtruckName + ", introduction=" + introduction + ", foodtruckFile=" + foodtruckFile + ", fileVO="
+				+ fileVO + ", foodList=" + foodList + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
 
 }

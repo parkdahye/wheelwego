@@ -8,7 +8,7 @@ public interface MemberDAO {
 
 	String forgetMemberId(MemberVO vo);
 
-	int forgetMemberPassword(MemberVO vo);
+	public int forgetMemberPassword(MemberVO vo);
 
 	void updateMember(MemberVO vo);
 
@@ -23,4 +23,6 @@ public interface MemberDAO {
 	String getMemberPassword(String id);
 
 	void deleteMember(String id);
+
+	String getMemberType(String id);
 }

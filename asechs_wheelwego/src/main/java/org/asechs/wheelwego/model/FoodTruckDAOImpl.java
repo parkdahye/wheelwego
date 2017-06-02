@@ -24,7 +24,8 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	@Override
 	public List<TruckVO> searchFoodTruckList(String name) {
 		return sqlSessionTemplate.selectList("foodtruck.searchFoodTruckList", name);
-	}
+}
+
 	/* pagingBean 적용된 검색 결과 푸드트럭 리스트 */
 	@Override
 	public List<TruckVO> pagingTruckList(PagingBean pagingBean){
@@ -35,4 +36,8 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 		return sqlSessionTemplate.selectOne("foodtruck.getTruckListTotalContentCount");
 	}
 
+	@Override
+	public List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo) {
+		return sqlSessionTemplate.selectList("foodtruck.searchFoodTruckByGPS", gpsInfo);
+	}
 }

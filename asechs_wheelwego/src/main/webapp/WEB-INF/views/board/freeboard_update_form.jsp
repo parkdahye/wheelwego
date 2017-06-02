@@ -1,50 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script>
+
+   <!-- 호겸 게시판 글 수정하기 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<!-- Bootstrap --> 
+<link href="css/bootstrap.min.css" rel="stylesheet"> 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+
+<script src="js/bootstrap.min.js"></script> 
+<script type="text/javascript">
 	$(document).ready(function(){
-		// 목록으로 가기
-		$("#boardListBtn").click(function()	{
+		$("#cancelBtn").click(function(){//취소버튼 작동
 			location.href="${pageContext.request.contextPath}/freeboard_list.do";
-		})// 목록버튼 끝
-		$("#modifyBtn").click(function()	{
-			location.href="${pageContext.request.contextPath}/freeboard_update_form.do?no="+${requestScope.detail_freeboard.no};
-		})// 수정버튼 끝
-		$("#deleteBtn").click(function()	{
-			var info=confirm("게시물을 삭제합니까?");
-			if(info){				
-			location.href="${pageContext.request.contextPath}/freeboardDelete.do?no="+${requestScope.detail_freeboard.no};
-			}else{
-			}
-		})// 삭제버튼 끝
+		})
 	})//ready
 </script>
-<table class="content">
-	<tr>
-			<td>NO : ${requestScope.detail_freeboard.no}</td>
-			<td colspan="2"><input type="text" name="title" value="${requestScope.detail_freeboard.title }" required="required"></td>
-		</tr>
-		 <tr>
-			<td>작성자 :  <input type="text" name="id" value="${requestScope.detail_freeboard.id }" readonly="readonly"></td>
-			<td> ${requestScope.detail_freeboard.timePosted}</td>
-			<td>조회수 : ${requestScope.detail_freeboard.hits}</td> 
-		</tr>
-		<tr>
-			<td colspan="3">
-			<textarea  name="content" required="required">"${requestScope.detail_freeboard.content }"</textarea>
-			</td> 
-		</tr>
-		<tr>
-			<td valign="middle" align="center" colspan="3">
-			<button type="button" class="btn btn-info"  id="boardListBtn">목록</button>
-			 <button type="button" class="btn btn-info"  id="modifyBtn">수정</button>
-			 <c:if test="${requestScope.detail_freeboard.id==sessionScope.memberVO.id}">
-			<button type="button" class="btn btn-info"  id="deleteBtn">삭제</button>
-			<%-- login 적용 시 위로 두칸 올린다 --%>
-			 </c:if>
-			 <br><br>		
-			 </td>
-		</tr>
-	</table>
+<div class="panel panel-default"> 
+<div class="panel-heading"><h3>자유게시판 수정</h3></div> 
+
+<div class="panel-body">
+
+<div class="container"> 
+<form action="updateBoard.do" method="post">  
+		<div class="row"> 
+			<div class="col-md-3">
+			<div class="form-group"> 
+			<label for="name">글번호</label> 
+			<input type="text" class="form-control" name="no" id="no" value="${requestScope.detail_freeboard.no}" readonly> 
+			</div> 
+			</div> 
+			
+			<div class="col-md-4"> 
+			<div class="form-group"> 
+			<label for="writer">작성자</label> 
+			<input type="text" class="form-control" name="id" id="writer" value="${requestScope.detail_freeboard.id }" readonly> 
+			</div> 
+			</div> 
+		</div> 
+		
+		<div class="col-md-8"> 
+		<div class="form-group"> 
+		<label for="title">글제목</label> 
+		<input type="text" class="form-control" name ="title" id="title" value="${requestScope.detail_freeboard.title }" required="required"> 
+		</div> </div>
+		 
+		<div class="col-md-8"> 
+		<div class="form-group"> 
+		<label for="content">글내용</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<font size=2 >${requestScope.detail_freeboard.timePosted} &nbsp;&nbsp; 조회수 : ${requestScope.detail_freeboard.hits}</font>
+		<textarea class="form-control" rows="10" name="content" id="content" required="required">${requestScope.detail_freeboard.content }</textarea> 
+		</div></div><br><br><br><br><br>
+		
+		<div class="form-group,col-md-8"> 
+		<label for="File">첨부파일 1</label> 
+		<input type="file" id="File1"> 
+		</div> 
+		<div class="form-group,col-md-8"> 
+		<label for="File">첨부파일 2</label> 
+		<input type="file" id="File2"> 
+		</div> 
+		<div class="form-group,col-md-8"> 
+		<label for="File">첨부파일 3</label> 
+		<input type="file" id="File3"> 
+		</div> 
+		
+		<div class="center-block" style='width:400px'> 
+		<input type="reset"  class="btn btn-info" value="다시작성">	
+		<input type="submit"  class="btn btn-info" value="수정" >
+		<input type="button"  class="btn btn-info" value="취소" id="cancelBtn"></div> 
+</form> 
+</div> 
+</div> <!--panel end--> 
+</div> 
 

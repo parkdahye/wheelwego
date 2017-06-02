@@ -592,6 +592,7 @@ body {
     -ms-flex-pack: start;
     justify-content: flex-start;
 }
+
 /* map */
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -629,3 +630,25 @@ body {
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+
+/*profileBtn*/
+#profileBtn{
+	    background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent;
+    border: none;
+    color: #FFFFFF;
+    outline: none;
+}
+
+#profileImg{
+ width:150px;
+ height:150px;
+ border-radius:75px;
+ -moz-border-radius : 75px;
+ -webkit-border-radius : 75px;
+ -ms-border-radius :75px;
+ -khtml-border-radius : 75px;
+ -o-border-radius :75px;
+ margin: 0 auto;
+ }

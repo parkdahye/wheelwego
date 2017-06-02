@@ -29,4 +29,20 @@ public class FoodTruckController {
 		System.out.println("searchFoodTruckList"+name);
 		return new ModelAndView("redirect:pagingTruckList.do","name",name);
 	}
+	
+	
+	/**
+	 * 황윤상 GPS 기반 푸드트럭수동검색
+	 * @param name
+	 * @return
+	 */
+	@RequestMapping("searchFoodTruckByGPS.do")
+	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude) {
+		TruckVO gpsInfo = new TruckVO();
+		gpsInfo.setLatitude(Double.parseDouble(latitude));
+		gpsInfo.setLongitude(Double.parseDouble(longitude));
+		List<TruckVO> searchTruckList = foodTruckService.searchFoodTruckByGPS(gpsInfo);
+		
+		return new ModelAndView("foodtruck/foodtruck_detail.tiles", "truckList", searchTruckList);
+	}	
 }
