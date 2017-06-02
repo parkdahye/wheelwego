@@ -71,8 +71,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public MemberVO getNameById(String id) {
-		return boardDAO.getNameById(id);
+	public MemberVO getNameById(BoardVO bvo ) {
+		return boardDAO.getNameById(bvo);
 	}
 
 	@Override
@@ -117,9 +117,7 @@ public class BoardServiceImpl implements BoardService {
 		MemberVO mvo=(MemberVO) session.getAttribute("memberVO");
 		bvo.setId(mvo.getId());
 		// 글 정보먼저 insert한다.
-		System.out.println("2번 service 자유게시판 글쓰기 시작");
 		String contentNo=boardDAO.freeboardWrite(bvo);
-		System.out.println("3번 service 자유게시판 글쓰기 완료 후 돌아옴");
 		
 		// 강정호. 파일 업로드. 컨트롤러에 넣기에는 너무 길어서 서비스에 넣었습니다.
 		// 그 다음 파일 이름을 insert한다
@@ -134,7 +132,6 @@ public class BoardServiceImpl implements BoardService {
 				String fileName=fileList.get(i).getOriginalFilename();
 				if(fileName.equals("")==false){
 					try{
-						System.out.println("5번 파일업로드"+i+"번");
 						fileList.get(i).transferTo(new File(uploadPath+fileName));
 						fileVO.setNo(contentNo);
 						fileVO.setFilepath(fileName);
@@ -142,7 +139,6 @@ public class BoardServiceImpl implements BoardService {
 						nameList.add(fileName);
 						//filePath.add(uploadPath+fileName);
 						boardDAO.freeboardWriteFileUpload(boardVO);
-						System.out.println("업로드 완료"+nameList);
 					}catch(IllegalStateException | IOException e){
 						e.printStackTrace();
 						}
@@ -154,6 +150,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public MemberVO business_getNameById(String id) {
 		return boardDAO.business_getNameById(id);
+	}
+
+	@Override
+	public List<FileVO> getFreeBoardFilePath(String no) {
+		return boardDAO.getFreeBoardFilePath(no);
 	}
 
 }

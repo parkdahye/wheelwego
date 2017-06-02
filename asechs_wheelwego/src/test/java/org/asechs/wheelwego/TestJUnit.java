@@ -6,6 +6,7 @@ import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.MemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -38,6 +39,8 @@ public class TestJUnit {
 	
 	@Resource
 	private BoardDAO boardDAO;
+	
+	
 	@Test
 	public void test(){
 		String id = "seller04";
@@ -50,7 +53,6 @@ public class TestJUnit {
 		String memberType = "seller";
 		String businessNumber = "0000000000";
 		
-		System.out.println(boardDAO.getFreeBoardDetail("96"));
 
 		/*service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		//System.out.println(service.getMemberPassword(id, password));
@@ -73,6 +75,9 @@ public class TestJUnit {
 		//service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
+		
+		System.out.println("파일 내임"+boardDAO.getFreeBoardFilePath("118"));
+		System.out.println(boardDAO.getFreeBoardDetail("118"));
 	}
 }
 

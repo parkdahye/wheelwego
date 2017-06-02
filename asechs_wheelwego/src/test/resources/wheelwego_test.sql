@@ -104,15 +104,27 @@ select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
 from freeboard f, freeboardfile fi 
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
 
-md
-cm
+
+select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		freeboard_hits from freeboard where freeboard_no='118'
+		
+select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		freeboard_hits from freeboard where freeboard_no='118'
+
+select m.member_name as memberName from freeboard f, member m where m.id=f.id and f.id='java101' and f.freeboard_no='118'
 
 
+	SELECT f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content, f.freeboard_timePosted, f.freeboard_hits, m.id FROM(
+		SELECT row_number() over(order by freeboard_no desc) as rnum, freeboard_no, id, freeboard_title, freeboard_content,
+		to_char(freeboard_timePosted,'YYYY.MM.DD') as freeboard_timePosted , freeboard_hits from freeboard
+		)f, member m where f.id=m.id and rnum between startRowNumber and endRowNumber
+		order by freeboard_no desc
 
 
-
-
-
-
+	SELECT f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content, f.freeboard_timePosted, f.freeboard_hits, m.id FROM(
+		SELECT row_number() over(order by freeboard_no desc) as rnum, freeboard_no, id, freeboard_title, freeboard_content,
+		to_char(freeboard_timePosted,'YYYY.MM.DD') as freeboard_timePosted , freeboard_hits from freeboard
+		)f, member m where f.id=m.id and rnum between 1 and 30
+		order by freeboard_no desc
 
 
