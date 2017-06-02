@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
@@ -32,7 +33,7 @@ public interface BoardDAO {
 
 	void updateBoard(BoardVO vo);
 
-	MemberVO getNameById(String id);
+	MemberVO getNameById(BoardVO bvo);
 
 	void updateHitsBusiness(int hits);
 
@@ -45,6 +46,8 @@ public interface BoardDAO {
 	MemberVO business_getNameById(String id);
 
 	void freeboardWriteFileUpload(BoardVO boardVO);
+
+	List<FileVO> getFreeBoardFilePath(String no);
 
 
 }

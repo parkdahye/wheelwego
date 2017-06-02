@@ -1,12 +1,13 @@
 package org.asechs.wheelwego.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.asechs.wheelwego.model.BoardService;
-
 import org.asechs.wheelwego.model.vo.BoardVO;
-
+import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,15 +59,17 @@ public class BoardController {
 	// 호겸 작성. 자유게시판 상세보기 and 조회수
 	@RequestMapping("board/freeboard_detail_content.do")
 	public String freeboard_detail_content(String no, Model model) {
-		System.out.println("강정호 상세보기 컨트롤러 통과"+no);
 		int hits = Integer.parseInt(no);
 		// 조회수 올리기
 		boardService.updateHits(hits);
+		// 글제목, 조회수, 내용 가져오는 메서드
 		BoardVO bvo = boardService.getFreeBoardDetail(no);
-		System.out.println("강정호 업데이트수정"+bvo);
+		// 파일 이름 가져오는 메서드
+		List<FileVO> fileNameList=boardService.getFreeBoardFilePath(no);
 		// 작성자 이름 갖고오기
-		MemberVO name = boardService.getNameById(bvo.getId());
+		MemberVO name = boardService.getNameById(bvo);
 		model.addAttribute("detail_freeboard", bvo);
+		model.addAttribute("fileNameList",fileNameList);
 		model.addAttribute("name", name);
 		return "board/freeboard_detail_content.tiles";
 	}
@@ -81,8 +84,9 @@ public class BoardController {
 	// 호겸 작성. 게시물 수정 폼으로 가기
 	@RequestMapping("freeboard_update_form.do")
 	public String freeboard_update_form(String no, Model model) {
-		BoardVO bvo = boardService.getFreeBoardDetail(no);
-		model.addAttribute("detail_freeboard", bvo);
+		//호겸이가 한거 보존
+		//BoardVO bvo = boardService.getFreeBoardDetail(no);
+		//model.addAttribute("detail_freeboard", bvo);
 		return "board/freeboard_update_form.tiles";
 	}
 
@@ -126,10 +130,7 @@ public class BoardController {
 	// 강정호 자유게시판 글 등록 메서드
 	@RequestMapping("freeboard_write.do")
 	public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
-		System.out.println("1번. freeboardWrite 컨트롤러 통과");
-		System.out.println(bvo.toString());
 		boardService.freeboardWrite(bvo, request);
-		System.out.println("6번 freeboardWrite 파일업로드까지 완성하고 돌아옴");
 		return "redirect:freeboard_list.do";
 	}
 
