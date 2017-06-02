@@ -2,10 +2,10 @@ package org.asechs.wheelwego.model;
 
 import java.util.List;
 
-import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.vo.WishlistVO;
 
 public interface MypageService {
 
-	List<TruckVO> getTruckList(String id, String trucknumber);
-	
+	public List<WishlistVO> myWishList(String id);
+	public void deleteWishList(WishlistVO wishlistVO);
 }

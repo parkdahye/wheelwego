@@ -114,5 +114,4 @@ public class TruckVO {
 				+ ", foodtruckFilepath=" + foodtruckFilepath + ", foodList=" + foodList + ", latitude=" + latitude
 				+ ", longitude=" + longitude + "]";
 	}
-
 }

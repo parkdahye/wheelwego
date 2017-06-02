@@ -38,7 +38,7 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('postCode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('address').value = fullAddr;
 
                 // 커서를 상세주소 필드로 이동한다.
@@ -48,38 +48,12 @@
     }
 </script>
 
-
-<%-- <form method="post" id="updateForm" action="${pageContext.request.contextPath}/updateMember.do">
-아이디 : <input type="text" name="id" value="${sessionScope.memberVO.id}" readonly><br>
-비밀번호 : <input type="password" name="password" required="required"><br>
-이름 : <input type="text" name="memberName" value="${sessionScope.memberVO.memberName}" readonly="readonly"><br>
-주소 : <input type="text" name="address" value="${sessionScope.memberVO.address}" required="required"><br>
-폰번호 : <input type="text" name="phoneNumber" value="${sessionScope.memberVO.phoneNumber}" required="required"><br>
-<c:if test="${sessionScope.memberVO.memberType=='1'}">
-	사업자번호 : <input type="text" name="memebrType" value="${sessionScope.memberVO.memberType}" readonly><br>
-</c:if>
-<input type="submit" value="수정" name="updateBtn">   <input type="button" value="취소" name="cancelBtn">
-</form> --%>
-
-
-<script type="text/javascript">
-   $(document).ready(function(){
-      $(":input[name=cancelBtn]").click(function(){
-         if(confirm("회원 정보 수정을 취소하시겠습니까?")){
-            location.href="${pageContext.request.contextPath}/home.do";
-         }
-      });
-   });
-</script>
-
-${sessionScope.memberVO};
-
-<form method="post" id="updateForm" action="${pageContext.request.contextPath}/updateMember.do">
+<form method="post" id="updateForm" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMember.do">
    아이디 <input type="text" name="id" maxlength="10" value="${sessionScope.memberVO.id}" readonly="readonly"><br>
    비밀번호  <input type="password" name="passwordPre" maxlength="10" id = "passwordPre" onkeypress="caps_lock(event)" required="required"><span id="capsLockCheckView"></span><br>
    비밀번호체크 <input type="password" name="password" maxlength="10" id = "password" onkeypress="caps_lock(event)" required="required"><span id="pwCheckView"></span><br>
    이름 : <input type="text" name="memberName" maxlength = "10" value="${sessionScope.memberVO.memberName}" readonly="readonly"><br>
-   주소 <input type="text" id="sample6_postcode" placeholder="우편번호" value = "${sessionScope.memberVO.postCode}" readonly="readonly">
+   주소 <input type="text" id="postCode" name = "postCode" placeholder="우편번호" value = "${sessionScope.memberVO.postCode}" readonly="readonly">
         <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
         <input type="text" id="address" name = "address" placeholder="주소" value = "${sessionScope.memberVO.address}" readonly="readonly">
         <input type="text" id="addressDetail" name = "addressDetail" maxlength="50" placeholder="상세주소" value = "${sessionScope.memberVO.addressDetail}" required="required"><br>     
@@ -87,27 +61,18 @@ ${sessionScope.memberVO};
    
    <c:choose>
    	<c:when test="${sessionScope.memberVO.memberType == customer}">
-   		<input type="radio" name="memberType" value="customer" checked="checked" disabled="disabled"> 일반회원&nbsp;
-   		<input type="radio" name="memberType" value="seller" disabled="disabled"> 창업자회원<br>
+   		<input type="radio" name="memberType" value="customer" checked="checked"> 일반회원&nbsp;
+   		<input type="radio" name="memberType" value="seller"> 창업자회원<br>
    	</c:when>
-   	<c:otherwise>
-   		<input type="radio" name="memberType" value="customer" disabled="disabled"> 일반회원&nbsp;
-   		<input type="radio" name="memberType" value="seller" checked="checked" disabled="disabled"> 창업자회원<br>
-   		사업자 번호 <input type='text' name = 'businessNumber' value = "${sessionScope.memberVO.businessNumber}" maxlength='10' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required='required'>"   	
+    <c:otherwise>
+   		<input type="radio" name="memberType" value="customer"> 일반회원&nbsp;
+   		<input type="radio" name="memberType" value="seller" checked="checked"> 창업자회원<br>
+   		<%-- 사업자 번호 <input type='text' name = 'businessNumber' value = "${sessionScope.memberVO.businessNumber}" maxlength='10' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required='required'>" --%>   	
    	</c:otherwise>
    </c:choose>
-<%--    <c:choose>
-   		<c:when test="${sessionScope.memberVO.memberType == customer}">
-
-   		</c:when>
-  		<c:otherwise>
-   			<input type="radio" name="memberType" value="customer" readonly="readonly"> 일반회원&nbsp;
-   			<input type="radio" name="memberType" value="seller" checked="checked" readonly="readonly"> 창업자회원<br> 
-   			 		
-  		</c:otherwise>
-   </c:choose>      --%>           
-   <span id="businessNumberView"></span><span id='businessNumberCheckView'></span><br>
-   <input type="submit" value="가입하기">
+   <!-- <span id="businessNumberView"></span><span id='businessNumberCheckView'></span><br> -->
+   <input type="submit" value="수정하기">
+   <input type="button" id = "cancelBtn" value="취소하기">
 </form>
 
 <script type="text/javascript">
@@ -150,18 +115,13 @@ function removeChar(event) {
 }
 
 $(document).ready(function(){
-      var checkResultId="";   
       var checkResultPw="";
-      var memberType = "";
+      //var memberType = "";
       var checkResultPhone = "";
-      var checkResultBusiness = "";
+      /*var checkResultBusiness = "";*/
 
       
-      $("#regForm").submit(function(){            
-         if(checkResultId==""){
-            alert("아이디를 체크하세요");
-            return false;
-         }      
+      $("#updateForm").submit(function(){     
          if(checkResultPw==""){
             alert("비밀번호를 체크하세요");
             return false;
@@ -174,45 +134,21 @@ $(document).ready(function(){
             alert("휴대전화번호를 체크하세요");
             return false;
          }
-         if(memberType==""){
+         /* if(memberType==""){
             alert("회원타입을 체크하세요");
             return false;
-         }
-         if(memberType == "seller" && checkResultBusiness==""){
+         } */
+         /* if(memberType == "seller" && checkResultBusiness==""){
             alert("사업자번호를 체크하세요");
             return false;
-         }            
+         }  */           
       });
-                  
-      $(":input[name=id]").keyup(function(){
-         var id=$(this).val().trim();
-         
-         if (id.match(/[^a-z0-9]/) != null ) {
-            $("#idCheckView").html("소문자와 영어만 입력하세요").css("background","pink");
-            checkResultId="";
-            return;
-         }
-
-         if(id.length<4 || id.length>10){
-            $("#idCheckView").html("아이디는 4자이상 10자 이하입니다").css("background","pink");
-            checkResultId="";
-            return;
-         }         
-         $.ajax({
-            type:"POST",
-            url:"${pageContext.request.contextPath}/idcheckAjax.do",            
-            data:"id="+id,   
-            success:function(data){                  
-               if(data=="fail"){
-               $("#idCheckView").html(id+" 사용불가!").css("background","red");
-                  checkResultId="";
-               }else{                  
-                  $("#idCheckView").html(id+" 사용가능!").css("background","yellow");      
-                  checkResultId=id;   
-               }               
-            }//callback         
-         });//ajax
-      });//keyup      
+      
+      $("#cancelBtn").click(function(){
+    	  if(confirm("회원 정보 수정을 취소하시겠습니까?")){
+    		  location.href="${pageContext.request.contextPath}/home.do";
+    	  }
+      });
       
       $(":input[name=passwordPre]").keyup(function(){
          var password = $(this).val().trim();
@@ -255,7 +191,7 @@ $(document).ready(function(){
          }
       });
       
-      $("input:radio[name=memberType]").click(function(){
+/*       $("input:radio[name=memberType]").click(function(){
          memberType = $(":input[name=memberType]:checked").val();
          
          if (memberType == "seller")
@@ -278,34 +214,6 @@ $(document).ready(function(){
          }
          else
             $("#businessNumberView").html("");
-      });
+      }); */
 });//ready
 </script>
-    
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form method="post" id="updateForm" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMember.do">
-아이디 : <input type="text" name="id" value="${sessionScope.memberVO.id}" readonly><br>
-비밀번호 : <input type="password" name="password" required="required"><br>
-이름 : <input type="text" name="memberName" value="${sessionScope.memberVO.memberName}" readonly="readonly"><br>
-주소 : <input type="text" name="address" value="${sessionScope.memberVO.address}" required="required"><br>
-폰번호 : <input type="text" name="phoneNumber" value="${sessionScope.memberVO.phoneNumber}" required="required"><br>
-<c:if test="${sessionScope.memberVO.memberType=='seller'}">
-	사업자번호 : <input type="text" name="memebrType" value="${sessionScope.memberVO.memberType}" readonly><br>
-</c:if>
-<input type="submit" value="수정" name="updateBtn">   <input type="button" value="취소" name="cancelBtn">
-</form>
-
-
-<script type="text/javascript">
-   $(document).ready(function(){
-      $(":input[name=cancelBtn]").click(function(){
-         if(confirm("회원 정보 수정을 취소하시겠습니까?")){
-            location.href="${pageContext.request.contextPath}/home.do";
-         }
-      });
-   });
-</script> --%>

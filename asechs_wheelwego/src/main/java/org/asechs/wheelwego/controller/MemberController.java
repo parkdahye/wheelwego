@@ -19,14 +19,15 @@ public class MemberController {
 
 	// 박다혜 Login
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
+
 	public String login(HttpServletRequest request, MemberVO vo) {
 		MemberVO memberVO = memberService.login(vo);
 		if (memberVO == null)
 			return "member/login_fail";
-		else {
-			HttpSession session = request.getSession();
-			session.setAttribute("memberVO", memberVO);
-			return "main_home.tiles";
+		else{
+			HttpSession session=request.getSession();
+			session.setAttribute("memberVO",memberVO);
+			return "redirect:home.do";
 		}
 	}
 
@@ -39,39 +40,41 @@ public class MemberController {
 		return "main_home.tiles";
 	}
 
-	// 정현지 id찾기
-	@RequestMapping("forgetMemberId.do")
-	@ResponseBody
-	public String forgetMemberId(MemberVO vo) {
-		return memberService.forgetMemberId(vo);
-	}
-
-	// 정현지 pw찾기
-	@RequestMapping("forgetMemberPassword.do")
-	@ResponseBody
-	public String forgetMemberPassword(MemberVO vo) {
-		return memberService.forgetMemberPassword(vo);
-	}	
 
 	// 강정호 회원 수정 메서드
-	@RequestMapping(value = "updateMember.do", method = RequestMethod.POST)
+	@RequestMapping(value = "afterLogin_mypage/updateMember.do", method = RequestMethod.POST)
 	public String updateMember(MemberVO vo, HttpServletRequest request) {
 		memberService.updateMember(vo);
 		request.getSession(false).setAttribute("memberVO", vo);
-		return "redirect:home.do";
+		return "redirect:" + "/home.do";
 	}
 
-	// 황윤상 id체크
-	@RequestMapping("idcheckAjax.do")
+	// 정현지 id찾기
+	@RequestMapping("forgetMemberId.do")
 	@ResponseBody
-	public String idcheckAjax(String id) {
-		int count = memberService.idcheck(id);
-		return (count == 0) ? "ok" : "fail";
-	}
+	   public String forgetMemberId(MemberVO vo) {
+	      return memberService.forgetMemberId(vo);
+	   }
+	//정현지 새 비밀번호 설정
+	   @RequestMapping("forgetMemberPassword.do")
+	   @ResponseBody
+	   public int forgetMemberPassword(MemberVO vo) {
+	     return memberService.forgetMemberPassword(vo);
+	   }
+	   
+	   //황윤상 id체크
+	   @RequestMapping("idcheckAjax.do")
+	   @ResponseBody
+	   public String idcheckAjax(String id) {      
+	      int count=memberService.idcheck(id);
+	      return (count==0) ? "ok":"fail";       
+	   }
+
 
 	// 황윤상 registerMember
 	@RequestMapping(value = "registerMember.do", method = RequestMethod.POST)
 	public String register(MemberVO memberVO, String businessNumber) {
+		System.out.println(memberVO);
 		memberService.registerMember(memberVO, businessNumber);
 		return "redirect:registerResultView.do?id=" + memberVO.getId();
 	}

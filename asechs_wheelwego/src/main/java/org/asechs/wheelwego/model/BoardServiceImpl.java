@@ -66,4 +66,28 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.freeboardDelete(no);
 	}
 
+	@Override
+	public void updateHits(int hits) {
+		boardDAO.updateHits(hits);
+		
+	}
+
+	@Override
+	public void updateHitsBusiness(int hits) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BoardVO getBusinessBoardDetail(String no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void businessDelete(String no) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

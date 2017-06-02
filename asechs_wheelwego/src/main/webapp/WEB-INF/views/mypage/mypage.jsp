@@ -2,12 +2,22 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form action="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do">
+
+<script>
+function checkDelete(){
+	if (confirm("정말 탈퇴하시겠습니까??") == true){    //확인
+	    return true;
+	}else{   //취소
+	    return false;
+	}
+}
+</script>
+
+<form action="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do" onsubmit="return checkDelete()">
   <input type="submit" value="탈퇴">
   <input type="hidden" name="command" value="deleteAccount">
 </form>
-
-<form action="${pageContext.request.contextPath}/mypage/checkPasswordForm.do">
+<form action="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do">
   <input type="submit" value="회원정보수정">
   <input type="hidden" name="command" value="update_form">
 </form>

@@ -17,4 +17,12 @@ public interface BoardService {
 
 	void freeboardDelete(String no);
 
+	void updateHits(int hits);
+
+	void updateHitsBusiness(int hits);
+
+	BoardVO getBusinessBoardDetail(String no);
+
+	void businessDelete(String no);
+
 }
