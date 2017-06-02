@@ -181,3 +181,13 @@ select m.member_name as memberName from freeboard f, member m where m.id=f.id an
 		)f, member m where f.id=m.id and rnum between 1 and 30
 		order by freeboard_no desc
 
+
+insert into review(review_no,foodtruck_number,customer_id,review_content,review_timeposted,grade) 
+values(review_seq.nextval,'1234','customer1','맛있네여~~',sysdate,4);
+
+select *
+from
+(select row_number() over(order by review_no desc) as rnum ,review_no,foodtruck_number,customer_id,
+review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
+where foodtruck_number='1234')
+where rnum between 1 and 5;

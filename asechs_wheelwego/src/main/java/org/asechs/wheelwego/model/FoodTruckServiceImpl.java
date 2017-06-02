@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +58,20 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	@Override
 	public List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo) {
 		return foodTruckDAO.searchFoodTruckByGPS(gpsInfo);
+	}
+	@Override
+	public void registerReview(ReviewVO reviewVO) {
+		foodTruckDAO.registerReview(reviewVO);
+	}
+	@Override
+	public List<ReviewVO> getReviewListByTruckNumber(String reviewPageNo, String foodtruckNumber) {
+		int totalCount =foodTruckDAO.getReivewTotalCount(foodtruckNumber);
+		PagingBean pagingBean=null;
+		if(reviewPageNo==null)
+			pagingBean=new PagingBean(totalCount, Integer.parseInt("1"));
+		else
+			pagingBean=new PagingBean(totalCount, Integer.parseInt(reviewPageNo));
+		foodTruckDAO.getReviewListByTruckNumber(pagingBean);
+		return null;
 	}
 }

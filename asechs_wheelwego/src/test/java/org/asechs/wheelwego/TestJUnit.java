@@ -8,7 +8,6 @@ import org.asechs.wheelwego.model.MypageDAO;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -39,7 +38,6 @@ public class TestJUnit {
 	@Resource
 	private MemberService service;
 	@Resource
-
 	private FoodTruckService foodService;
 	@Resource
 	private MypageDAO mypageDAO;
@@ -56,11 +54,11 @@ public class TestJUnit {
 		String memberType = "customer";
 		String businessNumber = null;
 
-		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 		
-		/*String id = "seller07";
+		String id = "seller07";
 		String password = "1234";
 		String memberName = "김래발";
 		String postCode = "13437";
@@ -83,8 +81,8 @@ public class TestJUnit {
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 		
-		System.out.println(foodService.searchFoodTruckList("끼니"));*/
-		
+		System.out.println(foodService.searchFoodTruckList("끼니"));
+*/		
 	}
 }
 

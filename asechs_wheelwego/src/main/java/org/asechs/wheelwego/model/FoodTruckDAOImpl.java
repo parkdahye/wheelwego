@@ -4,11 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.expression.common.TemplateAwareExpressionParser;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -39,5 +38,17 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	@Override
 	public List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo) {
 		return sqlSessionTemplate.selectList("foodtruck.searchFoodTruckByGPS", gpsInfo);
+	}
+	@Override
+	public void registerReview(ReviewVO reviewVO) {
+		sqlSessionTemplate.insert("foodtruck.registerReview", reviewVO);
+	}
+	@Override
+	public List<ReviewVO> getReviewListByTruckNumber(PagingBean pagingBean) {
+		return sqlSessionTemplate.selectList("foodtruck.getReviewListByTruckNumber", pagingBean);
+	}
+	@Override
+	public int getReivewTotalCount(String foodtruckNumber) {
+		return sqlSessionTemplate.selectOne("foodtruck.getReivewTotalCount",foodtruckNumber);
 	}
 }
