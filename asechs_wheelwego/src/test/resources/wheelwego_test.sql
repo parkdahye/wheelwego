@@ -104,16 +104,7 @@ select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
 from freeboard f, freeboardfile fi 
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
 
-md
-cm
-
-
-
-
-
-
-
-
-
-
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
+		 to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		 f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath 
+		 from freeboard f, freeboardfile fi where f.freeboard_no=fi.freeboard_no and f.freeboard_no='22'
