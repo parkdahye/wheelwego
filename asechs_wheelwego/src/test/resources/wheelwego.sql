@@ -198,10 +198,11 @@ create table freeboard(
 );
 -------------------------------------------------------------------------------
 drop table freeboard;
+select * from freeboardfile;
 -------------------------------------------------------------------------------freeboardfile(0531)
 create table freeboardfile(
 	freeboard_no varchar2(100) not null,
-	freeboard_filepath varchar2(100) not null,
+	freeboardfile_filepath varchar2(100) not null,
 	constraint freeboardfile_freeboardno_fk foreign key(freeboard_no) references freeboard(freeboard_no) on delete cascade , 
 	constraint freeboardfile_PK primary key(freeboard_no, freeboardfile_filepath) 
 );

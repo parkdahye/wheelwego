@@ -1,6 +1,6 @@
 ----------dbTEST---------------------
 
-insert into member values ('seller02', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
+insert into member values ('seller01', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
 update member set member_type='0' where id='java01';
 delete from member;
 delete from member where id = 'seller02';
@@ -9,7 +9,7 @@ select * from seller;
 delete member where id='java'
 delete seller where seller_id='java'
 insert into customer values ('java01');
-insert into seller values ('seller02');
+insert into seller values ('seller01','1231');
 delete from customer;
 select c.customer_id, m.password, m.member_name, m.address, m.phonenumber, m.member_type
 from customer c, member m
@@ -55,7 +55,7 @@ update member set password=#{password}, address=#{address}, addressdetail = #{ad
 
 
 insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction, foodtruck_filename1)
-values ('80나0014', 'seller02', '스파르타쿡스', '전설의 불떡볶이와 바삭한 탕수육의 환상조화! 10년 조리경력의 주인장이 운영하는 스파르타쿡스입니다.', '스파르타쿡스_트럭1.PNG');
+values ('80나0014', 'seller01', '스파르타쿡스', '전설의 불떡볶이와 바삭한 탕수육의 환상조화! 10년 조리경력의 주인장이 운영하는 스파르타쿡스입니다.', '스파르타쿡스_트럭1.PNG');
 
 select * from customer;
 select * from seller;
