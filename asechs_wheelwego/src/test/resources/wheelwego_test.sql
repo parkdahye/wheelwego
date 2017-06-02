@@ -10,12 +10,15 @@ create table member(
    member_type varchar2(100) not null,
    postcode varchar2(100) not null
 ); 
+	SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck
+		)f where rnum between 1 and 5
 
 insert into member values ('java01', 'java01', '김래발', '판교','코스타', '010-1111-1111', '일반회원','1234');
 >>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 update member set member_type='0' where id='java01';
 delete from member;
-select * from member;
+select * from foodtruck;
 delete member where id='java'
 delete seller where seller_id='java'
 insert into customer values ('java01');
@@ -51,4 +54,10 @@ freeboard_timeposted,
 freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=8
 --게시물 삭제
 delete freeboard where freeboard_no=1 
-select * from 
+select foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name like '%' || '트럭' || '%' 
+select row_number() over(order by foodtruck_number desc)as rnum, foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name like '%' || '트럭' || '%' 
+SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck 
+		where foodtruck_name like '%' || '트럭' || '%'
+		)f  where rnum between 1 and 5
+ 

@@ -35,8 +35,8 @@
   	<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
   </definition>
  
-  <definition name="foodtruck/foodtruck_detail.tiles" extends="map_home.tiles">
-  	<put-attribute name="main" value="/WEB-INF/views/foodtruck/foodtruck_detail.jsp"/>
+  <definition name="foodtruck/foodtruck_location_select_list.tiles" extends="map_home.tiles">
+  	<put-attribute name="main" value="/WEB-INF/views/foodtruck/foodtruck_location_select_list.jsp"/>
   </definition>
   
 

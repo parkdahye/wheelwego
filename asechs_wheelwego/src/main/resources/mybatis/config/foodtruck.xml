@@ -6,20 +6,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="foodtruck"> 	
 <resultMap type="truckVO" id="truckRM">
       <result property="foodtruckNumber" column="foodtruck_number" />
-      <result property="foodtruckName" column="foodtruck_name"></result>
       <result property="sellerId" column="seller_id" />
+      <result property="foodtruckName" column="foodtruck_name"/>     
 	  <result property="foodtruckFilepath" column="foodtruck_filename1"/>
 </resultMap>
 <select id="foodtruckList" resultMap="truckRM">
 select * from foodtruck
 </select>
 <select id="searchFoodTruckList" resultMap="truckRM">
-select * from foodtruck where foodtruck_name like '%' || #{value} || '%' 
+select foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name like '%' || #{value} || '%' 
 </select>
-
+<select id="getTruckListTotalContentCount" resultType="Integer">
+		select count(*) from foodtruck
+</select>
+<select id="pagingTruckList" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
+SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck)
+		f where rnum between #{startRowNumber} and #{endRowNumber}
+</select>
 </mapper>
- 
- 
  
  
  

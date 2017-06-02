@@ -22,14 +22,17 @@
                     <c:choose >
                     	<c:when test="${sessionScope.memberVO==null}">
                     <li class="page-scroll">
-                         <a href="${pageContext.request.contextPath}/foodtruck/foodtruck_detail.do">map폼으로이동</a>
+                         <a href="${pageContext.request.contextPath}/foodtruck/foodtruck_location_select_list.do">map폼으로이동</a>
                     </li>
                     <li class="page-scroll">
                          <a href="${pageContext.request.contextPath}/board/boardSelectList.do">커뮤니티</a>
                    </li>
                     <li class="page-scroll">
                         <a href="${pageContext.request.contextPath}/member/register_form.do" >회원가입</a>
-                    </li>              	
+                    </li>    
+                     <li class="page-scroll">
+                        <a href="${pageContext.request.contextPath}/foodtruck/foodtruck_detail.do" >test(detail)</a>
+                    </li>           	
                     <li class="page-scroll">
                         <a  href="#myModal" data-toggle="modal" >Login</a>
                     </li>      

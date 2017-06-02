@@ -1,7 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+var x = document.getElementById("demo");
 
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+</script>
 <!-- Header -->
 <header>
    <div class="container" id="maincontent" tabindex="-1">
@@ -16,23 +48,19 @@
             <div class="social col-lg-1">
               <ul>
                 <li>
-                  <!-- <a href=""><i class="fa fa-map-marker fa-3x"></i></a> -->
                  <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-map-marker fa-3x"></i></a>
-                 <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                 <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;" id="roundCorner">
 	              <form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
-					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
-					  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
-					  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
-					  <label class="string optional" for="user_remember_me"> Remember me</label>
-					  <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="Sign In" />
-					</form>
+					   <input class="btn btn-warning" type="submit" style="width: 100%;" value="수동검색" style=""/>
+					  <input class="btn btn-warning" style="width: 100%;" type="submit" value="현재위치 자동검색" />
+					</form>				
 	            </div>
                 </li>
               </ul>
             </div>
                <div class="col-lg-4">
 			  <!-- 푸드트럭 검색 폼 -->
-			  <form class="subscribe_form" action="${pageContext.request.contextPath}/searchFoodTruckList.do" method="post">
+			  <form class="subscribe_form" action="${pageContext.request.contextPath}/searchFoodTruckList.do" method="get">
               <input type="text" value="" placeholder="Search foodtruck!" class="email" id="search" name="name" required="" >
               <input type="submit" class="subscribe" name="search" value="Search">
 
@@ -61,7 +89,7 @@
                   <a href="#portfolioModal1" class="portfolio-link"
                      data-toggle="modal">
                      <div class="front" >
-                        <img class="img-circle  center-block food-img img-responsive"
+                        <img class="img-circle center-block food-img img-responsive"
                            src="resources/img/foodtruck/${truckVO.foodtruckFilepath}"
                            alt="" >
                      </div>
