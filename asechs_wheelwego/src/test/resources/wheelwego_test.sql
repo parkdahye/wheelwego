@@ -1,6 +1,5 @@
 ----------dbTEST---------------------
 
-<<<<<<< HEAD
 create table member(
    id varchar2(100) primary key,
    password varchar2(100) not null,
@@ -16,19 +15,13 @@ create table member(
 		)f where rnum between 1 and 5
 
 insert into member values ('java01', 'java01', '김래발', '판교','코스타', '010-1111-1111', '일반회원','1234');
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
-=======
 insert into member values ('seller02', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 update member set member_type='0' where id='java01';
 delete from member;
-<<<<<<< HEAD
 select * from foodtruck;
-=======
 delete from member where id = 'seller02';
 select * from member;
 select * from seller;
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 delete member where id='java'
 delete seller where seller_id='java'
 insert into customer values ('java01');
@@ -105,7 +98,6 @@ SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
 		where foodtruck_name like '%' || '트럭' || '%'
 		)f  where rnum between 1 and 5
  
-=======
 
 select * from 
 
@@ -161,9 +153,9 @@ from freeboard b, freeboardfile f where b.freeboard_no=f.freeboard_no and f.free
 select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
        to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted, f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath
 from freeboard f, freeboardfile fi 
-<<<<<<< HEAD
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
-=======
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
+    
+insert into review values (review_seq.nextval, '2523','customer1','맛있어요',sysdate, 4);
+select review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD'), grade from review
