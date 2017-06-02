@@ -103,7 +103,7 @@ function removeChar(event) {
       event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }
 
-$(document).ready(function(){
+	$(document).ready(function(){
       var checkResultId="";   
       var checkResultPw="";
       var memberType = "";

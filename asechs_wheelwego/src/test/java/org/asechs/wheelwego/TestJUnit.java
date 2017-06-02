@@ -3,8 +3,8 @@ package org.asechs.wheelwego;
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.BoardDAO;
+import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,15 +36,34 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestJUnit {
 	@Resource
 	private MemberService service;
-	
 	@Resource
+<<<<<<< HEAD
 	private BoardDAO boardDAO;
 	
 	
 	@Test
+=======
+	private FoodTruckService foodService;
+	@Resource
+	private BoardDAO boardDAO;
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 	public void test(){
-		String id = "seller04";
-		String password = "seller04";
+/*		String id = "customer01";
+		String password = "1234";
+		String memberName = "김래발";
+		String postCode = "13437";
+		String address = "경기도 성남시 분당구";
+		String addressDetail = "삼평동";
+		String phoneNumber = "01000000000";
+		String memberType = "customer";
+		String businessNumber = null;
+
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
+		//System.out.println(service.getMemberPassword(id, password));
+		//service.deleteMember(id);
+		
+		/*String id = "seller07";
+		String password = "1234";
 		String memberName = "김래발";
 		String postCode = "13437";
 		String address = "경기도 성남시 분당구";
@@ -52,32 +71,22 @@ public class TestJUnit {
 		String phoneNumber = "01000000000";
 		String memberType = "seller";
 		String businessNumber = "0000000000";
-		
 
 		/*service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
+
 		
-		String id = "java01";
-		//String password = "java02";
-		String memberName = "김래발";
-		//String postCode = "13437";
-		//String address = "경기도 성남시 분당구";
-		//String addressDetail = "삼평동";
-		String phoneNumber = "01000000000";
-		//String memberType = "seller";
-		//String businessNumber = "0000000000";
+		//int result = service.forgetMemberPassword(new MemberVO(id, "1234", memberName, null, null, null, phoneNumber, null));
 		
-		int result = service.forgetMemberPassword(new MemberVO(id, "1234", memberName, null, null, null, phoneNumber, null));
-		System.out.println(result);*/
 
 
 		//service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
-		System.out.println(service.getMemberPassword(id, password));
+		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 		
-		System.out.println("파일 내임"+boardDAO.getFreeBoardFilePath("118"));
-		System.out.println(boardDAO.getFreeBoardDetail("118"));
+		System.out.println(foodService.searchFoodTruckList("끼니"));*/
+		
 	}
 }
 
