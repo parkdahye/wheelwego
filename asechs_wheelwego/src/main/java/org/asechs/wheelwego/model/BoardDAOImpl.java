@@ -1,11 +1,11 @@
 package org.asechs.wheelwego.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
-import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -62,8 +62,21 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void freeboardWrite(BoardVO bvo) {
+	public String freeboardWrite(BoardVO bvo) {
+		System.out.println(bvo.toString());
 		template.insert("board.freeboardWrite",bvo);
+		//template 메서드 써서 가져온 게시물 번호와 파일명을 insert바로 하기
+		System.out.println(bvo.toString());
+		System.out.println("3번 DAO 글 등록 완료");
+		//여기서 bvo.getNo을 int로 넘겨주기
+		return bvo.getNo();
+	}
+
+	@Override
+	public void freeboardWriteFileUpload(BoardVO boardVO) {
+		System.out.println("파일업로드 하기위해 freeboardWriteFileUpload 통과");
+		template.insert("board.freeboardWriteFileUpload", boardVO);
+		
 	}
 		
 	public void updateBoard(BoardVO vo) {
@@ -99,5 +112,9 @@ public class BoardDAOImpl implements BoardDAO {
 	public MemberVO business_getNameById(String id) {
 		return template.selectOne("board.business_getNameById", id);
 	}
+
+	
+
+
 
 }

@@ -8,19 +8,22 @@ public class FoodVO {
 	private String menuName;
 	private int menuPrice;
 	private MultipartFile menuFile; //이미지를 받을 변수
+	private FileVO fileVO;
 	
 	public FoodVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public FoodVO(String menuId, String foodTruckNumber, String menuName, int menuPrice, MultipartFile menuFile) {
+	public FoodVO(String menuId, String foodTruckNumber, String menuName, int menuPrice, MultipartFile menuFile,
+			FileVO fileVO) {
 		super();
 		this.menuId = menuId;
 		this.foodTruckNumber = foodTruckNumber;
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
 		this.menuFile = menuFile;
+		this.fileVO = fileVO;
 	}
 
 	public String getMenuId() {
@@ -63,10 +66,19 @@ public class FoodVO {
 		this.menuFile = menuFile;
 	}
 
+	public FileVO getFileVO() {
+		return fileVO;
+	}
+
+	public void setFileVO(FileVO fileVO) {
+		this.fileVO = fileVO;
+	}
+
 	@Override
 	public String toString() {
 		return "FoodVO [menuId=" + menuId + ", foodTruckNumber=" + foodTruckNumber + ", menuName=" + menuName
-				+ ", menuPrice=" + menuPrice + ", menuFile=" + menuFile + "]";
+				+ ", menuPrice=" + menuPrice + ", menuFile=" + menuFile + ", fileVO=" + fileVO + "]";
 	}
+
 
 }

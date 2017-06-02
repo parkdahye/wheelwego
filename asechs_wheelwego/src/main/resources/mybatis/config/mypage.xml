@@ -4,63 +4,94 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mypage">
+<resultMap type="wishlistVO" id="wishlistRM">
+	<result property="foodtruckNumber" column="foodtruck_number"/>
+	<result property="customerId" column="customer_id"/>	
+</resultMap>
 	<resultMap type="truckVO" id="truckRM">
 		<result column="foodtruck_number" property="foodtruckNumber"/>
 		<result column="seller_id" property="sellerId"/>
 		<result column="foodtruck_name" property="foodtruckName"/>
+	</resultMap>
+	<resultMap type="truckVO" id="truckpageRM" extends="truckRM">
 		<result column="foodtruck_filepath" property="fileVO.filepath"/>
+	</resultMap>
+	<resultMap type="foodVO" id="foodRM">
+		<result column="menu_id" property="menuId"/>
+		<result column="foodtruck_number" property="foodTruckNumber"/>
+		<result column="menu_name" property="menuName"/>
+		<result column="menu_price" property="menuPrice"/>
+		<result column="menu_filename" property="fileVO.filepath"/>
 	</resultMap>
 	<insert id="registerFoodtruck" parameterType="truckVO">
 		insert into foodtruck(foodtruck_number,seller_id,foodtruck_name,introduction)
 		 values(#{foodtruckNumber},#{sellerId},#{foodtruckName},#{introduction})
 	</insert>
 	<select id="showMyTruckpage" resultMap="truckRM">
-	select t.foodtruck_number, t.seller_id, t.foodtruck_name, t.introduction,f.foodtruck_filepath from(
+		select t.foodtruck_number, t.seller_id, t.foodtruck_name, t.introduction,f.foodtruck_filepath from(
 		select foodtruck_number,seller_id,foodtruck_name,introduction from foodtruck where seller_id=#{value}
 		)t, foodtruckfile f where t.foodtruck_number=f.foodtruck_number
 	
 	</select>
+	<select id="findFoodtruckByTruckNumber" resultMap="truckRM">
+		select * from foodtruck where foodtruck_number=#{value}
+	</select>
+		<select id="findtruckInfoByTruckNumber" resultMap="truckpageRM">
+		select t.*, f.foodtruck_filepath
+		from(select * from foodtruck where foodtruck_number=#{value})t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number
+	</select>
+	<select id="findtruckNumberBySellerId" resultType="String">
+		select foodtruck_number from foodtruck where seller_id=#{value}
+	</select>
+	<insert id="saveFilePath" parameterType="fileVO">
+		insert into foodtruckfile values (#{no},#{filepath})
+	</insert>
+	<update id="updateMyfoodtruck" parameterType="truckVO">
+		update foodtruck set foodtruck_name=#{foodtruckName}, introduction=#{introduction} where foodtruck_number=#{foodtruckNumber}
+	</update>
+	<update id="updateFilePath" parameterType="fileVO">
+		update foodtruckfile set foodtruck_filepath=#{filepath} where foodtruck_number=#{no}
+	</update>
+	<select id="showMenuList" resultMap="foodRM">
+		select menu_id,foodtruck_number,menu_name,menu_price,menu_filename from menu where foodtruck_number=#{value} order by menu_id asc
+	</select>
+	<insert id="registerMenu" parameterType="foodVO">
+		<selectKey keyProperty="menuId" order="BEFORE" resultType="String">
+			select menu_seq.nextval from dual
+		</selectKey>
+		insert into menu(menu_id,foodtruck_number,menu_name,menu_price,menu_filename) 
+		values (#{menuId},#{foodTruckNumber},#{menuName},#{menuPrice},#{fileVO.filepath})
+	</insert>
+	<delete id="deleteAllMenu">
+		delete from menu where foodtruck_number=#{value}
+	</delete>
+	<delete id="deleteMenu">
+		delete from menu where menu_id=#{value}
+	</delete>
+	<update id="updateMenu" parameterType="foodVO">
+		update menu set menu_name=#{menuName}, menu_price=#{menuPrice}
+		 where menu_id=#{menuId}
+	</update>
+	<select id="findMenuByMenuId" resultMap="foodRM">
+		select * from menu where menu_id=#{value}
+	</select>
+	<update id="updateMenuFilepath" parameterType="fileVO">
+		update menu set menu_filename=#{filepath}
+		 where menu_id=#{no}
+	</update>
+	<delete id="deleteMyTruck">
+		delete from foodtruck where foodtruck_number=#{value}
+	</delete>
+	<select id="myWishList" resultMap="truckRM" parameterType="string">
+	select * from foodtruck where foodtruck_number in (select
+	w.foodtruck_number
+	from customer c, wishlist w
+	where c.customer_id = w.customer_id and c.customer_id = #{value})
+</select>
+<delete id="deleteWishList" parameterType="wishListVO">
+	delete from wishlist where customer_id = #{customerId} and foodtruck_number = #{foodTruckNumber}
+</delete>
 </mapper>
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

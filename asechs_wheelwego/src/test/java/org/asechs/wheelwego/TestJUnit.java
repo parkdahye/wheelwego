@@ -2,10 +2,9 @@ package org.asechs.wheelwego;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
-import org.asechs.wheelwego.model.vo.MemberVO;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,7 +37,8 @@ public class TestJUnit {
 	private MemberService service;
 	@Resource
 	private FoodTruckService foodService;
-	@Test
+	@Resource
+	private BoardDAO boardDAO;
 	public void test(){
 /*		String id = "customer01";
 		String password = "1234";
@@ -62,7 +62,10 @@ public class TestJUnit {
 		String addressDetail = "삼평동";
 		String phoneNumber = "01000000000";
 		String memberType = "seller";
-		String businessNumber = "0000000000";*/
+		/*service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
+		//System.out.println(service.getMemberPassword(id, password));
+		//service.deleteMember(id);
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 		
 		//int result = service.forgetMemberPassword(new MemberVO(id, "1234", memberName, null, null, null, phoneNumber, null));
 		
@@ -72,7 +75,7 @@ public class TestJUnit {
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 		
-		System.out.println(foodService.searchFoodTruckList("끼니"));
+		System.out.println(foodService.searchFoodTruckList("끼니"));*/
 		
 	}
 }

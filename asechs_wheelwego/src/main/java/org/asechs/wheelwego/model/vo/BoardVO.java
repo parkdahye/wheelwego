@@ -12,11 +12,12 @@ public class BoardVO {
 	private String timePosted;
 	private int hits;
 	private List<MultipartFile> file;
+	private FileVO fileVO;
 	public BoardVO() {
 		super();
 	}
 	public BoardVO(String no, String id, String title, String content, String timePosted, int hits,
-			List<MultipartFile> file) {
+			List<MultipartFile> file, FileVO fileVO) {
 		super();
 		this.no = no;
 		this.id = id;
@@ -25,6 +26,7 @@ public class BoardVO {
 		this.timePosted = timePosted;
 		this.hits = hits;
 		this.file = file;
+		this.fileVO = fileVO;
 	}
 	public String getNo() {
 		return no;
@@ -68,11 +70,16 @@ public class BoardVO {
 	public void setFile(List<MultipartFile> file) {
 		this.file = file;
 	}
+	public FileVO getFileVO() {
+		return fileVO;
+	}
+	public void setFileVO(FileVO fileVO) {
+		this.fileVO = fileVO;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [no=" + no + ", id=" + id + ", title=" + title + ", content=" + content + ", timePosted="
-				+ timePosted + ", hits=" + hits + ", file=" + file + "]";
+				+ timePosted + ", hits=" + hits + ", file=" + file + ", fileVO=" + fileVO + "]";
 	}
-	
 	
 }

@@ -1,8 +1,9 @@
 package org.asechs.wheelwego.model;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;

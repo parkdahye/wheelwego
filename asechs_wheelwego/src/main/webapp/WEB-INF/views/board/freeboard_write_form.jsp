@@ -41,7 +41,7 @@
 <div class="panel-body">
 
 <div class="container"> 
-<form action="${pageContext.request.contextPath }/freeboard_write.do" method="post">  
+<form enctype="multipart/form-data" action="${pageContext.request.contextPath }/freeboard_write.do" method="post">  
 		<div class="row"> 
 			
 			<div class="col-md-6"> 
@@ -60,20 +60,20 @@
 		
 		<div class="form-group"> 
 		<label for="content">글내용</label> 
-		<textarea class="form-control" rows="10" name="content" id="content" value="" required="required"></textarea> 
+		<textarea class="form-control" rows="10" name="content" id="content" required="required"></textarea> 
 		</div> 
 		
 		<div class="form-group"> 
 		<label for="File">첨부파일 1</label> 
-		<input type="file" id="File1"> 
+		<input type="file" name="file[0]"> 
 		</div> 
 		<div class="form-group"> 
 		<label for="File">첨부파일 2</label> 
-		<input type="file" id="File2"> 
+		<input type="file" name="file[1]"> 
 		</div> 
 		<div class="form-group"> 
 		<label for="File">첨부파일 3</label> 
-		<input type="file" id="File3"> 
+		<input type="file" name="file[2]"> 
 		</div> 
 		
 		<div class="center-block" style='width:200px'> 
@@ -85,8 +85,6 @@
 
 </div> 
 </div> <!--panel end--> 
-</div> 
-
 </div> 
 </body> 
 

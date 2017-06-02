@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class BoardServiceImpl implements BoardService {
 	@Resource
 	private BoardDAO boardDAO;
+	
 	
 	@Override
 	public ListVO getFreeBoardList(String pageNo) {
@@ -114,27 +116,42 @@ public class BoardServiceImpl implements BoardService {
 		HttpSession session=request.getSession(false);
 		MemberVO mvo=(MemberVO) session.getAttribute("memberVO");
 		bvo.setId(mvo.getId());
-		boardDAO.freeboardWrite(bvo);
+		// 글 정보먼저 insert한다.
+		System.out.println("2번 service 자유게시판 글쓰기 시작");
+		String contentNo=boardDAO.freeboardWrite(bvo);
+		System.out.println("3번 service 자유게시판 글쓰기 완료 후 돌아옴");
 		
 		// 강정호. 파일 업로드. 컨트롤러에 넣기에는 너무 길어서 서비스에 넣었습니다.
-		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img";
+		// 그 다음 파일 이름을 insert한다
+		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
 		List<MultipartFile> fileList=bvo.getFile();
-		ArrayList<String> filePath=new ArrayList<String>();
+		//ArrayList<String> filePath=new ArrayList<String>();
 		ArrayList<String> nameList=new ArrayList<String>();
 		for(int i=0; i<fileList.size(); i++){
-			String fileName=fileList.get(i).getOriginalFilename();
-			if(fileName.equals("")==false){
-				try{
-					fileList.get(i).transferTo(new File(uploadPath+fileName));
-					nameList.add(fileName);
-					filePath.add(uploadPath+fileName);
-					System.out.println("업로드 완료"+filePath);
-				}catch(IllegalStateException | IOException e){
-					e.printStackTrace();
-				}
+			if(fileList.isEmpty()==false){
+				BoardVO boardVO=new BoardVO();
+				FileVO fileVO=new FileVO();
+				String fileName=fileList.get(i).getOriginalFilename();
+				if(fileName.equals("")==false){
+					try{
+						System.out.println("5번 파일업로드"+i+"번");
+						fileList.get(i).transferTo(new File(uploadPath+fileName));
+						fileVO.setNo(contentNo);
+						fileVO.setFilepath(fileName);
+						boardVO.setFileVO(fileVO);
+						nameList.add(fileName);
+						//filePath.add(uploadPath+fileName);
+						boardDAO.freeboardWriteFileUpload(boardVO);
+						System.out.println("업로드 완료"+nameList);
+					}catch(IllegalStateException | IOException e){
+						e.printStackTrace();
+						}
+					}
 			}
 		}
 	}
+	
+	@Override
 	public MemberVO business_getNameById(String id) {
 		return boardDAO.business_getNameById(id);
 	}

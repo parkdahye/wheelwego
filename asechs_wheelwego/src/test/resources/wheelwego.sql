@@ -6,12 +6,11 @@ drop sequence booking_seq;
 drop sequence review_seq;
 drop sequence menu_seq;
 
-
 drop sequence information_seq;
 drop sequence informationcomment_seq;
 drop sequence qna_seq;
 drop sequence qnacomment_seq;
-drop sequence freeboard_seq;
+drop sequence freeboard_seq ;
 drop sequence freeboardcomment_seq;
 
 create sequence survey_seq;
@@ -24,7 +23,7 @@ create sequence information_seq;
 create sequence informationcomment_seq;
 create sequence qna_seq;
 create sequence qnacomment_seq;
-create sequence freeboard_seq;
+create sequence freeboard_seq start with 15;
 create sequence freeboardcomment_seq;
 -------------------------------------------------------------------------------
 
@@ -196,9 +195,9 @@ drop table freeboard;
 -------------------------------------------------------------------------------freeboardfile(0531)
 create table freeboardfile(
 	freeboard_no varchar2(100) not null,
-	freeboardfile_filepath varchar2(100) not null,
+	freeboard_filepath varchar2(100) not null,
 	constraint freeboardfile_freeboardno_fk foreign key(freeboard_no) references freeboard(freeboard_no) on delete cascade , 
-	constraint freeboardfile_PK primary key(freeboard_no, freeboardfile_filepath) 
+	constraint freeboardfile_PK primary key(freeboard_no, freeboard_filepath) 
 );
 -------------------------------------------------------------------------------
 drop table freeboardfile;
