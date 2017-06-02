@@ -45,12 +45,6 @@ create table customer(
 	customer_id varchar2(100) primary key,
 	constraint customer_id_fk foreign key(customer_id) references member(id) on delete cascade
 );
--- ���� ���������� �̸��� ���Ҷ� [���̺��]_[Į����]_[������������] �̷��� �־����� �� ����.kos
--- ���� customer ���� ��쿡�� 
--- ���̺� �� : customer / �÷��� : customer_id / ������������ : fk
--- customer_customer_id_fk�� ������ ��� ȥ���� ���� ������ �� ���
--- ���̺� �� : customer / �÷Ÿ� : id / ������������ : fk
--- customer_id_fk�� �Ѵ�.
 -------------------------------------------------------------------------------
 drop table customer;
 -------------------------------------------------------------------------------
@@ -204,7 +198,7 @@ create table freeboardfile(
 	freeboard_no varchar2(100) not null,
 	freeboardfile_filepath varchar2(100) not null,
 	constraint freeboardfile_freeboardno_fk foreign key(freeboard_no) references freeboard(freeboard_no) on delete cascade , 
-	constraint freeboardfile_PK primary key(freeboard_no, freeboardfile_filepath) 
+	constraint freeboardfile_PK primary key(freeboard_no, freeboard_filepath) 
 );
 -------------------------------------------------------------------------------
 drop table freeboardfile;

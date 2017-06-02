@@ -1,8 +1,23 @@
 ----------dbTEST---------------------
-
 insert into member values ('seller01', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
+create table member(
+   id varchar2(100) primary key,
+   password varchar2(100) not null,
+   member_name varchar2(100) not null,
+   address varchar2(100) not null,
+   addressdetail varchar2(100) not null,
+   phonenumber varchar2(100) not null,
+   member_type varchar2(100) not null,
+   postcode varchar2(100) not null
+); 
+	SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck
+		)f where rnum between 1 and 5
+
+insert into member values ('java01', 'java01', '김래발', '판교','코스타', '010-1111-1111', '일반회원','1234');
 update member set member_type='0' where id='java01';
 delete from member;
+select * from foodtruck;
 delete from member where id = 'seller02';
 select * from member;
 select * from seller;
@@ -74,6 +89,13 @@ freeboard_timeposted,
 freeboard_hits  from freeboard where freeboard_no=8
 --게시물 삭제
 delete freeboard where freeboard_no=1 
+select foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name like '%' || '트럭' || '%' 
+select row_number() over(order by foodtruck_number desc)as rnum, foodtruck_name, foodtruck_filename1 from foodtruck where foodtruck_name like '%' || '트럭' || '%' 
+SELECT f.foodtruck_filename1, f.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck 
+		where foodtruck_name like '%' || '트럭' || '%'
+		)f  where rnum between 1 and 5
+ 
 
 select * from 
 
@@ -103,6 +125,14 @@ select m.member_name as membername
 from freeboard f, member m
 where m.id=f.id and f.id='java9'
 
+
+select * from customer;
+
+ select t.*, f.foodtruck_filepath   
+ from(select * from foodtruck)t, foodtruckfile f    
+ where t.foodtruck_number=f.foodtruck_number
+
+
 select * from File
 select * from freeboardfile
 insert into freeboardfile(freeboard_no, freeboard_filepath) values ('93','한입만모모.jpg');
@@ -122,13 +152,4 @@ select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
        to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted, f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath
 from freeboard f, freeboardfile fi 
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
-
-
-
-
-
-
-
-
-
 

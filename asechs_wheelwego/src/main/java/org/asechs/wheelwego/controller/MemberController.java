@@ -103,8 +103,7 @@ public class MemberController {
 	@RequestMapping("getMemberPasswordAjax.do")
 	@ResponseBody
 	public String getMemberPasswordAjax(String id, String password) {
-		String result = memberService.getMemberPassword(id, password);
-		
+		String result = memberService.getMemberPassword(id, password);		
 		return result;
 	}
 }
