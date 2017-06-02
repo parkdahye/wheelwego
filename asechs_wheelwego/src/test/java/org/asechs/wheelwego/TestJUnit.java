@@ -2,9 +2,8 @@ package org.asechs.wheelwego;
 
 import javax.annotation.Resource;
 
-import org.asechs.wheelwego.model.FoodTruckService;
+import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.MemberService;
-import org.asechs.wheelwego.model.vo.MemberVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,6 +35,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestJUnit {
 	@Resource
 	private MemberService service;
+	
+	@Resource
+	private BoardDAO boardDAO;
 	@Test
 	public void test(){
 		String id = "seller04";
@@ -47,6 +49,8 @@ public class TestJUnit {
 		String phoneNumber = "01000000000";
 		String memberType = "seller";
 		String businessNumber = "0000000000";
+		
+		System.out.println(boardDAO.getFreeBoardDetail("96"));
 
 		/*service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		//System.out.println(service.getMemberPassword(id, password));

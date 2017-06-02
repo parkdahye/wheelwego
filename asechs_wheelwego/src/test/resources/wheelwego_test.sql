@@ -71,7 +71,7 @@ where c.customer_id = w.customer_id and c.customer_id = 'customer01' );
 -- 게시판 상세보기
 select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss')
 freeboard_timeposted,
-freeboard_hits, freeboard_filename1 from freeboard where freeboard_no=8
+freeboard_hits  from freeboard where freeboard_no=8
 --게시물 삭제
 delete freeboard where freeboard_no=1 
 
@@ -95,3 +95,40 @@ select * from foodtruck;
 insert into wishList (customer_id, foodtruck_number) values ('customer01', '80나0011');
 
 delete from wishlist where customer_id = 'java01' and foodtruck_number = '80나0011';
+select * from 
+create sequence freeboard_seq;
+
+
+select m.member_name as membername
+from freeboard f, member m
+where m.id=f.id and f.id='java9'
+
+select * from File
+select * from freeboardfile
+insert into freeboardfile(freeboard_no, freeboard_filepath) values ('93','한입만모모.jpg');
+
+
+select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
+		 to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as f.freeboard_timeposted,
+		 f.freeboard_hits, file.freeboard_no, file.freeboardfile_filepath 
+from freeboard f, freeboardfile file 
+where f.freeboard_no=file.freeboard_no and f.freeboard_no='112'
+
+select b.freeboard_no, b.id, b.freeboard_title, b.freeboard_content, to_char(b.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+b.freeboard_hits, f.freeboard_no, f.freeboardfile_filepath 
+from freeboard b, freeboardfile f where b.freeboard_no=f.freeboard_no and f.freeboard_no='112'
+
+select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
+       to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted, f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath
+from freeboard f, freeboardfile fi 
+where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
+
+
+
+
+
+
+
+
+
+

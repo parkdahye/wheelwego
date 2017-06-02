@@ -10,25 +10,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result property="sellerId" column="seller_id" />
 	  <result property="foodtruckFilepath" column="foodtruck_filename1"/>
 </resultMap>
-<resultMap type="wishlistVO" id="wishlistRM">
-	<result property="foodtruckNumber" column="foodtruck_number"/>
-	<result property="customerId" column="customer_id"/>	
-</resultMap>
+
 <select id="foodtruckList" resultMap="truckRM">
-select * from foodtruck
+		select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number
 </select>
 <select id="searchFoodTruckList" resultMap="truckRM">
 select * from foodtruck where foodtruck_name like '%' || #{value} || '%' 
 </select>
-<select id="myWishList" resultMap="truckRM" parameterType="string"> 
-select * from foodtruck where foodtruck_number in (select w.foodtruck_number
-from customer c, wishlist w
-where c.customer_id = w.customer_id and c.customer_id = #{value})
+
+<select id="searchFoodTruckByGPS" resultMap="truckRM" parameterType="truckVO">
+select * from (
+select * from foodtruck
+where (latitude between #{latitude}-0.009 and #{latitude}+0.009) and (longitude between #{longitude}-0.012 and #{longitude}+0.012)) TMP 
 </select>
 
-<delete id="deleteWishList" parameterType="wishListVO">
-	delete from wishlist where customer_id = #{customerId} and foodtruck_number = #{foodTruckNumber}
-</delete>
+
 </mapper>
  
  

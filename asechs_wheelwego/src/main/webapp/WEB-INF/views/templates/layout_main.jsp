@@ -14,6 +14,9 @@
     <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=3IKOAkT6zc5H36iz7sma&submodules=geocoder"></script>    
   
   
     <!-- Bootstrap Core CSS -->

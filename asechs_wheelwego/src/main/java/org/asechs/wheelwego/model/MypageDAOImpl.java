@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.vo.FileVO;
+import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,10 +19,66 @@ public class MypageDAOImpl implements MypageDAO {
 	public List<WishlistVO> myWishList(String id) {
 		//System.out.println("강정호 MyPageDAOImpl test"+sqlSessionTemplate.selectList("foodtruck.myWishList", wvo));
 		System.out.println("MyDAO 통과");
-		return sqlSessionTemplate.selectList("foodtruck.myWishList", id);
+		return sqlSessionTemplate.selectList("mypage.myWishList", id);
 	}
 	@Override
 	public void deleteWishList(WishlistVO wishlistVO) {
-		sqlSessionTemplate.delete("foodtruck.deleteWishList", wishlistVO);
+		sqlSessionTemplate.delete("mypage.deleteWishList", wishlistVO);
+	}
+	public void registerFoodtruck(TruckVO tvo){
+		sqlSessionTemplate.insert("mypage.registerFoodtruck", tvo);
+	}
+	@Override
+	public TruckVO findtruckInfoByTruckNumber(String truckNumber) {
+		return sqlSessionTemplate.selectOne("mypage.findtruckInfoByTruckNumber", truckNumber);
+	}
+	@Override
+	public void saveFilePath(FileVO fileVO) {
+		sqlSessionTemplate.insert("mypage.saveFilePath", fileVO);
+	}
+	@Override
+	public void updateMyfoodtruck(TruckVO truckVO) {
+		sqlSessionTemplate.update("mypage.updateMyfoodtruck", truckVO);
+	}
+	@Override
+	public void updateFilePath(FileVO fileVO) {
+		sqlSessionTemplate.update("mypage.updateFilePath", fileVO);
+	}
+	@Override
+	public String findtruckNumberBySellerId(String sellerId) {
+		return sqlSessionTemplate.selectOne("mypage.findtruckNumberBySellerId", sellerId);
+	}
+	@Override
+	public List<FoodVO> showMenuList(String truckNumber) {
+		return sqlSessionTemplate.selectList("mypage.showMenuList", truckNumber);
+	}
+	@Override
+	public void deleteAllMenu(String truckNumber) {
+		sqlSessionTemplate.delete("mypage.deleteAllMenu", truckNumber);
+	}
+	@Override
+	public void registerMenu(FoodVO foodVO) {
+		sqlSessionTemplate.insert("mypage.registerMenu", foodVO);
+	}
+	@Override
+	public void deleteMenu(String menuId) {
+		sqlSessionTemplate.delete("mypage.deleteMenu", menuId);
+	}
+	@Override
+	public void updateMenu(FoodVO foodVO) {
+		sqlSessionTemplate.update("mypage.updateMenu", foodVO);
+	}
+	@Override
+	public FoodVO findMenuByMenuId(String menuId) {
+		return sqlSessionTemplate.selectOne("mypage.findMenuByMenuId", menuId);
+	}
+	@Override
+	public void updateMenuFilepath(FileVO fileVO) {
+		sqlSessionTemplate.update("mypage.updateMenuFilepath", fileVO);
+		
+	}
+	@Override
+	public void deleteMyTruck(String foodtruckNumber) {
+		sqlSessionTemplate.delete("mypage.deleteMyTruck", foodtruckNumber);
 	}
 }

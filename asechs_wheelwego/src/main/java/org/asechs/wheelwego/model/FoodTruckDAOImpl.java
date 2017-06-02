@@ -18,7 +18,10 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	}
 	@Override
 	public List<TruckVO> searchFoodTruckList(String name){
-		System.out.println(name);
 		return sqlSessionTemplate.selectList("foodtruck.searchFoodTruckList",name);
+	}
+	@Override
+	public List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo) {
+		return sqlSessionTemplate.selectList("foodtruck.searchFoodTruckByGPS", gpsInfo);
 	}
 }
