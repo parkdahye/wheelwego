@@ -16,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class MypageServiceImpl implements MypageService {
 	@Resource
 	private MypageDAO mypageDAO;
-	//private String uploadPath="C:\\Users\\Administrator\\Documents\\카카오톡 받은 파일\\asechs_wheelwego2\\src\\main\\webapp\\resources\\upload\\";
-	private String uploadPath="C:\\Users\\User\\AppData\\Roaming\\SPB_16.6\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
+	private String uploadPath="C:\\Users\\Administrator\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
+	//private String uploadPath="C:\\Users\\User\\AppData\\Roaming\\SPB_16.6\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
 	/**
 	 *  트럭정보 등록하기
 	 *  이후 파일경로도 같이 등록한다
