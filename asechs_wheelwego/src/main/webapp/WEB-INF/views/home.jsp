@@ -4,7 +4,8 @@
 
 <!-- GPS(위도, 경도) 가져오기 --- by 황윤상 -->
 <script type="text/javascript">
-function geoFindMe() {	  
+function geoFindMe() {
+	var name = document.getElementById("name").value;
 	  if (!navigator.geolocation){
 		 alert("지오로케이션을 지원하지 않습니다!");
 		 return;
@@ -12,8 +13,7 @@ function geoFindMe() {
 	  function success(position) {
 	    var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
-	    
-	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
+	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude+"&name="+name;
 	  };
 
 	  function error() {
@@ -57,7 +57,7 @@ function geoFindMe() {
                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                 }
                 	
-            	var test = naver.maps.Service.geocode({
+            	var mapInfo = naver.maps.Service.geocode({
             	    address: fullAddr
             	}, function(status, response) {
             	    if (status !== naver.maps.Service.Status.OK) {
@@ -70,9 +70,7 @@ function geoFindMe() {
             	    var latitude  = items[0].point.y;
             	    var longitude = items[0].point.x;
             	    
-            	    //location.href = "${pageContext.request.contextPath}/freeboard_list.do";            	    
-            	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
-            	    //location.href ="getGPSInfo.jsp?latitude="+latitude+"&longitude="+longitude;
+            	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude+"&name="+name;
             	});                
             }
         }).open();
@@ -113,9 +111,11 @@ function geoFindMe() {
             </div>
                <div class="col-lg-4">
 			  <!-- 푸드트럭 검색 폼 -->
-			<form class="subscribe_form" action="${pageContext.request.contextPath}/searchFoodTruckList.do" method="post">
-              <input type="text" value="" placeholder="Search foodtruck!" class="email" id="search" name="name" required="required">
-              <input type="submit" class="subscribe" name="search" value="Search">
+<!--              	 <input type="text" value="" placeholder="Search foodtruck!" class="email" id="name" name="name" required="required">
+             	 <input type="button" class="subscribe" name="search" value="Search" onclick="geoFindMe()"> --> 	 			  
+		    <form class="subscribe_form">
+              <input type="text" value="" placeholder="Search foodtruck!" class="email" id="name" name="name" required="required">
+              <input type="button" class="subscribe" name="search" value="Search" onclick="geoFindMe()">
             </form>
            </div>
              <div class="col-lg-4"></div>

@@ -5,6 +5,7 @@
 <div class="container">
   <div class="list-group col-lg-3 text-center">
   <h4>Search Result</h4>
+  
   <c:forEach items="${truckList}" var="truckInfo">
     <a href="#" class="list-group-item">${truckInfo.foodtruckName}</a>
     </c:forEach>

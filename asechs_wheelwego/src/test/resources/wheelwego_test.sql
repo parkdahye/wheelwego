@@ -42,7 +42,7 @@ select password from member where id = 'java01';
 select * from member;
 
 select * from seller;
-select * from foodtruck;
+select * from foodtruck
 select * from wishlist;
 
 
@@ -85,3 +85,9 @@ select m.member_name as membername
 from freeboard f, member m
 where m.id=f.id and f.id='java9'
 >>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
+select * from customer;
+
+ select t.*, f.foodtruck_filepath   
+ from(select * from foodtruck)t, foodtruckfile f    
+ where t.foodtruck_number=f.foodtruck_number

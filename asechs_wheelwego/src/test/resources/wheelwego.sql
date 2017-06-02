@@ -46,12 +46,6 @@ create table customer(
 	customer_id varchar2(100) primary key,
 	constraint customer_id_fk foreign key(customer_id) references member(id) on delete cascade
 );
--- ���� ���������� �̸��� ���Ҷ� [���̺��]_[Į����]_[������������] �̷��� �־����� �� ����.kos
--- ���� customer ���� ��쿡�� 
--- ���̺� �� : customer / �÷��� : customer_id / ������������ : fk
--- customer_customer_id_fk�� ������ ��� ȥ���� ���� ������ �� ���
--- ���̺� �� : customer / �÷Ÿ� : id / ������������ : fk
--- customer_id_fk�� �Ѵ�.
 -------------------------------------------------------------------------------
 drop table customer;
 -------------------------------------------------------------------------------

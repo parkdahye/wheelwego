@@ -34,11 +34,19 @@ public class FoodTruckController {
 	 * @return
 	 */
 	@RequestMapping("searchFoodTruckByGPS.do")
-	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude) {
+	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String name) {
 		TruckVO gpsInfo = new TruckVO();
 		gpsInfo.setLatitude(Double.parseDouble(latitude));
 		gpsInfo.setLongitude(Double.parseDouble(longitude));
-		List<TruckVO> searchTruckList = foodTruckService.searchFoodTruckByGPS(gpsInfo);
+		List<TruckVO> searchTruckList = null;
+		
+		if (name != "")
+			searchTruckList = foodTruckService.searchFoodTruckList(name);
+			
+		else
+			searchTruckList = foodTruckService.searchFoodTruckByGPS(gpsInfo);
+
+			
 		
 		return new ModelAndView("foodtruck/foodtruck_detail.tiles", "truckList", searchTruckList);
 	}	
