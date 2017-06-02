@@ -4,13 +4,13 @@
    <div class=" text-center"> <h1 class="page-header">MY TRUCK</h1> </div>
     <a href="${pageContext.request.contextPath}/afterLogin_mypage/foodtruck" >푸드트럭 상세보기</a>
     <div class="_40h7m" >
-    <form class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/showMyfoodtruck.do" method="post" enctype="multipart/form-data">
+    <form class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMyfoodtruck.do" method="post" enctype="multipart/form-data">
     <div class="_ljqf0 col-lg-12">
     		<div  class="col-lg-6" style="margin-right: 5px">
-    		<button id="profileBtn" type="button" onclick=document.all.file.click();>
+    		<button id="profileBtn" type="button" onclick=document.all.file.click(); >
     			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}">
     		</button>
-		<input type="file" name="file" id="file" style="display: none;" /> 
+		<input type="file" name="foodtruckFile" id="file" style="display: none;" required="required"/> 
 		</div>
 				<div class="col-lg-6">
 					<h1>${sessionScope.memberVO.id }</h1>
@@ -30,7 +30,7 @@
     			<label for="foodtruck">푸드트럭 넘버</label>
     		</aside>
     		<div>
-    				<input type="text" name="foodtruckNumber" placeholder="푸드트럭 넘버를 입력해주세요" class="form-control" value="${truckVO.foodtruckNumber}">
+    				<input type="text" name="foodtruckNumber" placeholder="푸드트럭 넘버를 입력해주세요" class="form-control" value="${truckVO.foodtruckNumber}" readonly="readonly">
     		</div>
     	</div>
     	<div>
@@ -42,32 +42,8 @@
     		</div>
     	</div>
 	<br>
-     <aside>
-    			<label for="foodtruckName">메뉴1</label>
-    		</aside>
-    		<div>
-    				<input type="text" name="foodList[0].menuName"  placeholder="음식명을 입력해주세요" class="form-control" value="${truckVO.foodList.menuName}">
-    				<input type="text"  name="foodList[0].menuPrice"  placeholder="가격을 입력해주세요" class="form-control" value=" ${truckVO.foodList.menuPrice}">
-	    			<input type="file" name="foodList[0].menuFile">
-    		</div>
-    		   <aside>
-    			<label for="foodtruckName">메뉴2</label>
-    		</aside>
-    		<div>
-    				<input type="text" name="foodList[1].menuName" placeholder="음식명을 입력해주세요" class="form-control">
-    				<input type="text"  name="foodList[1].menuPrice"  placeholder="가격을 입력해주세요" class="form-control">
-	    			<input type="file" name="foodList[1].menuFile">
-    		</div>
-    		   <aside>
-    			<label for="foodtruckName">메뉴3</label>
-    		</aside>
-    		<div>
-    				<input type="text" name="foodList[2].menuName"   placeholder="음식명을 입력해주세요" class="form-control">
-    				<input type="text" name="foodList[2].menuPrice"  placeholder="가격을 입력해주세요" class="form-control">
-	    			<input type="file" name="foodList[2].menuFile">
-    		</div>
-    		<br><br>
-    		<input type="submit" value="등록"> 
+    		<input type="button" id="registerTruckBtn" value="트럭 등록"> 
+   			<input type="button" id="deleteTruckBtn" value="트럭 삭제"> 
    </form>
    </div>
    <br><br>
@@ -93,7 +69,18 @@
           alert(this.value); //선택한 이미지 경로 표시
           readURL(this);
       });
+      $("#registerTruckBtn").click(function(){
+    	  var file=$("#file").val();
+    	  if(file==""){
+    		  
+    	  }
+      });
+      
+      $("#deleteTruckBtn").click(function(){
+    	  if(confirm("트럭을 삭제하시겠습니까?")){
+    	  location.href="${pageContext.request.contextPath}/afterLogin_mypage/deleteMyTruck.do?foodtruckNumber=${truckVO.foodtruckNumber}";
+    	  }
+      });
    });
-
 </script>
 

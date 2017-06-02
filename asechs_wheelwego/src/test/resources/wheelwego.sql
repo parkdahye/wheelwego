@@ -6,7 +6,6 @@ drop sequence booking_seq;
 drop sequence review_seq;
 drop sequence menu_seq;
 
-
 drop sequence information_seq;
 drop sequence informationcomment_seq;
 drop sequence qna_seq;
