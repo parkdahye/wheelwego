@@ -63,7 +63,7 @@ public class BoardController {
 		@RequestMapping("freeboard_write.do")
 		public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
 			boardService.freeboardWrite(bvo, request);
-			return "redirect:freeboard_list.do";
+			return "redirect:board/business_detail_content.do?no=" + bvo.getNo();
 		}
 		
 		// 호겸 작성. 자유게시판 게시물 삭제
@@ -158,7 +158,6 @@ public class BoardController {
 	public ModelAndView QnABoardList(String pageNo) {
 		return new ModelAndView("board/qna_list.tiles", "qnaBoardList", boardService.getQnABoardList(pageNo));
 	}
-
 	// 강정호. 질문답변게시판 상세보기
 	@RequestMapping("board/qna_detail_content.do")
 	public String qna_detail_content(String no, Model model) {
