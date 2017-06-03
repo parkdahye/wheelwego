@@ -20,6 +20,19 @@ body, html {
 .menu {
     display: none;
 }
+/*별점*/
+input[name="grade"]{
+  display:none;
+}
+
+.star_point{
+  font-size:20pt;
+  color:gold;
+  cursor:pointer;
+}
+input[name="grade"]:checked + .star_point~label{
+    color:lightgray;
+}
 </style>
 
 <!-- Header -->
@@ -72,20 +85,10 @@ body, html {
     </div>
 
     <div id="Eat" class="w3-container menu w3-padding-48 w3-card-2">
-      <h5>Bread Basket</h5>
-      <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
-    
-      <h5>Honey Almond Granola with Fruits</h5>
-      <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
-    
-      <h5>Belgian Waffle</h5>
-      <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
-    
-      <h5>Scrambled eggs</h5>
-      <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
-    
-      <h5>Blueberry Pancakes</h5>
-      <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>
+       <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
+      <h5>${foodList.menuName }</h5>
+      <p class="w3-text-grey">${foodList.menuPrice}</p><br>
+      </c:forEach>
     </div>
 
     <div id="Drinks" class="w3-container menu w3-padding-48 w3-card-2">
@@ -115,59 +118,76 @@ body, html {
 <div class="w3-container" id="where" style="padding-bottom:32px;">
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">WHERE TO FIND US</span></h5>
-    <p>Find us at some address at some place.</p>
+    <p style="text-align:center">Find us at some address at some place.</p>
     <div id="googleMap" class="w3-sepia" style="width:100%;height:400px;"></div>
-    <p><span class="w3-tag">REVIEW</span> We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste.</p>
-    <p><strong>Reserve</strong> a table, ask for today's special or just send us a message:</p>
-  
-    <form action="/action_page.php" target="_blank">
-     	<input type="radio" name="grade" id="star-1" value="1"/>
-    <label for="star-1" class="star_point">
+
+    <c:if test="${sessionScope.memberVO!=null}">
+    <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW</span></h5>
+   <form action="${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do" target="_blank" method="post">
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
     <input type="radio" name="grade" id="star-2" value="2"/>
-    <label for="star-2" class="star_point">
+    <label for="star-2" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
     <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
-    <label for="star-3" class="star_point">
+    <label for="star-3" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
     <input type="radio" name="grade" id="star-4" value="4"/>
-    <label for="star-4" class="star_point">
+    <label for="star-4" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
     <input type="radio" name="grade" id="star-5" value="5"/>
-    <label for="star-5" class="star_point">
+    <label for="star-5" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
-
-
-	
-	<table class="content">
-	<tr>
-		<td>
-			<table>
-				<tr>
-					<td>
-					트럭번호: <input type="text" name="foodtruckNumber"  readonly="readonly"></input>
-					| 작성자:<input type="text"  name="customerId" value="${sessionScope.memberVO.id}" readonly="readonly"></input>	
-					</td>
-				<tr>
-					<td>						
-		<textarea rows="5" cols="100" id="content" name="reviewContent" required="required" style="resize: none;"></textarea>
-					</td>
-				</tr>
-				<tr>
-				<td valign="middle">						
-					<input type="submit" value="등록하기" class="action"></input>			
-					</td>				
-				</tr>
-			</table>
-		</td>
-	</tr>
+<table class="content">
+   <tr>
+      <td>
+         <table>
+            <tr>
+               <div class="form-group">
+			      <textarea class="form-control" rows="5" cols="100" id="content" name="reviewContent" required="required" style="resize: none;"></textarea>
+			   </div>
+            </tr>
+            <tr>
+               <input type="button" id="registerBtn" value="Register" class="btn btn-default" style="float: right;"/>                
+            </tr>
+         </table>
+         <hr>
+      </td>
+   </tr>
 </table>
-    </form>
+</form>
+</c:if>
+    <form>
+    <!-- review 결과 table -->
+    <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW LIST</span></h5>      
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>SCORE</th>
+        <th>COMMENT</th>
+        <th>WRITER</th>
+        <th>DATE</th>
+      </tr>
+    </thead>
+    <tbody>
+     <c:forEach items="${reviewlist.reviewList}" var="reviewVO">
+      <tr>
+        <td>${reviewVO.grade}</td>
+        <td>${reviewVO.reviewContent}</td>
+        <td>${reviewVO.customerId}</td>
+        <td>${reviewVO.reviewTimeposted}</td>
+      </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+<!-- review 결과 테이블 -->
+</form>
   </div>
 </div>
 
@@ -207,6 +227,27 @@ function openMenu(evt, menuName) {
   evt.currentTarget.firstElementChild.className += " w3-dark-grey";
 }
 document.getElementById("myLink").click();
+</script>
+<script>
+   $(document).ready(function(){
+      $("#registerBtn").click(function(){
+         var grade = $("input[name=grade]:checked").val();
+         var reviewContent = $("#content").val();
+         var d = new Date();
+         if(confirm("리뷰를 등록하시겠습니까?")){
+            $.ajax({
+            	type:"post",
+            	url:"${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do",
+                data:"grade="+grade+"&reviewContent="+reviewContent+"&customerId=${sessionScope.memberVO.id}"+"&foodtruckNumber=${truckDetailInfo.foodtruckNumber}"
+                +"&reviewTimeposted="+d.toString(),
+                success:function(result){
+                	alert("등록 완료");
+                	location.href="${pageContext.request.contextPath}/getReviewListByTruckNumber.do?foodtruckNumber=${truckDetailInfo.foodtruckNumber}";
+                }
+            })
+         }
+      });
+   });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
 

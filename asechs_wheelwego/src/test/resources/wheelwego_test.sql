@@ -2,10 +2,18 @@
 ----------dbTEST---------------------
 select * from member
 select * from seller
+select * from menu
+select * from FOODTRUCK where foodtruck_name='꼬부랑아이스크림'
+select * from FOODTRUCKFILE where foodtruck_number='80나0004'
+select * from FOODTRUCKFILE
+select * from customer
 select * from FOODTRUCK
+select * from REVIEW
+select * from FOODTRUCKFILE where foodtruck_number='80나0036'
 select * from FOODTRUCKFILE
 select * from menu
 select * from menu where foodtruck_number='80나0001'
+insert into MEMBER values('customer01','1234','정현지','위례','경기도 하남시 학암동','01022552716','customer','12345');
 select t.*, f.foodtruck_filepath, m.menu_filename
 		from(select * from foodtruck)t, foodtruckfile f, menu m
 		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_number=m.foodtruck_number and t.foodtruck_number='80나0001'
@@ -89,7 +97,7 @@ select * from foodtruck where foodtruck_number in (select w.foodtruck_number
 from customer c, wishlist w
 where c.customer_id = w.customer_id and c.customer_id = 'customer01' );
 
-select * from wishlist;
+select * from wishlist where customer_id = 'customer01';
 insert into wishlist values('customer01','80나0001');
 insert into wishlist values('customer01','80나0002');
 insert into wishlist values('customer01','80나0003');
