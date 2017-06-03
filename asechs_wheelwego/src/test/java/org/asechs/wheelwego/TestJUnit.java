@@ -1,9 +1,11 @@
 package org.asechs.wheelwego;
 
+import java.util.List;
 import javax.annotation.Resource;
-
+import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
+import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.MypageDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,12 +41,18 @@ public class TestJUnit {
 	@Resource
 	private MemberService service;
 	@Resource
+	private FoodTruckService foodtruckService;
+	@Resource
+	private BoardDAO boardDAO;
+	@Resource
 	private FoodTruckService foodService;
 	@Resource
 	private MypageDAO mypageDAO;
 	@Test
 	public void test(){
-
+		//System.out.println(foodtruckService.foodtruckDetail("80나0001"));
+		//System.out.println(foodtruckService.foodListDetail("80나0001"));
+		System.out.println(foodtruckService.foodTruckAndMenuDetail("80나0001"));
 		System.out.println(foodService.getReviewListByTruckNumber("1", "1234"));
 /*		String id = "customer01";
 		String password = "1234";
