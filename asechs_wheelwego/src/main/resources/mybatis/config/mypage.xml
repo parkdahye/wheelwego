@@ -4,6 +4,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mypage">
+<resultMap type="reviewVO" id="reviewRM">
+	<result property="reviewNo" column="review_no"/>
+	<result property="foodtruckNumber" column="foodtruck_number"/>
+	<result property="customerId" column="customer_id"/>
+	<result property="reviewContent" column="review_content"/>
+	<result property="reviewTimeposted" column="review_timeposted"/>
+</resultMap>
 <resultMap type="wishlistVO" id="wishlistRM">
 	<result property="foodtruckNumber" column="foodtruck_number"/>
 	<result property="customerId" column="customer_id"/>	
@@ -83,15 +90,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteMyTruck">
 		delete from foodtruck where foodtruck_number=#{value}
 	</delete>
-	<select id="myWishList" resultMap="truckRM" parameterType="string">
-	select * from foodtruck where foodtruck_number in (select
-	w.foodtruck_number
-	from customer c, wishlist w
-	where c.customer_id = w.customer_id and c.customer_id = #{value})
-</select>
+	<select id="myWishList" resultMap="truckpageRM" parameterType="string">
+		select t.foodtruck_number, f.foodtruck_filepath from foodtruck t, foodtruckfile f 
+		where f.foodtruck_number in 
+		(select foodtruck_number from wishlist where customer_id = #{value})
+		and t.foodtruck_number = f.foodtruck_number
+	</select>
 <delete id="deleteWishList" parameterType="wishListVO">
 	delete from wishlist where customer_id = #{customerId} and foodtruck_number = #{foodTruckNumber}
 </delete>
+<select id="showMyReview" resultMap="reviewRM">
+	select review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD HH24:MI:SS') as review_timeposted, grade
+	from review where customer_id=#{value}
+</select>
+<update id="updateMyReview" parameterType="reviewVO"> 
+	update review set review_content=#{reviewContent}, grade=#{grade} where review_no=#{reviewNo}
+</update>
+<delete id="deleteMyReview" >
+	delete from review where review_no=#{value}
+</delete>
+<select id="findReviewInfoByReviewNo" resultMap="reviewRM">
+	select review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD HH24:MI:SS') as review_timeposted, grade
+	from review where review_no=#{value}
+</select>
 </mapper>
  
 

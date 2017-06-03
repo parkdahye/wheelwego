@@ -38,7 +38,7 @@ public class FileController {
 		//실제 운영시에 사용할 서버 업로드 경로
 		//uploadPath=request.getSession().getServletContext().getRealPath("/resources/upload/"); 
 		//개발시에는 워크스페이스 업로드 경로로 준다.
-		uploadPath="C:\\java-kosta\\wheelwego-workspace\\asechs_wheelwego2\\src\\main\\webapp\\resources\\upload\\";
+		uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
 		List<MultipartFile> truckList=tvo.getFoodtruckFile(); //푸드트럭이미지 파일 리스트
 		List<FoodVO> menuList=tvo.getFoodList(); //메뉴리스트
 		//결과 응답화면에 파일명 목록을 전달하기 위한 리스트

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,7 +17,7 @@ public class MypageDAOImpl implements MypageDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	@Override
-	public List<WishlistVO> myWishList(String id) {
+	public List<TruckVO> myWishList(String id) {
 		return sqlSessionTemplate.selectList("mypage.myWishList", id);
 	}
 	@Override
@@ -78,5 +79,21 @@ public class MypageDAOImpl implements MypageDAO {
 	@Override
 	public void deleteMyTruck(String foodtruckNumber) {
 		sqlSessionTemplate.delete("mypage.deleteMyTruck", foodtruckNumber);
+	}
+	@Override
+	public List<ReviewVO> showMyReviewList(String customerId) {
+		return sqlSessionTemplate.selectList("mypage.showMyReview", customerId);
+	}
+	@Override
+	public void updateMyReview(ReviewVO reviewVO) {
+		sqlSessionTemplate.update("mypage.updateMyReview", reviewVO);
+	}
+	@Override
+	public void deleteMyReview(String reviewNo) {
+		sqlSessionTemplate.delete("mypage.deleteMyReview", reviewNo);
+	}
+	@Override
+	public ReviewVO findReviewInfoByReviewNo(String reviewNo) {
+		return sqlSessionTemplate.selectOne("mypage.findReviewInfoByReviewNo", reviewNo);
 	}
 }

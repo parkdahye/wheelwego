@@ -1,12 +1,14 @@
 package org.asechs.wheelwego;
 
+import java.util.List;
 import javax.annotation.Resource;
-
 import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
+import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.MypageDAO;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -30,6 +32,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
    <version>4.9</version>
    <scope>test</scope>
   </dependency>  
+  
+  
  */  
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
@@ -37,12 +41,19 @@ public class TestJUnit {
 	@Resource
 	private MemberService service;
 	@Resource
-
-	private FoodTruckService foodService;
+	private FoodTruckService foodtruckService;
 	@Resource
 	private BoardDAO boardDAO;
-
+	@Resource
+	private FoodTruckService foodService;
+	@Resource
+	private MypageDAO mypageDAO;
+	@Test
 	public void test(){
+		//System.out.println(foodtruckService.foodtruckDetail("80나0001"));
+		//System.out.println(foodtruckService.foodListDetail("80나0001"));
+		System.out.println(foodtruckService.foodTruckAndMenuDetail("80나0001"));
+		System.out.println(foodService.getReviewListByTruckNumber("1", "1234"));
 /*		String id = "customer01";
 		String password = "1234";
 		String memberName = "김래발";
@@ -53,17 +64,22 @@ public class TestJUnit {
 		String memberType = "customer";
 		String businessNumber = null;
 
-		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 		
-		/*String id = "seller07";
+		/*String id = "customer01";
+		String id = "seller07";
 		String password = "1234";
 		String memberName = "김래발";
 		String postCode = "13437";
 		String address = "경기도 성남시 분당구";
 		String addressDetail = "삼평동";
 		String phoneNumber = "01000000000";
+		String memberType = "customer";
+		String businessNumber = null;
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
+		
 		String memberType = "seller";
 		String businessNumber = "0000000000";
 
@@ -80,8 +96,12 @@ public class TestJUnit {
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 		
-		System.out.println(foodService.searchFoodTruckList("끼니"));*/
+		System.out.println(foodService.searchFoodTruckList("끼니"));
 		
+		List<TruckVO> truckVO = mypageService.myWishList("customer01");
+		System.out.println(truckVO);
+		System.out.println(foodService.searchFoodTruckList("끼니"));
+*/
 	}
 }
 

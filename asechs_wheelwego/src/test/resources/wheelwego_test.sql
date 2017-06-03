@@ -1,5 +1,37 @@
+
+----------dbTEST---------------------
+select * from member
+select * from seller
+select * from FOODTRUCK
+select * from FOODTRUCKFILE
+select * from menu
+select * from menu where foodtruck_number='80나0001'
+select t.*, f.foodtruck_filepath, m.menu_filename
+		from(select * from foodtruck)t, foodtruckfile f, menu m
+		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_number=m.foodtruck_number and t.foodtruck_number='80나0001'
+select * from menu where foodtruck_number='80나0001'
+		--foodtruck detail test
+select t.*, f.foodtruck_filepath, m.menu_filename
+		from(select * from foodtruck)t, foodtruckfile f, menu m
+		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_number=m.foodtruck_number and t.foodtruck_number='80나0001'
+select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number
+-- pagingbean 적용 푸드트럭 리스트
+select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' || '트럭' || '%'
+--
+	select f.foodtruck_filepath, t.foodtruck_name FROM foodtruck t, foodtruckfile f
+	where t.foodtruck_number=f.foodtruck_number
+-- 검색 결과 푸드트럭 리스트
+SELECT f.foodtruck_filepath, t.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck)
+		f where rnum between #{startRowNumber} and #{endRowNumber}
+
 ----------dbTEST---------------------
 insert into member values ('seller01', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 create table member(
    id varchar2(100) primary key,
    password varchar2(100) not null,
@@ -15,6 +47,7 @@ create table member(
 		)f where rnum between 1 and 5
 
 insert into member values ('java01', 'java01', '김래발', '판교','코스타', '010-1111-1111', '일반회원','1234');
+insert into member values ('seller02', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
 update member set member_type='0' where id='java01';
 delete from member;
 select * from foodtruck;
@@ -56,10 +89,17 @@ select * from foodtruck where foodtruck_number in (select w.foodtruck_number
 from customer c, wishlist w
 where c.customer_id = w.customer_id and c.customer_id = 'customer01' );
 
+select * from wishlist;
+insert into wishlist values('customer01','80나0001');
+insert into wishlist values('customer01','80나0002');
+insert into wishlist values('customer01','80나0003');
 insert into wishlist values('customer01','80나0015');
-insert into wishlist values('customer01','80나0014');
-insert into wishlist values('customer03','80나0013');
-insert into wishlist values('customer01','80나0015');
+
+select * from foodtruck;
+
+delete from wishlist;
+
+select * from seller;
 
 update member set password='1234' where id='java01' and member_name='김래발' and phonenumber='01000000000';
 
@@ -152,7 +192,12 @@ select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
        to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted, f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath
 from freeboard f, freeboardfile fi 
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
-<<<<<<< HEAD
+from freeboard f, freeboardfile fi 
+where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
+
+    
+insert into review values (review_seq.nextval, '2523','customer1','맛있어요',sysdate, 4);
+select review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD'), grade from review
 
 
 select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
@@ -177,32 +222,82 @@ select m.member_name as memberName from freeboard f, member m where m.id=f.id an
 		)f, member m where f.id=m.id and rnum between 1 and 30
 		order by freeboard_no desc
 
-select * from informationfile
-select informationfile_filepath from informationfile where information_no=51
 
+select * from foodtruck;
 
-select m.member_name as memberName from information f, member m where m.id=f.id and f.id='java101' and f.information_no=51
+commit
 
-select m.member_name as memberName from qna f, member m where m.id=f.id and f.id='java101' and f.qna_no=52
+insert into foodtruck ()
 
+delete from seller;
 
+delete from foodtruck;
+delete from foodtruckfile;
 
+insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction) values('80나0001', 'seller01', '봉군타코', '도시위에 멕시칸! 바로 봉군타코에서 느낄 수 있습니다.');
+insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction) values('80나0002', 'seller02', '깡스푸드', '도시위에 멕시칸! 바로 봉군타코에서 느낄 수 있습니다.');
+insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction) values('80나0003', 'seller03', '래발푸드', '도시위에 멕시칸! 바로 봉군타코에서 느낄 수 있습니다.');
 
-
-
-
-
-
-
-
-
-
-
-
+insert into foodtruckfile(foodtruck_number,foodtruck_filepath) values ('80나0001', 'Friend_트럭1.jpg');
+insert into foodtruckfile(foodtruck_number,foodtruck_filepath) values ('80나0002', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile(foodtruck_number,foodtruck_filepath) values ('80나0003', '깡스푸드_트럭1.JPG');
 
 
 
+select foodtruck_number from wishlist where customer_id = 'customer01';
+
+select t.*, f.FOODTRUCK_FILEPATH 
+from foodtruck t, foodtruckfile f
+where t.foodtruck_number = f.foodtruck_number;
+
+	select * from foodtruck where foodtruck_number in (select
+	w.foodtruck_number
+	from customer c, wishlist w
+	where c.customer_id = w.customer_id and c.customer_id = 'cusomter01');
+	
+	select * from foodtruckfile;
+	
+select t.*, f.foodtruck_filepath
+from(select * from foodtruck where foodtruck_number=#{value})t, foodtruckfile f
+where t.foodtruck_number=f.foodtruck_number	
+
+		
+		
+select * from foodtruck where foodtruck_number in 
+
+select foodtruck_number from wishlist where customer_id=  'customer01';
+		
+select menu_id,foodtruck_number,menu_name,menu_price,menu_filename from menu where foodtruck_number='80나0001' order by menu_id asc
+
+select t.*, f.foodtruck_filepath from foodtruck t, foodtruckfile f 
+where f.foodtruck_number in 
+(select foodtruck_number from wishlist where customer_id = 'customer01')
+and t.foodtruck_number = f.foodtruck_number;
+
+select * from foodtruck
+where foodtruck_number in (
+select w.foodtruck_number from customer c, wishlist w
+where c.customer_id = 'cusomter01' and c.customer_id = w.customer_id);
+
+SELECT A.MBR_ID, B.MBR_ID
+FROM MEMBER A
+INNER JOIN MEMBER B ON A.MBR_ID = B.MBR_ID
 
 
+select * from wishlist where customer_id = 'customer01'
 
+select * from foodtruckfile;
+select * from wishlist;
 
+insert into review(review_no,foodtruck_number,customer_id,review_content,review_timeposted,grade) 
+values(review_seq.nextval,'1234','customer2','굿~~',sysdate,4);
+insert into review(review_no,foodtruck_number,customer_id,review_content,review_timeposted,grade) 
+values(review_seq.nextval,'1234','customer1','맛있음~~',sysdate,4);
+
+SELECT * FROM FOODTRUCK
+select *
+from
+(select row_number() over(order by review_no desc) as rnum ,review_no,foodtruck_number,customer_id,
+review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
+where foodtruck_number='1234')
+where rnum between 1 and 5;
