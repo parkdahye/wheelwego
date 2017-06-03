@@ -17,34 +17,18 @@ public class BoardDAOImpl implements BoardDAO {
 	@Resource
 	SqlSessionTemplate template;
 	
+//////////강정호. 자유게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@Override
 	public List<BoardVO> getFreeBoardList(PagingBean pagingBean) {
 		return template.selectList("board.getFreeBoardList", pagingBean);
 	}
 
-	@Override
-	public List<BoardVO> getBusinessInfoBoardList(PagingBean pagingBean) {
-		return template.selectList("board.getBusinessInfoBoardList", pagingBean);
-	}
+
 
 	@Override
 	public int getFreeBoardTotalContentCount() {
 		return template.selectOne("board.getFreeBoardTotalContentCount");
-	}
-
-	@Override
-	public int getBusinessInfoBoardTotalContentCount() {
-		return template.selectOne("board.getBusinessInfoBoardTotalContentCount");
-	}
-
-	@Override
-	public int getQnATotalContentCount() {
-		return template.selectOne("board.getQnATotalContentCount");
-	}
-
-	@Override
-	public List<BoardVO> getQnABoardList(PagingBean pagingBean) {
-		return template.selectList("board.getQnABoardList", pagingBean);
 	}
 
 	@Override
@@ -56,12 +40,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public void freeboardDelete(String no) {
 		template.delete("board.freeboardDelete", no);
 	}
-
-	@Override
-	public void updateHits(int hits) {
-		template.update("board.updateCount", hits);
-	}
-
+	
 	@Override
 	public String freeboardWrite(BoardVO bvo) {
 		template.insert("board.freeboardWrite",bvo);
@@ -69,21 +48,43 @@ public class BoardDAOImpl implements BoardDAO {
 		//여기서 bvo.getNo을 int로 넘겨주기
 		return bvo.getNo();
 	}
-
+	
 	@Override
 	public void freeboardWriteFileUpload(BoardVO boardVO) {
 		template.insert("board.freeboardWriteFileUpload", boardVO);
 		
 	}
-		
+	
+	@Override
+	public void updateHits(int hits) {
+		template.update("board.updateCount", hits);
+	}
+	
 	public void updateBoard(BoardVO vo) {
 		template.update("board.updateBoard",vo);
+	}
+	
+	@Override
+	public List<FileVO> getFreeBoardFilePath(String no) {
+		return template.selectList("board.getFreeBoardFilePath",no);
 	}
 
 	@Override
 	public MemberVO getNameById(BoardVO bvo) {
 		return template.selectOne("board.getNameById", bvo);
 	}
+//////////강정호. 창업게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public List<BoardVO> getBusinessInfoBoardList(PagingBean pagingBean) {
+		return template.selectList("board.getBusinessInfoBoardList", pagingBean);
+	}
+	
+	@Override
+	public int getBusinessInfoBoardTotalContentCount() {
+		return template.selectOne("board.getBusinessInfoBoardTotalContentCount");
+	}
+	
 
 	@Override
 	public void updateHitsBusiness(int hits) {
@@ -104,15 +105,66 @@ public class BoardDAOImpl implements BoardDAO {
 	public void business_updateBoard(BoardVO vo) {
 		template.update("board.business_updateBoard", vo);
 	}
+	
+	@Override
+	public MemberVO business_getNameById(BoardVO bvo) {
+		return template.selectOne("board.business_getNameById", bvo);
+	}
+	
+	@Override
+	public String businessWrite(BoardVO bvo) {
+		template.insert("board.businessWrite",bvo);
+		return bvo.getNo();
+	}
+	
+	@Override
+	public void businessWriteFileUpload(BoardVO boardVO) {
+		template.insert("board.businessWriteFileUpload", boardVO);
+	}
+	
+	@Override
+	public List<FileVO> getBusinessFilePath(String no) {
+		 return template.selectList("board.getBusinessFilePath",no);
+	}
+
+//////////강정호. Q&A게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public int getQnATotalContentCount() {
+		return template.selectOne("board.getQnATotalContentCount");
+	}
+	
+	@Override
+	public List<BoardVO> getQnABoardList(PagingBean pagingBean) {
+		return template.selectList("board.getQnABoardList", pagingBean);
+	}
+	
 
 	@Override
-	public MemberVO business_getNameById(String id) {
-		return template.selectOne("board.business_getNameById", id);
+	public String qnaWrite(BoardVO bvo) {
+		template.insert("board.qnaWrite",bvo);
+		return bvo.getNo();
 	}
 
 	@Override
-	public List<FileVO> getFreeBoardFilePath(String no) {
-		return template.selectList("board.getFreeBoardFilePath",no);
+	public void qnaWriteFileUpload(BoardVO boardVO) {
+		template.insert("board.qnaWriteFileUpload",boardVO);
+		
+	}
+
+	@Override
+	public List<FileVO> getqnaFilePath(String no) {
+		 return template.selectList("board.getqnaFilePath",no);
+	}
+
+	@Override
+	public MemberVO qna_getNameById(BoardVO bvo) {
+		return template.selectOne("board.qna_getNameById", bvo);
+	}
+
+	@Override
+	public BoardVO getqnaBoardDetail(String no) {
+		return template.selectOne("board.getqnaBoardDetail", no);
 	}
 
 	

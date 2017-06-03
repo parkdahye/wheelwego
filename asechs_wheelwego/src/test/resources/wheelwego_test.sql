@@ -177,6 +177,32 @@ select m.member_name as memberName from freeboard f, member m where m.id=f.id an
 		)f, member m where f.id=m.id and rnum between 1 and 30
 		order by freeboard_no desc
 
-=======
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+select * from informationfile
+select informationfile_filepath from informationfile where information_no=51
+
+
+select m.member_name as memberName from information f, member m where m.id=f.id and f.id='java101' and f.information_no=51
+
+select m.member_name as memberName from qna f, member m where m.id=f.id and f.id='java101' and f.qna_no=52
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

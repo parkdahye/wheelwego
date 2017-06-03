@@ -43,11 +43,27 @@ public interface BoardDAO {
 
 	void business_updateBoard(BoardVO vo);
 
-	MemberVO business_getNameById(String id);
+	MemberVO business_getNameById(BoardVO bvo);
 
 	void freeboardWriteFileUpload(BoardVO boardVO);
 
 	List<FileVO> getFreeBoardFilePath(String no);
+
+	String businessWrite(BoardVO bvo);
+
+	void businessWriteFileUpload(BoardVO boardVO);
+
+	List<FileVO> getBusinessFilePath(String no);
+
+	String qnaWrite(BoardVO bvo);
+
+	void qnaWriteFileUpload(BoardVO boardVO);
+
+	List<FileVO> getqnaFilePath(String no);
+
+	MemberVO qna_getNameById(BoardVO bvo);
+
+	BoardVO getqnaBoardDetail(String no);
 
 
 }

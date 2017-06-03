@@ -38,7 +38,19 @@ public interface BoardService {
 	MemberVO getNameById(BoardVO bvo);
 	void business_updateBoard(BoardVO vo);
 
-	MemberVO business_getNameById(String id);
+	MemberVO business_getNameById(BoardVO bvo);
 
 	List<FileVO> getFreeBoardFilePath(String no);
+
+	void businessWrite(BoardVO bvo, HttpServletRequest request);
+
+	List<FileVO> getBusinessFilePath(String no);
+
+	void qnaWrite(BoardVO bvo, HttpServletRequest request);
+
+	List<FileVO> getqnaFilePath(String no);
+
+	MemberVO qna_getNameById(BoardVO bvo);
+
+	BoardVO getqnaBoardDetail(String no);
 }
