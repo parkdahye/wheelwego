@@ -23,7 +23,7 @@ create sequence information_seq;
 create sequence informationcomment_seq;
 create sequence qna_seq;
 create sequence qnacomment_seq;
-create sequence freeboard_seq start with 15;
+create sequence freeboard_seq start with 51;
 create sequence freeboardcomment_seq;
 -------------------------------------------------------------------------------
 
@@ -200,10 +200,10 @@ create table freeboard(
 drop table freeboard;
 -------------------------------------------------------------------------------freeboardfile(0531)
 create table freeboardfile(
-   freeboard_no varchar2(100) not null,
-   freeboard_filepath varchar2(100) not null,
-   constraint freeboardfile_freeboardno_fk foreign key(freeboard_no) references freeboard(freeboard_no) on delete cascade , 
-   constraint freeboardfile_PK primary key(freeboard_no, freeboard_filepath) 
+	freeboard_no number not null,
+	freeboardfile_filepath varchar2(100) not null,
+	constraint freeboardfile_freeboardno_fk foreign key(freeboard_no) references freeboard(freeboard_no) on delete cascade , 
+	constraint freeboardfile_PK primary key(freeboard_no, freeboardfile_filepath) 
 );
 -------------------------------------------------------------------------------
 drop table freeboardfile;

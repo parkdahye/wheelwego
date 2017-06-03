@@ -18,13 +18,14 @@
 		})
 	})//ready
 </script>
+${requestScope.detail_freeboard}    ${requestScope.fileNameList }
 <div class="panel panel-default"> 
 <div class="panel-heading"><h3>자유게시판 수정</h3></div> 
 
 <div class="panel-body">
 
 <div class="container"> 
-<form action="updateBoard.do" method="post">  
+<form action="updateBoard.do" method="post" enctype="multipart/form-data">  
 		<div class="row"> 
 			<div class="col-md-3">
 			<div class="form-group"> 
@@ -36,7 +37,7 @@
 			<div class="col-md-4"> 
 			<div class="form-group"> 
 			<label for="writer">작성자</label> 
-			<input type="text" class="form-control" name="id" id="writer" value="${requestScope.detail_freeboard.id }" readonly> 
+			<input type="text" class="form-control" name="id" id="writer" value="${requestScope.name.memberName }" readonly> 
 			</div> 
 			</div> 
 		</div> 
@@ -50,29 +51,39 @@
 		<div class="col-md-8"> 
 		<div class="form-group"> 
 		<label for="content">글내용</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<font size=2 >${requestScope.detail_freeboard.timePosted} &nbsp;&nbsp; 조회수 : ${requestScope.detail_freeboard.hits}</font>
+		<font size=2 >${requestScope.detail_freeboard.timePosted} &nbsp;&nbsp; 
+		조회수 : ${requestScope.detail_freeboard.hits}</font>
 		<textarea class="form-control" rows="10" name="content" id="content" required="required">${requestScope.detail_freeboard.content }</textarea> 
-		</div></div><br><br><br><br><br>
+		</div></div><br><br><br><br>
 		
-		<div class="form-group,col-md-8"> 
+			<div class="form-group"> 
 		<label for="File">첨부파일 1</label> 
-		<input type="file" id="File1"> 
+		<input type="file" name="file[0]"> 
 		</div> 
-		<div class="form-group,col-md-8"> 
+		<div class="form-group"> 
 		<label for="File">첨부파일 2</label> 
-		<input type="file" id="File2"> 
+		<input type="file" name="file[1]"> 
 		</div> 
-		<div class="form-group,col-md-8"> 
+		<div class="form-group"> 
 		<label for="File">첨부파일 3</label> 
-		<input type="file" id="File3"> 
-		</div> 
+		<input type="file" name="file[2]"> 
+		</div> <br><br>
 		
+	 	<div class="form-group,col-md-8"> 
+		<c:forEach items="${requestScope.fileNameList }" var="fileNameList">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="150px" height="100px"> 
+		</c:forEach>
+		
+		</div><br><br>
+		${requestScope.fileNameList }
+		<!-- 버튼  -->
 		<div class="center-block" style='width:400px'> 
 		<input type="reset"  class="btn btn-info" value="다시작성">	
 		<input type="submit"  class="btn btn-info" value="수정" >
 		<input type="button"  class="btn btn-info" value="취소" id="cancelBtn"></div> 
 </form> 
-</div> 
+</div>
 </div> <!--panel end--> 
 </div> 
 
