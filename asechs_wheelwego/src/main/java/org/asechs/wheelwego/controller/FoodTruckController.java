@@ -6,9 +6,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.asechs.wheelwego.model.FoodTruckService;
+import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -63,4 +67,20 @@ public class FoodTruckController {
 		
 		return new ModelAndView("foodtruck/foodtruck_detail.tiles", "truckList", searchTruckList);
 	}	
+	/**
+	 * 리뷰 동록하기
+	 * @param reviewVO
+	 */
+	@RequestMapping(value = "afterLogin_foodtruck/registerReview.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String registerReview(ReviewVO reviewVO){
+		System.out.println(reviewVO);
+		foodTruckService.registerReview(reviewVO); // 푸드 트럭 등록
+		return "foodtruck/foodtruck_detail.tiles";
+	}
+	@RequestMapping("getReviewListByTruckNumber.do")
+	public ModelAndView getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber){
+		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodTruckNumber);
+		return new ModelAndView("foodtruck/foodtruck_detail.tiles","reviewlist",reviewList);
+	}
 }
