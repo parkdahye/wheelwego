@@ -19,9 +19,9 @@ create sequence booking_seq;
 create sequence review_seq;
 create sequence menu_seq;
 
-create sequence information_seq;
+create sequence information_seq start with 51;
 create sequence informationcomment_seq;
-create sequence qna_seq;
+create sequence qna_seq start with 51;
 create sequence qnacomment_seq;
 create sequence freeboard_seq start with 51;
 create sequence freeboardcomment_seq;

@@ -4,6 +4,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
+<!-- 강정호 자유게시판 -->
 	<resultMap type="boardVO" id="freeBoardListRM">
 		<result property="no" column="freeboard_no"/>
 		<result property="id" column="id"/>
@@ -15,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="fileVO.filepath" column="freeboardfile_filepath"/>
 		<!-- <result property="file" column="freeboard_filename1"/> -->
 	</resultMap>
+
 	<select id="getFreeBoardList" parameterType="pagingBean" resultMap="freeBoardListRM" resultType="boardVO">
 		<!-- select freeboard_no, id, freeboard_title, freeboard_content, freeboard_timePosted, freeboard_hits
 		 from freeboard -->
@@ -24,45 +26,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)f, member m where f.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
 		order by freeboard_no desc
 	</select>
-	<resultMap type="boardVO" id="businessInfoBoardListRM">
-		<result property="no" column="information_no"/>
-		<result property="id" column="id"/>
-		<result property="title" column="information_title"/>
-		<result property="content" column="information_content"/>
-		<result property="timePosted" column="information_timeposted"/>
-		<result property="hits" column="information_hits"/>
-	</resultMap>
-	<select id="getBusinessInfoBoardList" parameterType="pagingBean" resultMap="businessInfoBoardListRM" resultType="boardVO">
-		SELECT b.information_no, b.id, b.information_title, b.information_content, b.information_timeposted, b.information_hits, m.id FROM(
-		SELECT row_number() over(order by information_no desc) as rnum, information_no, id, information_title, information_content,
-		to_char(information_timeposted,'YYYY.MM.DD') as information_timeposted ,information_hits from information
-		)b, member m where b.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
-		order by information_no desc
-	</select>
+	
 	<select id="getFreeBoardTotalContentCount" resultType="Integer">
 		select count(*) from freeboard
 	</select>
-	<select id="getBusinessInfoBoardTotalContentCount" resultType="Integer">
-		select count(*) from information
-	</select>
-	<select id="getQnATotalContentCount" resultType="Integer">
-		select count(*) from qna
-	</select>
-	<resultMap type="boardVO" id="QnABoardListRM">
-		<result property="no" column="qna_no"/>
-		<result property="id" column="id"/>
-		<result property="title" column="qna_title"/>
-		<result property="content" column="qna_content"/>
-		<result property="timePosted" column="qna_timeposted"/>
-		<result property="hits" column="qna_hits"/>
-	</resultMap>
-	<select id="getQnABoardList" parameterType="pagingBean" resultMap="QnABoardListRM" resultType="boardVO">
-		SELECT q.qna_no, q.id, q.qna_title, q.qna_content, q.qna_timeposted, q.qna_hits, m.id FROM(
-		SELECT row_number() over(order by qna_no desc) as rnum, qna_no, id, qna_title, qna_content,
-		to_char(qna_timeposted,'YYYY.MM.DD') as qna_timeposted , qna_hits from qna
-		)q, member m where q.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
-		order by qna_no desc
-	</select>
+	
 	<select id="getFreeBoardDetail" resultMap="freeBoardListRM" resultType="boardVO" parameterType="String">
 		select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
 		freeboard_hits from freeboard where freeboard_no=#{value}
@@ -71,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 f.freeboard_hits, fi.freeboard_no, fi.freeboardfile_filepath 
 		 from freeboard f, freeboardfile fi where f.freeboard_no=fi.freeboard_no and f.freeboard_no=#{value} -->
 	</select>
+	
 	<resultMap type="fileVO" id="freeboardFileNameRM">
 		<result property="no" column="freeboard_no"/>
 		<result property="filepath" column="freeboardfile_filepath"/>
@@ -95,6 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into freeboard(freeboard_no, id, freeboard_title, freeboard_content, freeboard_timePosted, freeboard_hits)
 		values(#{no}, #{id},#{title},#{content},sysdate,#{hits})
 	</insert>
+	
 	<resultMap type="boardVO" id="freeboardWriteFileUploadRM">
 		<result property="fileVO.no" column="freeboard_no"/>
 		<result property="fileVO.filePath" column="freeboardfile_filepath"/>
@@ -106,11 +76,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getNameById" resultType="memberVO" parameterType="boardVO">
 	select m.member_name as memberName from freeboard f, member m where m.id=f.id and f.id=#{id} and f.freeboard_no=#{no}
 	</select>
-	<!-- 창업게시판 -->
-		<select id="getBusinessBoardDetail" resultMap="businessInfoBoardListRM" resultType="boardVO">
-		select information_no, id, information_title, information_content, to_char(information_timeposted,'YYYY.MM.DD HH:mm:ss')
-		information_timeposted,
+<!-- 강정호창업게시판 -->
+
+<resultMap type="boardVO" id="businessInfoBoardListRM">
+		<result property="no" column="information_no"/>
+		<result property="id" column="id"/>
+		<result property="title" column="information_title"/>
+		<result property="content" column="information_content"/>
+		<result property="timePosted" column="information_timeposted"/>
+		<result property="hits" column="information_hits"/>
+	</resultMap>
+	<select id="getBusinessInfoBoardList" parameterType="pagingBean" resultMap="businessInfoBoardListRM" resultType="boardVO">
+		SELECT b.information_no, b.id, b.information_title, b.information_content, b.information_timeposted, b.information_hits, m.id FROM(
+		SELECT row_number() over(order by information_no desc) as rnum, information_no, id, information_title, information_content,
+		to_char(information_timeposted,'YYYY.MM.DD') as information_timeposted ,information_hits from information
+		)b, member m where b.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
+		order by information_no desc
+	</select>
+	
+	<select id="getBusinessInfoBoardTotalContentCount" resultType="Integer">
+		select count(*) from information
+	</select>
+	
+	<insert id="businessWrite" parameterType="boardVO">
+		<selectKey keyProperty="no" resultType="String" order="BEFORE">
+			select information_seq.nextval from dual
+		</selectKey>
+		insert into information(information_no, id, information_title, information_content, information_timeposted, information_hits)
+		values(#{no}, #{id},#{title},#{content},sysdate,#{hits})
+	</insert>
+	
+	<resultMap type="boardVO" id="businessWriteFileUploadRM">
+		<result property="fileVO.no" column="information_no"/>
+		<result property="fileVO.filepath" column="informationfile_filepath"/>
+	</resultMap>
+	<insert id="businessWriteFileUpload" parameterType="boardVO">
+		insert into informationfile(information_no, informationfile_filepath)values(#{fileVO.no},#{fileVO.filepath})
+	</insert>
+	
+	<select id="getBusinessBoardDetail" resultMap="businessInfoBoardListRM" resultType="boardVO">
+		select information_no, id, information_title, information_content, to_char(information_timeposted,'YYYY.MM.DD HH:mm:ss') as information_timeposted,
 		information_hits from information where information_no=#{value}
+	</select>
+	<resultMap type="fileVO" id="businessFileNameRM">
+		<result property="no" column="information_no"/>
+		<result property="filepath" column="informationfile_filepath"/>
+	</resultMap>
+	<select id="getBusinessFilePath" resultType="fileVO" parameterType="String" resultMap="businessFileNameRM">
+		select informationfile_filepath from informationfile where information_no=#{value}
 	</select>
 	<delete id="businessDelete" parameterType="String">
 		delete information where information_no=#{value}
@@ -121,10 +134,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<update id="business_updateBoard" parameterType="boardVO">
 		update information set information_title=#{title},information_content=#{content},information_timeposted=sysdate where information_no=#{no}
 	</update>
-	<select id="business_getNameById" resultType="memberVO">
-	select m.member_name as membername
-	from information f, member m
-	where m.id=f.id and f.id=#{value}
+	<select id="business_getNameById" resultType="memberVO" parameterType="boardVO">
+	select m.member_name as memberName from information f, member m where m.id=f.id and f.id=#{id} and f.information_no=#{no}
+	</select>
+<!-- 강정호Q&A게시판 -->
+
+	<select id="getQnATotalContentCount" resultType="Integer">
+		select count(*) from qna
+	</select>
+	<resultMap type="boardVO" id="QnABoardListRM">
+		<result property="no" column="qna_no"/>
+		<result property="id" column="id"/>
+		<result property="title" column="qna_title"/>
+		<result property="content" column="qna_content"/>
+		<result property="timePosted" column="qna_timeposted"/>
+		<result property="hits" column="qna_hits"/>
+	</resultMap>
+	<select id="getQnABoardList" parameterType="pagingBean" resultMap="QnABoardListRM" resultType="boardVO">
+		SELECT q.qna_no, q.id, q.qna_title, q.qna_content, q.qna_timeposted, q.qna_hits, m.id FROM(
+		SELECT row_number() over(order by qna_no desc) as rnum, qna_no, id, qna_title, qna_content,
+		to_char(qna_timeposted,'YYYY.MM.DD') as qna_timeposted , qna_hits from qna
+		)q, member m where q.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
+		order by qna_no desc
+	</select>	
+	<insert id="qnaWrite" parameterType="boardVO">
+		<selectKey keyProperty="no" resultType="String" order="BEFORE">
+			select qna_seq.nextval from dual
+		</selectKey>
+		insert into qna(qna_no, id, qna_title, qna_content, qna_timeposted, qna_hits)
+		values(#{no}, #{id},#{title},#{content},sysdate,#{hits})
+	</insert>
+	
+	<resultMap type="boardVO" id="qnaWriteFileUploadRM">
+		<result property="fileVO.no" column="qna_no"/>
+		<result property="fileVO.filepath" column="qnafile_filepath"/>
+	</resultMap>
+	<insert id="qnaWriteFileUpload" parameterType="boardVO">
+		insert into qnafile(qna_no, qnafile_filepath)values(#{fileVO.no},#{fileVO.filepath})
+	</insert>
+	
+	<resultMap type="fileVO" id="qnaFileNameRM">
+		<result property="no" column="qna_no"/>
+		<result property="filepath" column="qnafile_filepath"/>
+	</resultMap>
+	<select id="getqnaFilePath" resultType="fileVO" parameterType="String" resultMap="qnaFileNameRM">
+		select qnafile_filepath from qnafile where qna_no=#{value}
+	</select>
+	<select id="qna_getNameById" resultType="memberVO" parameterType="boardVO">
+		select m.member_name as memberName from qna f, member m where m.id=f.id and f.id=#{id} and f.qna_no=#{no}
+	</select>
+	<select id="getqnaBoardDetail" resultMap="QnABoardListRM" resultType="boardVO">
+		select qna_no, id, qna_title, qna_content, to_char(qna_timeposted,'YYYY.MM.DD HH:mm:ss') as qna_timeposted,
+		qna_hits from qna where qna_no=#{value}
 	</select>
 </mapper>
  

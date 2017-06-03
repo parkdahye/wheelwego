@@ -16,12 +16,12 @@
 			location.href="${pageContext.request.contextPath}/business_list.do";
 		})//수정버튼
 		$("#modifyBtn").click(function()	{
-			location.href="${pageContext.request.contextPath}/business_update_form.do?no="+${requestScope.detail_freeboard.no};
+			location.href="${pageContext.request.contextPath}/business_update_form.do?no="+${requestScope.detail_business.no};
 		})// 삭제버튼
 		$("#deleteBtn").click(function()	{
 			var info=confirm("게시물을 삭제합니까?");
 			if(info){				
-			location.href="${pageContext.request.contextPath}/businessDelete.do?no="+${requestScope.detail_freeboard.no};
+			location.href="${pageContext.request.contextPath}/businessDelete.do?no="+${requestScope.detail_business.no};
 			}else{
 			}
 		})// 삭제버튼 끝
@@ -36,7 +36,7 @@
 			<div class="col-md-3">
 			<div class="form-group"> 
 			<label for="name">글번호</label> 
-			<input type="text" class="form-control" value="${requestScope.detail_freeboard.no}" readonly> 
+			<input type="text" class="form-control" value="${requestScope.detail_business.no}" readonly> 
 			</div> 
 			</div> 
 			
@@ -52,22 +52,26 @@
 		<div class="col-md-8"> 
 		<div class="form-group"> 
 		<label for="title">글제목</label> 
-		<input type="text" class="form-control" value="${requestScope.detail_freeboard.title }" readonly> 
+		<input type="text" class="form-control" value="${requestScope.detail_business.title }" readonly> 
 		</div> </div>
 		 
 		 <%-- 글 내용--%>
 		<div class="col-md-8"> 
 		<div class="form-group"> 
 		<label for="content">글내용</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<font size=2 >${requestScope.detail_freeboard.timePosted} &nbsp;&nbsp; 
-		조회수 : ${requestScope.detail_freeboard.hits}</font>
-		<textarea class="form-control" rows="10" readonly>${requestScope.detail_freeboard.content }</textarea> 
-		</div></div><br><br><br><br><br>
+		<font size=2 >${requestScope.detail_business.timePosted} &nbsp;&nbsp; 
+		조회수 : ${requestScope.detail_business.hits}</font>
+		<textarea class="form-control" rows="10" readonly>${requestScope.detail_business.content }</textarea> 
+		</div></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		
-		<%-- 사진 들어갈 공간 임시로 올림 --%>
+			<%-- 사진 들어갈 공간 임시로 올림 --%>
 		<div class="form-group,col-md-8"> 
-		<img src="${pageContext.request.contextPath }/resources/img/truck.jpg" width="300px" height="200px">
-		</div> 
+		<c:forEach items="${requestScope.fileNameList }" var="fileNameList">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="300px" height="200px">
+		</c:forEach>
+		</div>
+		
 		<%-- 목록, 수정 , 삭제 버튼  --%>
 		<div class="center-block" style='width:400px'> 
 		<button type="button" class="btn btn-info"  id="boardListBtn">목록</button>

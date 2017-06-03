@@ -660,7 +660,8 @@ input[name="grade"]{
 }
 
 .star_point{
-  font-size:30pt;
+  width:30%;
+  font-size:10pt;
   color:gold;
   cursor:pointer;
 }

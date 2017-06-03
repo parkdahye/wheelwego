@@ -3,7 +3,6 @@ package org.asechs.wheelwego.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.vo.ListVO;

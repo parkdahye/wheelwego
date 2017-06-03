@@ -163,7 +163,8 @@ input[name="grade"]:checked + .star_point~label{
    </tr>
 </table>
 </c:if>
-    </form>
+</form>
+
     <form action="${pageContext.request.contextPath}/getReviewListByTruckNumber.do">
     <!-- review 결과 table -->
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW LIST</span></h5>      

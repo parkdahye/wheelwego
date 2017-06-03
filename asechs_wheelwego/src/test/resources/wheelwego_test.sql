@@ -230,6 +230,7 @@ select m.member_name as memberName from freeboard f, member m where m.id=f.id an
 		)f, member m where f.id=m.id and rnum between 1 and 30
 		order by freeboard_no desc
 
+
 select * from foodtruck;
 
 commit
