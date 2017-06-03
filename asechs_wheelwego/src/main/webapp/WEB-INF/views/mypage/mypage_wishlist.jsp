@@ -7,6 +7,10 @@ $(document).ready(function(){
 	$("input#clearBtn").click(function(){
 		  var foodtruckNumber = $(this).attr('name');
 		  var id = "${sessionScope.memberVO.id}";
+		  
+		  if(confirm("즐겨찾기를 해제하시겠습니까?") == false) {
+                return false;
+		  }		  
 		  	
 	      $.ajax({
 	          type:"POST",
@@ -24,52 +28,35 @@ $(document).ready(function(){
 </script>
     
 <section id="portfolio">
-   <div class="container">
-      <div class="row" style="position: absolute;">
+  <div class="col-lg-4 col-sm-6 portfolio-item" >
+     <!--  <div class="flip-container"
+               ontouchstart="this.classList.toggle('hover');" style="margin: 0 auto;"> -->
+        		<div class="col-lg col-sm-6">	
       		<c:forEach items="${requestScope.wishlist}" var="wishList">
-        		<div class="col-lg-4 col-sm-6">
-			 		<img src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}">
+      		<div style="position:relative;">
+			 <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:absoulte;  z-index: 2; ">
+			 	<div class='overlay'><div class='overlaytext'>
+								<h4>${wishList.foodtruckName}</h4>
+								판매자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${wishList.sellerId}<br>
+								푸드트럭소개&nbsp;&nbsp;&nbsp;${wishList.introduction}<br>
+								</div>
+								</div>
+			 	<input  type="image" id="clearBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/foodtruck/hearton.png" 
+			 	style=" position:absolute; width: 45px; top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" >
+			 </div>	
 			 	<%-- 	<input type='hidden' name='id' value='${sessionScope.memberVO.id}'/>  --%> 
-			 		<input type="button" name = "${wishList.foodtruckNumber}" value="좋아요" id="clearBtn" >
-        		</div>  		
        		</c:forEach>
+        		</div>  		
       </div>
-      <div style="position: absolute; margin-left: 10px; margin-top: 10px;">
+<!--       <div style="position: absolute; margin-left: 10px; margin-top: 10px;">
       		
-      </div>
+      </div> -->
       <!-- row -->
       <hr>
-   </div>
+  
    <!-- container -->
-</section>    
+</section>   
 
-
-
-	
-
-    
-<%-- <input id="search" type="image" src="${pageContext.request.contextPath }/resources/img/foodtruck/hearton.png" style="width: 45px; opacity: 0.8;" onclick="test();"> --%>
-<%-- <div>
-	<c:forEach items="${requestScope.wishlist }" var="wishList">
-	${wishList.foodtruckNumber}
-    <div style="position: absolute;">
-        <a href="${pageContext.request.contextPath }/afterLogin_foodtruck/foodtruck_detail.do">
-                
-		<img src="${pageContext.request.contextPath }/resources/upload/${truckVO.fileVO.filepath}" >
-		</a>
-    </div>
-    <div style="position: absolute; margin-left: 10px; margin-top: 10px;">
-    	<form method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/deleteWishList.do" id="delForm">
-	        <div style="position: relative; top: 5px; left: 5px;">
-	        <input  TYPE="IMAGE" src="${pageContext.request.contextPath }/resources/img/foodtruck/hearton.png" style="width: 45px; opacity: 0.8;" name="Submit" value="Submit" >
-	        </div>
-	        <input type='hidden' name='foodTruckNumber' value='${wishList.foodtruckNumber}'/>
-	        <input type='hidden' name='id' value='${sessionScope.memberVO.id}'/>    	
-    	</form>
-    </div>
-	</c:forEach>
-</div> --%>
- 
 <%--    <c:forEach items="${sessionScope.wishlistVO.customer_id.wishlist}" var="wishlist">
    </c:forEach>
  --%>
@@ -93,6 +80,28 @@ $(document).ready(function(){
  	</tbody>
  </table>
   --%>
+     
+<%-- <input id="search" type="image" src="${pageContext.request.contextPath }/resources/img/foodtruck/hearton.png" style="width: 45px; opacity: 0.8;" onclick="test();"> --%>
+<%-- <div>
+	<c:forEach items="${requestScope.wishlist }" var="wishList">
+	${wishList.foodtruckNumber}
+    <div style="position: absolute;">
+        <a href="${pageContext.request.contextPath }/afterLogin_foodtruck/foodtruck_detail.do">
+                
+		<img src="${pageContext.request.contextPath }/resources/upload/${truckVO.fileVO.filepath}" >
+		</a>
+    </div>
+    <div style="position: absolute; margin-left: 10px; margin-top: 10px;">
+    	<form method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/deleteWishList.do" id="delForm">
+	        <div style="position: relative; top: 5px; left: 5px;">
+	        <input  TYPE="IMAGE" src="${pageContext.request.contextPath }/resources/img/foodtruck/hearton.png" style="width: 45px; opacity: 0.8;" name="Submit" value="Submit" >
+	        </div>
+	        <input type='hidden' name='foodTruckNumber' value='${wishList.foodtruckNumber}'/>
+	        <input type='hidden' name='id' value='${sessionScope.memberVO.id}'/>    	
+    	</form>
+    </div>
+	</c:forEach>
+</div> --%>
  
  
  

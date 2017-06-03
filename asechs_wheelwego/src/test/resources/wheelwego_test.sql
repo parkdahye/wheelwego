@@ -57,7 +57,7 @@ select * from foodtruck where foodtruck_number in (select w.foodtruck_number
 from customer c, wishlist w
 where c.customer_id = w.customer_id and c.customer_id = 'customer01' );
 
-select * from wishlist;
+select * from wishlist where customer_id = 'customer01';
 insert into wishlist values('customer01','80나0001');
 insert into wishlist values('customer01','80나0002');
 insert into wishlist values('customer01','80나0003');
