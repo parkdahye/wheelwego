@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
@@ -38,6 +39,17 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	@Override
 	public List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo) {
 		return sqlSessionTemplate.selectList("foodtruck.searchFoodTruckByGPS", gpsInfo);
+	}
+
+	/* foodtruck 정보 상세보기 */
+	@Override
+	public TruckVO foodtruckDetail(String foodtruckNo){
+		return sqlSessionTemplate.selectOne("foodtruck.foodtruckDetail",foodtruckNo);
+	}
+	/* foodtruck 상세보기에 들어갈 menu list*/
+	@Override
+	public List<FoodVO> foodListDetail(String foodtruckNo){
+		return sqlSessionTemplate.selectList("foodtruck.foodListDetail", foodtruckNo);
 	}
 	@Override
 	public void registerReview(ReviewVO reviewVO) {

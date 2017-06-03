@@ -1,5 +1,45 @@
+
+----------dbTEST---------------------
+select * from member
+select * from seller
+select * from menu
+select * from FOODTRUCK where foodtruck_name='꼬부랑아이스크림'
+select * from FOODTRUCKFILE where foodtruck_number='80나0004'
+select * from FOODTRUCKFILE
+select * from customer
+select * from FOODTRUCK
+select * from REVIEW
+select * from FOODTRUCKFILE where foodtruck_number='80나0036'
+select * from FOODTRUCKFILE
+select * from menu
+select * from menu where foodtruck_number='80나0001'
+insert into MEMBER values('customer01','1234','정현지','위례','경기도 하남시 학암동','01022552716','customer','12345');
+select t.*, f.foodtruck_filepath, m.menu_filename
+		from(select * from foodtruck)t, foodtruckfile f, menu m
+		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_number=m.foodtruck_number and t.foodtruck_number='80나0001'
+select * from menu where foodtruck_number='80나0001'
+		--foodtruck detail test
+select t.*, f.foodtruck_filepath, m.menu_filename
+		from(select * from foodtruck)t, foodtruckfile f, menu m
+		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_number=m.foodtruck_number and t.foodtruck_number='80나0001'
+select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number
+-- pagingbean 적용 푸드트럭 리스트
+select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' || '트럭' || '%'
+--
+	select f.foodtruck_filepath, t.foodtruck_name FROM foodtruck t, foodtruckfile f
+	where t.foodtruck_number=f.foodtruck_number
+-- 검색 결과 푸드트럭 리스트
+SELECT f.foodtruck_filepath, t.foodtruck_name FROM(
+		SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_filename1, foodtruck_name from foodtruck)
+		f where rnum between #{startRowNumber} and #{endRowNumber}
+
 ----------dbTEST---------------------
 insert into member values ('seller01', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 create table member(
    id varchar2(100) primary key,
    password varchar2(100) not null,
@@ -189,6 +229,7 @@ select m.member_name as memberName from freeboard f, member m where m.id=f.id an
 		to_char(freeboard_timePosted,'YYYY.MM.DD') as freeboard_timePosted , freeboard_hits from freeboard
 		)f, member m where f.id=m.id and rnum between 1 and 30
 		order by freeboard_no desc
+
 
 select * from foodtruck;
 

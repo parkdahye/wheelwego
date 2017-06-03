@@ -11,7 +11,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>글목록</title>
 <script type="text/javascript">
-	
+$(document).ready(function(){
+	$("#writeBtn").click(function(){
+		location.href="${pageContext.request.contextPath}/afterLogin_board/business_write_form.do";
+	})//click
+})//ready
 </script>
 <body>
 	<table class="table table-hover">
@@ -82,4 +86,7 @@
 	▶<!-- <img src="img/right_arrow_btn.gif"> --></a>
 	</c:if>
 	</p>
+	<table align="right"><tr>
+	<td><button type="button" class="btn btn-info" id="writeBtn">글쓰기</button></td></tr>
+	</table>
 </body>
