@@ -1,10 +1,15 @@
 package org.asechs.wheelwego;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
+import org.asechs.wheelwego.model.MypageService;
+import org.asechs.wheelwego.model.vo.TruckVO;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -39,6 +44,9 @@ public class TestJUnit {
 	private FoodTruckService foodService;
 	@Resource
 	private BoardDAO boardDAO;
+	@Resource
+	private MypageService mypageService;
+	@Test
 	public void test(){
 /*		String id = "customer01";
 		String password = "1234";
@@ -54,15 +62,17 @@ public class TestJUnit {
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 		
-		/*String id = "seller07";
+		/*String id = "customer01";
 		String password = "1234";
 		String memberName = "김래발";
 		String postCode = "13437";
 		String address = "경기도 성남시 분당구";
 		String addressDetail = "삼평동";
 		String phoneNumber = "01000000000";
-		String memberType = "seller";
-		/*service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
+		String memberType = "customer";
+		String businessNumber = null;
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
+		/*
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 >>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
@@ -77,6 +87,8 @@ public class TestJUnit {
 		
 		System.out.println(foodService.searchFoodTruckList("끼니"));*/
 		
+		List<TruckVO> truckVO = mypageService.myWishList("customer01");
+		System.out.println(truckVO);
 	}
 }
 

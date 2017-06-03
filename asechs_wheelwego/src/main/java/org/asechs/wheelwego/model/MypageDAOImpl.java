@@ -16,7 +16,7 @@ public class MypageDAOImpl implements MypageDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	@Override
-	public List<WishlistVO> myWishList(String id) {
+	public List<TruckVO> myWishList(String id) {
 		return sqlSessionTemplate.selectList("mypage.myWishList", id);
 	}
 	@Override

@@ -56,10 +56,17 @@ select * from foodtruck where foodtruck_number in (select w.foodtruck_number
 from customer c, wishlist w
 where c.customer_id = w.customer_id and c.customer_id = 'customer01' );
 
+select * from wishlist;
+insert into wishlist values('customer01','80나0001');
+insert into wishlist values('customer01','80나0002');
+insert into wishlist values('customer01','80나0003');
 insert into wishlist values('customer01','80나0015');
-insert into wishlist values('customer01','80나0014');
-insert into wishlist values('customer03','80나0013');
-insert into wishlist values('customer01','80나0015');
+
+select * from foodtruck;
+
+delete from wishlist;
+
+select * from seller;
 
 update member set password='1234' where id='java01' and member_name='김래발' and phonenumber='01000000000';
 
@@ -153,3 +160,68 @@ select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
 from freeboard f, freeboardfile fi 
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
 
+select * from foodtruck;
+
+commit
+
+insert into foodtruck ()
+
+delete from seller;
+
+delete from foodtruck;
+delete from foodtruckfile;
+
+insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction) values('80나0001', 'seller01', '봉군타코', '도시위에 멕시칸! 바로 봉군타코에서 느낄 수 있습니다.');
+insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction) values('80나0002', 'seller02', '깡스푸드', '도시위에 멕시칸! 바로 봉군타코에서 느낄 수 있습니다.');
+insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction) values('80나0003', 'seller03', '래발푸드', '도시위에 멕시칸! 바로 봉군타코에서 느낄 수 있습니다.');
+
+insert into foodtruckfile(foodtruck_number,foodtruck_filepath) values ('80나0001', 'Friend_트럭1.jpg');
+insert into foodtruckfile(foodtruck_number,foodtruck_filepath) values ('80나0002', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile(foodtruck_number,foodtruck_filepath) values ('80나0003', '깡스푸드_트럭1.JPG');
+
+
+
+select foodtruck_number from wishlist where customer_id = 'customer01';
+
+select t.*, f.FOODTRUCK_FILEPATH 
+from foodtruck t, foodtruckfile f
+where t.foodtruck_number = f.foodtruck_number;
+
+	select * from foodtruck where foodtruck_number in (select
+	w.foodtruck_number
+	from customer c, wishlist w
+	where c.customer_id = w.customer_id and c.customer_id = 'cusomter01');
+	
+	select * from foodtruckfile;
+	
+select t.*, f.foodtruck_filepath
+from(select * from foodtruck where foodtruck_number=#{value})t, foodtruckfile f
+where t.foodtruck_number=f.foodtruck_number	
+
+		
+		
+select * from foodtruck where foodtruck_number in 
+
+select foodtruck_number from wishlist where customer_id=  'customer01';
+		
+select menu_id,foodtruck_number,menu_name,menu_price,menu_filename from menu where foodtruck_number='80나0001' order by menu_id asc
+
+select t.*, f.foodtruck_filepath from foodtruck t, foodtruckfile f 
+where f.foodtruck_number in 
+(select foodtruck_number from wishlist where customer_id = 'customer01')
+and t.foodtruck_number = f.foodtruck_number;
+
+select * from foodtruck
+where foodtruck_number in (
+select w.foodtruck_number from customer c, wishlist w
+where c.customer_id = 'cusomter01' and c.customer_id = w.customer_id);
+
+SELECT A.MBR_ID, B.MBR_ID
+FROM MEMBER A
+INNER JOIN MEMBER B ON A.MBR_ID = B.MBR_ID
+
+
+select * from wishlist where customer_id = 'customer01'
+
+select * from foodtruckfile;
+select * from wishlist;

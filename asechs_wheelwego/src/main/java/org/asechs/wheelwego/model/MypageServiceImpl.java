@@ -20,7 +20,7 @@ public class MypageServiceImpl implements MypageService {
 	private String uploadPath="C:\\Users\\Administrator\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
 	//private String uploadPath="C:\\Users\\User\\AppData\\Roaming\\SPB_16.6\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
 	@Override
-	public List<WishlistVO> myWishList(String id) {
+	public List<TruckVO> myWishList(String id) {
 		System.out.println("서비스 실행");
 		return mypageDAO.myWishList(id);
 			

@@ -7,7 +7,7 @@ import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 
 public interface MypageService {
-	public List<WishlistVO> myWishList(String id);
+	public List<TruckVO> myWishList(String id);
 	
 	public void deleteWishList(WishlistVO wishlistVO);
 	
