@@ -652,3 +652,18 @@ body {
  -o-border-radius :75px;
  margin: 0 auto;
  }
+
+ /*별점*/
+
+input[name="grade"]{
+  display:none;
+}
+
+.star_point{
+  font-size:30pt;
+  color:gold;
+  cursor:pointer;
+}
+input[name="grade"]:checked + .star_point~label{
+    color:lightgray;
+}

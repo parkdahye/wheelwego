@@ -2,9 +2,10 @@ package org.asechs.wheelwego.model;
 
 import java.util.List;
 
-import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.vo.WishlistVO;
 
 public interface MypageService {
 	public List<WishlistVO> myWishList(String id);
@@ -28,4 +29,12 @@ public interface MypageService {
 	void updateMenu(TruckVO truckVO);
 
 	void deleteMyTruck(String foodtruckNumber);
+	
+	List<ReviewVO> showMyReviewList(String customerId); //리뷰 리스트보기
+	
+	void updateMyReview(ReviewVO reviewVO); //리뷰수정하기
+	
+	void deleteMyReview(String reviewNo); //리뷰 삭제하기
+
+	public  ReviewVO findReviewInfoByReviewNo(String reviewNo);
 }
