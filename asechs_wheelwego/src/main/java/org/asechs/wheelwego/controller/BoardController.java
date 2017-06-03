@@ -85,20 +85,26 @@ public class BoardController {
 	@RequestMapping("freeboard_update_form.do")
 	public String freeboard_update_form(String no, Model model) {
 		//호겸이가 한거 보존
-		//BoardVO bvo = boardService.getFreeBoardDetail(no);
-		//model.addAttribute("detail_freeboard", bvo);
+		BoardVO bvo = boardService.getFreeBoardDetail(no);
+		MemberVO name = boardService.getNameById(bvo);
+		List<FileVO> fileNameList=boardService.getFreeBoardFilePath(no);
+		model.addAttribute("detail_freeboard", bvo);
+		model.addAttribute("fileNameList",fileNameList);
+		model.addAttribute("name", name);
 		return "board/freeboard_update_form.tiles";
 	}
 
 	// 호겸 작성. 게시물 수정 해버리기
 	@RequestMapping("updateBoard.do")
-	public String updateBoard(BoardVO vo) {
-		System.out.println(vo.getNo());
-		System.out.println(vo);
+	public String updateBoard(BoardVO vo,HttpServletRequest request) {
+		//for(int i=0; i<vo.getFile().size();i++){
+		System.out.println(request.getParameter("file"));
+			System.out.println("vo            "+vo);
+		//}
 		boardService.updateBoard(vo);
 		return "redirect:board/freeboard_detail_content.do?no=" + vo.getNo();
 	}
-
+	
 	// 창업게시판 상세보기
 	@RequestMapping("board/business_detail_content.do")
 	public String business_detail_content(String no, Model model) {
@@ -131,7 +137,7 @@ public class BoardController {
 	@RequestMapping("freeboard_write.do")
 	public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
 		boardService.freeboardWrite(bvo, request);
-		return "redirect:freeboard_list.do";
+		return "redirect:board/freeboard_detail_content.do?no="+bvo.getNo();
 	}
 
 	// 호겸 작성. 창업게시물 수정 해버리기

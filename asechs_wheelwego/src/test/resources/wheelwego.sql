@@ -23,7 +23,7 @@ create sequence information_seq;
 create sequence informationcomment_seq;
 create sequence qna_seq;
 create sequence qnacomment_seq;
-create sequence freeboard_seq start with 15;
+create sequence freeboard_seq start with 51;
 create sequence freeboardcomment_seq;
 -------------------------------------------------------------------------------
 
