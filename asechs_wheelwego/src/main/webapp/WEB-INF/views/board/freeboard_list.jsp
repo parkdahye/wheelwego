@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#writeBtn").click(function(){
-			location.href="${pageContext.request.contextPath}/board/freeboard_write_form.do";
+			location.href="${pageContext.request.contextPath}/afterLogin_board/freeboard_write_form.do";
 		})//click
 	})//ready
 </script>
@@ -30,7 +30,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.freeBoardList.list }" var="freeBoardList">
+			<c:forEach items="${requestScope.freeBoardList.boardList }" var="freeBoardList">
 				<tr>
 					<td>${freeBoardList.no }</td>
 					<td><a href="${pageContext.request.contextPath}/board/freeboard_detail_content.do?no=${freeBoardList.no}">${freeBoardList.title }</a></td>

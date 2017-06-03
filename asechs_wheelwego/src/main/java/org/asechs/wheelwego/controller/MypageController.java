@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.springframework.stereotype.Controller;
@@ -125,5 +126,27 @@ public class MypageController {
 	public String deleteMyTruck(String foodtruckNumber){
 		mypageService.deleteMyTruck(foodtruckNumber);
 		return "redirect:/afterLogin_mypage/mypage.do";
+	}
+	
+	@RequestMapping("/afterLogin_mypage/showMyReviewList.do")
+	public ModelAndView showMyReiviewList(String customerId, HttpServletRequest request){
+		List<ReviewVO> reviewList=mypageService.showMyReviewList(customerId);
+		return new ModelAndView("mypage/mypage_review.tiles","reviewList",reviewList);
+	}
+	@RequestMapping("afterLogin_mypage/mypage_review_update.do")
+	public ModelAndView ReviewUpdateForm(String reviewNo){
+		ReviewVO reviewVO=mypageService.findReviewInfoByReviewNo(reviewNo);
+		return new ModelAndView("mypage/mypage_review_update.tiles","reviewVO",reviewVO);
+	}
+	@RequestMapping("afterLogin_mypage/deleteMyReview.do")
+	@ResponseBody
+	public String deleteMyReview(String reviewNo){
+		mypageService.deleteMyReview(reviewNo);
+		return "deleteOk";
+	}
+	@RequestMapping("afterLogin_mypage/updateMyReview.do")
+	public String updateMyReview(ReviewVO reviewVO){
+		mypageService.updateMyReview(reviewVO);
+		return"redirect:/afterLogin_mypage/showMyReviewList.do?customerId="+reviewVO.getCustomerId();
 	}
 }

@@ -11,6 +11,7 @@ import java.util.List;
 public class ListVO {
 	private List<BoardVO> boardList;
 	private List<TruckVO> truckList;
+	private List<ReviewVO> reviewList;
 	private PagingBean pagingBean;
 
 	public ListVO() {
@@ -23,6 +24,7 @@ public class ListVO {
 		this.boardList = boardList;
 		this.pagingBean = pagingBean;
 	}
+
 
 /*	public ListVO(List<TruckVO> truckList, PagingBean pagingBean) {
 		super();
@@ -53,10 +55,23 @@ public class ListVO {
 	public void setPagingBean(PagingBean pagingBean) {
 		this.pagingBean = pagingBean;
 	}
+	
+
+
+
+	public List<ReviewVO> getReviewList() {
+		return reviewList;
+	}
+
+	public void setReviewList(List<ReviewVO> reviewList) {
+		this.reviewList = reviewList;
+	}
 
 	@Override
 	public String toString() {
-		return "ListVO [boardList=" + boardList + ", truckList=" + truckList + ", pagingBean=" + pagingBean + "]";
+		return "ListVO [boardList=" + boardList + ", truckList=" + truckList + ", reviewList=" + reviewList
+				+ ", pagingBean=" + pagingBean + "]";
 	}
+
 
 }

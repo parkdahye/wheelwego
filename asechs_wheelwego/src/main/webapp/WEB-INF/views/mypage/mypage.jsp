@@ -38,6 +38,6 @@ function checkDelete(){
 	</c:when>
 	<c:otherwise>
 		<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do">단골트럭</a><br>
-		<a href="">My Review List</a>
+		<a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}">My Review List</a>
 	</c:otherwise>
 </c:choose>

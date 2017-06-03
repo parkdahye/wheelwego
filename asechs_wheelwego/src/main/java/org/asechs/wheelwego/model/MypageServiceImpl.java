@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.springframework.stereotype.Service;
@@ -133,5 +134,21 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void deleteMyTruck(String foodtruckNumber) {
 		mypageDAO.deleteMyTruck(foodtruckNumber);
+	}
+	@Override
+	public List<ReviewVO> showMyReviewList(String customerId) {
+		return mypageDAO.showMyReviewList(customerId);
+	}
+	@Override
+	public void updateMyReview(ReviewVO reviewVO) {
+		mypageDAO.updateMyReview(reviewVO);
+	}
+	@Override
+	public void deleteMyReview(String reviewNo) {
+		mypageDAO.deleteMyReview(reviewNo);
+	}
+	@Override
+	public ReviewVO findReviewInfoByReviewNo(String reviewNo) {
+		return mypageDAO.findReviewInfoByReviewNo(reviewNo);
 	}
 }

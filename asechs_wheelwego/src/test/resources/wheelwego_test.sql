@@ -15,6 +15,7 @@ create table member(
 		)f where rnum between 1 and 5
 
 insert into member values ('java01', 'java01', '김래발', '판교','코스타', '010-1111-1111', '일반회원','1234');
+insert into member values ('seller02', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
 update member set member_type='0' where id='java01';
 delete from member;
 select * from foodtruck;
@@ -159,6 +160,35 @@ select f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content,
        to_char(f.freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted, f.freeboard_hits, fi.freeboard_no, fi.freeboard_filepath
 from freeboard f, freeboardfile fi 
 where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
+from freeboard f, freeboardfile fi 
+where f.freeboard_no=fi.freeboard_no and f.freeboard_no='112'
+
+    
+insert into review values (review_seq.nextval, '2523','customer1','맛있어요',sysdate, 4);
+select review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD'), grade from review
+
+
+select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		freeboard_hits from freeboard where freeboard_no='118'
+		
+select freeboard_no, id, freeboard_title, freeboard_content, to_char(freeboard_timeposted,'YYYY.MM.DD HH:mm:ss') as freeboard_timeposted,
+		freeboard_hits from freeboard where freeboard_no='118'
+
+select m.member_name as memberName from freeboard f, member m where m.id=f.id and f.id='java101' and f.freeboard_no='118'
+
+
+	SELECT f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content, f.freeboard_timePosted, f.freeboard_hits, m.id FROM(
+		SELECT row_number() over(order by freeboard_no desc) as rnum, freeboard_no, id, freeboard_title, freeboard_content,
+		to_char(freeboard_timePosted,'YYYY.MM.DD') as freeboard_timePosted , freeboard_hits from freeboard
+		)f, member m where f.id=m.id and rnum between startRowNumber and endRowNumber
+		order by freeboard_no desc
+
+
+	SELECT f.freeboard_no, f.id, f.freeboard_title, f.freeboard_content, f.freeboard_timePosted, f.freeboard_hits, m.id FROM(
+		SELECT row_number() over(order by freeboard_no desc) as rnum, freeboard_no, id, freeboard_title, freeboard_content,
+		to_char(freeboard_timePosted,'YYYY.MM.DD') as freeboard_timePosted , freeboard_hits from freeboard
+		)f, member m where f.id=m.id and rnum between 1 and 30
+		order by freeboard_no desc
 
 select * from foodtruck;
 
@@ -225,3 +255,16 @@ select * from wishlist where customer_id = 'customer01'
 
 select * from foodtruckfile;
 select * from wishlist;
+
+insert into review(review_no,foodtruck_number,customer_id,review_content,review_timeposted,grade) 
+values(review_seq.nextval,'1234','customer2','굿~~',sysdate,4);
+insert into review(review_no,foodtruck_number,customer_id,review_content,review_timeposted,grade) 
+values(review_seq.nextval,'1234','customer1','맛있음~~',sysdate,4);
+
+SELECT * FROM FOODTRUCK
+select *
+from
+(select row_number() over(order by review_no desc) as rnum ,review_no,foodtruck_number,customer_id,
+review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
+where foodtruck_number='1234')
+where rnum between 1 and 5;
