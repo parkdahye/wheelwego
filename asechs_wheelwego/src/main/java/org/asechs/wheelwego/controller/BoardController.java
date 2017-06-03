@@ -97,10 +97,9 @@ public class BoardController {
 	// 호겸 작성. 게시물 수정 해버리기
 	@RequestMapping("updateBoard.do")
 	public String updateBoard(BoardVO vo,HttpServletRequest request) {
-		//for(int i=0; i<vo.getFile().size();i++){
-		System.out.println(request.getParameter("file"));
-			System.out.println("vo            "+vo);
-		//}
+		for(int i=0; i<vo.getFile().size();i++){
+		System.out.println(vo.getFile().get(i).getOriginalFilename());
+		}
 		boardService.updateBoard(vo);
 		return "redirect:board/freeboard_detail_content.do?no=" + vo.getNo();
 	}
@@ -137,6 +136,9 @@ public class BoardController {
 	@RequestMapping("freeboard_write.do")
 	public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
 		boardService.freeboardWrite(bvo, request);
+		for(int i=0; i<bvo.getFile().size();i++){
+		System.out.println(bvo.getFile().get(i).getOriginalFilename());
+		}
 		return "redirect:board/freeboard_detail_content.do?no="+bvo.getNo();
 	}
 
