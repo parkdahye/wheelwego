@@ -19,7 +19,7 @@
     			<label for="foodtruckName">이름</label>
     		</aside>
     		<div>
-    				<input type="text" name="foodtruckName" placeholder="푸드트럭 이름을 입력해주세요" class="form-control" >
+    				<input type="text" name="foodtruckName" placeholder="푸드트럭 이름을 입력해주세요" class="form-control" required="required">
     		</div>
     	</div>
     	<br>
@@ -28,7 +28,7 @@
     			<label for="foodtruck">푸드트럭 넘버</label>
     		</aside>
     		<div>
-    				<input type="text" name="foodtruckNumber" placeholder="푸드트럭 넘버를 입력해주세요" class="form-control" >
+    				<input type="text" name="foodtruckNumber" placeholder="푸드트럭 넘버를 입력해주세요" class="form-control" required="required">
     		</div>
     	</div>
     	<br>
@@ -37,7 +37,7 @@
     			<label for="foodtruck">푸드트럭 소개</label>
     		</aside>
     		<div>
-    				<textarea rows="4" cols="50"  name="introduction" placeholder="푸드트럭을 소개해주세요!" style="resize: none;" class="form-control" ></textarea>
+    				<textarea rows="4" cols="50"  name="introduction" placeholder="푸드트럭을 소개해주세요!" style="resize: none;" class="form-control" required="required"></textarea>
     		</div>
     	</div>
 	<br><br>

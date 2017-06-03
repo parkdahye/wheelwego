@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class MypageServiceImpl implements MypageService {
 	private String uploadPath="C:\\Users\\Administrator\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
 	//private String uploadPath="C:\\Users\\User\\AppData\\Roaming\\SPB_16.6\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
 	@Override
-	public List<WishlistVO> myWishList(String id) {
+	public List<TruckVO> myWishList(String id) {
 		System.out.println("서비스 실행");
 		return mypageDAO.myWishList(id);
 			
@@ -37,24 +38,19 @@ public class MypageServiceImpl implements MypageService {
 	 */
 	@Override
 	public void registerFoodtruck(TruckVO tvo) {
-		System.out.println("register+++"+tvo);
-		//uploadPath="C:\\java-kosta\\final_project\\asechs_wheelwego2\\src\\main\\webapp\\resources\\upload\\";
-		//uploadPath="C:\\Users\\Administrator\\Documents\\카카오톡 받은 파일\\asechs_wheelwego2\\src\\main\\webapp\\resources\\upload\\";
 		List<MultipartFile> truckfileList=tvo.getFoodtruckFile(); 
 		for(int i=0; i<truckfileList.size();i++){
 			String fileName=truckfileList.get(i).getOriginalFilename();
 			FileVO fileVO=null;
 			if(fileName.equals("")==false){ // 파일이 있다면
 				fileVO=new FileVO(tvo.getFoodtruckNumber(),fileName); //파일객체를 만든다.
-			}else{
-				fileVO=new FileVO(tvo.getFoodtruckNumber(),"defaultTruck.jpg");
+			}else{ // 파일이 없으면
+				fileVO=new FileVO(tvo.getFoodtruckNumber(),"defaultTruck.jpg"); //default로 설정
 			}
-				System.out.println("파일 객체"+fileVO);
 				try {
 					mypageDAO.registerFoodtruck(tvo);  //트럭정보 등록
 					mypageDAO.saveFilePath(fileVO); //파일경로 등록
 					truckfileList.get(i).transferTo(new File(uploadPath+fileName)); //서버에 전송하여 저장
-					System.out.println("업로드 완료"+fileName);
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
@@ -71,18 +67,15 @@ public class MypageServiceImpl implements MypageService {
 	 */
 	@Override
 	public void updateMyfoodtruck(TruckVO truckVO) {
-		//uploadPath="C:\\Users\\Administrator\\Documents\\카카오톡 받은 파일\\asechs_wheelwego2\\src\\main\\webapp\\resources\\upload\\";
 		List<MultipartFile> truckfileList=truckVO.getFoodtruckFile(); 
 		for(int i=0; i<truckfileList.size();i++){
 			String fileName=truckfileList.get(i).getOriginalFilename();
 			if(fileName.equals("")==false){ // 파일이 있다면
 				FileVO fileVO=new FileVO(truckVO.getFoodtruckNumber(),fileName); //파일객체를 만든다.
-				System.out.println("파일 객체"+fileVO);
 				try {
 					mypageDAO.updateMyfoodtruck(truckVO);  //트럭정보 등록
 					mypageDAO.updateFilePath(fileVO); //파일경로 등록
 					truckfileList.get(i).transferTo(new File(uploadPath+fileName)); //서버에 전송하여 저장
-					System.out.println("업로드 완료"+fileName);
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
@@ -100,8 +93,6 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.showMenuList(truckNumber);
 	}
 
-	//메뉴 삭제
-	
 	//메뉴 등록
 	@Override
 	public void registerMenuList(List<FoodVO> foodList, String truckNumber) {
@@ -125,15 +116,13 @@ public class MypageServiceImpl implements MypageService {
 		for(int i=0;i<foodList.size();i++){
 			try{
 			String fileName=foodList.get(i).getMenuFile().getOriginalFilename();
-			if(fileName.equals("")){
-				System.out.println("service쪽 : "+foodList.get(i));
-				mypageDAO.updateMenu(foodList.get(i)); //메뉴를 수정
+			if(fileName.equals("")){ //파일이 없으면
+				mypageDAO.updateMenu(foodList.get(i)); //메뉴정보만 수정
 				
-			}else{
+			}else{ //파일이 있으면
 				foodList.get(i).setFileVO(new FileVO(foodList.get(i).getMenuId(),fileName));
-				System.out.println("service쪽 : "+foodList.get(i));
-				mypageDAO.updateMenu(foodList.get(i)); //메뉴를 수정
-				mypageDAO.updateMenuFilepath(foodList.get(i).getFileVO());
+				mypageDAO.updateMenu(foodList.get(i)); //메뉴정보 수정
+				mypageDAO.updateMenuFilepath(foodList.get(i).getFileVO()); //파일 경로 수정
 				foodList.get(i).getMenuFile().transferTo(new File(uploadPath+fileName));
 			}
 			}catch (Exception e) {
@@ -145,5 +134,21 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void deleteMyTruck(String foodtruckNumber) {
 		mypageDAO.deleteMyTruck(foodtruckNumber);
+	}
+	@Override
+	public List<ReviewVO> showMyReviewList(String customerId) {
+		return mypageDAO.showMyReviewList(customerId);
+	}
+	@Override
+	public void updateMyReview(ReviewVO reviewVO) {
+		mypageDAO.updateMyReview(reviewVO);
+	}
+	@Override
+	public void deleteMyReview(String reviewNo) {
+		mypageDAO.deleteMyReview(reviewNo);
+	}
+	@Override
+	public ReviewVO findReviewInfoByReviewNo(String reviewNo) {
+		return mypageDAO.findReviewInfoByReviewNo(reviewNo);
 	}
 }

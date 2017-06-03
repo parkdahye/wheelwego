@@ -27,44 +27,29 @@ var symbolMarker = new naver.maps.Marker({
     }
 });
 
-var test = [
+var foodTruckInfo = [
 	<c:forEach items="${truckList}" var="truckInfo" varStatus="status">
        {
     	   latitude : "${truckInfo.latitude}",
-    	   longtitude : "${truckInfo.longitude}"
+    	   longtitude : "${truckInfo.longitude}",
+    	   foodtruckName : "${truckInfo.foodtruckName}"
        }
        <c:if test="${not status.last}">,</c:if>
     </c:forEach>
 ];
 
-for (var i = 0; i < test.length; i++)
-{
-	alert(test[i].latitude + "," + test[i].longtitude);
-}	
-
-
-
-/*태평*/
-/* var latlngs = [
-    new naver.maps.LatLng(37.444038, 127.141633),
-    new naver.maps.LatLng(37.447317, 127.140185),
-    new naver.maps.LatLng(37.444579, 127.133043),
-    new naver.maps.LatLng(37.443531, 127.134985),
-    new naver.maps.LatLng(37.440620, 127.139817),
-    new naver.maps.LatLng(37.441497, 127.143186),
-    new naver.maps.LatLng(37.440969, 127.143003),
-    new naver.maps.LatLng(37.439193, 127.142998),
-    new naver.maps.LatLng(37.438546, 127.138856),
-    new naver.maps.LatLng(37.435726, 127.139043)
-]; */
-
 var latlngs = [
-    new naver.maps.LatLng(37.400221, 127.104280),
-    new naver.maps.LatLng(37.399577, 127.108512),
-    new naver.maps.LatLng(37.400263, 127.110765),
-    new naver.maps.LatLng(37.400749, 127.115896),
-    new naver.maps.LatLng(37.405785, 127.107760),	
+	/*     new naver.maps.LatLng(37.400221, 127.104280),
+	    new naver.maps.LatLng(37.399577, 127.108512),
+	    new naver.maps.LatLng(37.400263, 127.110765),
+	    new naver.maps.LatLng(37.400749, 127.115896),
+	    new naver.maps.LatLng(37.405785, 127.107760), */	
 ];
+
+for (var i = 0; i < foodTruckInfo.length; i++)
+{
+	latlngs.push(new naver.maps.LatLng(foodTruckInfo[i].latitude, foodTruckInfo[i].longtitude));
+}	
 
 var markers = [];
 var infoWindows = [];
@@ -89,7 +74,7 @@ for (var i=0, ii=latlngs.length; i<ii; i++) {
         });
     
     var infoWindow = new naver.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:5px;">The Letter is <b>"'+ i +'"</b>.</div>'
+        content: '<div style="width:150px;text-align:center;padding:5px;">"' + foodTruckInfo[i].foodtruckName + '"</div>'
     });    
 
     markers.push(marker);

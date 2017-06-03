@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
 
 public interface MypageDAO {
-	public List<WishlistVO> myWishList(String id);
+	public List<TruckVO> myWishList(String id);
 	
 	public void deleteWishList(WishlistVO wishlistVO);
 
@@ -39,4 +40,12 @@ public interface MypageDAO {
 	void updateMenuFilepath(FileVO fileVO);
 
 	void deleteMyTruck(String foodtruckNumber);
+	
+	List<ReviewVO> showMyReviewList(String customerId); //리뷰 리스트보기
+	
+	void updateMyReview(ReviewVO reviewVO); //리뷰수정하기
+	
+	void deleteMyReview(String reviewNo); //리뷰 삭제하기
+
+	public ReviewVO findReviewInfoByReviewNo(String reviewNo);
 }

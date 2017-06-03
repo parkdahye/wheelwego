@@ -43,7 +43,7 @@
 			<div class="col-md-4"> 
 			<div class="form-group"> 
 			<label for="writer">작성자</label> 
-			<input type="text" class="form-control"value="${requestScope.name.memberName}" readonly> 
+			<input type="text" class="form-control" value="${requestScope.name.memberName}" readonly> 
 			</div> 
 			</div> 
 		</div> 
@@ -52,7 +52,7 @@
 		<div class="col-md-8"> 
 		<div class="form-group"> 
 		<label for="title">글제목</label> 
-		<input type="text" class="form-control" value="${requestScope.detail_freeboard.title }" readonly> 
+		<input type="text" class="form-control" value="${requestScope.detail_freeboard.title}" readonly> 
 		</div> </div>
 		 
 		 <%-- 글 내용--%>
@@ -62,19 +62,23 @@
 		<font size=2 >${requestScope.detail_freeboard.timePosted} &nbsp;&nbsp; 
 		조회수 : ${requestScope.detail_freeboard.hits}</font>
 		<textarea class="form-control" rows="10" readonly>${requestScope.detail_freeboard.content }</textarea> 
-		</div></div><br><br><br><br><br>
+		</div></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		
 		<%-- 사진 들어갈 공간 임시로 올림 --%>
 		<div class="form-group,col-md-8"> 
-		<img src="${pageContext.request.contextPath }/resources/img/truck.jpg" width="300px" height="200px">
-		</div> 
+		<c:forEach items="${requestScope.fileNameList }" var="fileNameList">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="300px" height="200px">
+		</c:forEach>
+		</div><br><br>
+		
 		<%-- 목록, 수정 , 삭제 버튼  --%>
 		<div class="center-block" style='width:400px'> 
-		<button type="button" class="btn btn-info"  id="boardListBtn">목록</button>
+		<button type="button" class="btn btn-warning"  id="boardListBtn">목록</button>
 			<%-- login 적용 시 위로 두칸 올린다 --%>
 			 <c:if test="${requestScope.detail_freeboard.id==sessionScope.memberVO.id}">
 			 <button type="button" class="btn btn-info"  id="modifyBtn">수정</button>
-			<button type="button" class="btn btn-info"  id="deleteBtn">삭제</button>
+			<button type="button" class="btn btn-danger"  id="deleteBtn">삭제</button>
 			 </c:if>
 			 </div> 
 </div> 

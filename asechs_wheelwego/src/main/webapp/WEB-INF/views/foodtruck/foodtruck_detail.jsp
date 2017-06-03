@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -103,6 +104,7 @@ body, html {
       <h5>Soda</h5>
       <p class="w3-text-grey">Coke, Sprite, Fanta, etc. 2.50</p>
     </div>  
+
      <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
     <img src="${pageContext.request.contextPath}/resources/img/menu/${foodList.fileVO.filepath}" style="width:100%;max-width:1000px;margin-top:32px;">
  	</c:forEach>
@@ -117,12 +119,54 @@ body, html {
     <div id="googleMap" class="w3-sepia" style="width:100%;height:400px;"></div>
     <p><span class="w3-tag">REVIEW</span> We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste.</p>
     <p><strong>Reserve</strong> a table, ask for today's special or just send us a message:</p>
+  
     <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people" required name="People"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" value="2017-11-16T20:00"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-      <p><button class="w3-button w3-black" type="submit">WRITE</button></p>
+     	<input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
+    <label for="star-3" class="star_point">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-4" value="4"/>
+    <label for="star-4" class="star_point">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-5" value="5"/>
+    <label for="star-5" class="star_point">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+
+
+	
+	<table class="content">
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td>
+					트럭번호: <input type="text" name="foodtruckNumber"  readonly="readonly"></input>
+					| 작성자:<input type="text"  name="customerId" value="${sessionScope.memberVO.id}" readonly="readonly"></input>	
+					</td>
+				<tr>
+					<td>						
+		<textarea rows="5" cols="100" id="content" name="reviewContent" required="required" style="resize: none;"></textarea>
+					</td>
+				</tr>
+				<tr>
+				<td valign="middle">						
+					<input type="submit" value="등록하기" class="action"></input>			
+					</td>				
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
     </form>
   </div>
 </div>

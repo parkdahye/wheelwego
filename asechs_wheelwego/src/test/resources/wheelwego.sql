@@ -23,7 +23,7 @@ create sequence information_seq;
 create sequence informationcomment_seq;
 create sequence qna_seq;
 create sequence qnacomment_seq;
-create sequence freeboard_seq start with 15;
+create sequence freeboard_seq start with 51;
 create sequence freeboardcomment_seq;
 -------------------------------------------------------------------------------
 
@@ -37,13 +37,13 @@ create table member(
    phonenumber varchar2(100) not null,
    member_type varchar2(100) not null,
    postcode varchar2(100) not null
-); 	
+);    
 -------------------------------------------------------------------------------
 drop table member;
 -------------------------------------------------------------------------------
 create table customer(
-	customer_id varchar2(100) primary key,
-	constraint customer_id_fk foreign key(customer_id) references member(id) on delete cascade
+   customer_id varchar2(100) primary key,
+   constraint customer_id_fk foreign key(customer_id) references member(id) on delete cascade
 );
 -- ���� ���������� �̸��� ���Ҷ� [���̺��]_[Į����]_[������������] �̷��� �־����� �� ����.kos
 -- ���� customer ���� ��쿡�� 
@@ -55,9 +55,9 @@ create table customer(
 drop table customer;
 -------------------------------------------------------------------------------
 create table seller(
-	seller_id varchar2(100) primary key,
-	businessnumber varchar2(100) not null,
-	constraint seller_id_fk foreign key(seller_id) references member(id) on delete cascade
+   seller_id varchar2(100) primary key,
+   businessnumber varchar2(100) not null,
+   constraint seller_id_fk foreign key(seller_id) references member(id) on delete cascade
 );
 -------------------------------------------------------------------------------
 drop table seller;
@@ -75,10 +75,10 @@ create table foodtruck(
 drop table foodtruck;
 -------------------------------------------------------------------------------file table 추가(0531)
 create table foodtruckfile(
-	foodtruck_number varchar2(100) not null,
-	foodtruck_filepath varchar2(100) not null,
-	constraint foodtruckfile_trucknumber_fk foreign key(foodtruck_number) references foodtruck(foodtruck_number) on delete cascade ,
-	constraint foodtruckfilePK primary key(foodtruck_number, foodtruck_filepath)
+   foodtruck_number varchar2(100) not null,
+   foodtruck_filepath varchar2(100) not null,
+   constraint foodtruckfile_trucknumber_fk foreign key(foodtruck_number) references foodtruck(foodtruck_number) on delete cascade ,
+   constraint foodtruckfilePK primary key(foodtruck_number, foodtruck_filepath)
 );
 -------------------------------------------------------------------------------
 drop table foodtruckfile;
@@ -166,10 +166,10 @@ create table qna(
 drop table qna;
 -------------------------------------------------------------------------------qnaFile(0531)
 create table qnafile(
-	qna_no varchar2(100) not null,
-	qnafile_filepath varchar2(100) not null,
-	constraint qnafile_qnano_fk foreign key(qna_no) references qna(qna_no) on delete cascade ,
-	constraint qnafile_PK primary key(qna_no, qnafile_filepath)
+   qna_no varchar2(100) not null,
+   qnafile_filepath varchar2(100) not null,
+   constraint qnafile_qnano_fk foreign key(qna_no) references qna(qna_no) on delete cascade ,
+   constraint qnafile_PK primary key(qna_no, qnafile_filepath)
 );
 -------------------------------------------------------------------------------
 drop table qnafile;
@@ -200,10 +200,10 @@ create table freeboard(
 drop table freeboard;
 -------------------------------------------------------------------------------freeboardfile(0531)
 create table freeboardfile(
-	freeboard_no varchar2(100) not null,
-	freeboard_filepath varchar2(100) not null,
+	freeboard_no number not null,
+	freeboardfile_filepath varchar2(100) not null,
 	constraint freeboardfile_freeboardno_fk foreign key(freeboard_no) references freeboard(freeboard_no) on delete cascade , 
-	constraint freeboardfile_PK primary key(freeboard_no, freeboard_filepath) 
+	constraint freeboardfile_PK primary key(freeboard_no, freeboardfile_filepath) 
 );
 -------------------------------------------------------------------------------
 drop table freeboardfile;
@@ -234,10 +234,10 @@ create table information(
 drop table information;
 -------------------------------------------------------------------------------informationfile(0531)
 create table informationfile(
-	information_no varchar2(100) not null,
-	informationfile_filepath varchar2(100) not null,
-	constraint informationfile_infono_fk foreign key(information_no) references information(information_no) on delete cascade , 
-	constraint informationfile_PK primary key(information_no, informationfile_filepath) 
+   information_no varchar2(100) not null,
+   informationfile_filepath varchar2(100) not null,
+   constraint informationfile_infono_fk foreign key(information_no) references information(information_no) on delete cascade , 
+   constraint informationfile_PK primary key(information_no, informationfile_filepath) 
 );
 -------------------------------------------------------------------------------
 drop table informationfile;

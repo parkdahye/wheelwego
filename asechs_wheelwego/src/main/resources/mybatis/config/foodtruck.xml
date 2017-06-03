@@ -18,6 +18,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <result property="menuPrice" column="menu_price"/>
 <result property="fileVO.filepath" column="menu_filename"/>
 </resultMap>
+<resultMap type="reviewVO" id="reviewRM">
+	<result property="reviewNo" column="review_no"/>
+	<result property="foodtruckNumber" column="foodtruck_number"/>
+	<result property="customerId" column="customer_id"/>
+	<result property="reviewContent" column="review_content"/>
+	<result property="reviewTimeposted" column="review_timeposted"/>
+</resultMap>
 <select id="foodtruckList" resultMap="truckRM">
 		select t.*, f.foodtruck_filepath
 		from(select * from foodtruck)t, foodtruckfile f
@@ -55,15 +62,28 @@ select * from (
 select * from foodtruck
 where (latitude between #{latitude}-0.009 and #{latitude}+0.009) and (longitude between #{longitude}-0.012 and #{longitude}+0.012)) TMP 
 </select>
+
+<insert id="registerReview" parameterType="reviewVO">
+<selectKey order="BEFORE" keyProperty="reviewNo" resultType="String">
+	select review_seq.nextval from dual
+</selectKey>
+insert into review(review_no,foodtruck_number,customer_id,review_content,review_timeposted,grade) 
+values(#{reviewNo},#{foodtruckNumber},#{customerId},#{reviewContent},sysdate,#{grade})
+</insert>
+
+<select id="getReviewListByTruckNumber" resultMap="reviewRM" parameterType="pagingBean">
+select * from (select row_number() over(order by review_no desc) as rnum ,review_no,foodtruck_number,customer_id,
+review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
+where foodtruck_number=#{searchWord})
+where rnum between #{startRowNumber} and #{endRowNumber}
+</select>
+
+<select id="getReivewTotalCount" resultType="int">
+	select count(*) from review where foodtruck_number=#{value}
+</select>
 </mapper>
  
- 
- 
- 
- 
- 
- 
- 
+
  
  
  
