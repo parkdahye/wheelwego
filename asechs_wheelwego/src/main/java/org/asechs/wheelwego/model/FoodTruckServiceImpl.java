@@ -68,10 +68,12 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		tvo.setFoodList(fvo);
 		return tvo;
 	}
+
 	@Override
 	public void registerReview(ReviewVO reviewVO) {
 		foodTruckDAO.registerReview(reviewVO);
 	}
+
 	@Override
 	public ListVO getReviewListByTruckNumber(String reviewPageNo, String foodtruckNumber) {
 		int totalCount =foodTruckDAO.getReivewTotalCount(foodtruckNumber);
@@ -82,6 +84,7 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 			pagingBean=new PagingBean( Integer.parseInt(reviewPageNo),totalCount,foodtruckNumber);
 		ListVO pagingList=new ListVO();
 		pagingList.setReviewList(foodTruckDAO.getReviewListByTruckNumber(pagingBean));
+		pagingList.setPagingBean(pagingBean);
 		return pagingList;
 	}
 }

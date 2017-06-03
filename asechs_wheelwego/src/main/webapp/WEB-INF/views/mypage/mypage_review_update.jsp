@@ -58,11 +58,9 @@
 $(document).ready(function(){
 	var gradeRadio=$(":input[name=grade]");
 	for(var i=0; i<gradeRadio.length;i++){
-		if(grade==gradeRadio[i].value){
 			//alert(gradeRadio[i].value);
 			gradeRadio[i].checked=true;
 		}
-	}
 		//alert(gradeRadio);
 })
 </Script>

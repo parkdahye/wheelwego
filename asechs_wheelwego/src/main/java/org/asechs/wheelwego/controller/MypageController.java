@@ -98,6 +98,7 @@ public class MypageController {
 	 */
 	@RequestMapping(method=RequestMethod.POST,value="afterLogin_mypage/updateMyfoodtruck.do")
 	public String updateMyfoodtruck(TruckVO truckVO, HttpServletRequest request){
+		System.out.println("update : "+truckVO);
 		mypageService.updateMyfoodtruck(truckVO);
 		return "redirect:/afterLogin_mypage/myfoodtruck_page.do";
 	}

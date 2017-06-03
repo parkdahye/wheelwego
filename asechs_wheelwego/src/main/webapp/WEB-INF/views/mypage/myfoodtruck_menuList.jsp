@@ -4,11 +4,12 @@
         <div class="_40h7m" >
         <c:choose>
         	<c:when test="${menuList!='[]'}">
+        	<br>
        <form class="menuForm" onsubmit="return checkFunction()" method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMenu.do" enctype="multipart/form-data">
         	<c:forEach items="${menuList}" var="foodVO" begin="0" end="2" varStatus="status">
-        <table style="border: none; padding: 15px">
+        <table style="border: none; padding: 15px" class="table table-hover">
          	<tr>
-         		<td>대표 메뉴${foodVO.menuId}<input type="hidden" name="foodList[${status.index}].menuId" value="${foodVO.menuId}" required="required"></td>
+         		<td>${status.index+1}<input type="hidden" name="foodList[${status.index}].menuId" value="${foodVO.menuId}" required="required"></td>
          		<td><input type="text" name="foodList[${status.index}].menuName" class="menuName" placeholder="메뉴이름" value="${foodVO.menuName}" required="required"></td>
          		<td><input type="text" name="foodList[${status.index}].menuPrice" class="menuPrice"  placeholder="가격" value="${foodVO.menuPrice}" required="required"></td>
          		<td><input type="file" name="foodList[${status.index}].menuFile" class="menuFile" >
@@ -27,7 +28,7 @@
         	</c:when>
         	<c:otherwise>
          <form  class="menuForm" onsubmit="return checkFunction()" method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/registerMenuList.do" enctype="multipart/form-data">
-        	<table style="border: none; padding: 15px">
+        	<table style="border: none; padding: 15px" class="table table-hover">
         		<tr>
         	 	<td>대표 메뉴</td>
          	  <td><input type="text" name="foodList[0].menuName" placeholder="메뉴이름" required="required"></td>

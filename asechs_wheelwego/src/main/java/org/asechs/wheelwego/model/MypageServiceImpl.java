@@ -1,11 +1,11 @@
 package org.asechs.wheelwego.model;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.vo.FileManager;
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.ReviewVO;
@@ -18,8 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class MypageServiceImpl implements MypageService {
 	@Resource
 	private MypageDAO mypageDAO;
-	private String uploadPath="C:\\Users\\Administrator\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
-	//private String uploadPath="C:\\Users\\User\\AppData\\Roaming\\SPB_16.6\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
 	@Override
 	public List<TruckVO> myWishList(String id) {
 		System.out.println("서비스 실행");
@@ -38,23 +36,23 @@ public class MypageServiceImpl implements MypageService {
 	 */
 	@Override
 	public void registerFoodtruck(TruckVO tvo) {
-		List<MultipartFile> truckfileList=tvo.getFoodtruckFile(); 
-		for(int i=0; i<truckfileList.size();i++){
-			String fileName=truckfileList.get(i).getOriginalFilename();
-			FileVO fileVO=null;
-			if(fileName.equals("")==false){ // 파일이 있다면
-				fileVO=new FileVO(tvo.getFoodtruckNumber(),fileName); //파일객체를 만든다.
-			}else{ // 파일이 없으면
-				fileVO=new FileVO(tvo.getFoodtruckNumber(),"defaultTruck.jpg"); //default로 설정
-			}
-				try {
-					mypageDAO.registerFoodtruck(tvo);  //트럭정보 등록
-					mypageDAO.saveFilePath(fileVO); //파일경로 등록
-					truckfileList.get(i).transferTo(new File(uploadPath+fileName)); //서버에 전송하여 저장
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-				}
-			}
+		MultipartFile truckFile=tvo.getFoodtruckFile(); 
+		FileManager fm=new FileManager();
+		String fileName=truckFile.getOriginalFilename();
+		if(fileName.equals("")==false){
+			try {
+				String renamedFile=fm.rename(truckFile);
+				tvo.setFileVO(new FileVO(tvo.getFoodtruckName(), renamedFile));
+				mypageDAO.registerFoodtruck(tvo);  //트럭정보 등록
+				mypageDAO.saveFilePath(new FileVO(tvo.getFoodtruckNumber(), renamedFile));
+				fm.uploadFile(truckFile, renamedFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} //서버에 전송
+		}else{
+			mypageDAO.registerFoodtruck(tvo);
+			mypageDAO.saveFilePath(new FileVO(tvo.getFoodtruckNumber(), "defaultTruck.jpg"));
+		}
 	}
 
 	@Override
@@ -67,21 +65,22 @@ public class MypageServiceImpl implements MypageService {
 	 */
 	@Override
 	public void updateMyfoodtruck(TruckVO truckVO) {
-		List<MultipartFile> truckfileList=truckVO.getFoodtruckFile(); 
-		for(int i=0; i<truckfileList.size();i++){
-			String fileName=truckfileList.get(i).getOriginalFilename();
-			if(fileName.equals("")==false){ // 파일이 있다면
-				FileVO fileVO=new FileVO(truckVO.getFoodtruckNumber(),fileName); //파일객체를 만든다.
-				try {
-					mypageDAO.updateMyfoodtruck(truckVO);  //트럭정보 등록
-					mypageDAO.updateFilePath(fileVO); //파일경로 등록
-					truckfileList.get(i).transferTo(new File(uploadPath+fileName)); //서버에 전송하여 저장
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-				}
-			}else{
-				mypageDAO.updateMyfoodtruck(truckVO);  //트럭정보 등록
+		MultipartFile truckFile=truckVO.getFoodtruckFile(); 
+		FileManager fm=new FileManager();
+		String fileName=truckFile.getOriginalFilename();
+		if(fileName.equals("")==false){
+			try {
+			String renamedFile=fm.rename(truckFile);
+			truckVO.setFileVO(new FileVO(truckVO.getFoodtruckNumber(), renamedFile));
+			mypageDAO.updateMyfoodtruck(truckVO);  //트럭정보 등록
+			mypageDAO.updateFilePath(truckVO.getFileVO()); //파일경로 등록
+				fm.uploadFile(truckFile, renamedFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		}else{
+			mypageDAO.updateMyfoodtruck(truckVO); 
 		}
 	}
 	@Override
@@ -96,13 +95,15 @@ public class MypageServiceImpl implements MypageService {
 	//메뉴 등록
 	@Override
 	public void registerMenuList(List<FoodVO> foodList, String truckNumber) {
+		FileManager fm=new FileManager();
 		for(int i=0;i<foodList.size();i++){
 			try{
-			foodList.get(i).setFoodTruckNumber(truckNumber); //트럭넘버를 세팅
-			String fileName=foodList.get(i).getMenuFile().getOriginalFilename();
-			foodList.get(i).setFileVO(new FileVO(truckNumber, fileName));
-			mypageDAO.registerMenu(foodList.get(i)); //메뉴를 등록한다.
-			foodList.get(i).getMenuFile().transferTo(new File(uploadPath+fileName));
+				foodList.get(i).setFoodTruckNumber(truckNumber); //트럭넘버를 세팅
+				MultipartFile foodFile=foodList.get(i).getMenuFile(); //메뉴사진받아와서
+				String renamedFile=fm.rename(foodFile); //파일 이름 수정
+				foodList.get(i).setFileVO(new FileVO(truckNumber, renamedFile));
+				mypageDAO.registerMenu(foodList.get(i)); //메뉴를 등록한다.
+				fm.uploadFile(foodFile, renamedFile); //서버에 파일 업로드
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -118,12 +119,14 @@ public class MypageServiceImpl implements MypageService {
 			String fileName=foodList.get(i).getMenuFile().getOriginalFilename();
 			if(fileName.equals("")){ //파일이 없으면
 				mypageDAO.updateMenu(foodList.get(i)); //메뉴정보만 수정
-				
 			}else{ //파일이 있으면
-				foodList.get(i).setFileVO(new FileVO(foodList.get(i).getMenuId(),fileName));
+				FileManager fm=new FileManager();
+				MultipartFile foodFile=foodList.get(i).getMenuFile(); //사진 받아서
+				String renamedFile=fm.rename(foodFile); //파일 이름 수정
+				foodList.get(i).setFileVO(new FileVO(foodList.get(i).getMenuId(),renamedFile));
 				mypageDAO.updateMenu(foodList.get(i)); //메뉴정보 수정
 				mypageDAO.updateMenuFilepath(foodList.get(i).getFileVO()); //파일 경로 수정
-				foodList.get(i).getMenuFile().transferTo(new File(uploadPath+fileName));
+				fm.uploadFile(foodFile, renamedFile);
 			}
 			}catch (Exception e) {
 				e.printStackTrace();

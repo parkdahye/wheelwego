@@ -9,7 +9,7 @@ public class TruckVO {
 	private String sellerId;
 	private String foodtruckName;
 	private String introduction;
-	private List<MultipartFile> foodtruckFile; // 웹에서 이미지 받아오기 위한 변수 (coulmn X)
+	private MultipartFile foodtruckFile; // 웹에서 이미지 받아오기 위한 변수 (coulmn X)
 	private FileVO fileVO;
 	private List<FoodVO> foodList;
 	private double latitude;
@@ -21,8 +21,7 @@ public class TruckVO {
 	}
 
 	public TruckVO(String foodtruckNumber, String sellerId, String foodtruckName, String introduction,
-			List<MultipartFile> foodtruckFile, FileVO fileVO, List<FoodVO> foodList, double latitude,
-			double longitude) {
+			MultipartFile foodtruckFile, FileVO fileVO, List<FoodVO> foodList, double latitude, double longitude) {
 		super();
 		this.foodtruckNumber = foodtruckNumber;
 		this.sellerId = sellerId;
@@ -67,11 +66,11 @@ public class TruckVO {
 		this.introduction = introduction;
 	}
 
-	public List<MultipartFile> getFoodtruckFile() {
+	public MultipartFile getFoodtruckFile() {
 		return foodtruckFile;
 	}
 
-	public void setFoodtruckFile(List<MultipartFile> foodtruckFile) {
+	public void setFoodtruckFile(MultipartFile foodtruckFile) {
 		this.foodtruckFile = foodtruckFile;
 	}
 
@@ -113,5 +112,6 @@ public class TruckVO {
 				+ foodtruckName + ", introduction=" + introduction + ", foodtruckFile=" + foodtruckFile + ", fileVO="
 				+ fileVO + ", foodList=" + foodList + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
+
 
 }
