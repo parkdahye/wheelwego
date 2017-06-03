@@ -9,7 +9,7 @@
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-xs-6">
       <div class="thumbnail">
-        <img src="resources/img/foodtruck/${truckInfo.foodtruckFilepath}" class="img-responsive">
+       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}"><img src="resources/img/foodtruck/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
         <p><strong>${truckInfo.foodtruckName}</strong></p>
         <p style="font-size:17px;">location / review</p>
     </div>  

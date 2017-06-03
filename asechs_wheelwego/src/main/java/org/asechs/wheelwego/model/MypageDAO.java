@@ -9,7 +9,7 @@ import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
 
 public interface MypageDAO {
-	public List<WishlistVO> myWishList(String id);
+	public List<TruckVO> myWishList(String id);
 	
 	public void deleteWishList(WishlistVO wishlistVO);
 
