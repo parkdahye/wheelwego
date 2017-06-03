@@ -128,10 +128,12 @@ function geoFindMe() {
                 <li>
                  <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-map-marker fa-3x"></i></a>
                  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;" id="roundCorner">
-	              <form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
-					   <button class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style=""/>
-					  <button class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" type="submit" value="현재위치 자동검색" />
-					</form>				
+                 
+	              <form>
+	              	   <input type="hidden" name = "name" id = "name">
+					   <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style="">
+					   <input class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" value="자동검색" style="">
+				  </form>				
                  
 <!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
 					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />

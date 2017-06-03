@@ -3,9 +3,9 @@ package org.asechs.wheelwego.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.asechs.wheelwego.model.FoodTruckService;
+import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +21,15 @@ public class FoodTruckController {
 	public ModelAndView pagingTruckList(String name, String pageNo) {
 		List<TruckVO> searchTruckList = foodTruckService.searchFoodTruckList(name);
 		System.out.println(searchTruckList);
+		ListVO listVO = foodTruckService.resultFoodTruckList(searchTruckList,pageNo);
+		System.out.println(listVO);
+		
+		//return null;
+		
 		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "pagingList", foodTruckService.resultFoodTruckList(searchTruckList,pageNo));		
 	}
+	
+	
 
 	@RequestMapping("searchFoodTruckList.do")
 	public ModelAndView searchFoodTruckList(String name){
@@ -51,6 +58,6 @@ public class FoodTruckController {
 
 			
 		
-		return new ModelAndView("foodtruck/foodtruck_detail.tiles", "truckList", searchTruckList);
+		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "truckList", searchTruckList);
 	}	
 }

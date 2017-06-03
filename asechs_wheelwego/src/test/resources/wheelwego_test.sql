@@ -194,3 +194,9 @@ from
 review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
 where foodtruck_number='1234')
 where rnum between 1 and 5;
+
+select * from foodtruckfile;
+
+		select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number

@@ -1,13 +1,13 @@
 package org.asechs.wheelwego;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
-import org.asechs.wheelwego.model.FoodTruckDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
-import org.asechs.wheelwego.model.vo.PagingBean;
-import org.asechs.wheelwego.model.vo.ReviewVO;
+import org.asechs.wheelwego.model.vo.TruckVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -88,6 +88,9 @@ public class TestJUnit {
 		
 		System.out.println(foodService.searchFoodTruckList("끼니"));
 */		
+		
+		List<TruckVO> truckList = foodService.foodtruckList();
+		System.out.println(truckList);
 	}
 }
 
