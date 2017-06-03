@@ -21,9 +21,6 @@
                     <c:choose >
                     	<c:when test="${sessionScope.memberVO==null}">
                     <li class="page-scroll">
-                         <a href="${pageContext.request.contextPath}/foodtruck/foodtruck_location_select_list.do">map폼으로이동</a>
-                    </li>
-                    <li class="page-scroll">
                          <a href="${pageContext.request.contextPath}/board/boardSelectList.do">커뮤니티</a>
                    </li>
                     <li class="page-scroll">

@@ -36,7 +36,7 @@
 	<div id="page_main">
 			<tiles:insertAttribute name="main" />
 		</div>
-	</div>
+	</div><br><br><br><br>
 		<div id="page_footer">
 			<tiles:insertAttribute name="footer" />
 		</div>
