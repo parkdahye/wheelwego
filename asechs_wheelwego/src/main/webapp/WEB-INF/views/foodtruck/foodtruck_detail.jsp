@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -12,7 +13,7 @@ body, html {
 .bgimg {
     background-position: center;
     background-size: cover;
-    background-image: url("../resources/img/truck7.jpg");
+    background-image: url("${pageContext.request.contextPath}/resources/img/foodtruck/${truckDetailInfo.fileVO.filepath}");
     min-height: 75%;
 }
 .menu {
@@ -20,7 +21,6 @@ body, html {
 }
 </style>
 
-<<<<<<< HEAD
 <!-- Header -->
 <header class="bgimg w3-display-container" id="home">
   <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
@@ -30,7 +30,7 @@ body, html {
       <div class="row">
          <div class="col-lg-12">
             <div class="intro-text">
-               <h1 class="name" style="color:light-grey">foodtruck name</h1>
+               <h1 class="name" style="color:light-grey">${truckDetailInfo.foodtruckName}</h1>
                </div>
          </div>
       </div>
@@ -41,21 +41,17 @@ body, html {
 </header>
 
 <!-- Add a background color and large text to the whole page -->
-<div class="w3-sand w3-grayscale w3-large">
+<div class="w3-sand w3-large">
 
 <!-- About Container -->
 <div class="w3-container" id="about">
   <div class="w3-content" style="max-width:700px">
-    <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">ABOUT US</span></h5>
-    <p>The Cafe was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    <p>In addition to our full espresso and brew bar menu, we serve fresh made-to-order breakfast and lunch sandwiches, as well as a selection of sides and salads and other good stuff.</p>
-    <div class="w3-panel w3-leftbar w3-light-grey">
-      <p><i>"Use products from nature for what it's worth - but never too early, nor too late." Fresh is the new sweet.</i></p>
-      <p>Chef, Coffeeist and Owner: Liam Brown</p>
-    </div>
-    <img src="/w3images/coffeeshop.jpg" style="width:100%;max-width:1000px" class="w3-margin-top">
+    <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5>
+<p style="text-align:center;"><i>${truckDetailInfo.introduction}</i></p><br>
+<div class="w3-panel w3-leftbar w3-light-grey" >
     <p><strong>Opening hours:</strong> everyday from 6am to 5pm.</p>
     <p><strong>Address:</strong> 15 Adr street, 5015, NY</p>
+</div>
   </div>
 </div>
 
@@ -107,7 +103,9 @@ body, html {
       <h5>Soda</h5>
       <p class="w3-text-grey">Coke, Sprite, Fanta, etc. 2.50</p>
     </div>  
-    <img src="/w3images/coffeehouse2.jpg" style="width:100%;max-width:1000px;margin-top:32px;">
+     <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
+    <img src="${pageContext.request.contextPath}/resources/img/menu/${foodList.fileVO.filepath}" style="width:100%;max-width:1000px;margin-top:32px;">
+ 	</c:forEach>
   </div>
 </div>
 
@@ -168,13 +166,3 @@ document.getElementById("myLink").click();
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
 
-=======
-<div class="container">
-  <div class="list-group col-lg-3 text-center">
-  <h4>Search Result</h4>
-  <c:forEach items="${truckList}" var="truckInfo">
-    <a href="#" class="list-group-item">${truckInfo.foodtruckName}</a>
-    </c:forEach>
-  </div>
-</div>
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git

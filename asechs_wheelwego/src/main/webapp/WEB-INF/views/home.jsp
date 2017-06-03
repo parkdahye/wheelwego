@@ -111,6 +111,10 @@ function geoFindMe() {
             }
         }).open();
     }
+    // 현지 : hover + click text
+    function hoverClick(val){
+        location.href ="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+val;
+	}
 </script>
 
 
@@ -132,7 +136,7 @@ function geoFindMe() {
                  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;" id="roundCorner">
 	              <form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
 					   <button class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style=""/>
-					  <button class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" type="submit" value="현재위치 자동검색" />
+					  <button class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" type="submit" value="자동검색" />
 					</form>				
                  
 <!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
@@ -174,12 +178,12 @@ function geoFindMe() {
          <div class="col-lg-4 col-sm-6 portfolio-item" >
             <div class="flip-container"
                ontouchstart="this.classList.toggle('hover');" style="margin: 0 auto;">
-               <div class="flipper">
-                  <a href="#portfolioModal1" class="portfolio-link"
+               <div class="flipper">  
+                  <a href="#portfolioModal1" onclick="hoverClick(this.id)" id=${truckVO.foodtruckNumber} class="portfolio-link"
                      data-toggle="modal">
                      <div class="front" >
                         <img class="img-circle  center-block food-img img-responsive"
-                           src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}"
+                           src="${pageContext.request.contextPath}/resources/img/foodtruck/${truckVO.fileVO.filepath}"
                            alt="" >
                      </div>
                      <div class="back cbx-back-side">
@@ -192,7 +196,6 @@ function geoFindMe() {
             </div>
          </div>
          </c:forEach>
-
        </div>
       <!-- row -->
       <hr>

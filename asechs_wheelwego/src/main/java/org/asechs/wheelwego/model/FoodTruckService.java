@@ -11,4 +11,5 @@ public interface FoodTruckService {
 	ListVO pagingTruckList(String pageNo);
 	ListVO resultFoodTruckList(List<TruckVO> searchTruckList, String pageNo);
 	List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo);
+	TruckVO foodTruckAndMenuDetail(String foodtruckNo);
 }
