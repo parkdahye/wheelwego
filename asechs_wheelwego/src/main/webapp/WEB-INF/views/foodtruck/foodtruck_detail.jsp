@@ -120,7 +120,7 @@ body, html {
     <p><span class="w3-tag">REVIEW</span> We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste.</p>
     <p><strong>Reserve</strong> a table, ask for today's special or just send us a message:</p>
   
-    <form action="/action_page.php" target="_blank">
+    <form  target="_blank">
      	<input type="radio" name="grade" id="star-1" value="1"/>
     <label for="star-1" class="star_point">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
@@ -147,21 +147,27 @@ body, html {
 	<table class="content">
 	<tr>
 		<td>
+		<c:if test="${sessionScope.memberVO!=null}">
 			<table>
 				<tr>
-					<td>
-					트럭번호: <input type="text" name="foodtruckNumber"  readonly="readonly"></input>
-					| 작성자:<input type="text"  name="customerId" value="${sessionScope.memberVO.id}" readonly="readonly"></input>	
-					</td>
-				<tr>
 					<td>						
-		<textarea rows="5" cols="100" id="content" name="reviewContent" required="required" style="resize: none;"></textarea>
+		<textarea rows="3" cols="80" id="content" name="reviewContent" required="required" style="resize: none;"></textarea>
 					</td>
 				</tr>
 				<tr>
 				<td valign="middle">						
-					<input type="submit" value="등록하기" class="action"></input>			
+					<input type="button" id="registerBtn" value="등록하기" class="action"></input>			
 					</td>				
+				</tr>
+			</table>
+			<hr>
+			</c:if>
+			<table>
+				<tr><td colspan="3">총 평점</td><td>?</td></tr>
+				<tr>
+					<td>평점</td><td>작성자</td><td>내용</td><td>등록일</td>
+				<tr>
+					<td>?</td><td>?</td><td>?</td><td>?</td>
 				</tr>
 			</table>
 		</td>
@@ -208,5 +214,20 @@ function openMenu(evt, menuName) {
 }
 document.getElementById("myLink").click();
 </script>
+<Script>
+	$(document).ready(function(){
+		$("#registerBtn").click(function(){
+			var grade=$(this).parent().parent().find(":input[name=grade]:checked");
+			var reviewContent=$(this).parent().parent().find(":input[name=reviewContent]").val();
+			alert(reviewContent);
+			if(confirm("리뷰를 등록하시겠습니까?")){
+				$.ajax({
+					url:"${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do",
+					type:"post"
+				})
+			}
+		});
+	});
+</Script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
 

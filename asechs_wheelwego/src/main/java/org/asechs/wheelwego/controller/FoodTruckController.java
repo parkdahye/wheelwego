@@ -62,5 +62,4 @@ public class FoodTruckController {
 		
 		return new ModelAndView("foodtruck/foodtruck_detail.tiles", "truckList", searchTruckList);
 	}	
-
 }

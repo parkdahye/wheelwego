@@ -10,7 +10,7 @@
     		<button id="profileBtn" type="button" onclick=document.all.file.click(); >
     			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}">
     		</button>
-		<input type="file" name="foodtruckFile" id="file" style="display: none;" required="required"/> 
+		<input type="file" name="foodtruckFile" id="file" style="display: none;"/> 
 		</div>
 				<div class="col-lg-6">
 					<h1>${sessionScope.memberVO.id }</h1>
@@ -42,7 +42,7 @@
     		</div>
     	</div>
 	<br>
-    		<input type="submit" id="registerTruckBtn" value="수정"> 
+    		<input type="submit"  value="수정"> 
    			<input type="button" id="deleteTruckBtn" value="트럭 삭제"> 
    </form>
    </div>
