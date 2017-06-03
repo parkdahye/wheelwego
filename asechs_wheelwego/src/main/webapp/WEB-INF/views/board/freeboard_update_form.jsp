@@ -66,16 +66,9 @@ ${requestScope.detail_freeboard}    ${requestScope.fileNameList }
 		</div> 
 		<div class="form-group"> 
 		<label for="File">첨부파일 3</label> 
-		<input type="file" name="file[2]"> 
+		<input type="file" name="file[2]" > 
 		</div> <br><br>
 		
-	 	<div class="form-group,col-md-8"> 
-		<c:forEach items="${requestScope.fileNameList }" var="fileNameList">
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<img src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="150px" height="100px"> 
-		</c:forEach>
-		
-		</div><br><br>
 		${requestScope.fileNameList }
 		<!-- 버튼  -->
 		<div class="center-block" style='width:400px'> 

@@ -25,6 +25,8 @@ public class BoardController {
 	public String showBoardList() {
 		return "board/boardSelectList.tiles";
 	}
+	
+	////////////강정호. 자유게시판 freeboard/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 강정호 작성. 자유게시판 리스트 보여주는 메서드
 	@RequestMapping("freeboard_list.do")
@@ -38,6 +40,58 @@ public class BoardController {
 		 */
 		return new ModelAndView("board/freeboard_list.tiles", "freeBoardList", boardService.getFreeBoardList(pageNo));
 	}
+	
+	// 호겸 작성. 자유게시판 상세보기 and 조회수
+		@RequestMapping("board/freeboard_detail_content.do")
+		public String freeboard_detail_content(String no, Model model) {
+			int hits = Integer.parseInt(no);
+			// 조회수 올리기
+			boardService.updateHits(hits);
+			// 글제목, 조회수, 내용 가져오는 메서드
+			BoardVO bvo = boardService.getFreeBoardDetail(no);
+			// 파일 이름 가져오는 메서드
+			List<FileVO> fileNameList=boardService.getFreeBoardFilePath(no);
+			// 작성자 이름 갖고오기
+			MemberVO name = boardService.getNameById(bvo);
+			model.addAttribute("detail_freeboard", bvo);
+			model.addAttribute("fileNameList",fileNameList);
+			model.addAttribute("name", name);
+			return "board/freeboard_detail_content.tiles";
+		}
+		
+		// 강정호 자유게시판 글 등록 메서드
+		@RequestMapping("freeboard_write.do")
+		public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
+			boardService.freeboardWrite(bvo, request);
+			return "redirect:board/business_detail_content.do?no=" + bvo.getNo();
+		}
+		
+		// 호겸 작성. 자유게시판 게시물 삭제
+		@RequestMapping("freeboardDelete.do")
+		public String freeboardDelete(String no) {
+			boardService.freeboardDelete(no);
+			return "redirect:freeboard_list.do";
+		}
+		
+		// 호겸 작성. 자유게시판 게시물 수정 폼으로 가기
+		@RequestMapping("freeboard_update_form.do")
+		public String freeboard_update_form(String no, Model model) {
+			//호겸이가 한거 보존
+			//BoardVO bvo = boardService.getFreeBoardDetail(no);
+			//model.addAttribute("detail_freeboard", bvo);
+			return "board/freeboard_update_form.tiles";
+		}
+		
+		// 호겸 작성. 자유게시판 게시물 수정 해버리기
+		@RequestMapping("updateBoard.do")
+		public String updateBoard(BoardVO vo) {
+			System.out.println(vo.getNo());
+			System.out.println(vo);
+			boardService.updateBoard(vo);
+			return "redirect:board/freeboard_detail_content.do?no=" + vo.getNo();
+		}
+		
+////////////강정호. 창업게시판 business/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 강정호 작성. 창업정보 게시판 리스트 보여주는 메서드
 	@RequestMapping("business_list.do")
@@ -49,101 +103,83 @@ public class BoardController {
 		return new ModelAndView("board/business_list.tiles", "businessInfoBoardList",
 				boardService.getBusinessInfoBoardList(pageNo));
 	}
+	
+	// 강정호. 창업게시판 상세보기
+		@RequestMapping("board/business_detail_content.do")
+		public String business_detail_content(String no, Model model) {
+			int hits = Integer.parseInt(no);
+			// 조회수 올리기
+			boardService.updateHitsBusiness(hits);
+			BoardVO bvo = boardService.getBusinessBoardDetail(no);
+			List<FileVO> fileNameList=boardService.getBusinessFilePath(no);
+			MemberVO name = boardService.business_getNameById(bvo);
+			model.addAttribute("detail_business", bvo);
+			model.addAttribute("fileNameList",fileNameList);
+			model.addAttribute("name", name);
+			return "board/business_detail_content.tiles";
+		}
+		
+		//강정호 창업 게시판 글 등록 메서드
+		@RequestMapping("business_write.do")
+		public String buesinessWrite(BoardVO bvo, HttpServletRequest request){
+			boardService.businessWrite(bvo, request);
+			return "redirect:business_list.do";
+		}
+		
+		// 호겸 작성. 창업 게시물 삭제
+		@RequestMapping("businessDelete.do")
+		public String businessDelete(String no) {
+			boardService.businessDelete(no);
+			return "redirect:business_list.do";
+		}
 
+		// 호겸 작성. 창업 게시물 수정 폼으로 가기
+		@RequestMapping("business_update_form.do")
+		public String business_update_form(String no, Model model) {
+			BoardVO bvo = boardService.getBusinessBoardDetail(no);
+			model.addAttribute("detail_freeboard", bvo);
+			return "board/business_update_form.tiles";
+		}
+		
+		// 호겸 작성. 창업게시물 수정 해버리기
+		@RequestMapping("business_updateBoard.do")
+		public String business_updateBoard(BoardVO vo) {
+			boardService.business_updateBoard(vo);
+			return "redirect:board/business_detail_content.do?no=" + vo.getNo();
+		}
+
+
+
+////////////강정호. Q&A게시판 business/////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 	// 강정호 작성. Q&A 게시판 리스트 보여주는 메서드
 	@RequestMapping("qna_list.do")
 	public ModelAndView QnABoardList(String pageNo) {
 		return new ModelAndView("board/qna_list.tiles", "qnaBoardList", boardService.getQnABoardList(pageNo));
 	}
-
-	// 호겸 작성. 자유게시판 상세보기 and 조회수
-	@RequestMapping("board/freeboard_detail_content.do")
-	public String freeboard_detail_content(String no, Model model) {
-		int hits = Integer.parseInt(no);
-		// 조회수 올리기
-		boardService.updateHits(hits);
-		// 글제목, 조회수, 내용 가져오는 메서드
-		BoardVO bvo = boardService.getFreeBoardDetail(no);
-		// 파일 이름 가져오는 메서드
-		List<FileVO> fileNameList=boardService.getFreeBoardFilePath(no);
-		// 작성자 이름 갖고오기
-		MemberVO name = boardService.getNameById(bvo);
-		model.addAttribute("detail_freeboard", bvo);
-		model.addAttribute("fileNameList",fileNameList);
-		model.addAttribute("name", name);
-		return "board/freeboard_detail_content.tiles";
-	}
-
-	// 호겸 작성. 게시물 삭제
-	@RequestMapping("freeboardDelete.do")
-	public String freeboardDelete(String no) {
-		boardService.freeboardDelete(no);
-		return "redirect:freeboard_list.do";
-	}
-
-	// 호겸 작성. 게시물 수정 폼으로 가기
-	@RequestMapping("freeboard_update_form.do")
-	public String freeboard_update_form(String no, Model model) {
-		//호겸이가 한거 보존
-		BoardVO bvo = boardService.getFreeBoardDetail(no);
-		MemberVO name = boardService.getNameById(bvo);
-		List<FileVO> fileNameList=boardService.getFreeBoardFilePath(no);
-		model.addAttribute("detail_freeboard", bvo);
-		model.addAttribute("fileNameList",fileNameList);
-		model.addAttribute("name", name);
-		return "board/freeboard_update_form.tiles";
-	}
-
-	// 호겸 작성. 게시물 수정 해버리기
-	@RequestMapping("updateBoard.do")
-	public String updateBoard(BoardVO vo,HttpServletRequest request) {
-		//for(int i=0; i<vo.getFile().size();i++){
-		System.out.println(request.getParameter("file"));
-			System.out.println("vo            "+vo);
-		//}
-		boardService.updateBoard(vo);
-		return "redirect:board/freeboard_detail_content.do?no=" + vo.getNo();
-	}
-	
-	// 창업게시판 상세보기
-	@RequestMapping("board/business_detail_content.do")
-	public String business_detail_content(String no, Model model) {
+	// 강정호. 질문답변게시판 상세보기
+	@RequestMapping("board/qna_detail_content.do")
+	public String qna_detail_content(String no, Model model) {
 		int hits = Integer.parseInt(no);
 		// 조회수 올리기
 		boardService.updateHitsBusiness(hits);
-		BoardVO bvo = boardService.getBusinessBoardDetail(no);
-		MemberVO name = boardService.business_getNameById(bvo.getId());
-		model.addAttribute("detail_freeboard", bvo);
+		BoardVO bvo = boardService.getqnaBoardDetail(no);
+		System.out.println(bvo);
+		List<FileVO> fileNameList=boardService.getqnaFilePath(no);
+		System.out.println("큐엔에이"+fileNameList);
+		MemberVO name = boardService.qna_getNameById(bvo);
+		System.out.println("큐엔에이"+name);
+		model.addAttribute("detail_qna", bvo);
+		model.addAttribute("fileNameList",fileNameList);
 		model.addAttribute("name", name);
-		return "board/business_detail_content.tiles";
+		return "board/qna_detail_content.tiles";
 	}
 
-	// 호겸 작성. 창업 게시물 삭제
-	@RequestMapping("businessDelete.do")
-	public String businessDelete(String no) {
-		boardService.businessDelete(no);
-		return "redirect:business_list.do";
-	}
-
-	// 호겸 작성. 창업 게시물 수정 폼으로 가기
-	@RequestMapping("business_update_form.do")
-	public String business_update_form(String no, Model model) {
-		BoardVO bvo = boardService.getBusinessBoardDetail(no);
-		model.addAttribute("detail_freeboard", bvo);
-		return "board/business_update_form.tiles";
-	}
-
-	// 강정호 자유게시판 글 등록 메서드
-	@RequestMapping("freeboard_write.do")
-	public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
-		boardService.freeboardWrite(bvo, request);
-		return "redirect:board/freeboard_detail_content.do?no="+bvo.getNo();
-	}
-
-	// 호겸 작성. 창업게시물 수정 해버리기
-	@RequestMapping("business_updateBoard.do")
-	public String business_updateBoard(BoardVO vo) {
-		boardService.business_updateBoard(vo);
-		return "redirect:board/business_detail_content.do?no=" + vo.getNo();
+	//강정호 Q&A 게시판 글 등록 메서드
+	@RequestMapping("qna_write.do")
+	public String qnaWrite(BoardVO bvo, HttpServletRequest request){
+		boardService.qnaWrite(bvo, request);
+		return "redirect:qna_list.do";
 	}
 }
