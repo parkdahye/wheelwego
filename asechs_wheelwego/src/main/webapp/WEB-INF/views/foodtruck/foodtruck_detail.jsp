@@ -26,7 +26,7 @@ input[name="grade"]{
 }
 
 .star_point{
-  font-size:30pt;
+  font-size:20pt;
   color:gold;
   cursor:pointer;
 }
@@ -120,28 +120,28 @@ input[name="grade"]:checked + .star_point~label{
     <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">WHERE TO FIND US</span></h5>
     <p style="text-align:center">Find us at some address at some place.</p>
     <div id="googleMap" class="w3-sepia" style="width:100%;height:400px;"></div>
-    <br>
+
     <c:if test="${sessionScope.memberVO!=null}">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW</span></h5>
-    <form action="${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do" target="_blank" method="post">
+   <form action="${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do" target="_blank" method="post">
     <input type="radio" name="grade" id="star-1" value="1"/>
-    <label for="star-1" class="star_point">
+    <label for="star-1" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
     <input type="radio" name="grade" id="star-2" value="2"/>
-    <label for="star-2" class="star_point">
+    <label for="star-2" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
     <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
-    <label for="star-3" class="star_point">
+    <label for="star-3" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
     <input type="radio" name="grade" id="star-4" value="4"/>
-    <label for="star-4" class="star_point">
+    <label for="star-4" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
     <input type="radio" name="grade" id="star-5" value="5"/>
-    <label for="star-5" class="star_point">
+    <label for="star-5" class="star_point" style="width:20px">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
 <table class="content">
@@ -169,10 +169,10 @@ input[name="grade"]:checked + .star_point~label{
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>평점</th>
-        <th>100자평</th>
-        <th>글쓴이</th>
-        <th>날짜</th>
+        <th>SCORE</th>
+        <th>COMMENT</th>
+        <th>WRITER</th>
+        <th>DATE</th>
       </tr>
     </thead>
     <tbody>
