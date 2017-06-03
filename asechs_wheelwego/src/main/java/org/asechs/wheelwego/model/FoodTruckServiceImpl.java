@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
@@ -64,14 +63,15 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		foodTruckDAO.registerReview(reviewVO);
 	}
 	@Override
-	public List<ReviewVO> getReviewListByTruckNumber(String reviewPageNo, String foodtruckNumber) {
+	public ListVO getReviewListByTruckNumber(String reviewPageNo, String foodtruckNumber) {
 		int totalCount =foodTruckDAO.getReivewTotalCount(foodtruckNumber);
 		PagingBean pagingBean=null;
 		if(reviewPageNo==null)
-			pagingBean=new PagingBean(totalCount, Integer.parseInt("1"));
+			pagingBean=new PagingBean(Integer.parseInt("1"),totalCount,foodtruckNumber);
 		else
-			pagingBean=new PagingBean(totalCount, Integer.parseInt(reviewPageNo));
-		foodTruckDAO.getReviewListByTruckNumber(pagingBean);
-		return null;
+			pagingBean=new PagingBean( Integer.parseInt(reviewPageNo),totalCount,foodtruckNumber);
+		ListVO pagingList=new ListVO();
+		pagingList.setReviewList(foodTruckDAO.getReviewListByTruckNumber(pagingBean));
+		return pagingList;
 	}
 }

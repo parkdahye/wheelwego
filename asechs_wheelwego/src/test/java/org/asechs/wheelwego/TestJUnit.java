@@ -2,9 +2,11 @@ package org.asechs.wheelwego;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.FoodTruckDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
+import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +33,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
    <version>4.9</version>
    <scope>test</scope>
   </dependency>  
+  
+  
  */  
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
@@ -44,6 +48,7 @@ public class TestJUnit {
 	@Test
 	public void test(){
 
+		System.out.println(foodService.getReviewListByTruckNumber("1", "1234"));
 /*		String id = "customer01";
 		String password = "1234";
 		String memberName = "김래발";

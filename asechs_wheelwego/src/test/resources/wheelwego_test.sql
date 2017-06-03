@@ -183,8 +183,11 @@ select m.member_name as memberName from freeboard f, member m where m.id=f.id an
 
 
 insert into review(review_no,foodtruck_number,customer_id,review_content,review_timeposted,grade) 
-values(review_seq.nextval,'1234','customer1','맛있네여~~',sysdate,4);
+values(review_seq.nextval,'1234','customer2','굿~~',sysdate,4);
+insert into review(review_no,foodtruck_number,customer_id,review_content,review_timeposted,grade) 
+values(review_seq.nextval,'1234','customer1','맛있음~~',sysdate,4);
 
+SELECT * FROM FOODTRUCK
 select *
 from
 (select row_number() over(order by review_no desc) as rnum ,review_no,foodtruck_number,customer_id,

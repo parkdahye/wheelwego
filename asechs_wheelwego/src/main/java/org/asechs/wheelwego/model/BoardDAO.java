@@ -1,11 +1,9 @@
 package org.asechs.wheelwego.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
 import org.asechs.wheelwego.model.vo.FileVO;
-import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 

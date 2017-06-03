@@ -13,5 +13,5 @@ public interface FoodTruckService {
 	ListVO resultFoodTruckList(List<TruckVO> searchTruckList, String pageNo);
 	List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo);
 	void registerReview(ReviewVO reviewVO);
-	List<ReviewVO> getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber);
+	ListVO getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber);
 }
