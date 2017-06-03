@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
@@ -42,12 +43,18 @@ public class TestJUnit {
 	@Resource
 	private MemberService service;
 	@Resource
+	private FoodTruckService foodtruckService;
+	@Resource
+	private BoardDAO boardDAO;
+	@Resource
 	private FoodTruckService foodService;
 	@Resource
 	private MypageDAO mypageDAO;
 	@Test
 	public void test(){
-
+		//System.out.println(foodtruckService.foodtruckDetail("80나0001"));
+		//System.out.println(foodtruckService.foodListDetail("80나0001"));
+		System.out.println(foodtruckService.foodTruckAndMenuDetail("80나0001"));
 		System.out.println(foodService.getReviewListByTruckNumber("1", "1234"));
 /*		String id = "customer01";
 		String password = "1234";
@@ -63,6 +70,7 @@ public class TestJUnit {
 		//System.out.println(service.getMemberPassword(id, password));
 		//service.deleteMember(id);
 		
+		/*String id = "customer01";
 		String id = "seller07";
 		String password = "1234";
 		String memberName = "김래발";
@@ -70,6 +78,10 @@ public class TestJUnit {
 		String address = "경기도 성남시 분당구";
 		String addressDetail = "삼평동";
 		String phoneNumber = "01000000000";
+		String memberType = "customer";
+		String businessNumber = null;
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
+		
 		String memberType = "seller";
 		String businessNumber = "0000000000";
 
@@ -87,10 +99,15 @@ public class TestJUnit {
 		//service.deleteMember(id);
 		
 		System.out.println(foodService.searchFoodTruckList("끼니"));
+
 */		
 		
-		List<TruckVO> truckList = foodService.foodtruckList();
+/*		List<TruckVO> truckList = foodService.foodtruckList();
 		System.out.println(truckList);
+
+		List<TruckVO> truckVO = mypageService.myWishList("customer01");
+		System.out.println(truckVO);
+		System.out.println(foodService.searchFoodTruckList("끼니"));*/
 	}
 }
 

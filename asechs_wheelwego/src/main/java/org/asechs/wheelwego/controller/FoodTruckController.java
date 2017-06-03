@@ -36,7 +36,17 @@ public class FoodTruckController {
 		System.out.println("searchFoodTruckList"+name);
 		return new ModelAndView("redirect:pagingTruckList.do","name",name);
 	}
-	
+	/**
+	 * 정현지 푸드트럭 상세보기
+	 * @param foodtruck_number
+	 * @return TruckVO
+	 */
+	@RequestMapping("foodTruckAndMenuDetail.do")
+	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo){
+		TruckVO truckDetail = foodTruckService.foodTruckAndMenuDetail(foodtruckNo);
+		System.out.println(truckDetail);
+		return new ModelAndView("foodtruck/foodtruck_detail.tiles","truckDetailInfo",truckDetail);
+	}
 	
 	/**
 	 * 황윤상 GPS 기반 푸드트럭수동검색
@@ -60,4 +70,5 @@ public class FoodTruckController {
 		
 		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "truckList", searchTruckList);
 	}	
+
 }

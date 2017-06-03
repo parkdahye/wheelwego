@@ -70,7 +70,7 @@ function geoFindMe() {
                 var extraAddr = ''; // 조합형 주소 변수
 
                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                if (data.userSelectedType == 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     fullAddr = data.roadAddress;
 
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
@@ -78,7 +78,7 @@ function geoFindMe() {
                 }
 
                 // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                if(data.userSelectedType === 'R'){
+                if(data.userSelectedType == 'R'){
                     //법정동명이 있을 경우 추가한다.
                     if(data.bname !== ''){
                         extraAddr += data.bname;
@@ -109,6 +109,10 @@ function geoFindMe() {
             }
         }).open();
     }
+    // 현지 : hover + click text
+    function hoverClick(val){
+        location.href ="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+val;
+	}
 </script>
 
 
@@ -128,13 +132,10 @@ function geoFindMe() {
                 <li>
                  <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-map-marker fa-3x"></i></a>
                  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;" id="roundCorner">
-                 
-	              <form>
-	              	   <input type="hidden" name = "name" id = "name">
-					   <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style="">
-					   <input class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" value="자동검색" style="">
-				  </form>				
-                 
+	              <form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
+					   <button class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style=""/>
+					  <button class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" type="submit" value="자동검색" />
+					</form>				
 <!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
 					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
 					  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
@@ -173,12 +174,12 @@ function geoFindMe() {
          <div class="col-lg-4 col-sm-6 portfolio-item" >
             <div class="flip-container"
                ontouchstart="this.classList.toggle('hover');" style="margin: 0 auto;">
-               <div class="flipper">
-                  <a href="#portfolioModal1" class="portfolio-link"
+               <div class="flipper">  
+                  <a href="#portfolioModal1" onclick="hoverClick(this.id)" id=${truckVO.foodtruckNumber} class="portfolio-link"
                      data-toggle="modal">
                      <div class="front" >
                         <img class="img-circle  center-block food-img img-responsive"
-                           src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}"
+                           src="${pageContext.request.contextPath}/resources/img/foodtruck/${truckVO.fileVO.filepath}"
                            alt="" >
                      </div>
                      <div class="back cbx-back-side">
@@ -191,7 +192,6 @@ function geoFindMe() {
             </div>
          </div>
          </c:forEach>
-
        </div>
       <!-- row -->
       <hr>

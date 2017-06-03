@@ -32,22 +32,23 @@ public class MypageController {
 			return new ModelAndView("main_home.tiles");
 		} else {
 			// 세션에 해당하는 아이디의 wishlist정보를 가져옴.
-			ModelAndView mv = new ModelAndView();
 			MemberVO sessionMemberVO = (MemberVO) session.getAttribute("memberVO");
-			List<WishlistVO> wishlist = mypageService.myWishList(sessionMemberVO.getId());
-/* 
+			List<TruckVO> wishlist = mypageService.myWishList(sessionMemberVO.getId());
+			
 			for (int i = 0; i < wishlist.size(); i++)
-				System.out.println(wishlist.get(i));*/
-
+				System.out.println(wishlist.get(i));
+			
 			return new ModelAndView("mypage/mypage_wishlist.tiles", "wishlist", wishlist);
 		}
 	}
+	
 	@RequestMapping(value = "afterLogin_mypage/deleteWishList.do", method = RequestMethod.POST)
-	//@RequestMapping("afterLogin_mypage/deleteWishList.do")
-	public ModelAndView deleteWishList(String id, String foodTruckNumber){
-		WishlistVO wishlistVO = new WishlistVO(foodTruckNumber, id);
+	@ResponseBody
+	public String deleteWishList(String id, String foodtruckNumber){
+		System.out.println(id + "," + foodtruckNumber);
+		WishlistVO wishlistVO = new WishlistVO(foodtruckNumber, id);
 		mypageService.deleteWishList(wishlistVO);
-		return new ModelAndView();
+		return "success";
 	}
 	/**
 	 * 판매자가
@@ -55,7 +56,7 @@ public class MypageController {
 	 * 판매자 아이디에 해당하는 푸드트럭이  테이블에 존재하는지 검사하여
 	 * 존재한다면 푸드트럭 정보를 같이 보내준다.
 	 * @return
-	 */
+	 */	
 	@RequestMapping("afterLogin_mypage/mypage.do")
 	public ModelAndView showMyTruckpage(HttpServletRequest request){
 		HttpSession session= request.getSession(false);

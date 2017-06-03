@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -103,7 +104,10 @@ body, html {
       <h5>Soda</h5>
       <p class="w3-text-grey">Coke, Sprite, Fanta, etc. 2.50</p>
     </div>  
-    <img src="${pageContext.request.contextPath}/resources/img/menu/${truckDetailInfo.fileVO.filepath}" style="width:100%;max-width:1000px;margin-top:32px;">
+
+     <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
+    <img src="${pageContext.request.contextPath}/resources/img/menu/${foodList.fileVO.filepath}" style="width:100%;max-width:1000px;margin-top:32px;">
+ 	</c:forEach>
   </div>
 </div>
 
@@ -205,3 +209,4 @@ function openMenu(evt, menuName) {
 document.getElementById("myLink").click();
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+
