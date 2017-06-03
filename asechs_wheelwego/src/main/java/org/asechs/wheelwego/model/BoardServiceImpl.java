@@ -76,7 +76,39 @@ public class BoardServiceImpl implements BoardService {
 	//자유게시판 업데이트
 	@Override
 	public void updateBoard(BoardVO vo) {
-		boardDAO.updateBoard(vo);
+		// 사용자가 수정하고 하는 파일명
+		for(int i=0;i<vo.getFile().size();i++){
+			System.out.println("controller 에서 보낸 파일 이름 :"+vo.getFile().get(i).getOriginalFilename());
+		}
+		String contentNo=boardDAO.updateBoard(vo);
+		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+		List<MultipartFile> fileList=vo.getFile();
+	
+		for(int i=0; i<fileList.size(); i++){
+			if(fileList.isEmpty()==false){
+				BoardVO boardVO=new BoardVO();
+				FileVO fileVO=new FileVO();
+				String fileName=fileList.get(i).getOriginalFilename();
+				System.out.println(fileName);
+				if(fileName.equals("")==false){
+					try{
+						fileList.get(i).transferTo(new File(uploadPath+fileName));
+						// 기존의 존재하는 파일명 갖고오기
+						List<FileVO> fvo= boardDAO.getFreeBoardFilePath(contentNo);
+						for(int j=0;j<fvo.size();j++){
+							fileVO.setBeforefilepath(fvo.get(j).getFilepath());
+						}
+						fileVO.setNo(contentNo);
+						fileVO.setFilepath(fileName);
+						boardVO.setFileVO(fileVO);
+						System.out.println(boardVO);
+						boardDAO.freeboardUpdateFileUpload(boardVO);
+					}catch(IllegalStateException | IOException e){
+						e.printStackTrace();
+						}
+					}
+			}
+		}
 	}
 
 	@Override

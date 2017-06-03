@@ -29,7 +29,7 @@ public interface BoardDAO {
 
 	String freeboardWrite(BoardVO bvo);
 
-	void updateBoard(BoardVO vo);
+	String updateBoard(BoardVO vo);
 
 	MemberVO getNameById(BoardVO bvo);
 
@@ -62,6 +62,8 @@ public interface BoardDAO {
 	MemberVO qna_getNameById(BoardVO bvo);
 
 	BoardVO getqnaBoardDetail(String no);
+
+	void freeboardUpdateFileUpload(BoardVO boardVO);
 
 
 }
