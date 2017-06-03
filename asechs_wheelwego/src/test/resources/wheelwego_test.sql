@@ -9,7 +9,7 @@ select * from FOODTRUCKFILE
 select * from customer
 select * from FOODTRUCK
 select * from REVIEW
-select * from FOODTRUCKFILE where foodtruck_number='1010101010'
+select * from FOODTRUCKFILE where foodtruck_number='80나0036'
 select * from FOODTRUCKFILE
 select * from menu
 select * from menu where foodtruck_number='80나0001'

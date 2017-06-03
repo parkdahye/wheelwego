@@ -121,9 +121,9 @@ input[name="grade"]:checked + .star_point~label{
     <p style="text-align:center">Find us at some address at some place.</p>
     <div id="googleMap" class="w3-sepia" style="width:100%;height:400px;"></div>
     <br>
-<c:if test="${sessionScope.memberVO!=null}">
+    <c:if test="${sessionScope.memberVO!=null}">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW</span></h5>
-    <form action="${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do" target="_blank" method="post" id="reviewTimePosted">
+    <form action="${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do" target="_blank" method="post">
     <input type="radio" name="grade" id="star-1" value="1"/>
     <label for="star-1" class="star_point">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
@@ -144,7 +144,6 @@ input[name="grade"]:checked + .star_point~label{
     <label for="star-5" class="star_point">
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
-    
 <table class="content">
    <tr>
       <td>
@@ -162,10 +161,9 @@ input[name="grade"]:checked + .star_point~label{
       </td>
    </tr>
 </table>
-</c:if>
 </form>
-
-    <form action="${pageContext.request.contextPath}/getReviewListByTruckNumber.do">
+</c:if>
+    <form>
     <!-- review 결과 table -->
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW LIST</span></h5>      
   <table class="table table-hover">
@@ -178,12 +176,14 @@ input[name="grade"]:checked + .star_point~label{
       </tr>
     </thead>
     <tbody>
+     <c:forEach items="${reviewlist.reviewList}" var="reviewVO">
       <tr>
-        <td>${reviewlist.reviewNo}</td>
-        <td>${reviewlist.reviewContent}</td>
-        <td>${reviewlist.customerId}</td>
-        <td>${reviewlist.reviewTimeposted}</td>
+        <td>${reviewVO.grade}</td>
+        <td>${reviewVO.reviewContent}</td>
+        <td>${reviewVO.customerId}</td>
+        <td>${reviewVO.reviewTimeposted}</td>
       </tr>
+      </c:forEach>
     </tbody>
   </table>
 <!-- review 결과 테이블 -->
@@ -231,16 +231,9 @@ document.getElementById("myLink").click();
 <script>
    $(document).ready(function(){
       $("#registerBtn").click(function(){
-         //var grade=$(this).parent().parent().find(":input[name=grade]:checked");
-         //var reviewContent=$(this).parent().parent().find(":input[name=reviewContent]").val();
          var grade = $("input[name=grade]:checked").val();
          var reviewContent = $("#content").val();
          var d = new Date();
-       /*   alert(d.toString());
-         alert(grade);
-         alert(reviewContent);
-         alert("${sessionScope.memberVO.id}");
-         alert("${truckDetailInfo.foodtruckNumber}"); */
          if(confirm("리뷰를 등록하시겠습니까?")){
             $.ajax({
             	type:"post",
@@ -249,6 +242,7 @@ document.getElementById("myLink").click();
                 +"&reviewTimeposted="+d.toString(),
                 success:function(result){
                 	alert("등록 완료");
+                	location.href="${pageContext.request.contextPath}/getReviewListByTruckNumber.do?foodtruckNumber=${truckDetailInfo.foodtruckNumber}";
                 }
             })
          }

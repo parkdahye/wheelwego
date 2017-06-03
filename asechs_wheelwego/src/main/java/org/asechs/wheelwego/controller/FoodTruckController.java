@@ -3,6 +3,7 @@ package org.asechs.wheelwego.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.vo.ListVO;
@@ -23,13 +24,11 @@ public class FoodTruckController {
 	@RequestMapping("pagingTruckList.do")
 	public ModelAndView pagingTruckList(String name, String pageNo) {
 		List<TruckVO> searchTruckList = foodTruckService.searchFoodTruckList(name);
-		System.out.println(searchTruckList);
 		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "pagingList", foodTruckService.resultFoodTruckList(searchTruckList,pageNo));		
 	}
 
 	@RequestMapping("searchFoodTruckList.do")
 	public ModelAndView searchFoodTruckList(String name){
-		System.out.println("searchFoodTruckList"+name);
 		return new ModelAndView("redirect:pagingTruckList.do","name",name);
 	}
 	/**
@@ -38,12 +37,16 @@ public class FoodTruckController {
 	 * @return TruckVO
 	 */
 	@RequestMapping("foodTruckAndMenuDetail.do")
-	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo){
+	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo,String reviewPageNo){
 		TruckVO truckDetail = foodTruckService.foodTruckAndMenuDetail(foodtruckNo);
-		System.out.println(truckDetail);
-		return new ModelAndView("foodtruck/foodtruck_detail.tiles","truckDetailInfo",truckDetail);
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("foodtruck/foodtruck_detail.tiles");
+		mv.addObject("truckDetailInfo", truckDetail);
+		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodtruckNo);
+		mv.addObject("reviewlist", reviewList);
+		return mv;
 	}
-	
+
 	/**
 	 * 황윤상 GPS 기반 푸드트럭수동검색
 	 * @param name
@@ -67,7 +70,7 @@ public class FoodTruckController {
 		return new ModelAndView("foodtruck/foodtruck_detail.tiles", "truckList", searchTruckList);
 	}	
 	/**
-	 * 리뷰 동록하기
+	 * 리뷰 등록하기
 	 * @param reviewVO
 	 */
 	@RequestMapping(value = "afterLogin_foodtruck/registerReview.do", method = RequestMethod.POST)
@@ -77,9 +80,16 @@ public class FoodTruckController {
 		foodTruckService.registerReview(reviewVO); // 푸드 트럭 등록
 		return "foodtruck/foodtruck_detail.tiles";
 	}
+	/**
+	 * 리뷰 list 가져오기
+	 * @param reviewPageNo
+	 * @param foodtruckNumber
+	 * @return reviewVO
+	 */
 	@RequestMapping("getReviewListByTruckNumber.do")
-	public ModelAndView getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber){
-		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodTruckNumber);
+	public ModelAndView getReviewListByTruckNumber(String reviewPageNo, String foodtruckNumber){
+		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodtruckNumber);
+		System.out.println(reviewList);
 		return new ModelAndView("foodtruck/foodtruck_detail.tiles","reviewlist",reviewList);
 	}
 }
