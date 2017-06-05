@@ -17,15 +17,18 @@ public class TruckVO {
 	private int wishlistCount;
 	private double latitude;
 	private double longitude;
+	private String address;
 
 	public TruckVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	public TruckVO(String foodtruckNumber, String sellerId, String foodtruckName, String introduction,
 			MultipartFile foodtruckFile, FileVO fileVO, List<FoodVO> foodList, String registerTimeposted,
-			double avgGrade, int wishlistCount, double latitude, double longitude) {
+			double avgGrade, int wishlistCount, double latitude, double longitude, String address) {
 		super();
 		this.foodtruckNumber = foodtruckNumber;
 		this.sellerId = sellerId;
@@ -39,7 +42,10 @@ public class TruckVO {
 		this.wishlistCount = wishlistCount;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.address = address;
 	}
+
+
 
 	public String getFoodtruckNumber() {
 		return foodtruckNumber;
@@ -137,13 +143,30 @@ public class TruckVO {
 		this.longitude = longitude;
 	}
 
+	
+	
+	public String getAddress() {
+		return address;
+	}
+
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "TruckVO [foodtruckNumber=" + foodtruckNumber + ", sellerId=" + sellerId + ", foodtruckName="
 				+ foodtruckName + ", introduction=" + introduction + ", foodtruckFile=" + foodtruckFile + ", fileVO="
 				+ fileVO + ", foodList=" + foodList + ", registerTimeposted=" + registerTimeposted + ", avgGrade="
 				+ avgGrade + ", wishlistCount=" + wishlistCount + ", latitude=" + latitude + ", longitude=" + longitude
-				+ "]";
+				+ ", address=" + address + "]";
 	}
+
+
+
 
 }
