@@ -9,6 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result property="sellerId" column="seller_id" />
       <result property="foodtruckName" column="foodtruck_name"/>     
 	  <result property="fileVO.filepath" column="foodtruck_filepath"/>
+	  <result property="registerTimeposted" column="register_timeposted"/>
+	  <result property="wishlistCount" column="wishlist_count"/>
+	  <result property="avgGrade" column="avg_grade"/>
 	  <result property="foodList.fileVO.filepath" column="menu_filename"/>
 </resultMap>
 <resultMap type="foodVO" id="foodRM">
@@ -79,6 +82,13 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 </select>
 
 <select id="getReivewTotalCount" resultType="int">
+	select count(*) from review where foodtruck_number=#{value}
+</select>
+<select id="getAvgGradeByTruckNumber" resultType="int">
+	select trunc(avg(grade),1) from review  where foodtruck_number=#{value} group by foodtruck_number
+</select>
+
+<select id="findTruckNumberInReview" resultType="int">
 	select count(*) from review where foodtruck_number=#{value}
 </select>
 </mapper>

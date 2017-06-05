@@ -65,6 +65,8 @@ input[name="grade"]:checked + .star_point~label{
 <div class="w3-panel w3-leftbar w3-light-grey" >
     <p><strong>Opening hours:</strong> everyday from 6am to 5pm.</p>
     <p><strong>Address:</strong> 15 Adr street, 5015, NY</p>
+   <p><strong>Grade:</strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <strong>WishList:</strong> ${requestScope.truckDetailInfo.wishlistCount}</p>
 </div>
   </div>
 </div>
@@ -77,40 +79,19 @@ input[name="grade"]:checked + .star_point~label{
   
     <div class="w3-row w3-center w3-card-2 w3-padding">
       <a href="javascript:void(0)" onclick="openMenu(event, 'Eat');" id="myLink">
-        <div class="w3-col s6 tablink">Eat</div>
-      </a>
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');">
-        <div class="w3-col s6 tablink">Drink</div>
+        <div class="w3-col s12 tablink">Eat</div>
       </a>
     </div>
 
     <div id="Eat" class="w3-container menu w3-padding-48 w3-card-2">
        <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
-      <h5>${foodList.menuName }</h5>
-      <p class="w3-text-grey">${foodList.menuPrice}</p><br>
+       <img src="${pageContext.request.contextPath}/resources/img/menu/${foodList.fileVO.filepath}" style="width:100%"><br>
+      <h5 class="text-center">메뉴 : ${foodList.menuName }</h5>
+      <p class="w3-text-grey text-center">가격 : ${foodList.menuPrice}</p><br><br>
       </c:forEach>
     </div>
 
-    <div id="Drinks" class="w3-container menu w3-padding-48 w3-card-2">
-      <h5>Coffee</h5>
-      <p class="w3-text-grey">Regular coffee 2.50</p><br>
-    
-      <h5>Chocolato</h5>
-      <p class="w3-text-grey">Chocolate espresso with milk 4.50</p><br>
-    
-      <h5>Corretto</h5>
-      <p class="w3-text-grey">Whiskey and coffee 5.00</p><br>
-    
-      <h5>Iced tea</h5>
-      <p class="w3-text-grey">Hot tea, except not hot 3.00</p><br>
-    
-      <h5>Soda</h5>
-      <p class="w3-text-grey">Coke, Sprite, Fanta, etc. 2.50</p>
-    </div>  
 
-     <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
-    <img src="${pageContext.request.contextPath}/resources/img/menu/${foodList.fileVO.filepath}" style="width:100%;max-width:1000px;margin-top:32px;">
- 	</c:forEach>
   </div>
 </div>
 

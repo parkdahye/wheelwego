@@ -185,7 +185,9 @@ function geoFindMe() {
                      </div>
                      <div class="back cbx-back-side">
                         <div class="text-center back-single-text">
-                           <p>${truckVO.foodtruckName}</p><p class="truck-simple-info"><br><br><br>위치<br>평점</p>
+                           <p>${truckVO.foodtruckName}</p><p class="truck-simple-info"><br><br><br>
+                           위치<br>
+                           평점 : ${truckVO.avgGrade }</p>
                         </div>
                      </div>
                   </a>

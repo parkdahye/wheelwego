@@ -52,7 +52,7 @@ public class FileManager {
 	// file upload method needed inner class
 	// 파일의 저장 경로 및 파일이름 새로 생성
 	
-	public String rename(MultipartFile file) { //파일이 들어오면 
+	public String rename(MultipartFile file,String key) { //파일이 들어오면 
 			String fileName = file.getOriginalFilename();
 	        String fileExt = "";
 	        int i = -1;
@@ -61,7 +61,7 @@ public class FileManager {
 	            fileName = fileName.substring(0,i);
 	        }
 	        System.out.println("rename");
-	       newFileName =( new Date( ).getTime( ) / 1000) +"_"+ fileName+fileExt;
+	       newFileName =/*( new Date( ).getTime( ) / 1000)*/key +/*"_"+ fileName+*/fileExt;
 			return newFileName; //rename된 파일을 반환
 	}
 }

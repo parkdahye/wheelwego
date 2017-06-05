@@ -6,10 +6,12 @@
         	<c:when test="${menuList!='[]'}">
         	<br>
        <form class="menuForm" onsubmit="return checkFunction()" method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMenu.do" enctype="multipart/form-data">
+			<input type="hidden" name="sellerId" value="${sessionScope.memberVO.id}" required="required">
         	<c:forEach items="${menuList}" var="foodVO" begin="0" end="2" varStatus="status">
         <table style="border: none; padding: 15px" class="table table-hover">
          	<tr>
-         		<td>${status.index+1}<input type="hidden" name="foodList[${status.index}].menuId" value="${foodVO.menuId}" required="required"></td>
+         		<td>${status.index+1}<input type="hidden" name="foodList[${status.index}].menuId" value="${foodVO.menuId}" required="required">
+         		</td>
          		<td><input type="text" name="foodList[${status.index}].menuName" class="menuName" placeholder="메뉴이름" value="${foodVO.menuName}" required="required"></td>
          		<td><input type="text" name="foodList[${status.index}].menuPrice" class="menuPrice"  placeholder="가격" value="${foodVO.menuPrice}" required="required"></td>
          		<td><input type="file" name="foodList[${status.index}].menuFile" class="menuFile" >

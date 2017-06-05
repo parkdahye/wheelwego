@@ -118,7 +118,9 @@ public class MypageController {
 		return"redirect:/afterLogin_mypage/myfoodtruck_menuList.do";
 	}
 	@RequestMapping("afterLogin_mypage/updateMenu.do")
-	public String updateMenu(TruckVO truckVO, HttpServletRequest request){
+	public String updateMenu(TruckVO truckVO, String sellerId,HttpServletRequest request){
+		String foodtruckNumber=mypageService.findtruckNumberBySellerId(sellerId);
+		truckVO.setFoodtruckNumber(foodtruckNumber);
 		mypageService.updateMenu(truckVO);
 		return "mypage/updateMenu_result.tiles";
 	}
