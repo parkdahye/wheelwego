@@ -5,6 +5,7 @@ import java.util.List;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.vo.WishlistVO;
 
 public interface FoodTruckService {
 	List<TruckVO> foodtruckList();
@@ -15,5 +16,7 @@ public interface FoodTruckService {
 	TruckVO foodTruckAndMenuDetail(String foodtruckNo);
 	void registerReview(ReviewVO reviewVO);
 	ListVO getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber);
+	void registerBookMark(WishlistVO wishlistVO);
+	int getBookMarkCount(WishlistVO wishlistVO);
 
 }

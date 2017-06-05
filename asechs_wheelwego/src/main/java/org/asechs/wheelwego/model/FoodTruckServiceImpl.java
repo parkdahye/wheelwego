@@ -9,6 +9,7 @@ import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -86,5 +87,15 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		pagingList.setReviewList(foodTruckDAO.getReviewListByTruckNumber(pagingBean));
 		pagingList.setPagingBean(pagingBean);
 		return pagingList;
+	}
+	@Override
+	public void registerBookMark(WishlistVO wishlistVO) {
+		foodTruckDAO.registerBookMark(wishlistVO);
+		
+	}
+	@Override
+	public int getBookMarkCount(WishlistVO wishlistVO) {
+		
+		return foodTruckDAO.getBookMarkCount(wishlistVO);
 	}
 }

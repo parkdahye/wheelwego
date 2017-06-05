@@ -1,6 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<Script type="text/javascript">
+
+$(document).ready(function(){
+	$("input#insertBtn").click(function(){
+	  var foodtruckNumber = $(this).attr('name');
+	  var id = "${sessionScope.memberVO.id}";
+	 // var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
+	
+	  
+	  $.ajax({
+		type:"post",
+		url:"${pageContext.request.contextPath}/afterLogin_foodtruck/registerBookMark.do",
+		data: {id: id, foodtruckNumber: foodtruckNumber},
+		success:function(data){
+			if(data=="on"){
+				alert("단골트럭으로 등록!");
+				$("input#insertBtn").html("<img alt='단골트럭 등록' src='${pageContext.request.contextPath }/resources/img/foodtruck/heart"+data+".png' style='position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;'>");
+				location.reload();		
+			}else{
+				alert("단골트럭 등록해제");			
+				location.reload();
+			}
+		}
+	});
+});
+});
+</script>
 
 <div class="container-fluid bg-grey">
   <h4>Search Result</h4><br>
@@ -8,8 +35,10 @@
   <!-- 이슈관리: 변수명으로 받아와야 함 (truckList) -->
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-xs-6">
-      <div class="thumbnail">
+      <div style="position:relative;" class="thumbnail">
        <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}"><img src="resources/img/foodtruck/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
+        <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png" 
+			 	style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
         <p style="font-size:17px;">location / review</p>
     </div>  

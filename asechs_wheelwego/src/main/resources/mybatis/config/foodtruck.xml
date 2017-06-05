@@ -81,6 +81,13 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 <select id="getReivewTotalCount" resultType="int">
 	select count(*) from review where foodtruck_number=#{value}
 </select>
+<insert id="registerBookMark" parameterType="wishListVO">
+	insert into wishlist(customer_id,foodtruck_number )
+	  values(#{customerId},#{foodTruckNumber})
+</insert>
+<select id="getBookMarkCount" parameterType="wishListVO" resultType="int">
+	select count(*) from wishlist where foodtruck_number = #{foodTruckNumber} and customer_id = #{customerId} 
+</select>
 </mapper>
  
 

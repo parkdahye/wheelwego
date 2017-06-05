@@ -113,6 +113,8 @@ update member set password='1234' where id='java01' and member_name='김래발' 
 
 select * from member;
 
+delete from wishlist;
+
 delete member where id = 'java01';
 update member set password=#{password}, address=#{address}, addressdetail = #{addressDetail}, phonenumber=#{phoneNumber}, postcode=#{postCode} where id=#{id}
 
@@ -318,12 +320,15 @@ where rnum between 1 and 5;
 
 select * from freeboardfile
 
+insert into wishlist();
 
 
+select * from wishlist;
+
+select count(*) from wishlist where foodtruck_number = '80나0003' and customer_id = 'customer01';
 
 
-
-
+select count(*) from wishlist where foodtruck_number = '80나0003' and customer_id = 'customer01';
 
 
 
