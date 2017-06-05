@@ -35,6 +35,22 @@
     	</div>
     	<div>
     		<aside>
+    			<label for="foodtruck">평점</label>
+    		</aside>
+    		<div>
+    				${truckVO.avgGrade}
+    		</div>
+    	</div>
+    	<div>
+    		<aside>
+    			<label for="foodtruck">좋아요</label>
+    		</aside>
+    		<div>
+    				${truckVO.wishlistCount}
+    		</div>
+    	</div>
+    	<div>
+    		<aside>
     			<label for="foodtruck">푸드트럭 소개</label>
     		</aside>
     		<div>
