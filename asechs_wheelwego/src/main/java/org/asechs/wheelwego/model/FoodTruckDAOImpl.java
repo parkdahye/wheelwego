@@ -63,4 +63,12 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	public int getReivewTotalCount(String foodtruckNumber) {
 		return sqlSessionTemplate.selectOne("foodtruck.getReivewTotalCount",foodtruckNumber);
 	}
+	@Override
+	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
+		return sqlSessionTemplate.selectOne("foodtruck.getAvgGradeByTruckNumber", foodtruckNumber);
+	}
+	@Override
+	public int findTruckNumberInReview(String foodtruckNumber) {
+		return sqlSessionTemplate.selectOne("foodtruck.findTruckNumberInReview", foodtruckNumber);
+	}
 }

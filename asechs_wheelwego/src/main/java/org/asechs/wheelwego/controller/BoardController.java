@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.asechs.wheelwego.model.BoardService;
 import org.asechs.wheelwego.model.vo.BoardVO;
@@ -63,7 +64,8 @@ public class BoardController {
 		@RequestMapping("freeboard_write.do")
 		public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
 			boardService.freeboardWrite(bvo, request);
-			return "redirect:board/business_detail_content.do?no=" + bvo.getNo();
+			//return "redirect:freeboard_list.do";
+			return "redirect:board/freeboard_detail_content.do?no=" + bvo.getNo();
 		}
 		
 		// 호겸 작성. 자유게시판 게시물 삭제
@@ -75,19 +77,20 @@ public class BoardController {
 		
 		// 호겸 작성. 자유게시판 게시물 수정 폼으로 가기
 		@RequestMapping("freeboard_update_form.do")
-		public String freeboard_update_form(String no, Model model) {
-			//호겸이가 한거 보존
-			//BoardVO bvo = boardService.getFreeBoardDetail(no);
-			//model.addAttribute("detail_freeboard", bvo);
+		public String freeboard_update_form(String no, Model model,HttpServletRequest request) {
+			//아이디를 받아와서 작성자를 뽑아야된다
+			BoardVO bvo = boardService.getFreeBoardDetail(no);
+			MemberVO name = boardService.getNameById(bvo);
+			model.addAttribute("name", name);
+			model.addAttribute("detail_freeboard", bvo);
 			return "board/freeboard_update_form.tiles";
 		}
 		
 		// 호겸 작성. 자유게시판 게시물 수정 해버리기
 		@RequestMapping("updateBoard.do")
 		public String updateBoard(BoardVO vo) {
-			System.out.println(vo.getNo());
-			System.out.println(vo);
 			boardService.updateBoard(vo);
+			
 			return "redirect:board/freeboard_detail_content.do?no=" + vo.getNo();
 		}
 		

@@ -90,7 +90,6 @@ select password from member where id = 'java01';
 select * from member;
 
 select * from seller;
-select * from foodtruck;
 select * from wishlist ;
 select * from wishlist where id = 'customer01';
 -- 푸드트럭 위시리스트 sql문
@@ -310,3 +309,21 @@ from
 review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
 where foodtruck_number='1234')
 where rnum between 1 and 5;
+
+	insert into freeboardfile(freeboard_no, freeboardfile_filepath)values(#{fileVO.no},#{fileVO.filepath})
+
+	update freeboardfile set freeboardfile_filepath=#{value} where freeboard_no=#{fileVO.no} and freeboardfile_filepath=#{fileVO.filepath}
+	update freeboardfile set freeboardfile_filepath='c.jpg' where freeboardfile_filepath='b.jpg' and freeboard_no=77
+
+
+select * from freeboardfile
+
+
+
+
+
+
+
+
+
+

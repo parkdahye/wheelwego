@@ -41,7 +41,7 @@ public class MypageServiceImpl implements MypageService {
 		String fileName=truckFile.getOriginalFilename();
 		if(fileName.equals("")==false){
 			try {
-				String renamedFile=fm.rename(truckFile);
+				String renamedFile=fm.rename(truckFile,tvo.getFoodtruckNumber());
 				tvo.setFileVO(new FileVO(tvo.getFoodtruckName(), renamedFile));
 				mypageDAO.registerFoodtruck(tvo);  //트럭정보 등록
 				mypageDAO.saveFilePath(new FileVO(tvo.getFoodtruckNumber(), renamedFile));
@@ -70,7 +70,7 @@ public class MypageServiceImpl implements MypageService {
 		String fileName=truckFile.getOriginalFilename();
 		if(fileName.equals("")==false){
 			try {
-			String renamedFile=fm.rename(truckFile);
+			String renamedFile=fm.rename(truckFile,truckVO.getFoodtruckNumber());
 			truckVO.setFileVO(new FileVO(truckVO.getFoodtruckNumber(), renamedFile));
 			mypageDAO.updateMyfoodtruck(truckVO);  //트럭정보 등록
 			mypageDAO.updateFilePath(truckVO.getFileVO()); //파일경로 등록
@@ -100,7 +100,7 @@ public class MypageServiceImpl implements MypageService {
 			try{
 				foodList.get(i).setFoodTruckNumber(truckNumber); //트럭넘버를 세팅
 				MultipartFile foodFile=foodList.get(i).getMenuFile(); //메뉴사진받아와서
-				String renamedFile=fm.rename(foodFile); //파일 이름 수정
+				String renamedFile=fm.rename(foodFile,truckNumber+"_"+foodList.get(i).getMenuId()); //파일 이름 수정
 				foodList.get(i).setFileVO(new FileVO(truckNumber, renamedFile));
 				mypageDAO.registerMenu(foodList.get(i)); //메뉴를 등록한다.
 				fm.uploadFile(foodFile, renamedFile); //서버에 파일 업로드
@@ -122,7 +122,7 @@ public class MypageServiceImpl implements MypageService {
 			}else{ //파일이 있으면
 				FileManager fm=new FileManager();
 				MultipartFile foodFile=foodList.get(i).getMenuFile(); //사진 받아서
-				String renamedFile=fm.rename(foodFile); //파일 이름 수정
+				String renamedFile=fm.rename(foodFile,truckVO.getFoodtruckNumber()+"_"+foodList.get(i).getMenuId()); //파일 이름 수정
 				foodList.get(i).setFileVO(new FileVO(foodList.get(i).getMenuId(),renamedFile));
 				mypageDAO.updateMenu(foodList.get(i)); //메뉴정보 수정
 				mypageDAO.updateMenuFilepath(foodList.get(i).getFileVO()); //파일 경로 수정
