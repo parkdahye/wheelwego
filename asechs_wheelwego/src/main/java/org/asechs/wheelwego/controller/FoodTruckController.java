@@ -1,9 +1,6 @@
 package org.asechs.wheelwego.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.vo.ListVO;
@@ -21,15 +18,27 @@ public class FoodTruckController {
 	private FoodTruckService foodTruckService;
 
 	/* 검색 결과 푸드트럭 리스트 */
-	@RequestMapping("pagingTruckList.do")
-	public ModelAndView pagingTruckList(String name, String pageNo) {
-		List<TruckVO> searchTruckList = foodTruckService.searchFoodTruckList(name);
-		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "pagingList", foodTruckService.resultFoodTruckList(searchTruckList,pageNo));		
+	@RequestMapping("searchFoodTruckByName.do")
+	public ModelAndView searchFoodTruckByName(String name, String pageNo, String latitude, String longitude) {
+		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");		
+		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
+		modelAndView.addObject("pagingList", listVO);
+		modelAndView.addObject("name", name);		
+		return modelAndView;
 	}
-
-	@RequestMapping("searchFoodTruckList.do")
-	public ModelAndView searchFoodTruckList(String name){
-		return new ModelAndView("redirect:pagingTruckList.do","name",name);
+	/**
+	 * 황윤상 GPS 기반 푸드트럭수동검색
+	 * @param name
+	 * @return
+	 */
+	@RequestMapping("searchFoodTruckByGPS.do")
+	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String pageNo) {
+		TruckVO gpsInfo = new TruckVO();
+		gpsInfo.setLatitude(Double.parseDouble(latitude));
+		gpsInfo.setLongitude(Double.parseDouble(longitude));
+		
+		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");	
+		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "truckList", null);
 	}
 	/**
 	 * 정현지 푸드트럭 상세보기
@@ -44,35 +53,9 @@ public class FoodTruckController {
 		mv.addObject("truckDetailInfo", truckDetail);
 		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodtruckNo);
 		mv.addObject("reviewlist", reviewList);
+		mv.addObject("avgGrade",foodTruckService.getAvgGradeByTruckNumber(foodtruckNo));
 		return mv;
 	}
-
-	/**
-	 * 황윤상 GPS 기반 푸드트럭수동검색
-	 * @param name
-	 * @return
-	 */
-	@RequestMapping("searchFoodTruckByGPS.do")
-	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String name) {
-		TruckVO gpsInfo = new TruckVO();
-		gpsInfo.setLatitude(Double.parseDouble(latitude));
-		gpsInfo.setLongitude(Double.parseDouble(longitude));
-		List<TruckVO> searchTruckList = null;
-		
-		if (name != "")
-			searchTruckList = foodTruckService.searchFoodTruckList(name);
-			
-		else
-			searchTruckList = foodTruckService.searchFoodTruckByGPS(gpsInfo);
-
-			
-		
-		return new ModelAndView("foodtruck/foodtruck_detail.tiles", "truckList", searchTruckList);
-	}	
-	/**
-	 * 리뷰 등록하기
-	 * @param reviewVO
-	 */
 	@RequestMapping(value = "afterLogin_foodtruck/registerReview.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String registerReview(ReviewVO reviewVO){

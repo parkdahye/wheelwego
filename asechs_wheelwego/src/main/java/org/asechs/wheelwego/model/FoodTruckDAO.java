@@ -10,12 +10,14 @@ import org.asechs.wheelwego.model.vo.TruckVO;
 public interface FoodTruckDAO {
 	List<TruckVO> foodtruckList();
 	List<TruckVO> searchFoodTruckList(String name);
-	List<TruckVO> pagingTruckList(PagingBean pagingBean);
-	int getTruckListTotalContentCount();
+	int getTruckListTotalContentCount(String name);
 	List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo);
 	TruckVO foodtruckDetail(String foodtruckNo);
 	List<FoodVO> foodListDetail(String foodtruckNo);
 	void registerReview(ReviewVO reviewVO);
 	List<ReviewVO> getReviewListByTruckNumber(PagingBean pagingBean);
 	int getReivewTotalCount(String foodtruckNumber);
+	List<TruckVO> getFoodTruckListByName(PagingBean pagingBean);
+	int getAvgGradeByTruckNumber(String foodtruckNumber);
+	int findTruckNumberInReview(String foodtruckNumber);
 }

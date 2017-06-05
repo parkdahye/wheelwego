@@ -17,7 +17,7 @@ create sequence survey_seq;
 create sequence customerpoint_seq;
 create sequence booking_seq;
 create sequence review_seq;
-create sequence menu_seq;
+create sequence menu_seq start with 123;;
 
 create sequence information_seq start with 51;
 create sequence informationcomment_seq;
@@ -67,6 +67,9 @@ create table foodtruck(
     seller_id varchar2(100) not null,
     foodtruck_name varchar2(100) not null,
     introduction clob not null,
+    register_timeposted date not null,
+    avg_grade BINARY_DOUBLE default 0,
+    wishlist_count number default 0,
     latitude BINARY_DOUBLE,
     longitude BINARY_DOUBLE,
     constraint foodtruck_id_fk foreign key(seller_id) references seller(seller_id) on delete cascade
@@ -154,7 +157,7 @@ create table wishlist(
 drop table wishlist;
 -------------------------------------------------------------------------------
 create table qna(
-   qna_no varchar2(100) primary key,
+   qna_no number primary key,
    id varchar2(100) not null,
    qna_title varchar2(100) not null,
    qna_content clob not null,
@@ -166,7 +169,7 @@ create table qna(
 drop table qna;
 -------------------------------------------------------------------------------qnaFile(0531)
 create table qnafile(
-   qna_no varchar2(100) not null,
+   qna_no number not null,
    qnafile_filepath varchar2(100) not null,
    constraint qnafile_qnano_fk foreign key(qna_no) references qna(qna_no) on delete cascade ,
    constraint qnafile_PK primary key(qna_no, qnafile_filepath)
@@ -175,9 +178,9 @@ create table qnafile(
 drop table qnafile;
 -------------------------------------------------------------------------------
 create table qnacomment(
-   qnacomment_no varchar2(100) primary key,
+   qnacomment_no number primary key,
    id varchar2(100) not null,
-   qna_no varchar2(100) not null,
+   qna_no number not null,
    qnacomment_content varchar2(300) not null,
    qnacomment_timeposted date not null,
    qnacomment_parent varchar2(100) not null,
@@ -188,7 +191,7 @@ create table qnacomment(
 drop table qnacomment;
 -------------------------------------------------------------------------------
 create table freeboard(
-   freeboard_no varchar2(100) primary key,
+   freeboard_no number primary key,
    id varchar2(100) not null,
    freeboard_title varchar2(100) not null,
    freeboard_content clob not null,
@@ -222,7 +225,7 @@ create table freeboardcomment(
 drop table freeboardcomment;
 -------------------------------------------------------------------------------
 create table information(
-   information_no varchar2(100) primary key,
+   information_no number primary key,
    id varchar2(100) not null,
    information_title varchar2(100) not null,
    information_content clob not null,
@@ -234,7 +237,7 @@ create table information(
 drop table information;
 -------------------------------------------------------------------------------informationfile(0531)
 create table informationfile(
-   information_no varchar2(100) not null,
+   information_no number not null,
    informationfile_filepath varchar2(100) not null,
    constraint informationfile_infono_fk foreign key(information_no) references information(information_no) on delete cascade , 
    constraint informationfile_PK primary key(information_no, informationfile_filepath) 
@@ -243,9 +246,9 @@ create table informationfile(
 drop table informationfile;
 -------------------------------------------------------------------------------
 create table informationcomment(
-   informationcomment_no varchar2(100) primary key,
+   informationcomment_no number primary key,
    id varchar2(100) not null,
-   information_no varchar2(100) not null,
+   information_no number not null,
    informationcomment_content varchar2(300) not null,
    informationcomment_timeposted date not null,
    informationcomment_parent varchar2(100) not null,

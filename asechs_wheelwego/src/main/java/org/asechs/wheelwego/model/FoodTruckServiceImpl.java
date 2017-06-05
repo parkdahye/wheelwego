@@ -26,35 +26,6 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		return foodTruckDAO.searchFoodTruckList(name);
 	}
 	
-	/* pagingBean 적용된 검색 결과 푸드트럭 리스트 */
-	@Override
-	public ListVO pagingTruckList(String pageNo){
-		int totalCount = foodTruckDAO.getTruckListTotalContentCount();
-		PagingBean pagingBean = null;
-		if(pageNo==null)
-			pagingBean=new PagingBean(totalCount,1);
-		else
-			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
-		ListVO list = new ListVO();
-		list.setTruckList(foodTruckDAO.pagingTruckList(pagingBean));
-		list.setPagingBean(pagingBean);
-		return list;
-	}
-
-	@Override
-	public ListVO resultFoodTruckList(List<TruckVO> searchTruckList, String pageNo) {
-		int totalCount=foodTruckDAO.getTruckListTotalContentCount();
-		PagingBean pagingBean=null;
-		if(pageNo==null)
-			pagingBean=new PagingBean(totalCount,1);
-		else
-			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
-		ListVO list = new ListVO();
-		list.setTruckList(searchTruckList);
-		list.setPagingBean(pagingBean);
-		return list;
-	}
-	
 	@Override
 	public List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo) {
 		return foodTruckDAO.searchFoodTruckByGPS(gpsInfo);
@@ -86,5 +57,27 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		pagingList.setReviewList(foodTruckDAO.getReviewListByTruckNumber(pagingBean));
 		pagingList.setPagingBean(pagingBean);
 		return pagingList;
+	}
+	@Override
+
+	public ListVO getFoodTruckListByName(String pageNo, String name) {
+		int totalCount=foodTruckDAO.getTruckListTotalContentCount(name);
+		PagingBean pagingBean=null;
+		
+		if(pageNo==null)
+			pagingBean=new PagingBean(totalCount);
+		else
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
+		
+		pagingBean.setSearchWord(name);
+		
+		return new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByName(pagingBean));
+	}
+
+	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
+		int avgGrade=0;
+		if(foodTruckDAO.findTruckNumberInReview(foodtruckNumber)>0)
+			avgGrade=foodTruckDAO.findTruckNumberInReview(foodtruckNumber);
+		return avgGrade;
 	}
 }

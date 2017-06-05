@@ -30,7 +30,7 @@ public interface BoardDAO {
 
 	String freeboardWrite(BoardVO bvo);
 
-	void updateBoard(BoardVO vo);
+	String updateBoard(BoardVO vo);
 
 	MemberVO getNameById(BoardVO bvo);
 
@@ -64,11 +64,15 @@ public interface BoardDAO {
 
 	BoardVO getqnaBoardDetail(String no);
 
+
 	void writeFreeboardComment(CommentVO cvo);
 
 	List<CommentVO> getFreeboardCommentList(String no);
 
 	void deleteFreeboardComment(CommentVO cvo);
+
+	void freeboardUpdateFileUpload(BoardVO boardVO);
+
 
 
 }

@@ -77,6 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select m.member_name as memberName from freeboard f, member m where m.id=f.id and f.id=#{id} and f.freeboard_no=#{no}
 	</select>
 	
+
 	<resultMap type="commentVO" id="freeboardCommentRM">
 		<result property="commentNo" column="freeboardcomment_no"/>
 		<result property="id" column="id"/>
@@ -101,9 +102,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteFreeboardComment" parameterType="commentVO">
 		delete from freeboardcomment where freeboardcomment_no=#{commentNo} and freeboard_no=#{contentNo}
 	</delete>
-	
-	
-	
+
+	<update id="freeboardUpdateFileUpload" parameterType="boardVO">
+		update freeboardfile set freeboardfile_filepath=#{fileVO.filepath} where freeboard_no=#{fileVO.no} and freeboardfile_filepath=#{fileVO.beforefilepath}
+	</update>
 <!-- 강정호창업게시판 -->
 
 <resultMap type="boardVO" id="businessInfoBoardListRM">
