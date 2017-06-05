@@ -8,6 +8,7 @@ import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -61,7 +62,17 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 
 	@Override
 	public int getReivewTotalCount(String foodtruckNumber) {
-		return sqlSessionTemplate.selectOne("foodtruck.getReivewTotalCount", foodtruckNumber);
+		return sqlSessionTemplate.selectOne("foodtruck.getReivewTotalCount",foodtruckNumber);
+	}
+	@Override
+	public void registerBookMark(WishlistVO wishlistVO) {
+		sqlSessionTemplate.insert("foodtruck.registerBookMark", wishlistVO);
+		
+	}
+	@Override
+	public int getBookMarkCount(WishlistVO wishlistVO) {
+		
+		return sqlSessionTemplate.selectOne("foodtruck.getBookMarkCount",wishlistVO);
 	}
 
 	@Override

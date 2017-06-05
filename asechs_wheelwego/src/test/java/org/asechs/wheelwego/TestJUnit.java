@@ -48,6 +48,7 @@ public class TestJUnit {
 	private FoodTruckDAO foodDAO;
 	@Resource
 	private MypageDAO mypageDAO;
+	
 	@Test
 	public void test(){
 		/*String id = "seller111";
@@ -72,6 +73,7 @@ public class TestJUnit {
 		
 		for (int i = 0; i < listVO.getTruckList().size(); i++)
 			System.out.println(listVO.getTruckList().get(i));*/
+
 	}
 }
 

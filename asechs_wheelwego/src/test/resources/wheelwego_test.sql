@@ -113,6 +113,8 @@ update member set password='1234' where id='java01' and member_name='김래발' 
 
 select * from member;
 
+delete from wishlist;
+
 delete member where id = 'java01';
 update member set password=#{password}, address=#{address}, addressdetail = #{addressDetail}, phonenumber=#{phoneNumber}, postcode=#{postCode} where id=#{id}
 
@@ -309,16 +311,53 @@ from
 review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
 where foodtruck_number='1234')
 where rnum between 1 and 5;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+select * from freeboardcomment
+
+select freeboardcomment_no, id, freeboardcomment_content, to_char(freeboardcomment_timeposted,'YYYY.MM.DD hh:mm:ss') as freeboardcomment_timeposted 
+		from freeboardcomment  where freeboard_no=154 order by freeboardcomment_no desc
+select * from freeboardcomment
+
+
+insert into freeboardcomment(freeboardcomment_no, id, freeboardcomment_content, freeboard_no,freeboardcomment_timeposted, freeboardcomment_parent)
+values(freeboardcomment_seq.nextval,'java101','강정호 댓글시도',154,sysdate,0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 select * from foodtruckfile;
 
 		select t.*, f.foodtruck_filepath
 		from(select * from foodtruck)t, foodtruckfile f
 		where t.foodtruck_number=f.foodtruck_number
-=======
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 
 select * from member;
 
@@ -333,7 +372,6 @@ select * from foodtruckfile;
 insert into foodtruckfile values ('80나0002', 'Friend_트럭1.jpg');
 
 select * from foodtruck;
-=======
 
 	insert into freeboardfile(freeboard_no, freeboardfile_filepath)values(#{fileVO.no},#{fileVO.filepath})
 
@@ -342,14 +380,16 @@ select * from foodtruck;
 
 
 select * from freeboardfile
+<<<<<<< HEAD
+
+insert into wishlist();
 
 
+select * from wishlist;
+
+select count(*) from wishlist where foodtruck_number = '80나0003' and customer_id = 'customer01';
 
 
+select count(*) from wishlist where foodtruck_number = '80나0003' and customer_id = 'customer01';
 
-
-
-
-
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 

@@ -6,6 +6,7 @@ import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.vo.WishlistVO;
 
 public interface FoodTruckDAO {
 	List<TruckVO> foodtruckList();
@@ -17,6 +18,8 @@ public interface FoodTruckDAO {
 	void registerReview(ReviewVO reviewVO);
 	List<ReviewVO> getReviewListByTruckNumber(PagingBean pagingBean);
 	int getReivewTotalCount(String foodtruckNumber);
+	void registerBookMark(WishlistVO wishlistVO);
+	int getBookMarkCount(WishlistVO wishlistVO);
 	List<TruckVO> getFoodTruckListByName(PagingBean pagingBean);
 	int getAvgGradeByTruckNumber(String foodtruckNumber);
 	int findTruckNumberInReview(String foodtruckNumber);

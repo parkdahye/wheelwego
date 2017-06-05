@@ -8,11 +8,15 @@ import javax.servlet.http.HttpSession;
 
 import org.asechs.wheelwego.model.BoardService;
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.CommentVO;
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -26,6 +30,8 @@ public class BoardController {
 	public String showBoardList() {
 		return "board/boardSelectList.tiles";
 	}
+	
+
 	
 	////////////강정호. 자유게시판 freeboard/////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,6 +51,7 @@ public class BoardController {
 	// 호겸 작성. 자유게시판 상세보기 and 조회수
 		@RequestMapping("board/freeboard_detail_content.do")
 		public String freeboard_detail_content(String no, Model model) {
+			System.out.println("자유게시판 상세보기 : 컨트롤러 시작");
 			int hits = Integer.parseInt(no);
 			// 조회수 올리기
 			boardService.updateHits(hits);
@@ -52,16 +59,18 @@ public class BoardController {
 			BoardVO bvo = boardService.getFreeBoardDetail(no);
 			// 파일 이름 가져오는 메서드
 			List<FileVO> fileNameList=boardService.getFreeBoardFilePath(no);
+			List<CommentVO> freeboardCommentList=boardService.getFreeboardCommentList(no);
 			// 작성자 이름 갖고오기
 			MemberVO name = boardService.getNameById(bvo);
 			model.addAttribute("detail_freeboard", bvo);
 			model.addAttribute("fileNameList",fileNameList);
 			model.addAttribute("name", name);
+			model.addAttribute("freeboardCommentList",freeboardCommentList);
 			return "board/freeboard_detail_content.tiles";
 		}
 		
 		// 강정호 자유게시판 글 등록 메서드
-		@RequestMapping("freeboard_write.do")
+		@RequestMapping(value="freeboard_write.do", method=RequestMethod.POST)
 		public String freeboardWrite(BoardVO bvo, HttpServletRequest request) {
 			boardService.freeboardWrite(bvo, request);
 			//return "redirect:freeboard_list.do";
@@ -92,6 +101,31 @@ public class BoardController {
 			boardService.updateBoard(vo);
 			
 			return "redirect:board/freeboard_detail_content.do?no=" + vo.getNo();
+		}
+		
+		//강정호 작성. 자유게시판 댓글 작성
+		@RequestMapping(value="writeFreeboardComment.do",method=RequestMethod.POST)
+		public String writeFreeboardComment(CommentVO cvo){
+			boardService.writeFreeboardComment(cvo);
+			return "redirect:board/freeboard_detail_content.do?no="+cvo.getContentNo();
+		}
+		
+		//강정호 작성. 자유게시판 댓글 수정.
+		@RequestMapping("updateFreeboardComment.do")
+		public String updateFreeboardComment(HttpServletRequest request){
+			System.out.println(request.getParameter("commentNo"));
+			System.out.println(request.getParameter("contentNo"));
+			return null;
+		}
+		
+		//강정호 작성. 자유게시판 댓글 삭제
+		@RequestMapping(value="deleteFreeboardComment.do", method=RequestMethod.POST)
+		@ResponseBody
+		public String deleteFreeboardComment(CommentVO cvo){
+			System.out.println(cvo);
+			boardService.deleteFreeboardComment(cvo);
+			return null;
+			
 		}
 		
 ////////////강정호. 창업게시판 business/////////////////////////////////////////////////////////////////////////////////////////////////////

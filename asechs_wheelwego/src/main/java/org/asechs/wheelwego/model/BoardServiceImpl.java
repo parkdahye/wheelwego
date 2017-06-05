@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.CommentVO;
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
@@ -140,6 +141,24 @@ public class BoardServiceImpl implements BoardService {
 	public List<FileVO> getFreeBoardFilePath(String no) {
 		return boardDAO.getFreeBoardFilePath(no);
 	}
+	
+	// 자유게시판 댓글 작성
+	@Override
+	public void writeFreeboardComment(CommentVO cvo) {
+		 boardDAO.writeFreeboardComment(cvo);
+	}
+	
+	@Override
+	public List<CommentVO> getFreeboardCommentList(String no) {
+		return boardDAO.getFreeboardCommentList(no);
+	}
+	
+	@Override
+	public void deleteFreeboardComment(CommentVO cvo) {
+		 boardDAO.deleteFreeboardComment(cvo);
+	}
+	
+	
 	
 	
 //////////강정호. 창업게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -301,6 +320,15 @@ public class BoardServiceImpl implements BoardService {
 	public MemberVO qna_getNameById(BoardVO bvo) {
 		return boardDAO.qna_getNameById(bvo);
 	}
+
+	
+
+
+
+	
+
+
+
 
 	
 

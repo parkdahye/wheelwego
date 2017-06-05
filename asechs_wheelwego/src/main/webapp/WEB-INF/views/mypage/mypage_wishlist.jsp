@@ -34,7 +34,7 @@ $(document).ready(function(){
         		<div class="col-lg col-sm-6">	
       		<c:forEach items="${requestScope.wishlist}" var="wishList">
       		<div style="position:relative;">
-			 <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}"><img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:absoulte;  z-index: 2; "></a>
+			 <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}"><img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/img/foodtruck/${wishList.fileVO.filepath}" style="position:absoulte;  z-index: 2; "></a>
 			 	<div class='overlay'><div class='overlaytext'>
 								<h4>${wishList.foodtruckName}</h4>
 								판매자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${wishList.sellerId}<br>
