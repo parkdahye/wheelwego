@@ -85,7 +85,7 @@ input[name="grade"]:checked + .star_point~label{
 
     <div id="Eat" class="w3-container menu w3-padding-48 w3-card-2">
        <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
-       <img src="${pageContext.request.contextPath}/resources/img/menu/${foodList.fileVO.filepath}" style="width:100%"><br>
+       <img src="${pageContext.request.contextPath}/resources/upload/${foodList.fileVO.filepath}" style="width:80%" align="middle" ><br>
       <h5 class="text-center">메뉴 : ${foodList.menuName }</h5>
       <p class="w3-text-grey text-center">가격 : ${foodList.menuPrice}</p><br><br>
       </c:forEach>

@@ -89,7 +89,6 @@ select password from member where id = 'java01';
 select * from member;
 
 select * from seller;
-select * from foodtruck;
 select * from wishlist ;
 select * from wishlist where id = 'customer01';
 -- 푸드트럭 위시리스트 sql문
