@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <div class="_40h7m" >
+ <%-- <div class="_40h7m" >
 	<c:choose>
 		<c:when test="${reviewList!='[]'}">
 		<table style="border: none; padding: 15px">
@@ -25,8 +25,52 @@
 			등록된 리뷰가 없습니다.
 		</c:otherwise>
 	</c:choose>
- </div>
- 
+ </div> --%>
+ <div class="row">
+ <div class="col-sm-2"></div>
+ <div class="container col-sm-8">
+  <c:choose>
+		<c:when test="${reviewList!='[]'}">      
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>TruckNo</th>
+        <th>Content</th>
+        <th>Score</th>
+        <th>Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${reviewList}" var="reviewVO" varStatus="status">
+      <tr>
+        <td>${status.index+1}<input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}"></td>
+        <td>${reviewVO.foodtruckNumber}</td>
+        <td>${reviewVO.reviewContent}</td>
+        <td>${reviewVO.grade}</td>
+        <td>${reviewVO.reviewTimeposted}</td>
+        <td>
+        <button type="button" class="updateBtn btn btn-default btn-sm">
+          <span class="	glyphicon glyphicon-pencil"></span>
+        </button>
+         <button type="button" class="deleteBtn btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+		</td>
+      </tr>
+     </c:forEach>
+    </tbody>
+  </table>
+  </c:when>
+  		<c:otherwise>
+			등록된 리뷰가 없습니다.
+		</c:otherwise>
+	</c:choose>
+</div>
+<div class="col-sm-2"></div>
+</div>
+
  <Script type="text/javascript">
  	$(document).ready(function(){
  		$(".updateBtn").click(function(){

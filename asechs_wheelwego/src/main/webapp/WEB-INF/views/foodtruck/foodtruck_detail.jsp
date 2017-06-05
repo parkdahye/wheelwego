@@ -30,6 +30,11 @@ input[name="grade"]{
   color:gold;
   cursor:pointer;
 }
+.star_point_list{
+  font-size:15pt;
+  color:gold;
+  cursor:pointer;
+}
 input[name="grade"]:checked + .star_point~label{
     color:lightgray;
 }
@@ -145,6 +150,7 @@ input[name="grade"]:checked + .star_point~label{
       <span><i class="fa fa-star" aria-hidden="true"></i></span>
     </label>
 <table class="content">
+<div class="form-group">
    <tr>
       <td>
          <table>
@@ -160,28 +166,118 @@ input[name="grade"]:checked + .star_point~label{
          <hr>
       </td>
    </tr>
+   </div>
 </table>
 </form>
 </c:if>
     <form>
     <!-- review 결과 table -->
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW LIST</span></h5>      
-  <table class="table table-hover">
+  <table class="table table-hover" id="table">
     <thead>
       <tr>
         <th>SCORE</th>
         <th>COMMENT</th>
         <th>WRITER</th>
         <th>DATE</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
      <c:forEach items="${reviewlist.reviewList}" var="reviewVO">
       <tr>
-        <td>${reviewVO.grade}</td>
+<!-- 별점 리스트 img -->
+<c:choose>
+    <c:when test="${reviewVO.grade eq '1'}">
+    <td>
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </td>
+    </c:when>
+    <c:when test="${reviewVO.grade eq '2'}">
+    <td>
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </td>
+    </c:when>
+    <c:when test="${reviewVO.grade eq '3'}">
+    <td>
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
+    <label for="star-3" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </td>
+    </c:when>
+    <c:when test="${reviewVO.grade eq '4'}">
+    <td>
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+        <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
+    <label for="star-3" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-4" value="4"/>
+    <label for="star-4" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </td>
+    </c:when>
+    <c:otherwise>
+    <td>
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
+    <label for="star-3" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-4" value="4"/>
+    <label for="star-4" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-5" value="5"/>
+    <label for="star-5" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </td>
+    </c:otherwise>
+</c:choose>
+<!-- 별점 리스트 img -->
         <td>${reviewVO.reviewContent}</td>
         <td>${reviewVO.customerId}</td>
         <td>${reviewVO.reviewTimeposted}</td>
+        <c:if test="${sessionScope.memberVO.id!=null}">
+        <td><input type="hidden" value="${reviewVO.reviewNo}" name="reviewNo">
+        <input type="hidden" value="${truckDetailInfo.foodtruckNumber}" name="truckNo">
+        <span role="button" class="glyphicon glyphicon-remove" id="deleteBtn"></span></td>
+        </c:if>
       </tr>
       </c:forEach>
     </tbody>
@@ -241,13 +337,28 @@ document.getElementById("myLink").click();
                 data:"grade="+grade+"&reviewContent="+reviewContent+"&customerId=${sessionScope.memberVO.id}"+"&foodtruckNumber=${truckDetailInfo.foodtruckNumber}"
                 +"&reviewTimeposted="+d.toString(),
                 success:function(result){
-                	alert("등록 완료");
-                	location.href="${pageContext.request.contextPath}/getReviewListByTruckNumber.do?foodtruckNumber=${truckDetailInfo.foodtruckNumber}";
+                	alert("등록되었습니다.");
+                	location.href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckDetailInfo.foodtruckNumber}";   	
                 }
             })
          }
-      });
+      });  
+      $("#deleteBtn").click(function(){
+    	  var reviewNo=$(this).parent().parent().find(":input[name=reviewNo]").val();
+    	  var truckNo =$(this).parent().parent().find(":input[name=truckNo]").val();
+  		if(confirm("리뷰를 삭제하시겠습니까?")){
+  			$.ajax({
+  				url:"${pageContext.request.contextPath}/afterLogin_mypage/deleteMyReview.do",
+  				data:"reviewNo="+reviewNo,
+  				success:function(result){
+  					alert("삭제되었습니다.");
+  					location.href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+truckNo;   	
+  				}
+  			})
+  		}
+  	});
    });
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
 

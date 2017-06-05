@@ -1,6 +1,7 @@
 
 ----------dbTEST---------------------
 select * from member
+delete from foodtruck where foodtruck_name='현지네트럭'
 select * from seller
 select * from menu
 select * from FOODTRUCK where foodtruck_name='꼬부랑아이스크림'
