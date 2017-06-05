@@ -98,6 +98,7 @@ public class MypageController {
 	 */
 	@RequestMapping(method=RequestMethod.POST,value="afterLogin_mypage/updateMyfoodtruck.do")
 	public String updateMyfoodtruck(TruckVO truckVO, HttpServletRequest request){
+		System.out.println("update : "+truckVO);
 		mypageService.updateMyfoodtruck(truckVO);
 		return "redirect:/afterLogin_mypage/myfoodtruck_page.do";
 	}
@@ -117,7 +118,9 @@ public class MypageController {
 		return"redirect:/afterLogin_mypage/myfoodtruck_menuList.do";
 	}
 	@RequestMapping("afterLogin_mypage/updateMenu.do")
-	public String updateMenu(TruckVO truckVO, HttpServletRequest request){
+	public String updateMenu(TruckVO truckVO, String sellerId,HttpServletRequest request){
+		String foodtruckNumber=mypageService.findtruckNumberBySellerId(sellerId);
+		truckVO.setFoodtruckNumber(foodtruckNumber);
 		mypageService.updateMenu(truckVO);
 		return "mypage/updateMenu_result.tiles";
 	}

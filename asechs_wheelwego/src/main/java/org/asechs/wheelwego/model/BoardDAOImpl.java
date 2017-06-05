@@ -59,8 +59,9 @@ public class BoardDAOImpl implements BoardDAO {
 		template.update("board.updateCount", hits);
 	}
 	
-	public void updateBoard(BoardVO vo) {
+	public String updateBoard(BoardVO vo) {
 		template.update("board.updateBoard",vo);
+		return vo.getNo();
 	}
 	
 	@Override
@@ -71,6 +72,12 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public MemberVO getNameById(BoardVO bvo) {
 		return template.selectOne("board.getNameById", bvo);
+	}
+	
+	@Override
+	public void freeboardUpdateFileUpload(BoardVO boardVO) {
+		template.update("board.freeboardUpdateFileUpload", boardVO);
+		
 	}
 //////////강정호. 창업게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -165,6 +172,10 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardVO getqnaBoardDetail(String no) {
 		return template.selectOne("board.getqnaBoardDetail", no);
 	}
+
+
+
+	
 
 	
 

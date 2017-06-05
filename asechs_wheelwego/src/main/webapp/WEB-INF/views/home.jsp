@@ -189,12 +189,14 @@ function geoFindMe() {
                      data-toggle="modal">
                      <div class="front" >
                         <img class="img-circle  center-block food-img img-responsive"
-                           src="${pageContext.request.contextPath}/resources/img/foodtruck/${truckVO.fileVO.filepath}"
+                           src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}"
                            alt="" >
                      </div>
                      <div class="back cbx-back-side">
                         <div class="text-center back-single-text">
-                           <p>${truckVO.foodtruckName}</p><p class="truck-simple-info"><br><br><br>${truckVO.introduction}<br>위치<br>평점</p>
+                           <p>${truckVO.foodtruckName}</p><p class="truck-simple-info"><br><br><br>
+                           위치<br>
+                           평점 : ${truckVO.avgGrade }</p>
                         </div>
                      </div>
                   </a>

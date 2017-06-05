@@ -1,11 +1,20 @@
 
 ----------dbTEST---------------------
 select * from member
+delete from foodtruck where foodtruck_name='현지네트럭'
 select * from seller
+select * from menu
+select * from FOODTRUCK where foodtruck_name='꼬부랑아이스크림'
+select * from FOODTRUCKFILE where foodtruck_number='80나0004'
+select * from FOODTRUCKFILE
+select * from customer
 select * from FOODTRUCK
+select * from REVIEW
+select * from FOODTRUCKFILE where foodtruck_number='80나0036'
 select * from FOODTRUCKFILE
 select * from menu
 select * from menu where foodtruck_number='80나0001'
+insert into MEMBER values('customer01','1234','정현지','위례','경기도 하남시 학암동','01022552716','customer','12345');
 select t.*, f.foodtruck_filepath, m.menu_filename
 		from(select * from foodtruck)t, foodtruckfile f, menu m
 		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_number=m.foodtruck_number and t.foodtruck_number='80나0001'
@@ -81,7 +90,6 @@ select password from member where id = 'java01';
 select * from member;
 
 select * from seller;
-select * from foodtruck;
 select * from wishlist ;
 select * from wishlist where id = 'customer01';
 -- 푸드트럭 위시리스트 sql문
@@ -89,7 +97,7 @@ select * from foodtruck where foodtruck_number in (select w.foodtruck_number
 from customer c, wishlist w
 where c.customer_id = w.customer_id and c.customer_id = 'customer01' );
 
-select * from wishlist;
+select * from wishlist where customer_id = 'customer01';
 insert into wishlist values('customer01','80나0001');
 insert into wishlist values('customer01','80나0002');
 insert into wishlist values('customer01','80나0003');
@@ -302,6 +310,7 @@ review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, gra
 where foodtruck_number='1234')
 where rnum between 1 and 5;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 select * from foodtruckfile;
 
@@ -324,4 +333,23 @@ select * from foodtruckfile;
 insert into foodtruckfile values ('80나0002', 'Friend_트럭1.jpg');
 
 select * from foodtruck;
+=======
+
+	insert into freeboardfile(freeboard_no, freeboardfile_filepath)values(#{fileVO.no},#{fileVO.filepath})
+
+	update freeboardfile set freeboardfile_filepath=#{value} where freeboard_no=#{fileVO.no} and freeboardfile_filepath=#{fileVO.filepath}
+	update freeboardfile set freeboardfile_filepath='c.jpg' where freeboardfile_filepath='b.jpg' and freeboard_no=77
+
+
+select * from freeboardfile
+
+
+
+
+
+
+
+
+
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 

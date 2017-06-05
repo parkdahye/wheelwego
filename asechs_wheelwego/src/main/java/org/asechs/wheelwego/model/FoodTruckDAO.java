@@ -18,4 +18,6 @@ public interface FoodTruckDAO {
 	List<ReviewVO> getReviewListByTruckNumber(PagingBean pagingBean);
 	int getReivewTotalCount(String foodtruckNumber);
 	List<TruckVO> getFoodTruckListByName(PagingBean pagingBean);
+	int getAvgGradeByTruckNumber(String foodtruckNumber);
+	int findTruckNumberInReview(String foodtruckNumber);
 }

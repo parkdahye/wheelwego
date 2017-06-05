@@ -68,4 +68,13 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	public List<TruckVO> getFoodTruckListByName(PagingBean pagingBean) {
 		return sqlSessionTemplate.selectList("foodtruck.getFoodTruckListByName",pagingBean);
 	}
+	
+	@Override
+	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
+		return sqlSessionTemplate.selectOne("foodtruck.getAvgGradeByTruckNumber", foodtruckNumber);
+	}
+	@Override
+	public int findTruckNumberInReview(String foodtruckNumber) {
+		return sqlSessionTemplate.selectOne("foodtruck.findTruckNumberInReview", foodtruckNumber);
+	}
 }

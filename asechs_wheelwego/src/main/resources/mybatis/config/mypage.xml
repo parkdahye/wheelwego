@@ -16,9 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result property="customerId" column="customer_id"/>	
 </resultMap>
 	<resultMap type="truckVO" id="truckRM">
-		<result column="foodtruck_number" property="foodtruckNumber"/>
-		<result column="seller_id" property="sellerId"/>
-		<result column="foodtruck_name" property="foodtruckName"/>
+      <result property="foodtruckNumber" column="foodtruck_number" />
+      <result property="sellerId" column="seller_id" />
+      <result property="foodtruckName" column="foodtruck_name"/>     
+	  <result property="registerTimeposted" column="register_timeposted"/>
+	  <result property="wishlistCount" column="wishlist_count"/>
+	  <result property="avgGrade" column="avg_grade"/>
+	  <result property="foodList.fileVO.filepath" column="menu_filename"/>
 	</resultMap>
 	<resultMap type="truckVO" id="truckpageRM" extends="truckRM">
 		<result column="foodtruck_filepath" property="fileVO.filepath"/>
@@ -31,14 +35,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="menu_filename" property="fileVO.filepath"/>
 	</resultMap>
 	<insert id="registerFoodtruck" parameterType="truckVO">
-		insert into foodtruck(foodtruck_number,seller_id,foodtruck_name,introduction)
-		 values(#{foodtruckNumber},#{sellerId},#{foodtruckName},#{introduction})
+		insert into foodtruck(foodtruck_number,seller_id,foodtruck_name,introduction,register_timeposted)
+		 values(#{foodtruckNumber},#{sellerId},#{foodtruckName},#{introduction},sysdate)
 	</insert>
 	<select id="showMyTruckpage" resultMap="truckRM">
-		select t.foodtruck_number, t.seller_id, t.foodtruck_name, t.introduction,f.foodtruck_filepath from(
-		select foodtruck_number,seller_id,foodtruck_name,introduction from foodtruck where seller_id=#{value}
+		select t.foodtruck_number, t.seller_id, t.foodtruck_name, t.introduction,f.foodtruck_filepath,f.wishlist_count,f.avg_grade from(
+		select foodtruck_number,seller_id,foodtruck_name,introduction,wishlist_count,avg_grade from foodtruck where seller_id=#{value}
 		)t, foodtruckfile f where t.foodtruck_number=f.foodtruck_number
-	
 	</select>
 	<select id="findFoodtruckByTruckNumber" resultMap="truckRM">
 		select * from foodtruck where foodtruck_number=#{value}
@@ -46,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="findtruckInfoByTruckNumber" resultMap="truckpageRM">
 		select t.*, f.foodtruck_filepath
 		from(select * from foodtruck where foodtruck_number=#{value})t, foodtruckfile f
-		where t.foodtruck_number=f.foodtruck_number
+		where t.foodtruck_number=f.foodtruck_number(+)
 	</select>
 	<select id="findtruckNumberBySellerId" resultType="String">
 		select foodtruck_number from foodtruck where seller_id=#{value}

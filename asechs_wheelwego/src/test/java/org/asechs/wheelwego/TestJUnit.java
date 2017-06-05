@@ -3,10 +3,10 @@ package org.asechs.wheelwego;
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.BoardDAO;
+import org.asechs.wheelwego.model.FoodTruckDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
-import org.asechs.wheelwego.model.vo.ListVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -44,6 +44,8 @@ public class TestJUnit {
 	private FoodTruckService foodtruckService;
 	@Resource
 	private BoardDAO boardDAO;
+	@Resource
+	private FoodTruckDAO foodDAO;
 	@Resource
 	private MypageDAO mypageDAO;
 	@Test

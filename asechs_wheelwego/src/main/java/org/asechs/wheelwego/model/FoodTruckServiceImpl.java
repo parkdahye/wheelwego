@@ -39,10 +39,12 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		tvo.setFoodList(fvo);
 		return tvo;
 	}
+
 	@Override
 	public void registerReview(ReviewVO reviewVO) {
 		foodTruckDAO.registerReview(reviewVO);
 	}
+
 	@Override
 	public ListVO getReviewListByTruckNumber(String reviewPageNo, String foodtruckNumber) {
 		int totalCount =foodTruckDAO.getReivewTotalCount(foodtruckNumber);
@@ -53,9 +55,11 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 			pagingBean=new PagingBean( Integer.parseInt(reviewPageNo),totalCount,foodtruckNumber);
 		ListVO pagingList=new ListVO();
 		pagingList.setReviewList(foodTruckDAO.getReviewListByTruckNumber(pagingBean));
+		pagingList.setPagingBean(pagingBean);
 		return pagingList;
 	}
 	@Override
+
 	public ListVO getFoodTruckListByName(String pageNo, String name) {
 		int totalCount=foodTruckDAO.getTruckListTotalContentCount(name);
 		PagingBean pagingBean=null;
@@ -68,5 +72,12 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		pagingBean.setSearchWord(name);
 		
 		return new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByName(pagingBean));
+	}
+
+	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
+		int avgGrade=0;
+		if(foodTruckDAO.findTruckNumberInReview(foodtruckNumber)>0)
+			avgGrade=foodTruckDAO.findTruckNumberInReview(foodtruckNumber);
+		return avgGrade;
 	}
 }

@@ -58,7 +58,7 @@ ${requestScope.detail_freeboard}    ${requestScope.fileNameList }
 		
 			<div class="form-group"> 
 		<label for="File">첨부파일 1</label> 
-		<input type="file" name="file[0]"> 
+		<input type="file" name="file[0]" > 
 		</div> 
 		<div class="form-group"> 
 		<label for="File">첨부파일 2</label> 
