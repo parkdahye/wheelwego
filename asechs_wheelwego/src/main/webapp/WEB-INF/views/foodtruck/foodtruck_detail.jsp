@@ -14,7 +14,7 @@ body, html {
 .bgimg {
     background-position: center;
     background-size: cover;
-    background-image: url("${pageContext.request.contextPath}/resources/img/foodtruck/${truckDetailInfo.fileVO.filepath}");
+    background-image: url("${pageContext.request.contextPath}/resources/upload/${truckDetailInfo.fileVO.filepath}");
     min-height: 75%;
 }
 .menu {
@@ -66,13 +66,13 @@ input[name="grade"]:checked + .star_point~label{
 <div class="w3-container" id="about">
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5>
-    <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br>
+    <%-- <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
 <p style="text-align:center;"><i>${truckDetailInfo.introduction}</i></p><br>
-<div class="w3-panel w3-leftbar w3-light-grey" >
-    <p><strong>Opening hours:</strong> everyday from 6am to 5pm.</p>
-    <p><strong>Address:</strong> 15 Adr street, 5015, NY</p>
-   <p><strong>Grade:</strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   <strong>WishList:</strong> ${requestScope.truckDetailInfo.wishlistCount}</p>
+<div class="w3-panel w3-leftbar w3-light-grey">
+    <p><strong><span class="glyphicon glyphicon-time"></span></strong> everyday from 6am to 5pm.</p>
+    <p><strong><span class="glyphicon glyphicon-map-marker"></span></strong> 15 Adr street, 5015, NY</p>
+   <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <strong><span class="glyphicon glyphicon-heart" style="color:red"></span> </strong>${requestScope.truckDetailInfo.wishlistCount}</p>
 </div>
   </div>
 </div>
@@ -92,8 +92,8 @@ input[name="grade"]:checked + .star_point~label{
     <div id="Eat" class="w3-container menu w3-padding-48 w3-card-2">
        <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
        <img src="${pageContext.request.contextPath}/resources/upload/${foodList.fileVO.filepath}" style="width:100%" ><br>
-      <h5 class="text-center">메뉴 : ${foodList.menuName }</h5>
-      <p class="w3-text-grey text-center">가격 : ${foodList.menuPrice}</p><br><br>
+      <h5 class="w3-text-grey text-center">${foodList.menuName}</h5>
+      <p class="w3-text-grey text-center">${foodList.menuPrice}</p><br><br>
       </c:forEach>
     </div>
 

@@ -10,7 +10,7 @@ drop sequence information_seq;
 drop sequence informationcomment_seq;
 drop sequence qna_seq;
 drop sequence qnacomment_seq;
-drop sequence freeboard_seq ;
+drop sequence freeboard_seq;
 drop sequence freeboardcomment_seq;
 
 create sequence survey_seq;
