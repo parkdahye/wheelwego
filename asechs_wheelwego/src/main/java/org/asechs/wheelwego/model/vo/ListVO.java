@@ -24,9 +24,16 @@ public class ListVO {
 		this.boardList = boardList;
 		this.pagingBean = pagingBean;
 	}
+	
+	public ListVO(PagingBean pagingBean, List<TruckVO> truckList) {
+		super();
+		this.truckList = truckList;
+		this.pagingBean = pagingBean;
+	}
 
 
-/*	public ListVO(List<TruckVO> truckList, PagingBean pagingBean) {
+
+	/*	public ListVO(List<TruckVO> truckList, PagingBean pagingBean) {
 		super();
 		this.truckList = truckList;
 		this.pagingBean = pagingBean;

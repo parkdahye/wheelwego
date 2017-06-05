@@ -310,3 +310,18 @@ select * from foodtruckfile;
 		where t.foodtruck_number=f.foodtruck_number
 =======
 >>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
+select * from member;
+
+
+select t.*, f.foodtruck_filepath
+from(select * from foodtruck)t, foodtruckfile f
+where t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' || '소시지' || '%'
+
+select * from foodtruck where foodtruck_name like '%' || '소시지' || '%'
+select * from foodtruckfile;
+
+insert into foodtruckfile values ('80나0002', 'Friend_트럭1.jpg');
+
+select * from foodtruck;
+

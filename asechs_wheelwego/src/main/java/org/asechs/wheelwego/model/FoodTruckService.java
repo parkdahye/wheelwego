@@ -9,11 +9,9 @@ import org.asechs.wheelwego.model.vo.TruckVO;
 public interface FoodTruckService {
 	List<TruckVO> foodtruckList();
 	List<TruckVO> searchFoodTruckList(String name);
-	ListVO pagingTruckList(String pageNo);
-	ListVO resultFoodTruckList(List<TruckVO> searchTruckList, String pageNo);
 	List<TruckVO> searchFoodTruckByGPS(TruckVO gpsInfo);
 	TruckVO foodTruckAndMenuDetail(String foodtruckNo);
 	void registerReview(ReviewVO reviewVO);
 	ListVO getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber);
-
+	public ListVO getFoodTruckListByName(String pageNo, String name);
 }

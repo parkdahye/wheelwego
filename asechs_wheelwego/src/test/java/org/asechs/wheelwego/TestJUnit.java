@@ -1,14 +1,12 @@
 package org.asechs.wheelwego;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.BoardDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
-import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.vo.ListVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,16 +45,10 @@ public class TestJUnit {
 	@Resource
 	private BoardDAO boardDAO;
 	@Resource
-	private FoodTruckService foodService;
-	@Resource
 	private MypageDAO mypageDAO;
 	@Test
 	public void test(){
-		//System.out.println(foodtruckService.foodtruckDetail("80나0001"));
-		//System.out.println(foodtruckService.foodListDetail("80나0001"));
-		System.out.println(foodtruckService.foodTruckAndMenuDetail("80나0001"));
-		System.out.println(foodService.getReviewListByTruckNumber("1", "1234"));
-/*		String id = "customer01";
+		/*String id = "seller111";
 		String password = "1234";
 		String memberName = "김래발";
 		String postCode = "13437";
@@ -64,50 +56,20 @@ public class TestJUnit {
 		String addressDetail = "삼평동";
 		String phoneNumber = "01000000000";
 		String memberType = "customer";
-		String businessNumber = null;
-
-		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
-		//System.out.println(service.getMemberPassword(id, password));
-		//service.deleteMember(id);
-		
-		/*String id = "customer01";
-		String id = "seller07";
-		String password = "1234";
-		String memberName = "김래발";
-		String postCode = "13437";
-		String address = "경기도 성남시 분당구";
-		String addressDetail = "삼평동";
-		String phoneNumber = "01000000000";
-		String memberType = "customer";
-		String businessNumber = null;
-		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
-		
-		String memberType = "seller";
 		String businessNumber = "0000000000";
-
-		/*service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
-		//System.out.println(service.getMemberPassword(id, password));
-		//service.deleteMember(id);
-
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
 		
-		//int result = service.forgetMemberPassword(new MemberVO(id, "1234", memberName, null, null, null, phoneNumber, null));
+		String name = "소시지";
+		//List<TruckVO> searchTruckList = foodtruckService.searchFoodTruckList(name);
 		
-
-
-		//service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
-		//System.out.println(service.getMemberPassword(id, password));
-		//service.deleteMember(id);
 		
-		System.out.println(foodService.searchFoodTruckList("끼니"));
-
-*/		
+/*		ListVO listVO = foodtruckService.resultFoodTruckList("1", name);
+		System.out.println(listVO);
+		System.out.println(listVO.getPagingBean().getStartRowNumber());
+		System.out.println(listVO.getPagingBean().getEndRowNumber());
 		
-/*		List<TruckVO> truckList = foodService.foodtruckList();
-		System.out.println(truckList);
-
-		List<TruckVO> truckVO = mypageService.myWishList("customer01");
-		System.out.println(truckVO);
-		System.out.println(foodService.searchFoodTruckList("끼니"));*/
+		for (int i = 0; i < listVO.getTruckList().size(); i++)
+			System.out.println(listVO.getTruckList().get(i));*/
 	}
 }
 

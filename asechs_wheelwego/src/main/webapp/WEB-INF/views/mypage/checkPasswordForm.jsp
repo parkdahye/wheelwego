@@ -19,8 +19,15 @@ $(document).ready(function(){
 	          data : {id: id, password: password} , 
 	          success:function(data){
 	        	  if (data == "ok"){
-	        		  alert("회원 탈퇴가 완료되었습니다!");
-	        		  $("#checkPwForm").submit();	        		  
+	        		  if ("${param.command}" == "deleteAccount")
+	        		  {
+	        			  alert("회원 탈퇴가 완료되었습니다!");
+	        			  $("#checkPwForm").submit();
+	        		  }
+	        		  else
+	        		  {
+	        			  $("#checkPwForm").submit();  
+	        		  }
 	        	  }
 
 	        	  else
@@ -43,4 +50,5 @@ $(document).ready(function(){
    패스워드 확인 <input type="password" name="password" id="password" size="10" required="required"><br>
    <input type="hidden" value="${param.command}">
    <input type="button" value="확인" id = "inputForm">
+   ${param.command}
 </form>
