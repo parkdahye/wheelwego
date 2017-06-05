@@ -3,14 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 
-$(document).ready(function(){
-    $("#searchFoodtruckName").keypress(function (e) {
-     if (e.which == 13){
-    	 alert("test");
-     }
- });
-});
-
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -20,8 +12,7 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
+    x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
 }
 
 function showError(error) {
@@ -45,6 +36,7 @@ function showError(error) {
 <!-- GPS(위도, 경도) 가져오기 --- by 황윤상 -->
 <script type="text/javascript">
 function geoFindMe() {
+	alert("geoFindMe");
 	var searchFoodtruckName = document.getElementById("searchFoodtruckName").value;
 	if (!navigator.geolocation){
 		alert("지오로케이션을 지원하지 않습니다!");
