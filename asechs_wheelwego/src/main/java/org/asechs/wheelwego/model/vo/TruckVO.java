@@ -12,6 +12,9 @@ public class TruckVO {
 	private MultipartFile foodtruckFile; // 웹에서 이미지 받아오기 위한 변수 (coulmn X)
 	private FileVO fileVO;
 	private List<FoodVO> foodList;
+	private String registerTimeposted;
+	private double avgGrade;
+	private int wishlistCount;
 	private double latitude;
 	private double longitude;
 
@@ -21,7 +24,8 @@ public class TruckVO {
 	}
 
 	public TruckVO(String foodtruckNumber, String sellerId, String foodtruckName, String introduction,
-			MultipartFile foodtruckFile, FileVO fileVO, List<FoodVO> foodList, double latitude, double longitude) {
+			MultipartFile foodtruckFile, FileVO fileVO, List<FoodVO> foodList, String registerTimeposted,
+			double avgGrade, int wishlistCount, double latitude, double longitude) {
 		super();
 		this.foodtruckNumber = foodtruckNumber;
 		this.sellerId = sellerId;
@@ -30,6 +34,9 @@ public class TruckVO {
 		this.foodtruckFile = foodtruckFile;
 		this.fileVO = fileVO;
 		this.foodList = foodList;
+		this.registerTimeposted = registerTimeposted;
+		this.avgGrade = avgGrade;
+		this.wishlistCount = wishlistCount;
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -90,6 +97,30 @@ public class TruckVO {
 		this.foodList = foodList;
 	}
 
+	public String getRegisterTimeposted() {
+		return registerTimeposted;
+	}
+
+	public void setRegisterTimeposted(String registerTimeposted) {
+		this.registerTimeposted = registerTimeposted;
+	}
+
+	public double getAvgGrade() {
+		return avgGrade;
+	}
+
+	public void setAvgGrade(double avgGrade) {
+		this.avgGrade = avgGrade;
+	}
+
+	public int getWishlistCount() {
+		return wishlistCount;
+	}
+
+	public void setWishlistCount(int wishlistCount) {
+		this.wishlistCount = wishlistCount;
+	}
+
 	public double getLatitude() {
 		return latitude;
 	}
@@ -110,8 +141,9 @@ public class TruckVO {
 	public String toString() {
 		return "TruckVO [foodtruckNumber=" + foodtruckNumber + ", sellerId=" + sellerId + ", foodtruckName="
 				+ foodtruckName + ", introduction=" + introduction + ", foodtruckFile=" + foodtruckFile + ", fileVO="
-				+ fileVO + ", foodList=" + foodList + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+				+ fileVO + ", foodList=" + foodList + ", registerTimeposted=" + registerTimeposted + ", avgGrade="
+				+ avgGrade + ", wishlistCount=" + wishlistCount + ", latitude=" + latitude + ", longitude=" + longitude
+				+ "]";
 	}
-
 
 }

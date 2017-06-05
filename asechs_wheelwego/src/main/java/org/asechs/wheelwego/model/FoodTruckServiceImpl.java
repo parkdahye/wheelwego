@@ -87,4 +87,11 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		pagingList.setPagingBean(pagingBean);
 		return pagingList;
 	}
+	@Override
+	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
+		int avgGrade=0;
+		if(foodTruckDAO.findTruckNumberInReview(foodtruckNumber)>0)
+			avgGrade=foodTruckDAO.findTruckNumberInReview(foodtruckNumber);
+		return avgGrade;
+	}
 }

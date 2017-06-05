@@ -3,7 +3,6 @@ package org.asechs.wheelwego.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.vo.ListVO;
@@ -44,6 +43,7 @@ public class FoodTruckController {
 		mv.addObject("truckDetailInfo", truckDetail);
 		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodtruckNo);
 		mv.addObject("reviewlist", reviewList);
+		mv.addObject("avgGrade",foodTruckService.getAvgGradeByTruckNumber(foodtruckNo));
 		return mv;
 	}
 

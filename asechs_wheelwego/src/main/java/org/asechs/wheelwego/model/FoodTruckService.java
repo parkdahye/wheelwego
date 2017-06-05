@@ -15,5 +15,5 @@ public interface FoodTruckService {
 	TruckVO foodTruckAndMenuDetail(String foodtruckNo);
 	void registerReview(ReviewVO reviewVO);
 	ListVO getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber);
-
+	int getAvgGradeByTruckNumber(String foodtruckNumber);
 }
