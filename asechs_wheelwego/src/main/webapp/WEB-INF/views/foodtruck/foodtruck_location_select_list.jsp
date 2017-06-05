@@ -1,15 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<Script type="text/javascript">
+
+$(document).ready(function(){
+	$("input#insertBtn").click(function(){
+	  var foodtruckNumber = $(this).attr('name');
+	  var id = "${sessionScope.memberVO.id}";
+	 // var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
+	
+	  
+	  $.ajax({
+		type:"post",
+		url:"${pageContext.request.contextPath}/afterLogin_foodtruck/registerBookMark.do",
+		data: {id: id, foodtruckNumber: foodtruckNumber},
+		success:function(data){
+			if(data=="on"){
+				alert("단골트럭으로 등록!");
+				$("input#insertBtn").html("<img alt='단골트럭 등록' src='${pageContext.request.contextPath }/resources/img/foodtruck/heart"+data+".png' style='position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;'>");
+				location.reload();		
+			}else{
+				alert("단골트럭 등록해제");			
+				location.reload();
+			}
+		}
+	});
+});
+});
+</script>
 
 <div class="container-fluid bg-grey">
-  <h4>Search Result</h4><br>
   <div class="row text-center">
   <!-- 이슈관리: 변수명으로 받아와야 함 (truckList) -->
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-xs-6">
-      <div class="thumbnail">
+      <div style="position:relative;" class="thumbnail">
        <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}"><img src="resources/img/foodtruck/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
+        <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png" 
+			 	style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
         <p style="font-size:17px;">location / review</p>
     </div>  
@@ -18,9 +46,7 @@
   </div>
 </div>
 
-
 <p class="paging text-center">
-	<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
 	<c:set var="pb" value="${requestScope.pagingList.pagingBean}"></c:set>
 	<!-- 
 			step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
@@ -32,6 +58,9 @@
 	<a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.startPageOfPageGroup-1}">
 	<!-- <img src="img/left_arrow_btn.gif"> -->
 	◀&nbsp; </a>	
+	
+
+	
 	</c:if>
 	<!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
 				   2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
@@ -40,11 +69,10 @@
 				      jstl choose 를 이용  
 				      예) <a href="list.do?pageNo=...">				   
 	 -->		
-	<c:forEach var="i" begin="${pb.startPageOfPageGroup}" 
-	end="${pb.endPageOfPageGroup}">
+	<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 	<c:choose>
 	<c:when test="${pb.nowPage!=i}">
-	<a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${i}">${i}</a> 
+	<a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${i}&name=${requestScope.name}">${i}</a> 
 	</c:when>
 	<c:otherwise>
 	${i}

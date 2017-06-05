@@ -48,10 +48,32 @@ public class TestJUnit {
 	private FoodTruckDAO foodDAO;
 	@Resource
 	private MypageDAO mypageDAO;
+	
 	@Test
 	public void test(){
-		//ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodTruckNumber);
-		System.out.println(foodtruckService.getAvgGradeByTruckNumber("80나0007"));
+		/*String id = "seller111";
+		String password = "1234";
+		String memberName = "김래발";
+		String postCode = "13437";
+		String address = "경기도 성남시 분당구";
+		String addressDetail = "삼평동";
+		String phoneNumber = "01000000000";
+		String memberType = "customer";
+		String businessNumber = "0000000000";
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
+		
+		String name = "소시지";
+		//List<TruckVO> searchTruckList = foodtruckService.searchFoodTruckList(name);
+		
+		
+/*		ListVO listVO = foodtruckService.resultFoodTruckList("1", name);
+		System.out.println(listVO);
+		System.out.println(listVO.getPagingBean().getStartRowNumber());
+		System.out.println(listVO.getPagingBean().getEndRowNumber());
+		
+		for (int i = 0; i < listVO.getTruckList().size(); i++)
+			System.out.println(listVO.getTruckList().get(i));*/
+
 	}
 }
 

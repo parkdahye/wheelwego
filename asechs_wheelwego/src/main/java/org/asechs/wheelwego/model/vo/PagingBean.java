@@ -97,7 +97,8 @@ public class PagingBean {
 	 * @return
 	 */
 	public int getTotalPage() {
-		int num = this.totalContents % this.contentNumberPerPage;
+		int num = this.totalContents % this.contentNumberPerPage;	
+		
 		int totalPage = 0;
 		if (num == 0) {
 			totalPage = this.totalContents / this.contentNumberPerPage;

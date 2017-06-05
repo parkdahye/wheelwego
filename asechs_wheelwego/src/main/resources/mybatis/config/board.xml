@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into freeboard(freeboard_no, id, freeboard_title, freeboard_content, freeboard_timePosted, freeboard_hits)
 		values(#{no}, #{id},#{title},#{content},sysdate,#{hits})
 	</insert>
-	
+		
 	<resultMap type="boardVO" id="freeboardWriteFileUploadRM">
 		<result property="fileVO.no" column="freeboard_no"/>
 		<result property="fileVO.filePath" column="freeboardfile_filepath"/>
@@ -77,6 +77,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select m.member_name as memberName from freeboard f, member m where m.id=f.id and f.id=#{id} and f.freeboard_no=#{no}
 	</select>
 	
+
+	<resultMap type="commentVO" id="freeboardCommentRM">
+		<result property="commentNo" column="freeboardcomment_no"/>
+		<result property="id" column="id"/>
+		<result property="contentNo" column="freeboard_no"/>
+		<result property="comment" column="freeboardcomment_content"/>
+		<result property="timePosted" column="freeboardcomment_timeposted"/>
+		<result property="parentNo" column="freeboardcomment_parent"/>
+	</resultMap>
+	<insert id="writeFreeboardComment" parameterType="commentVO">
+	<selectKey keyProperty="commentNo" resultType="Integer" order="BEFORE">
+			select freeboardcomment_seq.nextval from dual
+	</selectKey>
+		insert into freeboardcomment(freeboardcomment_no, id, freeboardcomment_content, freeboard_no,freeboardcomment_timeposted, freeboardcomment_parent)
+		values(#{commentNo},#{id},#{comment},#{contentNo},sysdate,0)
+	</insert>
+	
+	<select id="getFreeboardCommentList" parameterType="String" resultType="commentVO" resultMap="freeboardCommentRM">
+		select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, to_char(freeboardcomment_timeposted,'YYYY.MM.DD HH.MM.SS') as freeboardcomment_timeposted,
+		freeboardcomment_parent from freeboardcomment where freeboard_no=#{value}
+	</select>
+	
+	<delete id="deleteFreeboardComment" parameterType="commentVO">
+		delete from freeboardcomment where freeboardcomment_no=#{commentNo} and freeboard_no=#{contentNo}
+	</delete>
+
 	<update id="freeboardUpdateFileUpload" parameterType="boardVO">
 		update freeboardfile set freeboardfile_filepath=#{fileVO.filepath} where freeboard_no=#{fileVO.no} and freeboardfile_filepath=#{fileVO.beforefilepath}
 	</update>

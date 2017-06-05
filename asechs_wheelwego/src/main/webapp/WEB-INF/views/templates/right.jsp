@@ -10,7 +10,7 @@ var position = new naver.maps.LatLng("${param.latitude}", "${param.longitude}");
 
 var map = new naver.maps.Map('map', {
     center: position,
-    zoom: 10,
+    zoom: 8,
     mapTypeId: naver.maps.MapTypeId.NORMAL    
 });
 
@@ -28,7 +28,7 @@ var symbolMarker = new naver.maps.Marker({
 });
 
 var foodTruckInfo = [
-	<c:forEach items="${truckList}" var="truckInfo" varStatus="status">
+	<c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo" varStatus="status">
        {
     	   latitude : "${truckInfo.latitude}",
     	   longtitude : "${truckInfo.longitude}",
@@ -39,11 +39,6 @@ var foodTruckInfo = [
 ];
 
 var latlngs = [
-	/*     new naver.maps.LatLng(37.400221, 127.104280),
-	    new naver.maps.LatLng(37.399577, 127.108512),
-	    new naver.maps.LatLng(37.400263, 127.110765),
-	    new naver.maps.LatLng(37.400749, 127.115896),
-	    new naver.maps.LatLng(37.405785, 127.107760), */	
 ];
 
 for (var i = 0; i < foodTruckInfo.length; i++)
@@ -127,5 +122,4 @@ for (var i=0, ii=markers.length; i<ii; i++) {
     naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 }
 </script>
-
-
+	

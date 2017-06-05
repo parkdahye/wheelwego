@@ -217,7 +217,7 @@ create table freeboardcomment(
    freeboard_no number not null,
    freeboardcomment_content varchar2(300) not null,
    freeboardcomment_timeposted date not null,
-   freeboardcomment_parent varchar2(100) not null,
+   freeboardcomment_parent number not null,
    constraint freeboardcomment_id_fk foreign key(id) references member(id) on delete cascade,
    constraint freeboardcomment_boardno_fk foreign key(freeboard_no) references freeboard(freeboard_no) on delete cascade 
 );

@@ -35,17 +35,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <select id="searchFoodTruckList" resultMap="truckRM">
 select t.*, f.foodtruck_filepath
-		from(select * from foodtruck)t, foodtruckfile f
-		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' || #{value} || '%'
+from(select * from foodtruck)t, foodtruckfile f
+where t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' || #{value} || '%' and latitude is not null and longitude is not null
 </select>
-<select id="getTruckListTotalContentCount" resultType="Integer">
-		select count(*) from foodtruck
+<select id="getTruckListTotalContentCount" resultType="Integer" parameterType="string">
+	select count(*) from foodtruck where foodtruck_name like '%' || #{value}|| '%' and latitude is not null and longitude is not null
 </select>
-<select id="pagingTruckList" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
-select f.foodtruck_filepath, t.foodtruck_name, t.foodtruck_number FROM(
+
+<!-- <select id="pagingTruckList" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
+	select f.foodtruck_filepath, t.foodtruck_name, t.foodtruck_number FROM(
 	SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_name, foodtruck_number from foodtruck)t, foodtruckfile f
 	where t.foodtruck_number=f.foodtruck_number and rnum between #{startRowNumber} and #{endRowNumber}
+</select> -->
+
+<select id="getFoodTruckListByName" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
+	SELECT f.foodtruck_filepath, t.* FROM
+	(SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
+	from foodtruck fo where foodtruck_name like '%' || #{searchWord} || '%' and latitude is not null and longitude is not null)t, foodtruckfile f  
+	where t.foodtruck_number=f.foodtruck_number and rnum between #{startRowNumber} and #{endRowNumber}
+	order by t.foodtruck_number desc
 </select>
+
 <select id="foodtruckDetail" resultMap="truckRM">
 select t.*, f.foodtruck_filepath
 		from(select * from foodtruck)t, foodtruckfile f
@@ -83,6 +93,13 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 
 <select id="getReivewTotalCount" resultType="int">
 	select count(*) from review where foodtruck_number=#{value}
+</select>
+<insert id="registerBookMark" parameterType="wishListVO">
+	insert into wishlist(customer_id,foodtruck_number )
+	  values(#{customerId},#{foodTruckNumber})
+</insert>
+<select id="getBookMarkCount" parameterType="wishListVO" resultType="int">
+	select count(*) from wishlist where foodtruck_number = #{foodTruckNumber} and customer_id = #{customerId} 
 </select>
 <select id="getAvgGradeByTruckNumber" resultType="int">
 	select trunc(avg(grade),1) from review  where foodtruck_number=#{value} group by foodtruck_number
