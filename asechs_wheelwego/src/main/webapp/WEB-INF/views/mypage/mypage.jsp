@@ -31,7 +31,7 @@ function checkDelete(){
 			<c:otherwise>
 				<a href="${pageContext.request.contextPath}/afterLogin_mypage/myfoodtruck_page.do">MYTRUCK 설정</a><br>
 				<a href="${pageContext.request.contextPath}/afterLogin_mypage/myfoodtruck_menuList.do">메뉴 관리</a><br>
-				<a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyfoodtruck.do">MYTRUCK 보기</a><br>	
+				<a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyfoodtruck.do">MYTRUCK 보기</a><br>
 				<a href="">예약관리</a>
 			</c:otherwise>
 		</c:choose>
@@ -39,5 +39,6 @@ function checkDelete(){
 	<c:otherwise>
 		<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do">단골트럭</a><br>
 		<a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}">My Review List</a>
+		<a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyComment.do">My CommentList</a><br>	
 	</c:otherwise>
 </c:choose>

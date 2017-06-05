@@ -51,8 +51,7 @@ public class TestJUnit {
 	private MypageDAO mypageDAO;
 	@Test
 	public void test(){
-		//ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodTruckNumber);
-		System.out.println(foodService.getReviewListByTruckNumber("1", "80나0036"));
+		System.out.println(boardDAO.getFreeboardCommentList("154"));
 	}
 }
 

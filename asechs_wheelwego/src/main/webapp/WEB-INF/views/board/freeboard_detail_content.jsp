@@ -4,11 +4,18 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
 <!-- Bootstrap --> 
 <link href="css/bootstrap.min.css" rel="stylesheet"> 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+<!-- 댓글 게시판 디자인 W3에서 끌어옴. 정호 -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+  
 <script type="text/javascript">
 	$(document).ready(function(){
 		// 목록으로 가기
@@ -25,19 +32,32 @@
 			}else{
 			}
 		})// 삭제버튼 끝
-		$("#submitBtn").onclick(function(){
-			$.ajax({
-				type:"post",
-				url:"${pageContext.request.contextPath}/writeFreeboardComment.do",
-				data:$("#comment").val(),
-				success:function(data){
-					String commentInfo="";
-					for(var i=0; i<data.size; i++){
-						commentInfo+="<tr>"
+		
+	/* 	$(":input[name=updateCommentBtn]").click(function(){
+			//alert($(this).parent().parent().find(".commentNo").text());
+			var commentNo=$(this).parent().parent().find(".commentNo").text();
+			location.href="${pageContext.request.contextPath}/updateFreeboardComment.do?commentNo="+commentNo+"&contentNo="+${requestScope.detail_freeboard.no};
+		}); */
+		
+		$(":input[name=deleteCommentBtn]").click(function(){
+			var commentNo=$(this).parent().parent().find(".commentNo").text();
+				$.ajax({
+					type:"post",
+					url:"${pageContext.request.contextPath}/deleteFreeboardComment.do",
+					data:"commentNo="+commentNo+"&contentNo=${requestScope.detail_freeboard.no}",
+					success:function(data){
+						location.href="${pageContext.request.contextPath}/board/freeboard_detail_content.do?no=${requestScope.detail_freeboard.no}";
 					}
-				}
-			});
-		});
+				});//ajax
+		});//click
+		
+		$(":input[name=updateCommentBtn]").click(function(){
+			alert($(this).parent().parent().find(".comment").text());
+			
+			
+			
+			
+		});//ajax
 	})//ready
 </script> 
 <div class="panel panel-default"> 
@@ -109,33 +129,50 @@
     <div class="col-md-6">
     						<div class="widget-area no-padding blank">
 								<div class="status-upload">
-									<form method="post" action="">
-										<textarea placeholder="댓글을 입력해주세요" id="comment"></textarea>
-										<ul>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
-										</ul>
-										<button type="button" class="btn btn-success green" id="submitBtn"><i class="fa fa-share"></i> Share</button>
+									<form method="post" action="${pageContext.request.contextPath }/writeFreeboardComment.do" id="freeboardCommentForm">
+										<textarea placeholder="댓글을 입력해주세요" name="comment" required="required"></textarea>
+										<input type="hidden" name="id" value="${sessionScope.memberVO.id }">
+										<input type="hidden" name="contentNo" value="${requestScope.detail_freeboard.no }">
+										<button type="submit" class="btn btn-success green" id="submitBtn"><i class="fa fa-share"></i> Share</button>
 									</form>
 								</div><!-- Status Upload  -->
 							</div><!-- Widget Area -->
 						</div>
     </div>
 </div>
-<table>
-	<thead>
-		<tr>
-			<th>댓글번호</th><th>작성자</th><th>내용</th><th>입력 날짜</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
+<div class="container">
+  <h2>댓글 게시판</h2>
+  <p>여러분의 자유로운 의견을 올려주세요</p>            
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      	<th>댓글번호</th>
+        <th>글쓴이</th>
+        <th>글내용</th>
+        <th>작성일시</th>
+      </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${requestScope.freeboardCommentList }" var="freeboardCommentList">
+    	<tr>
+    		<td class="commentNo">${freeboardCommentList.commentNo }</td>
+    		<td>${freeboardCommentList.id }</td>
+    		<td class="comment">${freeboardCommentList.comment }</td>
+    		<td>${freeboardCommentList.timePosted }</td>
+    		<c:if test="${sessionScope.memberVO.id==freeboardCommentList.id }">
+    		<td>
+				<input type="button" name="updateCommentBtn" value="수정">
+			</td>
+			<td>
+				<input type="button" name="deleteCommentBtn" value="삭제">
+			</td>
+			</c:if>
+    	</tr>
+    </c:forEach>
+    </tbody>
+  </table>
+</div>
+
 
 <!-- 댓글창 CSS 임시적으로 여기에 배치 -->
 <style>

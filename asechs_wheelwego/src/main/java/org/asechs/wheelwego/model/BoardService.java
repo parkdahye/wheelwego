@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.CommentVO;
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
@@ -53,4 +54,13 @@ public interface BoardService {
 	MemberVO qna_getNameById(BoardVO bvo);
 
 	BoardVO getqnaBoardDetail(String no);
+
+	void writeFreeboardComment(CommentVO cvo);
+
+	List<CommentVO> getFreeboardCommentList(String no);
+
+	void deleteFreeboardComment(CommentVO cvo);
+
+
+
 }

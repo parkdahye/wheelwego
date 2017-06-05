@@ -309,3 +309,46 @@ from
 review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
 where foodtruck_number='1234')
 where rnum between 1 and 5;
+
+select * from freeboardcomment
+
+select freeboardcomment_no, id, freeboardcomment_content, to_char(freeboardcomment_timeposted,'YYYY.MM.DD hh:mm:ss') as freeboardcomment_timeposted 
+		from freeboardcomment  where freeboard_no=154 order by freeboardcomment_no desc
+select * from freeboardcomment
+
+
+insert into freeboardcomment(freeboardcomment_no, id, freeboardcomment_content, freeboard_no,freeboardcomment_timeposted, freeboardcomment_parent)
+values(freeboardcomment_seq.nextval,'java101','강정호 댓글시도',154,sysdate,0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

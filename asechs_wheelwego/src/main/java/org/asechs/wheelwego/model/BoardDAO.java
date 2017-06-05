@@ -3,6 +3,7 @@ package org.asechs.wheelwego.model;
 import java.util.List;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.CommentVO;
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
@@ -62,6 +63,12 @@ public interface BoardDAO {
 	MemberVO qna_getNameById(BoardVO bvo);
 
 	BoardVO getqnaBoardDetail(String no);
+
+	void writeFreeboardComment(CommentVO cvo);
+
+	List<CommentVO> getFreeboardCommentList(String no);
+
+	void deleteFreeboardComment(CommentVO cvo);
 
 
 }
