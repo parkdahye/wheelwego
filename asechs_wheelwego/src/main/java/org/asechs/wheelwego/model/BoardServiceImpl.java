@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.CommentVO;
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
@@ -44,7 +45,6 @@ public class BoardServiceImpl implements BoardService {
 		bvo.setId(mvo.getId());
 		// 글 정보먼저 insert한다.
 		String contentNo=boardDAO.freeboardWrite(bvo);
-		
 		// 강정호. 파일 업로드. 컨트롤러에 넣기에는 너무 길어서 서비스에 넣었습니다.
 		// 그 다음 파일 이름을 insert한다
 		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
@@ -78,29 +78,35 @@ public class BoardServiceImpl implements BoardService {
 	public void updateBoard(BoardVO vo) {
 		// 사용자가 수정하고 하는 파일명
 		for(int i=0;i<vo.getFile().size();i++){
-			System.out.println("controller 에서 보낸 파일 이름 :"+vo.getFile().get(i).getOriginalFilename());
+			System.out.println("업데이트 할 파일 이름 :"+vo.getFile().get(i).getOriginalFilename());
 		}
 		String contentNo=boardDAO.updateBoard(vo);
 		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
 		List<MultipartFile> fileList=vo.getFile();
-	
+		
 		for(int i=0; i<fileList.size(); i++){
 			if(fileList.isEmpty()==false){
 				BoardVO boardVO=new BoardVO();
 				FileVO fileVO=new FileVO();
 				String fileName=fileList.get(i).getOriginalFilename();
-				System.out.println(fileName);
-				if(fileName.equals("")==false){
+					System.out.println("수정할 사진 :	"+fileName);
+					if(fileName.equals("")==false){
+			}
 					try{
 						fileList.get(i).transferTo(new File(uploadPath+fileName));
 						// 기존의 존재하는 파일명 갖고오기
 						List<FileVO> fvo= boardDAO.getFreeBoardFilePath(contentNo);
+						System.out.println("기존 파일 명  "+fvo);
 						for(int j=0;j<fvo.size();j++){
-							fileVO.setBeforefilepath(fvo.get(j).getFilepath());
-						}
+						// 파일 기존 경로 저장하기
+						fileVO.setBeforefilepath(fvo.get(j).getFilepath());
+						// 파일 넘버 지정
 						fileVO.setNo(contentNo);
+						//파일 경로 지정
 						fileVO.setFilepath(fileName);
+						//보드VO 에 파일VO 저장
 						boardVO.setFileVO(fileVO);
+						} 
 						System.out.println(boardVO);
 						boardDAO.freeboardUpdateFileUpload(boardVO);
 					}catch(IllegalStateException | IOException e){
@@ -108,7 +114,6 @@ public class BoardServiceImpl implements BoardService {
 						}
 					}
 			}
-		}
 	}
 
 	@Override
@@ -136,6 +141,24 @@ public class BoardServiceImpl implements BoardService {
 	public List<FileVO> getFreeBoardFilePath(String no) {
 		return boardDAO.getFreeBoardFilePath(no);
 	}
+	
+	// 자유게시판 댓글 작성
+	@Override
+	public void writeFreeboardComment(CommentVO cvo) {
+		 boardDAO.writeFreeboardComment(cvo);
+	}
+	
+	@Override
+	public List<CommentVO> getFreeboardCommentList(String no) {
+		return boardDAO.getFreeboardCommentList(no);
+	}
+	
+	@Override
+	public void deleteFreeboardComment(CommentVO cvo) {
+		 boardDAO.deleteFreeboardComment(cvo);
+	}
+	
+	
 	
 	
 //////////강정호. 창업게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -297,6 +320,15 @@ public class BoardServiceImpl implements BoardService {
 	public MemberVO qna_getNameById(BoardVO bvo) {
 		return boardDAO.qna_getNameById(bvo);
 	}
+
+	
+
+
+
+	
+
+
+
 
 	
 

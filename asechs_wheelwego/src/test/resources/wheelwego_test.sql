@@ -1,6 +1,7 @@
 
 ----------dbTEST---------------------
 select * from member
+delete from foodtruck where foodtruck_name='현지네트럭'
 select * from seller
 select * from menu
 select * from FOODTRUCK where foodtruck_name='꼬부랑아이스크림'
@@ -89,7 +90,6 @@ select password from member where id = 'java01';
 select * from member;
 
 select * from seller;
-select * from foodtruck;
 select * from wishlist ;
 select * from wishlist where id = 'customer01';
 -- 푸드트럭 위시리스트 sql문
@@ -312,6 +312,67 @@ review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, gra
 where foodtruck_number='1234')
 where rnum between 1 and 5;
 
+select * from freeboardcomment
+
+select freeboardcomment_no, id, freeboardcomment_content, to_char(freeboardcomment_timeposted,'YYYY.MM.DD hh:mm:ss') as freeboardcomment_timeposted 
+		from freeboardcomment  where freeboard_no=154 order by freeboardcomment_no desc
+select * from freeboardcomment
+
+
+insert into freeboardcomment(freeboardcomment_no, id, freeboardcomment_content, freeboard_no,freeboardcomment_timeposted, freeboardcomment_parent)
+values(freeboardcomment_seq.nextval,'java101','강정호 댓글시도',154,sysdate,0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from foodtruckfile;
+
+		select t.*, f.foodtruck_filepath
+		from(select * from foodtruck)t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number
+
+select * from member;
+
+
+select t.*, f.foodtruck_filepath
+from(select * from foodtruck)t, foodtruckfile f
+where t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' || '소시지' || '%'
+
+select * from foodtruck where foodtruck_name like '%' || '소시지' || '%'
+select * from foodtruckfile;
+
+insert into foodtruckfile values ('80나0002', 'Friend_트럭1.jpg');
+
+select * from foodtruck;
+
 	insert into freeboardfile(freeboard_no, freeboardfile_filepath)values(#{fileVO.no},#{fileVO.filepath})
 
 	update freeboardfile set freeboardfile_filepath=#{value} where freeboard_no=#{fileVO.no} and freeboardfile_filepath=#{fileVO.filepath}
@@ -319,6 +380,7 @@ where rnum between 1 and 5;
 
 
 select * from freeboardfile
+<<<<<<< HEAD
 
 insert into wishlist();
 
@@ -329,6 +391,5 @@ select count(*) from wishlist where foodtruck_number = '80나0003' and customer_
 
 
 select count(*) from wishlist where foodtruck_number = '80나0003' and customer_id = 'customer01';
-
 
 

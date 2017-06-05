@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.BoardVO;
+import org.asechs.wheelwego.model.vo.CommentVO;
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
@@ -79,6 +80,26 @@ public class BoardDAOImpl implements BoardDAO {
 		template.update("board.freeboardUpdateFileUpload", boardVO);
 		
 	}
+	
+	@Override
+	public void writeFreeboardComment(CommentVO cvo) {
+		template.insert("board.writeFreeboardComment",cvo);
+	}
+	
+	@Override
+	public List<CommentVO> getFreeboardCommentList(String no) {
+		return template.selectList("board.getFreeboardCommentList", no);
+	}
+	
+	@Override
+	public void deleteFreeboardComment(CommentVO cvo) {
+		template.delete("board.deleteFreeboardComment",cvo);
+		
+	}
+
+
+	
+	
 //////////강정호. 창업게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
@@ -172,13 +193,5 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardVO getqnaBoardDetail(String no) {
 		return template.selectOne("board.getqnaBoardDetail", no);
 	}
-
-
-
-	
-
-	
-
-
 
 }
