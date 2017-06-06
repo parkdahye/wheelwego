@@ -89,4 +89,28 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 			avgGrade=foodTruckDAO.findTruckNumberInReview(foodtruckNumber);
 		return avgGrade;
 	}
+	@Override
+	public ListVO filtering(String option, String searchWord, String nowPage) {
+		List<TruckVO> truckList=null;
+		if(nowPage==null)
+			nowPage="1";
+		PagingBean pagingbean=null;
+		ListVO pagingList=new ListVO();
+		int totalCount=foodTruckDAO.getTruckListTotalContentCount(searchWord);
+		if(option.equals("byRegisterDate")){
+			 pagingbean=new PagingBean(Integer.parseInt(nowPage),totalCount,searchWord);
+			truckList=foodTruckDAO.filteringByWishlistCount(pagingbean);
+		}else if(option.equals("byAvgGrade")){
+			 pagingbean=new PagingBean(Integer.parseInt(nowPage),totalCount,searchWord);
+			truckList=foodTruckDAO.filteringByAvgGrade(pagingbean);
+		}else{
+			 pagingbean=new PagingBean(Integer.parseInt(nowPage),totalCount,searchWord);
+			truckList=foodTruckDAO.filteringByRegisterDate(pagingbean);
+		}
+		for(int i=0; i<truckList.size();i++)
+			truckList.get(i).setAvgGrade(foodTruckDAO.findAvgGradeByTruckNumber(truckList.get(i).getFoodtruckNumber()));
+		pagingList.setTruckList(truckList);
+		pagingList.setPagingBean(pagingbean);
+		return pagingList;
+	}
 }
