@@ -392,4 +392,4 @@ select count(*) from wishlist where foodtruck_number = '80나0003' and customer_
 
 select count(*) from wishlist where foodtruck_number = '80나0003' and customer_id = 'customer01';
 
-
+select * from menu;

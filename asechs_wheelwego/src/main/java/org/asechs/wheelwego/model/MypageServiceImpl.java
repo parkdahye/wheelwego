@@ -99,10 +99,11 @@ public class MypageServiceImpl implements MypageService {
 		for(int i=0;i<foodList.size();i++){
 			try{
 				foodList.get(i).setFoodTruckNumber(truckNumber); //트럭넘버를 세팅
+				foodList.get(i).setFileVO(new FileVO(truckNumber, "defaultMenu.jpg"));
+				mypageDAO.registerMenu(foodList.get(i)); //메뉴를 등록한다.
 				MultipartFile foodFile=foodList.get(i).getMenuFile(); //메뉴사진받아와서
 				String renamedFile=fm.rename(foodFile,truckNumber+"_"+foodList.get(i).getMenuId()); //파일 이름 수정
-				foodList.get(i).setFileVO(new FileVO(truckNumber, renamedFile));
-				mypageDAO.registerMenu(foodList.get(i)); //메뉴를 등록한다.
+				mypageDAO.updateMenuFilepath(new FileVO(foodList.get(i).getMenuId(), renamedFile)); //파일 경로 수정
 				fm.uploadFile(foodFile, renamedFile); //서버에 파일 업로드
 			}catch (Exception e) {
 				e.printStackTrace();
