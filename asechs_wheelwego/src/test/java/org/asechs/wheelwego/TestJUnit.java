@@ -7,6 +7,8 @@ import org.asechs.wheelwego.model.FoodTruckDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
+import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.PagingBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -45,7 +47,7 @@ public class TestJUnit {
 	@Resource
 	private BoardDAO boardDAO;
 	@Resource
-	private FoodTruckDAO foodDAO;
+	private FoodTruckDAO foodTruckDAO;
 	@Resource
 	private MypageDAO mypageDAO;
 	
@@ -73,6 +75,18 @@ public class TestJUnit {
 		
 		for (int i = 0; i < listVO.getTruckList().size(); i++)
 			System.out.println(listVO.getTruckList().get(i));*/
+		
+		int totalCount=foodTruckDAO.getTruckListTotalContentCount(name);
+		PagingBean pagingBean=null;
+		
+
+		pagingBean=new PagingBean(totalCount);
+			
+		pagingBean.setSearchWord(name);
+		
+		ListVO listVO = new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByName(pagingBean));
+		
+		System.out.println(listVO);
 
 	}
 }

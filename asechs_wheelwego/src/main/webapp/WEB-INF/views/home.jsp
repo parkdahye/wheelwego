@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script>
+<!-- <script>
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -31,12 +31,11 @@ function showError(error) {
             break;
     }
 }
-</script>
+</script> -->
 
 <!-- GPS(위도, 경도) 가져오기 --- by 황윤상 -->
 <script type="text/javascript">
 function geoFindMe() {
-	alert("geoFindMe");
 	var searchFoodtruckName = document.getElementById("searchFoodtruckName").value;
 	if (!navigator.geolocation){
 		alert("지오로케이션을 지원하지 않습니다!");
