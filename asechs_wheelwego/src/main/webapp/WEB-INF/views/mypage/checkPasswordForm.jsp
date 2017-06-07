@@ -45,15 +45,18 @@ $(document).ready(function(){
 	});
 });
 </script>
-
+<br><br>
 <form method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/${param.command}.do" id="checkPwForm">
+   <h3 class="text-center">Check Password</h3>
+   <h5 class="text-center">정보확인을 위해 비밀번호를 다시 입력하세요.</h5>
+   <hr>
  <div class="row">
- <div class="col-xs-5"></div>
- <div class="col-xs-2">
-   Check Password : <input type="password" name="password" id="password" size="10" required="required" class="form-control col-xs-2" autofocus><br>
+  <div class="col-xs-4" align="center"></div>
+ <div class="col-xs-4" align="center">
+    <input type="password" name="password" id="password" size="5" required="required" class="form-control col-xs-2" autofocus><br>
    <input type="hidden" value="${param.command}"><br><br><br>
    <span><input type="button" value="click!" id="inputForm" class="btn" style="float: right;"></span>
    </div>
-    <div class="col-xs-5"></div>
+   <div class="col-xs-4" align="center"></div>
 </div>
 </form>

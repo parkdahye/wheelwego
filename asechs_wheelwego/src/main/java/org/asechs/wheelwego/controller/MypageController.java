@@ -148,4 +148,9 @@ public class MypageController {
 		mypageService.updateMyReview(reviewVO);
 		return"redirect:/afterLogin_mypage/showMyReviewList.do?customerId="+reviewVO.getCustomerId();
 	}
+	@RequestMapping("afterLogin_mypage/showMyFoodtruck.do")
+	public String showMyFoodtruck(String id){
+		String foodtruckNo=mypageService.findtruckNumberBySellerId(id);
+		return "redirect:../foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo;
+	}
 }

@@ -33,11 +33,6 @@
 			}
 		})// 삭제버튼 끝
 		
-	/* 	$(":input[name=updateCommentBtn]").click(function(){
-			//alert($(this).parent().parent().find(".commentNo").text());
-			var commentNo=$(this).parent().parent().find(".commentNo").text();
-			location.href="${pageContext.request.contextPath}/updateFreeboardComment.do?commentNo="+commentNo+"&contentNo="+${requestScope.detail_freeboard.no};
-		}); */
 		
 		$(":input[name=deleteCommentBtn]").click(function(){
 			var commentNo=$(this).parent().parent().find(".commentNo").text();
@@ -51,12 +46,13 @@
 				});//ajax
 		});//click
 		
-		$(":input[name=updateCommentBtn]").click(function(){
-			alert($(this).parent().parent().find(".comment").text());
-			
-			
-			
-			
+		$(":input[name=updateCommentBtn]").click(function(){ 	 	 	
+			var commentNo=$(this).parent().parent().find(".commentNo").text();
+			var contentNo=${requestScope.detail_freeboard.no};
+			alert(commentNo);
+			window.name="parentForm";
+			window.open("${pageContext.request.contextPath}/freeboard_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
+					,"commentUpdateForm", "width=570, height=350, resizable=no, scrollbars=no");
 		});//ajax
 	})//ready
 </script> 
@@ -164,7 +160,7 @@
 				<input type="button" name="updateCommentBtn" value="수정">
 			</td>
 			<td>
-				<input type="button" name="deleteCommentBtn" value="삭제">
+				<input type="button"  name="deleteCommentBtn" value="삭제">
 			</td>
 			</c:if>
     	</tr>

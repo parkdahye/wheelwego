@@ -48,4 +48,5 @@ public interface MypageDAO {
 	void deleteMyReview(String reviewNo); //리뷰 삭제하기
 
 	public ReviewVO findReviewInfoByReviewNo(String reviewNo);
+
 }

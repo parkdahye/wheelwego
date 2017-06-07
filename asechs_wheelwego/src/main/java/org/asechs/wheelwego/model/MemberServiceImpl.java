@@ -94,4 +94,9 @@ public class MemberServiceImpl implements MemberService {
 	public String getMemberType(String id){
 		return memberDAO.getMemberType(id);
 	}
+
+	@Override
+	public String findBusinessNumberById(String id) {
+		return memberDAO.findBusinessNumberById(id);
+	}
 }

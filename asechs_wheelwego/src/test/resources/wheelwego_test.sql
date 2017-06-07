@@ -380,7 +380,6 @@ select * from foodtruck;
 
 
 select * from freeboardfile
-<<<<<<< HEAD
 
 insert into wishlist();
 
@@ -426,4 +425,10 @@ select t.foodtruck_number, t.foodtruck_name, count(customer_id) as wishlist_coun
 where t.foodtruck_number=w.foodtruck_number(+) and t.foodtruck_number=f.foodtruck_number and  t.foodtruck_name like '%' || '트' || '%'
 group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath order by wishlist_count desc
 )) where rnum between 1 and 9
+
+select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboardcomment_timeposted from freeboardcomment 
+		where freeboardcomment_no=64 and freeboard_no=175
+		
+		delete from information where informationcomment_no=1 and information_no=91
+		select * from informationcomment
 

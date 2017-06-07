@@ -108,7 +108,7 @@ input[name="grade"]:checked + .star_point~label{
     <p style="text-align:center">Find us at some address at some place.</p>
     <div id="map" style="width:100%;height:400px;"></div>
 
-    <c:if test="${sessionScope.memberVO!=null}">
+    <c:if test="${sessionScope.memberVO!=null&&sessionScope.memberVO.memberType!='seller'}">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW</span></h5>
    <form action="${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do" target="_blank" method="post">
     <input type="radio" name="grade" id="star-1" value="1"/>

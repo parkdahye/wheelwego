@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <style>
 .star_point_list{
   font-size:10pt;
@@ -8,6 +9,16 @@
   cursor:pointer;
 }
 </style>
+
+   <div class=" text-center"> <h1 class="page-header">MY Page</h1> </div>
+<div align="center">
+  <button type="button" id="deleteAccountBtn" class="btn btn-warning">회원탈퇴</button>&nbsp;&nbsp;
+  <button type="button" id="updateBtn" class="btn btn-warning">회원정보수정</button>&nbsp;&nbsp;
+	<button type="button" id="wishlistBtn"class="btn btn-warning">단골트럭</button>&nbsp;&nbsp;
+<button type="button" id="reviewBtn"class="btn btn-warning">MY REVIEW</button>&nbsp;&nbsp;
+</div>
+<br><br>
+
  <div class="row">
  <div class="col-sm-2"></div>
  <div class="container col-sm-8">
@@ -153,4 +164,21 @@
  			}
  		});
  	});
+ 	
+ 	$(document).ready(function(){
+		$("#deleteAccountBtn").click(function(){
+			if(confirm("계정을 삭제하시겠습니까?")){
+				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
+			}
+		});
+		$("#updateBtn").click(function(){
+				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
+		});
+		$("#wishlistBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do";
+	});
+		$("#reviewBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
+	});
+});
  </Script>

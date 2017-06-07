@@ -125,30 +125,39 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="inputNumber">휴대폰번호</label>
               <div class="col-sm-6">
-                <input type="text"   class="form-control" name = "phoneNumber"   value = "${sessionScope.memberVO.phoneNumber}" maxlength="11" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required="required"><span id="phoneNumberCheckView"></span>
+                <input type="tel"   class="form-control" name = "phoneNumber"   value = "${sessionScope.memberVO.phoneNumber}" maxlength="11" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required="required"><span id="phoneNumberCheckView"></span>
               </div>
         </div>
         
-            <div class="form-group">
+            
+	<c:choose>
+   	<c:when test="${sessionScope.memberVO.memberType=='customer'}">
+          <div class="form-group">
             <label class="col-sm-3 control-label" for="inputNumberCheck">회원 타입</label>
           <div class="col-sm-6">
-	<c:choose>
-   	<c:when test="${sessionScope.memberVO.memberType == customer}">
          	   <input type="radio" name="memberType" value="customer" checked="checked" > 일반회원&nbsp;
-       	   	   <input type="radio" name="memberType" value="seller"> 창업자회원<br>
+         </div>
+         </div>
    	</c:when>
     <c:otherwise>
-		   <input type="radio" name="memberType" value="customer" checked="checked" > 일반회원&nbsp;
-       	   	   <input type="radio" name="memberType" value="seller"> 창업자회원<br>
+              <div class="form-group">
+            <label class="col-sm-3 control-label" for="inputNumberCheck">회원 타입</label>
+              <div class="col-sm-6">
+       	   	   <input type="radio" name="memberType" value="seller" checked="checked" > 창업자회원<br>
+       	   	   </div>
+       	   	   </div>
+       	   	   <div class="form-group">
+          <label class="col-sm-3 control-label" for="inputPassword">사업자 번호</label>
+        	<div class="col-sm-6">
+            <input type="text"   class="form-control"  id="businessNumber" name = "businessNumber" placeholder="사업자번호" value = "${sessionScope.businessNumber}" readonly="readonly"><br>
+            </div>
+            </div>
    	</c:otherwise>
    </c:choose>
-            	<span id="businessNumberView" ></span><span id='businessNumberCheckView'></span>
-          </div>
-        </div>
         <div class="form-group">
           <div class="col-sm-12 text-center">
             <button class="btn btn-primary" type="submit">정보수정<i class="fa fa-check spaceLeft"></i></button>
-            <button class="btn btn-danger" type="submit" id="cancelBtn">수정취소<i class="fa fa-times spaceLeft"></i></button>
+            <button class="btn btn-danger" type="button" id="cancelBtn">수정취소<i class="fa fa-times spaceLeft"></i></button>
           </div>
         </div>
         </form>
@@ -208,19 +217,7 @@ $(document).ready(function(){
          if ($("#address").val() == ""){
             alert("주소를 입력하세요.");
             return false;
-         }
-/*          if(checkResultPhone==""){
-            alert("휴대전화번호를 체크하세요");
-            return false;
-         } */
-         /* if(memberType==""){
-            alert("회원타입을 체크하세요");
-            return false;
-         } */
-         /* if(memberType == "seller" && checkResultBusiness==""){
-            alert("사업자번호를 체크하세요");
-            return false;
-         }  */           
+         }  
       });
       
       $("#cancelBtn").click(function(){
@@ -242,20 +239,7 @@ $(document).ready(function(){
             checkResultPw=password;
          }
       });
-      
-       $(":input[name=phoneNumber]").keyup(function(){
-         var phoheNumber = $(this).val().trim();
-         
-         if(phoheNumber.length == 10 || phoheNumber.length == 11){
-            $("#phoneNumberCheckView").html("");
-            checkResultPhone=phoheNumber;            
-         }
-         else
-         {
-            $("#phoneNumberCheckView").html("-를 제외한 휴대전화번호 10~11자리를 입력하세요");
-            checkResultPhone="";
-         }
-      });   
+  
       
       $(":input[name=password]").keyup(function(){
          var password = $(this).val().trim();
@@ -269,30 +253,6 @@ $(document).ready(function(){
             checkResultPw=password;
          }
       });
-      
-/*       $("input:radio[name=memberType]").click(function(){
-         memberType = $(":input[name=memberType]:checked").val();
-         
-         if (memberType == "seller")
-         {
-            $("#businessNumberView").html("사업자 번호 <input type='text' name = 'businessNumber' maxlength='10' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required='required'>");
-            
-             $(":input[name=businessNumber]").keyup(function(){
-               var businessNumber = $(this).val().trim();
-               
-               if(businessNumber.length == 10){
-                  $("#businessNumberCheckView").html("");
-                  checkResultBusiness=businessNumber;            
-               }
-               else
-               {
-                  $("#businessNumberCheckView").html("-를 제외한 사업자번호 10자리를 입력하세요").css("background","pink");
-                  checkResultBusiness="";
-               }
-            });
-         }
-         else
-            $("#businessNumberView").html("");
-      }); */
+   
 });//ready
 </script>

@@ -54,7 +54,7 @@ public class TestJUnit {
 	
 	@Test
 	public void test(){
-		System.out.println(mypageService.myWishList("customer02"));
+
 	}
 }
 

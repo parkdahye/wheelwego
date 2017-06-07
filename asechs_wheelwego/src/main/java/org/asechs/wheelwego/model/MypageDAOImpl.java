@@ -96,4 +96,5 @@ public class MypageDAOImpl implements MypageDAO {
 	public ReviewVO findReviewInfoByReviewNo(String reviewNo) {
 		return sqlSessionTemplate.selectOne("mypage.findReviewInfoByReviewNo", reviewNo);
 	}
+
 }

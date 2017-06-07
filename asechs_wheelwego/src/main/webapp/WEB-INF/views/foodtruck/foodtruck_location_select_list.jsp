@@ -33,7 +33,7 @@
 <Script type="text/javascript">
 
 $(document).ready(function(){
-	$("input#insertBtn").click(function(){
+	$("#insertBtn").click(function(){
 	  var foodtruckNumber = $(this).attr('name');
 	  var id = "${sessionScope.memberVO.id}";
 	 // var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
@@ -48,7 +48,7 @@ $(document).ready(function(){
 		success:function(data){
 			if(data=="on"){
 				alert("단골트럭으로 등록!");
-				$(this).children().find("img").html("<img alt='단골트럭 등록' src='${pageContext.request.contextPath}/resources/img/hearton.png' style='position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;'>");
+				$(this).css("background-image","${pageContext.request.contextPath}/resources/img/hearton.png");
 				location.reload();		
 			}else{
 				alert("단골트럭 등록해제");			
@@ -77,7 +77,6 @@ $(document).ready(function(){
     });
 	</c:forEach>
 </script>
-
 <div class="container-fluid text-center bg-grey">
   <h4>FOODTRUCK LIST</h4><br>
   <div class="row text-center" style="position:relative;">
