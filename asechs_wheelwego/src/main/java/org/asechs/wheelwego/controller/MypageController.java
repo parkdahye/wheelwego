@@ -25,7 +25,7 @@ public class MypageController {
 	
 	@RequestMapping("afterLogin_mypage/wishlist.do")
 	// 세션이 없으면 홈으로 보냄
-	public ModelAndView myWishList(HttpServletRequest request, String id, String pageNo) {
+	public ModelAndView myWishList(HttpServletRequest request, String id) {
 		// System.out.println("실행");
 		HttpSession session = request.getSession(false);
 		if (session == null) {
