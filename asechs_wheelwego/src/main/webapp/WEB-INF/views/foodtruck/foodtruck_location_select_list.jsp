@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+ .container-fluid {
+      padding: 40px 50px 30px 40px;
+  }
+  .bg-grey {
+      background-color: #f6f6f6;
+  }
+  .thumbnail {
+      padding: 0 0 15px 0;
+      border: 1px solid light grey;
+      height:280px;
+      position: relative;
+      display: block;
+  }
+  .thumbnail img {
+     /*  width: 100%;
+      height:100%; */
+      margin-bottom: 10px;
+      
+  }
+  .col-sm-6{
+  width: 50%;
+  height: 300px;
+  }
+/*   img:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+} */
+</style>
 <Script type="text/javascript">
 
 $(document).ready(function(){
@@ -48,18 +77,20 @@ $(document).ready(function(){
     });
 	</c:forEach>
 </script>
-<div class="container-fluid bg-grey">
-  <div class="row text-center">
-  <!-- 이슈관리: 변수명으로 받아와야 함 (truckList) -->
+
+<div class="container-fluid text-center bg-grey">
+  <h4>FOODTRUCK LIST</h4><br>
+  <div class="row text-center" style="position:relative;">
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
-    <div class="col-xs-6">
-      <div style="position:relative;" class="thumbnail">
-       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}"><img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
+    <div class="col-sm-6">
+      <div class="thumbnail">
+      <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
+        <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
+        </a>
         <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
         <p style="font-size:17px;">location / review </p>
-        <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
-    </div>  
+      </div>
     </div>
   </c:forEach>
   </div>

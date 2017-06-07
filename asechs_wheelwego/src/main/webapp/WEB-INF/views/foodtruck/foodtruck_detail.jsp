@@ -48,7 +48,7 @@ input[name="grade"]:checked + .star_point~label{
    <div class="container" id="maincontent" tabindex="-1">
       <div class="row">
          <div class="col-lg-12">
-            <div class="intro-text">
+            <div class="w3-text-light-grey intro-text">
                <h1 class="name" style="color:light-grey">${truckDetailInfo.foodtruckName}</h1>
                </div>
          </div>

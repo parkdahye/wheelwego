@@ -27,27 +27,28 @@ $(document).ready(function(){
 });
 </script>
     
-<section id="portfolio">
-  <div class="col-lg-4 col-sm-6 portfolio-item" >
+
+<div class="col-sm-12" >
      <!--  <div class="flip-container"
                ontouchstart="this.classList.toggle('hover');" style="margin: 0 auto;"> -->
-        		<div class="col-lg col-sm-6">	
+        		
       		<c:forEach items="${requestScope.wishlist}" var="wishList">
+      		<div class="col-sm-4">
       		<div style="position:relative;">
-			 <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}"><img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/img/foodtruck/${wishList.fileVO.filepath}" style="position:absoulte;  z-index: 2; "></a>
+			 <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}"><img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:absoulte;  z-index: 2; "></a>
 			 	<div class='overlay'><div class='overlaytext'>
 								<h4>${wishList.foodtruckName}</h4>
 								판매자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${wishList.sellerId}<br>
 								푸드트럭소개&nbsp;&nbsp;&nbsp;${wishList.introduction}<br>
 								</div>
 								</div>
-			 	<input  type="image" id="clearBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/foodtruck/hearton.png" 
+			 	<input  type="image" id="clearBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/hearton.png" 
 			 	style=" position:absolute; width: 45px; top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" >
+			 </div>
 			 </div>	
 			 	<%-- 	<input type='hidden' name='id' value='${sessionScope.memberVO.id}'/>  --%> 
        		</c:forEach>
         		</div>  		
-      </div>
 <!--       <div style="position: absolute; margin-left: 10px; margin-top: 10px;">
       		
       </div> -->
@@ -55,7 +56,7 @@ $(document).ready(function(){
       <hr>
   
    <!-- container -->
-</section>   
+
 
 <%--    <c:forEach items="${sessionScope.wishlistVO.customer_id.wishlist}" var="wishlist">
    </c:forEach>

@@ -79,7 +79,7 @@
    <input type="submit" value="수정하기">
    <input type="button" id = "cancelBtn" value="취소하기">
 </form> --%>
- <div class="col-md-12">
+ <div class="col-md-12" style="overflow:auto;">
         <div class="page-header text-center">
     	    <h1><small>회원정보 수정 </small></h1>
         </div>

@@ -1,31 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <%-- <div class="_40h7m" >
-	<c:choose>
-		<c:when test="${reviewList!='[]'}">
-		<table style="border: none; padding: 15px">
-				<tr>
-					<th>No</th><th>트럭<th>리뷰내용</th><th>평점</th><th>등록날짜</th><th>수정/삭제</th>
-				</tr>
-			<c:forEach items="${reviewList}" var="reviewVO" varStatus="status">
-				<tr>
-					<td>${status.index+1}<input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}"></td>
-					<td>${reviewVO.foodtruckNumber}</td><td><div style="width:300px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis ">${reviewVO.reviewContent}</div></td>
-					<td>${reviewVO.grade}</td><td>${reviewVO.reviewTimeposted}</td>
-					<td>
-						<button type="button" class="updateBtn">수정</button>
-						<button type="button" class="deleteBtn">삭제</button>
-					</td>
-				</tr>
-			</c:forEach>
-			</table>
-		</c:when>
-		<c:otherwise>
-			등록된 리뷰가 없습니다.
-		</c:otherwise>
-	</c:choose>
- </div> --%>
+<style>
+.star_point_list{
+  font-size:10pt;
+  color:gold;
+  cursor:pointer;
+}
+</style>
  <div class="row">
  <div class="col-sm-2"></div>
  <div class="container col-sm-8">
@@ -48,7 +30,80 @@
         <td>${status.index+1}<input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}"></td>
         <td>${reviewVO.foodtruckNumber}</td>
         <td>${reviewVO.reviewContent}</td>
-        <td>${reviewVO.grade}</td>
+        <td>
+    <c:choose>
+    <c:when test="${reviewVO.grade eq '1'}">
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </c:when>
+    <c:when test="${reviewVO.grade eq '2'}">
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </c:when>
+    <c:when test="${reviewVO.grade eq '3'}">
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
+    <label for="star-3" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </c:when>
+    <c:when test="${reviewVO.grade eq '4'}">
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+        <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
+    <label for="star-3" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-4" value="4"/>
+    <label for="star-4" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </c:when>
+    <c:otherwise>
+    <input type="radio" name="grade" id="star-1" value="1"/>
+    <label for="star-1" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-2" value="2"/>
+    <label for="star-2" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-3" value="3" checked="checked"/>
+    <label for="star-3" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-4" value="4"/>
+    <label for="star-4" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    <input type="radio" name="grade" id="star-5" value="5"/>
+    <label for="star-5" class="star_point_list" style="width:10px">
+      <span><i class="fa fa-star" aria-hidden="true"></i></span>
+    </label>
+    </c:otherwise>
+</c:choose>
+</td>
         <td>${reviewVO.reviewTimeposted}</td>
         <td>
         <button type="button" class="updateBtn btn btn-default btn-sm">
