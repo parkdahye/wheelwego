@@ -49,4 +49,9 @@ public interface MypageDAO {
 
 	public ReviewVO findReviewInfoByReviewNo(String reviewNo);
 
+	public TruckVO getGPSInfo(String sellerId);
+
+	public void stayFoodtruck(TruckVO gpsInfo);
+
+	public void leaveFoodtruck(TruckVO gpsInfo);
 }

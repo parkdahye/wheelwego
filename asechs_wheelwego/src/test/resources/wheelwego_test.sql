@@ -322,6 +322,9 @@ select * from freeboardcomment
 insert into freeboardcomment(freeboardcomment_no, id, freeboardcomment_content, freeboard_no,freeboardcomment_timeposted, freeboardcomment_parent)
 values(freeboardcomment_seq.nextval,'java101','강정호 댓글시도',154,sysdate,0)
 
+delete freeboardfile where freeboard_no=115 
+delete freeboardfile where freeboard_no=93 and  freeboardfile_filepath='c.jpg'
+
 
 
 
