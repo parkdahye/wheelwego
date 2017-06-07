@@ -30,4 +30,5 @@ public interface FoodTruckDAO {
 	List<TruckVO> filteringByAvgGrade(PagingBean pagingbean);
 	
 	int findAvgGradeByTruckNumber(String truckNumber);
+	int findWishlistCountByTruckNumber(String foodtruckNumber);
 }

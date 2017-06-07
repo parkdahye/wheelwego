@@ -399,6 +399,12 @@ select nvl(trunc(avg(r.grade),1),0) as grade
 from(select * from foodtruck)f, review r
 where f.foodtruck_number=r.foodtruck_number(+) and r.foodtruck_number='80나0001' group by f.foodtruck_number 
 
+--해당 푸드트럭의 위시리스트수 찾기
+
+select * from wishlist where foodtruck_number='1234'
+select f.foodtruck_number, count(customer_id) from foodtruck f, wishlist w
+where f.foodtruck_number=w.foodtruck_number(+) and w.foodtruck_number='80나0056' group by f.foodtruck_number
+
 --최신순 트럭 리스트
 select * from(
 select row_number() over(order by register_timeposted desc) as rnum, t.foodtruck_name, t.foodtruck_number, t.register_timeposted, f.foodtruck_filepath
@@ -421,17 +427,3 @@ where t.foodtruck_number=w.foodtruck_number(+) and t.foodtruck_number=f.foodtruc
 group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath order by wishlist_count desc
 )) where rnum between 1 and 9
 
-
-
-insert into review values(review_seq.nextval, '80나0001','customer1','맛있어요~',sysdate,2);
-insert into review values(review_seq.nextval, '80나0001','customer2','굿~',sysdate,3);
-insert into review values(review_seq.nextval, '80나0001','customer3','존맛~',sysdate,4);
-insert into review values(review_seq.nextval, '80나0001','customer4','몰라~',sysdate,5);
-insert into review values(review_seq.nextval, '80나0001','customer5','맛좋음~',sysdate,3);
-
-insert into review values(review_seq.nextval, '80나0002','customer1','맛있어요~',sysdate,2);
-insert into review values(review_seq.nextval, '80나0002','customer3','존맛~',sysdate,4);
-insert into review values(review_seq.nextval, '80나0002','customer5','맛좋음~',sysdate,5);
-insert into review values(review_seq.nextval, '80나0003','customer2','굿~',sysdate,3);
-insert into review values(review_seq.nextval, '80나0003','customer4','몰라~',sysdate,4);
-insert into review values(review_seq.nextval, '80나0003','customer5','맛좋음~',sysdate,5);

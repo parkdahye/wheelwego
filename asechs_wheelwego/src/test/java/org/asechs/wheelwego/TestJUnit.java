@@ -52,7 +52,9 @@ public class TestJUnit {
 	
 	@Test
 	public void test(){
-		System.out.println(foodDAO.filteringByAvgGrade(new PagingBean(1, foodDAO.getTruckListTotalContentCount("트"),"트")));
+		System.out.println(foodtruckService.filtering("byWishlistCount", "", null));
+		System.out.println(foodtruckService.filtering("byAvgGrade", "", null));
+		System.out.println(foodtruckService.filtering("", "", null));
 /*		String id = "seller111";
 		String password = "1234";
 		String memberName = "김래발";

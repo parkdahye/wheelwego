@@ -122,7 +122,7 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 
 <select id="filteringByWishlistCount" resultMap="truckRM"
 	parameterType="pagingBean">
-	select * from(
+	select foodtruck_number, foodtruck_name, wishlist_cnt,foodtruck_filepath from(
 	select row_number() over(order by wishlist_cnt desc) as
 	rnum,foodtruck_number, foodtruck_name, wishlist_cnt,
 	foodtruck_filepath from(
@@ -155,6 +155,10 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 	from(select * from foodtruck)f, review r
 	where f.foodtruck_number=r.foodtruck_number(+) and
 	r.foodtruck_number=#{value} group by f.foodtruck_number
+</select>
+<select id="findWishlistCountByTruckNumber" resultType="int">
+select nvl(count(customer_id),0) as wishlist_cnt from foodtruck f, wishlist w
+where f.foodtruck_number=w.foodtruck_number(+) and w.foodtruck_number=#{value} group by f.foodtruck_number
 </select>
 </mapper>
  
