@@ -13,7 +13,7 @@
 	<c:when test="${sessionScope.memberVO.memberType=='seller'}">
 		<c:choose>
 			<c:when test="${truckNumber==null }">
-				<button type="button" id="registerTruckBtn"=class="btn btn-warning">MY TRUCK 등록</button>&nbsp;&nbsp;
+				<button type="button" id="registerTruckBtn" class="btn btn-warning">MY TRUCK 등록</button>&nbsp;&nbsp;
 			</c:when>
 			<c:otherwise>
 			<button type="button" id="updateTruckBtn"class="btn btn-warning">MY TRUCK 설정</button>&nbsp;&nbsp;

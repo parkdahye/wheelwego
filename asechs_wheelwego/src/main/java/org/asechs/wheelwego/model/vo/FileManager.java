@@ -1,6 +1,5 @@
 package org.asechs.wheelwego.model.vo;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -46,7 +45,8 @@ public class FileManager {
 	}
 
 	public void uploadFile(MultipartFile imgFile,String renamedFile) throws IOException {
-		imgFile.transferTo(new File(newFilePath+renamedFile)); //서버에 전송하여 저장		
+		System.out.println(renamedFile);
+		//imgFile.transferTo(new File(renamedFile)); //서버에 전송하여 저장		
 	}
 	
 	// file upload method needed inner class

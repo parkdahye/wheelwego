@@ -66,7 +66,7 @@ input[name="grade"]:checked + .star_point~label{
 <div class="w3-container" id="about">
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5>
-    <%-- <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
+    <%-- <img src="${pageContext.request.contextPath}/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
 <p style="text-align:center;"><i>${truckDetailInfo.introduction}</i></p><br>
 <div class="w3-panel w3-leftbar w3-light-grey">
     <p><strong><span class="glyphicon glyphicon-time"></span></strong> everyday from 6am to 5pm.</p>
@@ -91,7 +91,7 @@ input[name="grade"]:checked + .star_point~label{
 
     <div id="Eat" class="w3-container menu w3-padding-48 w3-card-2">
        <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
-       <img src="${pageContext.request.contextPath}/resources/upload/${foodList.fileVO.filepath}" style="width:100%" ><br>
+       <img src="${pageContext.request.contextPath}/upload/${foodList.fileVO.filepath}" style="width:100%" ><br>
       <h5 class="w3-text-grey text-center">${foodList.menuName}</h5>
       <p class="w3-text-grey text-center">${foodList.menuPrice}</p><br><br>
       </c:forEach>
