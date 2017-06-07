@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
+<style>
+img{
+    border-radius: 8px;
+}
+.overlay{
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+</style>
 <div class=" text-center"> <h1 class="page-header">MY Page</h1> </div>
 <div align="center">
   <button type="button" id="deleteAccountBtn" class="btn btn-warning">회원탈퇴</button>&nbsp;&nbsp;
@@ -38,8 +46,6 @@
    </c:choose>
 </div>
 </div>
-
-
 
  <script>
 $(document).ready(function(){

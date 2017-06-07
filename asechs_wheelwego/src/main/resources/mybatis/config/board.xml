@@ -96,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getFreeboardCommentList" parameterType="String" resultType="commentVO" resultMap="freeboardCommentRM">
 		select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, to_char(freeboardcomment_timeposted,'YYYY.MM.DD HH.MM.SS') as freeboardcomment_timeposted,
-		freeboardcomment_parent from freeboardcomment where freeboard_no=#{value}
+		freeboardcomment_parent from freeboardcomment where freeboard_no=#{value} order by freeboardcomment_no desc
 	</select>
 	
 	<delete id="deleteFreeboardComment" parameterType="commentVO">
@@ -193,7 +193,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getbusinessCommentList" parameterType="String" resultType="commentVO" resultMap="businessCommentRM">
 		select informationcomment_no, id, information_no, informationcomment_content, 
 		to_char(informationcomment_timeposted,'YYYY.MM.DD hh.mm.ss') as informationcomment_timeposted, informationcomment_parent 
-		from informationcomment where information_no=#{value}
+		from informationcomment where information_no=#{value} order by informationcomment_no desc
 	</select>
 	
 	<insert id="writebusinessComment" parameterType="commentVO">
@@ -296,7 +296,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getqnaCommentList" parameterType="String" resultType="commentVO" resultMap="qnaCommentRM">
 		select qnacomment_no, id, qna_no, qnacomment_content, to_char(qnacomment_timeposted,'YYYY.MM.DD HH.MM.SS') as qnacomment_timeposted,
-		qnacomment_parent from qnacomment where qna_no=#{value}
+		qnacomment_parent from qnacomment where qna_no=#{value} order by qnacomment_no desc
 	</select>
 	
 	<insert id="writeqnaComment" parameterType="commentVO">

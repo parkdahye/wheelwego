@@ -81,15 +81,14 @@ public class BoardServiceImpl implements BoardService {
 		// 글 수정을 먼저 한다
 		String contentNo=boardDAO.updateBoard(vo);
 		// 게시물 사진 삭제 하기
-		boardDAO.freeboardDeleteFile(contentNo);
 		for(int i=0; i<fileList.size(); i++){
 			if(fileList.isEmpty()==false){
 				String fileName=fileList.get(i).getOriginalFilename();
 				BoardVO boardVO=new BoardVO();			
 				FileVO fileVO=new FileVO();
 					if(fileName.equals("")==false){	
-						
 					try{
+						boardDAO.freeboardDeleteFile(contentNo);
 						fileList.get(i).transferTo(new File(uploadPath+fileName));
 						// 파일 넘버 지정
 						fileVO.setNo(contentNo);
@@ -244,8 +243,6 @@ public class BoardServiceImpl implements BoardService {
 		List<MultipartFile> fileList=vo.getFile();// 사진을 받아오고
 		// 글 수정을 먼저 한다
 		String contentNo=boardDAO.businessupdateBoard(vo);
-		// 게시물 사진 삭제 하기
-		boardDAO.businessDeleteFile(contentNo);
 		for(int i=0; i<fileList.size(); i++){
 			if(fileList.isEmpty()==false){
 				String fileName=fileList.get(i).getOriginalFilename();
@@ -254,6 +251,8 @@ public class BoardServiceImpl implements BoardService {
 					if(fileName.equals("")==false){	
 						
 					try{
+						// 게시물 사진 삭제 하기
+						boardDAO.businessDeleteFile(contentNo);
 						fileList.get(i).transferTo(new File(uploadPath+fileName));
 						// 파일 넘버 지정
 						fileVO.setNo(contentNo);
@@ -399,8 +398,6 @@ public class BoardServiceImpl implements BoardService {
 		List<MultipartFile> fileList=vo.getFile();// 사진을 받아오고
 		// 글 수정을 먼저 한다
 		String contentNo=boardDAO.qnaupdateBoard(vo);
-		// 게시물 사진 삭제 하기
-		boardDAO.qnaDeleteFile(contentNo);
 		for(int i=0; i<fileList.size(); i++){
 			if(fileList.isEmpty()==false){
 				String fileName=fileList.get(i).getOriginalFilename();
@@ -409,6 +406,8 @@ public class BoardServiceImpl implements BoardService {
 					if(fileName.equals("")==false){	
 						
 					try{
+						// 게시물 사진 삭제 하기
+						boardDAO.qnaDeleteFile(contentNo);
 						fileList.get(i).transferTo(new File(uploadPath+fileName));
 						// 파일 넘버 지정
 						fileVO.setNo(contentNo);
