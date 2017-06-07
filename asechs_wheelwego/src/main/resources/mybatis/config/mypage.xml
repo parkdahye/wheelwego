@@ -116,6 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD HH24:MI:SS') as review_timeposted, grade
 	from review where review_no=#{value}
 </select>
+
 </mapper>
  
 

@@ -427,3 +427,4 @@ where t.foodtruck_number=w.foodtruck_number(+) and t.foodtruck_number=f.foodtruc
 group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath order by wishlist_count desc
 )) where rnum between 1 and 9
 
+select * from foodtruckfile where foodtruck_number='1234'

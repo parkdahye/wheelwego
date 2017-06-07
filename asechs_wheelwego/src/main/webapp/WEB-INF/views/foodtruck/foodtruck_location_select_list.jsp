@@ -4,7 +4,7 @@
 <Script type="text/javascript">
 
 $(document).ready(function(){
-	$("input#insertBtn").click(function(){
+	$("#insertBtn").click(function(){
 	  var foodtruckNumber = $(this).attr('name');
 	  var id = "${sessionScope.memberVO.id}";
 	 // var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
@@ -19,7 +19,7 @@ $(document).ready(function(){
 		success:function(data){
 			if(data=="on"){
 				alert("단골트럭으로 등록!");
-				$(this).children().find("img").html("<img alt='단골트럭 등록' src='${pageContext.request.contextPath}/resources/img/hearton.png' style='position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;'>");
+				$(this).css("background-image","${pageContext.request.contextPath}/resources/img/hearton.png");
 				location.reload();		
 			}else{
 				alert("단골트럭 등록해제");			
@@ -49,6 +49,13 @@ $(document).ready(function(){
 	</c:forEach>
 </script>
 <div class="container-fluid bg-grey">
+<!--   <select name="option">
+  	<option value="">--</option>
+  	<option value="ByRegisterDate">최신순</option>
+  	<option value="ByAvgGrade">평점순</option>
+  	<option value="ByWishlistCount">즐겨찾기순</option>
+  </select>
+  <hr> -->
   <div class="row text-center">
   <!-- 이슈관리: 변수명으로 받아와야 함 (truckList) -->
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
