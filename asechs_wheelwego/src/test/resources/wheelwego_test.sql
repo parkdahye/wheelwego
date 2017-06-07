@@ -1,11 +1,11 @@
 
 ----------dbTEST---------------------
 select * from member
-delete from foodtruck where foodtruck_name='현지네트럭'
+delete from foodtruck where foodtruck_name='불빠닭'
 select * from seller
 select * from menu
-select * from FOODTRUCK where foodtruck_name='꼬부랑아이스크림'
-select * from FOODTRUCKFILE where foodtruck_number='80나0004'
+select * from FOODTRUCK where foodtruck_name='불빠닭'
+select * from FOODTRUCKFILE where foodtruck_number='80나0019'
 select * from FOODTRUCKFILE
 select * from customer
 select * from FOODTRUCK
