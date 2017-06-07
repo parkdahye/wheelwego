@@ -143,3 +143,11 @@ order by t.foodtruck_number desc
 SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
 from foodtruck fo 
 where rnum between 1 and 8
+
+select * from seller;
+select latitude, longitude from foodtruck where seller_id = 'seller01';
+
+update foodtruck set latitude=null, longitude = null where seller_id = 'seller01';
+update foodtruck set latitude=37.497904, longitude = 127.027657 where seller_id = 'seller01'
+
+commit

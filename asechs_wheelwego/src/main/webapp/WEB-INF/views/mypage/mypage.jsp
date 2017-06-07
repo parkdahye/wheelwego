@@ -19,6 +19,8 @@
 			<button type="button" id="updateTruckBtn"class="btn btn-warning">MY TRUCK 설정</button>&nbsp;&nbsp;
 			<button type="button" id="menuBtn"class="btn btn-warning">MENU</button>&nbsp;&nbsp;
 			<button type="button" id="myTruckBtn"class="btn btn-warning">MY TRUCK PAGE</button>&nbsp;&nbsp;
+			
+			<a href="${pageContext.request.contextPath}/afterLogin_mypage/checkTruckGPS.do?sellerId=${sessionScope.memberVO.id}" class="btn btn-warning" role="button">TRUCK 위치 설정</a><br>
 			</c:otherwise>
 		</c:choose>
 	</c:when>
@@ -28,6 +30,7 @@
 	</c:otherwise>
 </c:choose>
 </div>
+
 <script>
 function checkDelete(){
 	if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
@@ -36,7 +39,6 @@ function checkDelete(){
 	    return false;
 	}
 }
-
 $(document).ready(function(){
 		$("#deleteAccountBtn").click(function(){
 			if(confirm("계정을 삭제하시겠습니까?")){

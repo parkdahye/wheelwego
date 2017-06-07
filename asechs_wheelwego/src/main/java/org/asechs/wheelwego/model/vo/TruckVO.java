@@ -41,6 +41,12 @@ public class TruckVO {
 		this.longitude = longitude;
 		this.address = address;
 	}
+	
+	public TruckVO(double latitude, double longitude) {
+		super();
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 	public String getFoodtruckNumber() {
 		return foodtruckNumber;
 	}

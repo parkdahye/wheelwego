@@ -155,4 +155,24 @@ public class MypageServiceImpl implements MypageService {
 	public ReviewVO findReviewInfoByReviewNo(String reviewNo) {
 		return mypageDAO.findReviewInfoByReviewNo(reviewNo);
 	}
+	@Override
+	public TruckVO getGPSInfo(String sellerId) {
+		return mypageDAO.getGPSInfo(sellerId);
+	}
+	@Override
+	public void setGPSInfo(TruckVO gpsInfo) {
+		System.out.println(gpsInfo);
+
+		if (gpsInfo.getLatitude() == 0.0)
+		{
+			System.out.println("leave");
+			mypageDAO.leaveFoodtruck(gpsInfo);			
+		}
+			
+		else
+		{
+			System.out.println("stay");
+			mypageDAO.stayFoodtruck(gpsInfo);
+		}
+	}
 }

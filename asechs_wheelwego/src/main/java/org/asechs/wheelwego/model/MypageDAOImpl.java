@@ -96,5 +96,19 @@ public class MypageDAOImpl implements MypageDAO {
 	public ReviewVO findReviewInfoByReviewNo(String reviewNo) {
 		return sqlSessionTemplate.selectOne("mypage.findReviewInfoByReviewNo", reviewNo);
 	}
-
+	@Override
+	public TruckVO getGPSInfo(String sellerId) {
+		System.out.println(sellerId);
+		return sqlSessionTemplate.selectOne("mypage.getGPSInfo", sellerId);
+	}
+	@Override
+	public void stayFoodtruck(TruckVO gpsInfo) {
+		System.out.println("stay 실행 " + gpsInfo);
+		sqlSessionTemplate.update("mypage.stayFoodtruck", gpsInfo);
+	}
+	@Override
+	public void leaveFoodtruck(TruckVO gpsInfo) {
+		System.out.println("leave 실행 " + gpsInfo);
+		sqlSessionTemplate.update("mypage.leaveFoodtruck", gpsInfo);
+	}
 }

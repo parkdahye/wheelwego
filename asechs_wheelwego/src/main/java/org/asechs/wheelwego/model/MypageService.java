@@ -38,4 +38,7 @@ public interface MypageService {
 
 	public  ReviewVO findReviewInfoByReviewNo(String reviewNo);
 
+	public TruckVO getGPSInfo(String sellerId);
+
+	public void setGPSInfo(TruckVO gpsInfo);
 }
