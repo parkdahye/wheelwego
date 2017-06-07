@@ -97,7 +97,6 @@ public class BoardController {
 		@RequestMapping("updateBoard.do")
 		public String updateBoard(BoardVO vo) {
 			boardService.updateBoard(vo);
-			
 			return "redirect:board/freeboard_detail_content.do?no=" + vo.getNo();
 		}
 		
@@ -158,7 +157,7 @@ public class BoardController {
 		@RequestMapping("business_write.do")
 		public String buesinessWrite(BoardVO bvo, HttpServletRequest request){
 			boardService.businessWrite(bvo, request);
-			return "redirect:business_list.do";
+			return "redirect:board/business_detail_content.do?no="+bvo.getNo();
 		}
 		
 		// 호겸 작성. 창업 게시물 삭제
@@ -171,16 +170,20 @@ public class BoardController {
 		// 호겸 작성. 창업 게시물 수정 폼으로 가기
 		@RequestMapping("business_update_form.do")
 		public String business_update_form(String no, Model model) {
+			System.out.println(no);
 			BoardVO bvo = boardService.getBusinessBoardDetail(no);
+			MemberVO name = boardService.business_getNameById(bvo);
+			model.addAttribute("name", name);
 			model.addAttribute("detail_freeboard", bvo);
 			return "board/business_update_form.tiles";
 		}
 		
 		// 호겸 작성. 창업게시물 수정 해버리기
 		@RequestMapping("business_updateBoard.do")
-		public String business_updateBoard(BoardVO vo) {
-			boardService.business_updateBoard(vo);
-			return "redirect:board/business_detail_content.do?no=" + vo.getNo();
+		public String businessupdateBoard(BoardVO vo) {
+			boardService.businessupdateBoard(vo);
+			System.out.println(vo.getNo());
+			return "redirect:board/business_detail_content.do?no="+vo.getNo();
 		}
 
 
@@ -198,13 +201,13 @@ public class BoardController {
 	public String qna_detail_content(String no, Model model) {
 		int hits = Integer.parseInt(no);
 		// 조회수 올리기
-		boardService.updateHitsBusiness(hits);
+		boardService.updateHitsqna(hits);
 		BoardVO bvo = boardService.getqnaBoardDetail(no);
-		System.out.println(bvo);
+		//System.out.println(bvo);
 		List<FileVO> fileNameList=boardService.getqnaFilePath(no);
-		System.out.println("큐엔에이"+fileNameList);
+		//System.out.println("큐엔에이"+fileNameList);
 		MemberVO name = boardService.qna_getNameById(bvo);
-		System.out.println("큐엔에이"+name);
+		//System.out.println("큐엔에이"+name);
 		model.addAttribute("detail_qna", bvo);
 		model.addAttribute("fileNameList",fileNameList);
 		model.addAttribute("name", name);
@@ -215,6 +218,30 @@ public class BoardController {
 	@RequestMapping("qna_write.do")
 	public String qnaWrite(BoardVO bvo, HttpServletRequest request){
 		boardService.qnaWrite(bvo, request);
-		return "redirect:qna_list.do";
+		return "redirect:board/qna_detail_content.do?no="+bvo.getNo();
 	}
+	// 호겸 작성. qna 게시물 삭제
+			@RequestMapping("qnaDelete.do")
+			public String qnaDelete(String no) {
+				boardService.qnaDelete(no);
+				return "redirect:qna_list.do";
+			}
+
+			// 호겸 작성. qna 게시물 수정 폼으로 가기
+			@RequestMapping("qna_update_form.do")
+			public String qna_update_form(String no, Model model) {
+				BoardVO bvo = boardService.getqnaBoardDetail(no);
+				MemberVO name = boardService.qna_getNameById(bvo);
+				model.addAttribute("name", name);
+				model.addAttribute("detail_qna", bvo);
+				System.out.println(bvo);
+				return "board/qna_update_form.tiles";
+			}
+			
+			// 호겸 작성. qna게시물 수정 해버리기
+			@RequestMapping("qna_updateBoard.do")
+			public String qnaupdateBoard(BoardVO vo) {
+				boardService.qnaupdateBoard(vo);
+				return "redirect:board/qna_detail_content.do?no="+vo.getNo();
+			}
 }

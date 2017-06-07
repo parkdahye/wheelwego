@@ -97,7 +97,12 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
-
+	//게시물 사진 수정시 선삭제
+	@Override
+	public void freeboardDeleteFile(String no) {
+		template.delete("board.freeboardDeleteFile", no);
+		
+	}
 	
 	
 //////////강정호. 창업게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -154,6 +159,20 @@ public class BoardDAOImpl implements BoardDAO {
 		 return template.selectList("board.getBusinessFilePath",no);
 	}
 
+
+	@Override
+	public void businessDeleteFile(String no) {
+		template.delete("board.businessDeleteFile", no);
+		
+	}
+
+	@Override
+	public String businessupdateBoard(BoardVO vo) {
+		template.update("board.businessupdateBoard",vo);
+		return vo.getNo();
+	}
+
+
 //////////강정호. Q&A게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
@@ -193,5 +212,29 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardVO getqnaBoardDetail(String no) {
 		return template.selectOne("board.getqnaBoardDetail", no);
 	}
+
+	@Override
+	public void qnaDeleteFile(String no) {
+		template.delete("board.qnaDeleteFile", no);
+	}
+
+	@Override
+	public String qnaupdateBoard(BoardVO vo) {
+		template.update("board.qnaupdateBoard",vo);
+		return vo.getNo();
+	}
+
+	@Override
+	public void qnaDelete(String no) {
+		template.delete("board.qnaDelete", no);
+		
+	}
+
+	@Override
+	public void updateHitsqna(int hits) {
+		template.update("board.updateHitsqna", hits);
+		
+	}
+
 
 }

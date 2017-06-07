@@ -73,6 +73,20 @@ public interface BoardDAO {
 
 	void freeboardUpdateFileUpload(BoardVO boardVO);
 
+	void freeboardDeleteFile(String no);
+
+	void businessDeleteFile(String contentNo);
+
+	String businessupdateBoard(BoardVO vo);
+
+	void qnaDeleteFile(String contentNo);
+
+	String qnaupdateBoard(BoardVO vo);
+
+	void qnaDelete(String no);
+
+	void updateHitsqna(int hits);
+
 
 
 }

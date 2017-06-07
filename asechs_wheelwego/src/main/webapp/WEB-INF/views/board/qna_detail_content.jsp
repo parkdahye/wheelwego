@@ -21,14 +21,14 @@
 		$("#deleteBtn").click(function()	{
 			var info=confirm("게시물을 삭제합니까?");
 			if(info){				
-			location.href="${pageContext.request.contextPath}/businessDelete.do?no="+${requestScope.detail_qna.no};
+			location.href="${pageContext.request.contextPath}/qnaDelete.do?no="+${requestScope.detail_qna.no};
 			}else{
 			}
 		})// 삭제버튼 끝
 	})//ready
 </script> 
 <div class="panel panel-default"> 
-<div class="panel-heading"><h3>자유게시판 상세보기</h3></div> 
+<div class="panel-heading"><h3>Q&A 상세보기</h3></div> 
 <div class="panel-body">
 <div class="container"> 
 <%-- 상세보기--%>
@@ -76,7 +76,7 @@
 		<div class="center-block" style='width:400px'> 
 		<button type="button" class="btn btn-info"  id="boardListBtn">목록</button>
 			<%-- login 적용 시 위로 두칸 올린다 --%>
-			 <c:if test="${requestScope.detail_freeboard.id==sessionScope.memberVO.id}">
+			 <c:if test="${requestScope.detail_qna.id==sessionScope.memberVO.id}">
 			 <button type="button" class="btn btn-info"  id="modifyBtn">수정</button>
 			<button type="button" class="btn btn-info"  id="deleteBtn">삭제</button>
 			 </c:if>

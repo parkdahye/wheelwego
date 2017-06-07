@@ -76,43 +76,36 @@ public class BoardServiceImpl implements BoardService {
 	//자유게시판 업데이트
 	@Override
 	public void updateBoard(BoardVO vo) {
-		// 사용자가 수정하고 하는 파일명
-		for(int i=0;i<vo.getFile().size();i++){
-			System.out.println("업데이트 할 파일 이름 :"+vo.getFile().get(i).getOriginalFilename());
-		}
-		String contentNo=boardDAO.updateBoard(vo);
 		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
-		List<MultipartFile> fileList=vo.getFile();
-		
+		List<MultipartFile> fileList=vo.getFile();// 사진을 받아오고
+		// 글 수정을 먼저 한다
+		String contentNo=boardDAO.updateBoard(vo);
+		// 게시물 사진 삭제 하기
+		boardDAO.freeboardDeleteFile(contentNo);
 		for(int i=0; i<fileList.size(); i++){
 			if(fileList.isEmpty()==false){
-				BoardVO boardVO=new BoardVO();
-				FileVO fileVO=new FileVO();
 				String fileName=fileList.get(i).getOriginalFilename();
-					System.out.println("수정할 사진 :	"+fileName);
-					if(fileName.equals("")==false){
-			}
+				BoardVO boardVO=new BoardVO();			
+				FileVO fileVO=new FileVO();
+					if(fileName.equals("")==false){	
+						
 					try{
 						fileList.get(i).transferTo(new File(uploadPath+fileName));
-						// 기존의 존재하는 파일명 갖고오기
-						List<FileVO> fvo= boardDAO.getFreeBoardFilePath(contentNo);
-						System.out.println("기존 파일 명  "+fvo);
-						for(int j=0;j<fvo.size();j++){
-						// 파일 기존 경로 저장하기
-						fileVO.setBeforefilepath(fvo.get(j).getFilepath());
 						// 파일 넘버 지정
 						fileVO.setNo(contentNo);
-						//파일 경로 지정
+						// 파일 경로 지정
 						fileVO.setFilepath(fileName);
 						//보드VO 에 파일VO 저장
 						boardVO.setFileVO(fileVO);
-						} 
 						System.out.println(boardVO);
-						boardDAO.freeboardUpdateFileUpload(boardVO);
+						// 새로운 사진 서버에 업데이트
+						boardDAO.freeboardWriteFileUpload(boardVO);
 					}catch(IllegalStateException | IOException e){
 						e.printStackTrace();
 						}
+						}
 					}
+		
 			}
 	}
 
@@ -157,6 +150,8 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteFreeboardComment(CommentVO cvo) {
 		 boardDAO.deleteFreeboardComment(cvo);
 	}
+	// 창업게시판 게시물 수정
+	
 	
 	
 	
@@ -231,12 +226,42 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void business_updateBoard(BoardVO vo) {
-		boardDAO.business_updateBoard(vo);
-		
+	public void businessupdateBoard(BoardVO vo) {
+		System.out.println("service vo : "+vo);
+		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+		List<MultipartFile> fileList=vo.getFile();// 사진을 받아오고
+		// 글 수정을 먼저 한다
+		String contentNo=boardDAO.businessupdateBoard(vo);
+		// 게시물 사진 삭제 하기
+		boardDAO.businessDeleteFile(contentNo);
+		for(int i=0; i<fileList.size(); i++){
+			if(fileList.isEmpty()==false){
+				String fileName=fileList.get(i).getOriginalFilename();
+				BoardVO boardVO=new BoardVO();			
+				FileVO fileVO=new FileVO();
+					if(fileName.equals("")==false){	
+						
+					try{
+						fileList.get(i).transferTo(new File(uploadPath+fileName));
+						// 파일 넘버 지정
+						fileVO.setNo(contentNo);
+						// 파일 경로 지정
+						fileVO.setFilepath(fileName);
+						//보드VO 에 파일VO 저장
+						boardVO.setFileVO(fileVO);
+						System.out.println(boardVO);
+						// 새로운 사진 서버에 업데이트
+						boardDAO.businessWriteFileUpload(boardVO);
+					}catch(IllegalStateException | IOException e){
+						e.printStackTrace();
+						}
+				
+					}
+				}
+			}
 	}
 
-	
+
 	@Override
 	public MemberVO business_getNameById(BoardVO bvo) {
 		return boardDAO.business_getNameById(bvo);
@@ -320,6 +345,57 @@ public class BoardServiceImpl implements BoardService {
 	public MemberVO qna_getNameById(BoardVO bvo) {
 		return boardDAO.qna_getNameById(bvo);
 	}
+
+	@Override
+	public void qnaDelete(String no) {
+		boardDAO.qnaDelete(no);
+		
+	}
+
+	@Override
+	public void qnaupdateBoard(BoardVO vo) {
+		System.out.println("service vo : "+vo);
+		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+		List<MultipartFile> fileList=vo.getFile();// 사진을 받아오고
+		// 글 수정을 먼저 한다
+		String contentNo=boardDAO.qnaupdateBoard(vo);
+		// 게시물 사진 삭제 하기
+		boardDAO.qnaDeleteFile(contentNo);
+		for(int i=0; i<fileList.size(); i++){
+			if(fileList.isEmpty()==false){
+				String fileName=fileList.get(i).getOriginalFilename();
+				BoardVO boardVO=new BoardVO();			
+				FileVO fileVO=new FileVO();
+					if(fileName.equals("")==false){	
+						
+					try{
+						fileList.get(i).transferTo(new File(uploadPath+fileName));
+						// 파일 넘버 지정
+						fileVO.setNo(contentNo);
+						// 파일 경로 지정
+						fileVO.setFilepath(fileName);
+						//보드VO 에 파일VO 저장
+						boardVO.setFileVO(fileVO);
+						System.out.println(boardVO);
+						// 새로운 사진 서버에 업데이트
+						boardDAO.qnaWriteFileUpload(boardVO);
+					}catch(IllegalStateException | IOException e){
+						e.printStackTrace();
+						}
+				
+					}
+				}
+			}
+		
+		
+	}
+
+	@Override
+	public void updateHitsqna(int hits) {
+		boardDAO.updateHitsqna(hits);
+		
+	}
+
 
 	
 
