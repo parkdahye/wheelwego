@@ -68,8 +68,6 @@ create table foodtruck(
     foodtruck_name varchar2(100) not null,
     introduction clob not null,
     register_timeposted date not null,
-    avg_grade BINARY_DOUBLE default 0,
-    wishlist_count number default 0,
     latitude BINARY_DOUBLE,
     longitude BINARY_DOUBLE,
     constraint foodtruck_id_fk foreign key(seller_id) references seller(seller_id) on delete cascade
