@@ -74,7 +74,7 @@ where c.customer_id = m.id;
 --로그인
 select id,password,member_name,address,phonenumber,member_type from member where id='java01' and password='java01'
 select * from member;
-
+select * from foodtruck;
 select * from seller;
 
 delete from member;
@@ -91,7 +91,7 @@ select * from member;
 
 select * from seller;
 select * from wishlist ;
-select * from wishlist where id = 'customer01';
+select * from wishlist where customer_id = 'customer01';
 -- 푸드트럭 위시리스트 sql문
 select * from foodtruck where foodtruck_number in (select w.foodtruck_number
 from customer c, wishlist w
