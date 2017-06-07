@@ -387,3 +387,9 @@ select * from foodtruck;
 
 select * from freeboardfile
 
+select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboardcomment_timeposted from freeboardcomment 
+		where freeboardcomment_no=64 and freeboard_no=175
+		
+		delete from information where informationcomment_no=1 and information_no=91
+		select * from informationcomment
+
