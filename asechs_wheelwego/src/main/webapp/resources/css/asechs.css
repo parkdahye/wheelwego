@@ -42,7 +42,7 @@
 	margin-top:100px;
 	min-height: 100%;
 	height: 100%;
-/* 	margin-bottom: -30px */
+	/* margin-bottom: -30px */
 	}
 /* #page_footer{
 	position: absolute;
@@ -667,4 +667,71 @@ input[name="grade"]{
 }
 input[name="grade"]:checked + .star_point~label{
     color:lightgray;
+}
+
+/*단골트럭하트*/
+#insertBtn{
+	position: absolute;
+	width: 45px;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
+	opacity: 0.8;
+	z-index: 1;
+	outline: none;
+}
+
+/*하트오버레이*/
+.w3-one img {
+	width: 300px;
+	height: 200px;
+}
+
+.w3-one {
+	position: relative;
+	display: block;
+}
+
+.w3-third img {
+	margin-bottom: 50px;
+	opacity: 1;
+	cursor: pointer;
+}
+
+.w3-one:hover .overlay {
+	opacity: 0.9;
+	
+}
+
+.w3-one:hover img {
+	opacity: 0.4;
+}
+
+.w3-one:hover .txtOverLay {
+	opacity: 1;
+}
+
+.overlay {
+	width: 300px;
+	margin-bottom: 50px;
+	margin-left:25px;
+	dispaly: block;
+	position: absolute;
+	top: 50%;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: black;
+	opacity: 0.0;
+	transition: .5s ease;
+}
+
+.txtOverLay {
+	margin-left:25px;
+	color: white;
+	position: absolute;
+	font-size: 0.875em;
+	padding: 10px;
 }

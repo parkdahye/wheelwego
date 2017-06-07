@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from foodtruck where foodtruck_number=#{value}
 	</delete>
 	<select id="myWishList" resultMap="truckpageRM" parameterType="string">
-		select t.foodtruck_number, f.foodtruck_filepath from foodtruck t, foodtruckfile f 
+		select t.*, f.foodtruck_filepath from foodtruck t, foodtruckfile f 
 		where f.foodtruck_number in 
 		(select foodtruck_number from wishlist where customer_id = #{value})
 		and t.foodtruck_number = f.foodtruck_number
@@ -125,7 +125,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id = "leaveFoodtruck" parameterType="truckVO">
 	update foodtruck set latitude=null, longitude = null where seller_id=#{sellerId}
 </update>
-
 </mapper>
  
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- <script>
+<script>
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -12,7 +12,8 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
 }
 
 function showError(error) {
@@ -31,19 +32,12 @@ function showError(error) {
             break;
     }
 }
-</script> -->
+</script>
 
 <!-- GPS(위도, 경도) 가져오기 --- by 황윤상 -->
 <script type="text/javascript">
 function geoFindMe() {
-	var searchFoodtruckName = document.getElementById("searchFoodtruckName").value;	
-	
-	if (searchFoodtruckName == "")
-	{
-		alert("검색어를 입력하세요.");
-		return;
-	}
-	
+	var searchFoodtruckName = document.getElementById("searchFoodtruckName").value;
 	if (!navigator.geolocation){
 		alert("지오로케이션을 지원하지 않습니다!");
 		return;
@@ -51,7 +45,6 @@ function geoFindMe() {
 	  function success(position) {
 	    var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
-
 	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
 	   
 	  };
@@ -74,6 +67,11 @@ function geoFindMe2() {
 	    var longitude = position.coords.longitude;
 	    
 	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
+
+	    if (searchFoodtruckName != "")
+	    	location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
+	    else
+	    	location.href = "${pageContext.request.contextPath}/pagingTruckList.do?latitude="+latitude+"&longitude="+longitude;
 	  };
 	  function error() {
 		  alert("사용자의 위치를 찾을 수 없습니다!");
@@ -153,19 +151,6 @@ function geoFindMe2() {
 	}
 </script>
 
-<script>
-function onKeyDown(){
-
-    // 엔터키의 코드는 13입니다.
-if(event.keyCode == 13){
-	//alert("Search 버튼을 클릭하세요.");
-	document.getElementById("searchFoodtruckName").value("");
-	//geoFindMe();
-	return;
-	}
-}
-</script>
-
 
 <!-- Header -->
 <header>
@@ -184,8 +169,8 @@ if(event.keyCode == 13){
                  <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-map-marker fa-3x"></i></a>
                  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;" id="roundCorner">
 	              <form>
-					   <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" id = "manual" style="width: 100%;" value="수동검색" style="">
-					   <input class="btn btn-warning" onclick="geoFindMe2()" id = "auto" style="width: 100%;" value="자동검색" style="">
+					   <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style="">
+					   <input class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" value="자동검색" style="">
 				  </form>			
 <!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
 					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
@@ -202,8 +187,8 @@ if(event.keyCode == 13){
                <div class="col-lg-4">
 			  <!-- 푸드트럭 검색 폼 -->
 			<form class="subscribe_form">
-              <input type="text" placeholder="Search foodtruck!" class="email" id="searchFoodtruckName" name="searchFoodtruckName" required="required" onKeyDown="onKeyDown();">
-              <input type="button" class="subscribe" name="search" value="Search" id = "searchByName" onclick="geoFindMe()">
+              <input type="text" placeholder="Search foodtruck!" class="email" id="searchFoodtruckName" name="searchFoodtruckName" required="required">
+              <input type="button" class="subscribe" name="search" value="Search" onclick="geoFindMe()">
             </form>
            </div>
              <div class="col-lg-4"></div>

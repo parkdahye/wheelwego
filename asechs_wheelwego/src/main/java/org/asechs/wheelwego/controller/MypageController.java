@@ -34,10 +34,6 @@ public class MypageController {
 			// 세션에 해당하는 아이디의 wishlist정보를 가져옴.
 			MemberVO sessionMemberVO = (MemberVO) session.getAttribute("memberVO");
 			List<TruckVO> wishlist = mypageService.myWishList(sessionMemberVO.getId());
-			
-			for (int i = 0; i < wishlist.size(); i++)
-				System.out.println(wishlist.get(i));
-			
 			return new ModelAndView("mypage/mypage_wishlist.tiles", "wishlist", wishlist);
 		}
 	}
@@ -177,5 +173,10 @@ public class MypageController {
 	@RequestMapping("afterLogin_mypage/test.do")
 	public String test(){
 		return "mypage/test";
+	}
+	@RequestMapping("afterLogin_mypage/showMyFoodtruck.do")
+	public String showMyFoodtruck(String id){
+		String foodtruckNo=mypageService.findtruckNumberBySellerId(id);
+		return "redirect:../foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo;
 	}
 }

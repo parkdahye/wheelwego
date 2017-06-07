@@ -67,4 +67,9 @@ public class MemberDAOImpl implements MemberDAO {
     public int forgetMemberPassword(MemberVO vo) {
        return sqlSessionTemplate.update("member.forgetMemberPassword", vo);
     }
+
+	@Override
+	public String findBusinessNumberById(String id) {
+		return sqlSessionTemplate.selectOne("member.findBusinessNumberById", id);
+	}
 }

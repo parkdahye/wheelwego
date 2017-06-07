@@ -96,8 +96,18 @@ public class BoardDAOImpl implements BoardDAO {
 		template.delete("board.deleteFreeboardComment",cvo);
 		
 	}
+	
+	@Override
+	public CommentVO getFreeboardComment(CommentVO cvo) {
+		return template.selectOne("board.getFreeboardComment",cvo);
+	}
 
 
+	@Override
+	public void updateFreeboardComment(CommentVO cvo) {
+		template.update("board.updateFreeboardComment",cvo);
+		
+	}
 	
 	
 //////////강정호. 창업게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,6 +163,35 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<FileVO> getBusinessFilePath(String no) {
 		 return template.selectList("board.getBusinessFilePath",no);
 	}
+	
+	@Override
+	public List<CommentVO> getbusinessCommentList(String no) {
+		return template.selectList("board.getbusinessCommentList",no);
+	}
+	
+	@Override
+	public void deletebusinessComment(CommentVO cvo) {
+		template.delete("board.deletebusinessComment", cvo);
+		
+	}
+	
+	@Override
+	public void writebusinessComment(CommentVO cvo) {
+		template.insert("board.writebusinessComment",cvo);
+		
+	}
+	
+	@Override
+	public CommentVO getbusinessComment(CommentVO cvo) {
+		return template.selectOne("board.getbusinessComment",cvo);
+	}
+	
+	@Override
+	public void updatebusinessComment(CommentVO cvo) {
+		template.update("board.updatebusinessComment",cvo);
+		
+	}
+
 
 //////////강정호. Q&A게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -193,5 +232,69 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardVO getqnaBoardDetail(String no) {
 		return template.selectOne("board.getqnaBoardDetail", no);
 	}
+
+
+
+	@Override
+	public List<CommentVO> getqnaCommentList(String no) {
+		return template.selectList("board.getqnaCommentList",no);
+	}
+
+
+
+	@Override
+	public void writeqnaComment(CommentVO cvo) {
+		template.insert("board.writeqnaComment",cvo);
+		
+	}
+
+
+
+	@Override
+	public void deleteqnaComment(CommentVO cvo) {
+		template.delete("board.deleteqnaComment",cvo);
+		
+	}
+
+
+
+	@Override
+	public CommentVO getqnaComment(CommentVO cvo) {
+		return template.selectOne("board.getqnaComment",cvo);
+	}
+
+
+
+	@Override
+	public void updateqnaComment(CommentVO cvo) {
+		template.update("board.updateqnaComment",cvo);
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+	
 
 }

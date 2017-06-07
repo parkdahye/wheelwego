@@ -81,10 +81,6 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	}
 	
 	@Override
-	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
-		return sqlSessionTemplate.selectOne("foodtruck.getAvgGradeByTruckNumber", foodtruckNumber);
-	}
-	@Override
 	public int findTruckNumberInReview(String foodtruckNumber) {
 		return sqlSessionTemplate.selectOne("foodtruck.findTruckNumberInReview", foodtruckNumber);
 	}
@@ -115,5 +111,10 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	@Override
 	public int findAvgGradeByTruckNumber(String truckNumber) {
 		return sqlSessionTemplate.selectOne("foodtruck.findAvgGradeByTruckNumber", truckNumber);
+	}
+
+	@Override
+	public int findWishlistCountByTruckNumber(String foodtruckNumber) {
+		return sqlSessionTemplate.selectOne("foodtruck.findWishlistCountByTruckNumber", foodtruckNumber);
 	}
 }

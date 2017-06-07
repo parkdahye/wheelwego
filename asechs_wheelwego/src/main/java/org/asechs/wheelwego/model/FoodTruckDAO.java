@@ -21,7 +21,6 @@ public interface FoodTruckDAO {
 	void registerBookMark(WishlistVO wishlistVO);
 	int getBookMarkCount(WishlistVO wishlistVO);
 	List<TruckVO> getFoodTruckListByName(PagingBean pagingBean);
-	int getAvgGradeByTruckNumber(String foodtruckNumber);
 	int findTruckNumberInReview(String foodtruckNumber);
 	int getTruckListTotalContentCountByGPS(TruckVO gpsInfo);
 	List<TruckVO> getFoodTruckListByGPS(PagingBean pagingBean);
@@ -29,4 +28,6 @@ public interface FoodTruckDAO {
 	List<TruckVO> filteringByWishlistCount(PagingBean pagingbean);
 	List<TruckVO> filteringByAvgGrade(PagingBean pagingbean);
 	int findAvgGradeByTruckNumber(String truckNumber);
+	int findWishlistCountByTruckNumber(String foodtruckNumber);
+
 }
