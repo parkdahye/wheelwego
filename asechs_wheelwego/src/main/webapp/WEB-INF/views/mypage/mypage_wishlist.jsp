@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
+<style>
+img{
+    border-radius: 8px;
+}
+.overlay{
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+</style>
 <div class=" text-center"> <h1 class="page-header">MY Page</h1> </div>
 <div align="center">
   <button type="button" id="deleteAccountBtn" class="btn btn-warning">회원탈퇴</button>&nbsp;&nbsp;
@@ -19,7 +27,7 @@
       <div class="w3-third col-sm-4" >    
          <div class="w3-one" align="center">
             <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
-               <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
+               <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative; z-index: 1;">
                 </a>
                   <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/hearton.png" 
                       style="right:40px;opacity: 0.8; z-index: 2;" >
@@ -38,8 +46,6 @@
    </c:choose>
 </div>
 </div>
-
-
 
  <script>
 $(document).ready(function(){
