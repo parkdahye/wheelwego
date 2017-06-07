@@ -97,7 +97,7 @@ public class MypageController {
 	public String updateMyfoodtruck(TruckVO truckVO, HttpServletRequest request){
 		String uploadPath=request.getSession().getServletContext().getRealPath("/resources/upload/"); 
 		mypageService.updateMyfoodtruck(truckVO,uploadPath);
-		return "redirect:/afterLogin_mypage/myfoodtruck_page.do";
+		return "mypage/myfoodtruck_page_result.tiles";
 	}
 	
 	@RequestMapping("afterLogin_mypage/myfoodtruck_menuList.do")
@@ -105,7 +105,11 @@ public class MypageController {
 		MemberVO memberVO=(MemberVO)request.getSession(false).getAttribute("memberVO");
 		String truckNumber=mypageService.findtruckNumberBySellerId(memberVO.getId());
 		List<FoodVO> menuList=mypageService.showMenuList(truckNumber);
-		return new ModelAndView("mypage/myfoodtruck_menuList.tiles","menuList",menuList);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("mypage/myfoodtruck_menuList.tiles");
+		mv.addObject("menuList", menuList);
+		mv.addObject("truckNumber", truckNumber);
+		return mv;
 	}
 	@RequestMapping(method=RequestMethod.POST,value="afterLogin_mypage/registerMenuList.do")
 	public String RegisterMenuList(HttpServletRequest request, TruckVO truckVO){

@@ -435,6 +435,7 @@ select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboar
 		delete from information where informationcomment_no=1 and information_no=91
 		select * from informationcomment
 
+	
 
 -------------------------------------------------------------------------------
 
