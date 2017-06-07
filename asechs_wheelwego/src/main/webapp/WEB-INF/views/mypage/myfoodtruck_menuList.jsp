@@ -37,7 +37,7 @@
          		<td><input type="text" name="foodList[0].menuPrice" placeholder="가격" required="required"></td>
          		<td><input type="file" name="foodList[0].menuFile" required="required" class="menuFile"></td>
          		<td>
-         			<img style="width: 40%" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/upload/defaultMenu.jpg">
+         			<img style="width: 40%" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/img/defaultMenu.jpg">
          		</td>
          	</tr>
          		<tr>
@@ -46,7 +46,7 @@
          		<td><input type="text" name="foodList[1].menuPrice" placeholder="가격" required="required"></td>
          		<td><input type="file" name="foodList[1].menuFile" required="required" class="menuFile"></td>
          		<td>
-         			<img style="width: 40%" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/upload/defaultMenu.jpg">
+         			<img style="width: 40%" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/img/defaultMenu.jpg">
          		</td>
          	</tr>
          		<tr>
@@ -55,7 +55,7 @@
          		<td><input type="text" name="foodList[2].menuPrice" placeholder="가격" required="required"></td>
          		<td><input type="file" name="foodList[2].menuFile" required="required" class="menuFile"></td>
          		<td>
-         			<img style="width: 40%" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/upload/defaultMenu.jpg">
+         			<img style="width: 40%" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/img/defaultMenu.jpg">
          		</td>
          	</tr>
          
@@ -96,7 +96,6 @@ function checkFunction(){
 
 	      //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
 	      $(".menuFile").change(function(){
-	          alert(this.value); //선택한 이미지 경로 표시
 	          readURL(this,$(this));
 	      });
 

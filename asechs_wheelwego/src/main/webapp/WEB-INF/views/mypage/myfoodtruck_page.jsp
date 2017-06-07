@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <div class=" text-center"> <h1 class="page-header">MY TRUCK</h1> </div>
     <a href="${pageContext.request.contextPath}/afterLogin_mypage/foodtruck" >푸드트럭 상세보기</a>
     <div class="_40h7m" >
@@ -8,7 +8,14 @@
     <div class="_ljqf0 col-lg-12">
     		<div  class="col-lg-6" style="margin-right: 5px">
     		<button id="profileBtn" type="button" onclick=document.all.file.click(); >
-    			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}">
+    			<c:choose>
+    				<c:when test="${truckVO.fileVO.filepath!='defaultTruck.jpg'}">
+    			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}">    				
+    				</c:when>
+    				<c:otherwise>
+    				<img id="profileImg"  src="${pageContext.request.contextPath}/resources/img/defaultTruck.jpg">
+    				</c:otherwise>
+    			</c:choose>
     		</button>
 		<input type="file" name="foodtruckFile" id="file" style="display: none;"/> 
 		</div>

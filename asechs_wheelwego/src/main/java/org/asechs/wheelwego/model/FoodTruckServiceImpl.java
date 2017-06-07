@@ -9,6 +9,7 @@ import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
+import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -59,9 +60,18 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		return pagingList;
 	}
 	@Override
-
+	public void registerBookMark(WishlistVO wishlistVO) {
+		foodTruckDAO.registerBookMark(wishlistVO);
+		
+	}
+	@Override
+	public int getBookMarkCount(WishlistVO wishlistVO) {
+		
+		return foodTruckDAO.getBookMarkCount(wishlistVO);
+	}
+	@Override
 	public ListVO getFoodTruckListByName(String pageNo, String name) {
-		int totalCount=foodTruckDAO.getTruckListTotalContentCount(name);
+		int totalCount=foodTruckDAO.getTruckListTotalContentCountByName(name);
 		PagingBean pagingBean=null;
 		
 		if(pageNo==null)
@@ -73,11 +83,50 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		
 		return new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByName(pagingBean));
 	}
+	@Override
+	public ListVO getFoodTruckListByGPS(String pageNo, TruckVO gpsInfo) {
+		int totalCount=foodTruckDAO.getTruckListTotalContentCountByGPS(gpsInfo);
+		PagingBean pagingBean=null;
+		
+		if(pageNo==null)
+			pagingBean=new PagingBean(totalCount);
+		else
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
+		
+		pagingBean.setGpsInfo(gpsInfo);
+				
+		return new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByGPS(pagingBean));
+	}
+
 
 	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
 		int avgGrade=0;
 		if(foodTruckDAO.findTruckNumberInReview(foodtruckNumber)>0)
 			avgGrade=foodTruckDAO.findTruckNumberInReview(foodtruckNumber);
 		return avgGrade;
+	}
+	@Override
+	public ListVO filtering(String option, String searchWord, String nowPage) {
+		List<TruckVO> truckList=null;
+		if(nowPage==null)
+			nowPage="1";
+		ListVO pagingList=new ListVO();
+		int totalCount=foodTruckDAO.getTruckListTotalContentCountByName(searchWord);
+		PagingBean pagingbean=new PagingBean(Integer.parseInt(nowPage),totalCount,searchWord);
+		if(option.equals("byWishlistCount")){
+
+			truckList=foodTruckDAO.filteringByWishlistCount(pagingbean);
+		}else if(option.equals("byAvgGrade")){
+			truckList=foodTruckDAO.filteringByAvgGrade(pagingbean);
+		}else{
+			truckList=foodTruckDAO.filteringByRegisterDate(pagingbean);
+		}
+		for(int i=0; i<truckList.size();i++){
+			truckList.get(i).setAvgGrade(foodTruckDAO.findAvgGradeByTruckNumber(truckList.get(i).getFoodtruckNumber()));
+			truckList.get(i).setWishlistCount(foodTruckDAO.findWishlistCountByTruckNumber(truckList.get(i).getFoodtruckNumber()));
+		}
+		pagingList.setTruckList(truckList);
+		pagingList.setPagingBean(pagingbean);
+		return pagingList;
 	}
 }

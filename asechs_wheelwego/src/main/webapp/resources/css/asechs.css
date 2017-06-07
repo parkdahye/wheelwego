@@ -668,3 +668,17 @@ input[name="grade"]{
 input[name="grade"]:checked + .star_point~label{
     color:lightgray;
 }
+
+/*단골트럭하트*/
+#insertBtn{
+	position: absolute;
+	width: 45px;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
+	opacity: 0.8;
+	z-index: 1;
+	outline: none;
+}

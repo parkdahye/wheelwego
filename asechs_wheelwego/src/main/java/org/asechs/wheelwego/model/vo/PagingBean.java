@@ -31,6 +31,10 @@ public class PagingBean {
 	 * 페이지 검색 단어
 	 */
 	private String searchWord;
+	/**
+	 * 트럭 GPS 정보
+	 */
+	private TruckVO gpsInfo;
 	
 	public PagingBean() {
 	}
@@ -224,6 +228,12 @@ public class PagingBean {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
-	
-	
+
+	public TruckVO getGpsInfo() {
+		return gpsInfo;
+	}
+
+	public void setGpsInfo(TruckVO gpsInfo) {
+		this.gpsInfo = gpsInfo;
+	}	
 }
