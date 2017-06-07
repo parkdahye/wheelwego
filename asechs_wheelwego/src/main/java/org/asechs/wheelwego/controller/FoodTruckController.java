@@ -29,6 +29,9 @@ public class FoodTruckController {
 		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("name", name);		
+		
+		System.out.println(name);
+		System.out.println(listVO);
 		return modelAndView;
 	}
 	/**

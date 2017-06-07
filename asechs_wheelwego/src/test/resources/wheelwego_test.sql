@@ -39,7 +39,7 @@ SELECT f.foodtruck_filepath, t.foodtruck_name FROM(
 		f where rnum between #{startRowNumber} and #{endRowNumber}
 
 ----------dbTEST---------------------
-insert into member values ('seller01', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
+insert into member values ('seller07', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
 >>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 create table member(
    id varchar2(100) primary key,
@@ -66,7 +66,7 @@ select * from seller;
 delete member where id='java'
 delete seller where seller_id='java'
 insert into customer values ('java01');
-insert into seller values ('seller01','1231');
+insert into seller values ('seller07','1231');
 delete from customer;
 select c.customer_id, m.password, m.member_name, m.address, m.phonenumber, m.member_type
 from customer c, member m
@@ -331,17 +331,40 @@ values(freeboardcomment_seq.nextval,'java101','강정호 댓글시도',154,sysda
 
 
 
+select id from member where seller_id='seller04';
+delete from foodtruck;
+select * from foodtruck;
 
 
 
 
+insert into foodtruck values('80나0001','seller01','프랑크소시지1000',	'두툼한 닭꼬치의 두께와 선홍빛의 양고기 꼬치','	37.399606',	'127.10853580');
+insert into foodtruck values('80나0002','seller02','그남자의소시지','크기도 엄청 크고 보기만 해도 군침이 도는 마약핫도그!','37.394921','127.111234');
+insert into foodtruck values('80나0003','seller03','프랑크소시지1001','100% 국내산 생고기를 사용하는 수제버거! 깡스푸드 푸드트럭입니다!','37.400375','127.110104');
+insert into foodtruck values('80나0004','seller04','프랑크소시지1002','고급 아이스크림을 먹고 싶은가? 이리로 오라 아이스크림으로 당신을 녹여주겠어',	'37.439793',	'127.127821');
+insert into foodtruck values('80나0006','seller06',	'프랑크소시지1004','츄러스를 소스에도 찍어먹고 아이스크림에도 찍어먹을수 있는 츄러스의 달인 나이스츄미츄!','	37.511074','127.073489');
+insert into foodtruck values('80나0007','seller07',	'프랑크소시지1005','이태리 거주 10년 본토의 맛을 푸드트럭에서 보여준다는 주인장! 날개없는 비행기 푸드트럭입니다!','	37.509873','	127.076533');
+insert into foodtruck values('80나0005','seller05',	'프랑크소시지1003','규동 가츠동 에비후라이동 등 대표일본음식이 푸짐한 양으로 제공되는 끼니 푸드트럭입니다!',	'37.438595',	'127.124501');
+
+select * from foodtruck where foodtruck_name like '%' || '푸드' || '%';
+select * from foodtruck;
+select * from foodtruckfile;
+
+insert into foodtruckfile values ('80나0001', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0002', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0003', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0004', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0005', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0006', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0007', '그남자의소시지_트럭1.PNG');
 
 
 
-
-
-
-
+SELECT f.foodtruck_filepath, t.* FROM
+(SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
+from foodtruck fo where foodtruck_name like '%' || '소시지' || '%' and latitude is not null and longitude is not null)t, foodtruckfile f  
+where t.foodtruck_number=f.foodtruck_number and rnum between 1 and 8
+order by t.foodtruck_number desc
 
 
 
