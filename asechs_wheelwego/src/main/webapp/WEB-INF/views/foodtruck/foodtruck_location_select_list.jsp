@@ -30,35 +30,33 @@
     filter: alpha(opacity=50); /* For IE8 and earlier */
 } */
 </style>
-<Script type="text/javascript">
 
-$(document).ready(function(){
-	$("#insertBtn").click(function(){
-	  var foodtruckNumber = $(this).attr('name');
-	  var id = "${sessionScope.memberVO.id}";
-	 // var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
-	
-	 if(id==""){
-		 alert("로그인이 필요합니다.");
-	 }else{
-	  $.ajax({
-		type:"post",
-		url:"${pageContext.request.contextPath}/afterLogin_foodtruck/registerBookMark.do",
-		data: {id: id, foodtruckNumber: foodtruckNumber},
-		success:function(data){
-			if(data=="on"){
-				alert("단골트럭으로 등록!");
-				$(this).css("background-image","${pageContext.request.contextPath}/resources/img/hearton.png");
-				location.reload();		
-			}else{
-				alert("단골트럭 등록해제");			
-				location.reload();
+<script>
+	function wishlist(foodtruckNumber){
+		  //var foodtruckNumber = $(this).attr('name');
+		  var id = "${sessionScope.memberVO.id}";
+		  var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
+		
+		 if(id==""){
+			 alert("로그인이 필요합니다.");
+		 }else{
+		  $.ajax({
+			type:"post",
+			url:"${pageContext.request.contextPath}/afterLogin_foodtruck/registerBookMark.do",
+			data: {id: id, foodtruckNumber: foodtruckNumber},
+			success:function(data){
+				if(data=="on"){
+					alert("단골트럭으로 등록!");
+					$(this).css("background-image","${pageContext.request.contextPath}/resources/img/hearton.png");
+					location.reload();		
+				}else{
+					alert("단골트럭 등록해제");			
+					location.reload();
+				}
 			}
-		}
-	});
-	 }
-});
-});
+		});
+		 }
+	}
 </script>
 
 <script type="text/javascript">
@@ -81,22 +79,19 @@ $(document).ready(function(){
   <h4>FOODTRUCK LIST</h4><br>
   <div class="row text-center" style="position:relative;">
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
-<<<<<<< HEAD
-    <div class="col-xs-6">
+   <%--  <div class="col-xs-6">
       <div style="position:relative;" class="thumbnail">
        <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${param.latitude}&longitude=${param.longitude}"><img src="resources/img/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
-        <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png" 
-			 	style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" >
-=======
+        <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" 
+			 	style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" > --%>
     <div class="col-sm-6">
       <div class="thumbnail">
       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
         </a>
-        <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" >
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+        <input  type="image" id="insertBtn" class="insertBtn" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" onclick="wishlist('${truckInfo.foodtruckNumber}')">
         <p><strong>${truckInfo.foodtruckName}</strong></p>
-        <p style="font-size:17px;">location / review </p>
+        <p id = "${truckInfo.foodtruckName}"></p>
       </div>
     </div>
   </c:forEach>
