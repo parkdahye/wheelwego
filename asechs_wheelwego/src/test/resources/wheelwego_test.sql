@@ -392,4 +392,38 @@ select count(*) from wishlist where foodtruck_number = '80나0003' and customer_
 
 select count(*) from wishlist where foodtruck_number = '80나0003' and customer_id = 'customer01';
 
+select * from menu;
+
+--해당 푸드트럭의 평점찾기
+select nvl(trunc(avg(r.grade),1),0) as grade
+from(select * from foodtruck)f, review r
+where f.foodtruck_number=r.foodtruck_number(+) and r.foodtruck_number='80나0001' group by f.foodtruck_number 
+
+--해당 푸드트럭의 위시리스트수 찾기
+
+select * from wishlist where foodtruck_number='1234'
+select f.foodtruck_number, count(customer_id) from foodtruck f, wishlist w
+where f.foodtruck_number=w.foodtruck_number(+) and w.foodtruck_number='80나0056' group by f.foodtruck_number
+
+--최신순 트럭 리스트
+select * from(
+select row_number() over(order by register_timeposted desc) as rnum, t.foodtruck_name, t.foodtruck_number, t.register_timeposted, f.foodtruck_filepath
+from foodtruck t, foodtruckfile f where f.foodtruck_number=t.foodtruck_number and t.foodtruck_name like '%' || '트' || '%' order by register_timeposted desc
+) where rnum between 1 and 9
+
+--평점순 트럭 리스트
+select * from(
+select row_number() over(order by grade desc) as rnum,foodtruck_number, foodtruck_name, grade, foodtruck_filepath from(
+select t.foodtruck_number, t.foodtruck_name, nvl(trunc(avg(r.grade),1),0) as grade, f.foodtruck_filepath from foodtruck t, review r, foodtruckfile f 
+where t.foodtruck_number=r.foodtruck_number(+) and t.foodtruck_number=f.foodtruck_number and  t.foodtruck_name like '%' || '트' || '%'
+group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath order by grade desc
+)) where rnum between 1 and 9
+
+--즐겨찾기순
+select * from(
+select row_number() over(order by wishlist_count desc) as rnum,foodtruck_number, foodtruck_name, wishlist_count, foodtruck_filepath from(
+select t.foodtruck_number, t.foodtruck_name, count(customer_id) as wishlist_count, f.foodtruck_filepath from foodtruck t, wishlist w, foodtruckfile f 
+where t.foodtruck_number=w.foodtruck_number(+) and t.foodtruck_number=f.foodtruck_number and  t.foodtruck_name like '%' || '트' || '%'
+group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath order by wishlist_count desc
+)) where rnum between 1 and 9
 

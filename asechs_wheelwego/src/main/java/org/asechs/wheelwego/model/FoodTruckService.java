@@ -3,6 +3,7 @@ package org.asechs.wheelwego.model;
 import java.util.List;
 
 import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
@@ -18,4 +19,6 @@ public interface FoodTruckService {
 	ListVO getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber);
 	public ListVO getFoodTruckListByName(String pageNo, String name);
 	int getAvgGradeByTruckNumber(String foodtruckNumber);
+	ListVO getFoodTruckListByGPS(String pageNo, TruckVO gpsInfo);
+	ListVO filtering(String option, String searchWord, String nowPage);
 }

@@ -2,13 +2,13 @@ package org.asechs.wheelwego.model.vo;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileManager {
 	private MultipartFile imgFile;
-	private String newFilePath="C:\\Users\\Administrator\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
+	private String newFilePath="C:\\Users\\User\\AppData\\Roaming\\SPB_16.6\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
+	//private String newFilePath="C:\\Users\\Administrator\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
 	private String newFileFullName;
 	private  String newFileName;
 
@@ -60,8 +60,8 @@ public class FileManager {
 	            fileExt = fileName.substring(i);
 	            fileName = fileName.substring(0,i);
 	        }
-	        System.out.println("rename");
 	       newFileName =/*( new Date( ).getTime( ) / 1000)*/key +/*"_"+ fileName+*/fileExt;
+	       System.out.println("rename : "+newFileName);
 			return newFileName; //rename된 파일을 반환
 	}
 }
