@@ -380,7 +380,6 @@ select * from foodtruck;
 
 
 select * from freeboardfile
-<<<<<<< HEAD
 
 insert into wishlist();
 

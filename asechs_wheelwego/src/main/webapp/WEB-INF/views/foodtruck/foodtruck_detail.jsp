@@ -48,7 +48,7 @@ input[name="grade"]:checked + .star_point~label{
    <div class="container" id="maincontent" tabindex="-1">
       <div class="row">
          <div class="col-lg-12">
-            <div class="intro-text">
+            <div class="w3-text-light-grey intro-text">
                <h1 class="name" style="color:light-grey">${truckDetailInfo.foodtruckName}</h1>
                </div>
          </div>
@@ -106,9 +106,10 @@ input[name="grade"]:checked + .star_point~label{
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">WHERE TO FIND US</span></h5>
     <p style="text-align:center">Find us at some address at some place.</p>
+    <!-- <iframe src="http://map.naver.com/?elng=b481b050171860a69f8e9feaa83f5ce7&menu=route&etext=%EB%8F%84%EC%B0%A9%EC%A7%80%EC%9D%B4%EB%A6%84&elat=bde725fc7a337cbc16aedc4da72b54ae&pathType=1&slng=b5980529d9dd3d387c515f33c92a0f06&stext=%EC%B6%9C%EB%B0%9C%EC%A7%80%EC%9D%B4%EB%A6%84&slat=e50da12d3af9afe511ca714e39883728" style="width:100%;height:400px;"></iframe> -->
     <div id="map" style="width:100%;height:400px;"></div>
 
-    <c:if test="${sessionScope.memberVO!=null}">
+    <c:if test="${sessionScope.memberVO!=null&&sessionScope.memberVO.memberType!='seller'}">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW</span></h5>
    <form action="${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do" target="_blank" method="post">
     <input type="radio" name="grade" id="star-1" value="1"/>
@@ -364,16 +365,12 @@ var symbolMarker = new naver.maps.Marker({
         anchor: new naver.maps.Point(11, 35)        	
     }
 });
-
 var foodTruckInfo = [
-	<c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo" varStatus="status">
        {
-    	   latitude : "${truckInfo.latitude}",
-    	   longtitude : "${truckInfo.longitude}",
-    	   foodtruckName : "${truckInfo.foodtruckName}"
+     	   latitude : "${requestScope.truckDetailInfo.latitude}",
+    	   longtitude : "${requestScope.truckDetailInfo.longitude}",
+    	   foodtruckName : "${requestScope.truckDetailInfo.foodtruckName}" 	   
        }
-       <c:if test="${not status.last}">,</c:if>
-    </c:forEach>
 ];
 
 var latlngs = [
