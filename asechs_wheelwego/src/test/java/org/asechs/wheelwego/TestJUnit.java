@@ -76,18 +76,7 @@ public class TestJUnit {
 		for (int i = 0; i < listVO.getTruckList().size(); i++)
 			System.out.println(listVO.getTruckList().get(i));*/
 		
-		int totalCount=foodTruckDAO.getTruckListTotalContentCount(name);
-		PagingBean pagingBean=null;
-		
-
-		pagingBean=new PagingBean(totalCount);
-			
-		pagingBean.setSearchWord(name);
-		
-		ListVO listVO = new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByName(pagingBean));
-		
-		System.out.println(listVO);
-
+	
 	}
 }
 

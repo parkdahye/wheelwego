@@ -41,7 +41,14 @@ public class FoodTruckController {
 		TruckVO gpsInfo = new TruckVO();
 		gpsInfo.setLatitude(Double.parseDouble(latitude));
 		gpsInfo.setLongitude(Double.parseDouble(longitude));
-		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "truckList", null);
+		
+		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");
+		ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
+		
+		modelAndView.addObject("pagingList", listVO);
+		modelAndView.addObject("gpsInfo", gpsInfo);
+		
+		return modelAndView;
 	}
 	/**
 	 * 정현지 푸드트럭 상세보기

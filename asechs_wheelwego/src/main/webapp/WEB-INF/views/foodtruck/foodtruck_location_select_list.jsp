@@ -45,14 +45,13 @@ $(document).ready(function(){
     });
 	</c:forEach>
 </script>
-
 <div class="container-fluid bg-grey">
   <div class="row text-center">
   <!-- 이슈관리: 변수명으로 받아와야 함 (truckList) -->
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-xs-6">
       <div style="position:relative;" class="thumbnail">
-       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}"><img src="resources/img/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
+       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}"><img src="resources/img/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
         <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png" 
 			 	style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
