@@ -33,7 +33,7 @@
 <Script type="text/javascript">
 
 $(document).ready(function(){
-   $("#insertBtn").click(function(){
+   $("input#insertBtn").click(function(){
      var foodtruckNumber = $(this).attr('name');
      var id = "${sessionScope.memberVO.id}";
     // var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
@@ -81,14 +81,15 @@ $(document).ready(function(){
   <h4>FOODTRUCK LIST</h4><br>
   <div class="row text-center" style="position:relative;">
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
+
     <div class="col-sm-6">
       <div class="thumbnail">
       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
         </a>
-        <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" >
+        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
-        <p style="font-size:17px;">location / review </p>
+        <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
       </div>
     </div>
   </c:forEach>

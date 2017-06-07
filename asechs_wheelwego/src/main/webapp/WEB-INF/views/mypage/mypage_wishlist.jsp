@@ -26,8 +26,6 @@
                <div class="overlay" >
                   <div class="txtOverLay">
                      <h4>${wishList.foodtruckName}</h4>
-                        판매자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${wishList.sellerId}<br>
-                        푸드트럭소개&nbsp;&nbsp;&nbsp;${wishList.introduction}<br>
                   </div>
                </div>
             </div>
