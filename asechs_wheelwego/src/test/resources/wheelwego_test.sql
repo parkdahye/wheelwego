@@ -1,11 +1,11 @@
 
 ----------dbTEST---------------------
 select * from member
-delete from foodtruck where foodtruck_name='현지네트럭'
+delete from foodtruck where foodtruck_name='불빠닭'
 select * from seller
 select * from menu
-select * from FOODTRUCK where foodtruck_name='꼬부랑아이스크림'
-select * from FOODTRUCKFILE where foodtruck_number='80나0004'
+select * from FOODTRUCK where foodtruck_name='불빠닭'
+select * from FOODTRUCKFILE where foodtruck_number='80나0019'
 select * from FOODTRUCKFILE
 select * from customer
 select * from FOODTRUCK
@@ -321,6 +321,9 @@ select * from freeboardcomment
 
 insert into freeboardcomment(freeboardcomment_no, id, freeboardcomment_content, freeboard_no,freeboardcomment_timeposted, freeboardcomment_parent)
 values(freeboardcomment_seq.nextval,'java101','강정호 댓글시도',154,sysdate,0)
+
+delete freeboardfile where freeboard_no=115 
+delete freeboardfile where freeboard_no=93 and  freeboardfile_filepath='c.jpg'
 
 
 

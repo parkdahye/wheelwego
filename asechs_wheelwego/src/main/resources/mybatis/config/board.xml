@@ -106,6 +106,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="freeboardUpdateFileUpload" parameterType="boardVO">
 		update freeboardfile set freeboardfile_filepath=#{fileVO.filepath} where freeboard_no=#{fileVO.no} and freeboardfile_filepath=#{fileVO.beforefilepath}
 	</update>
+	<delete id="freeboardDeleteFile" parameterType="String">
+		delete freeboardfile where freeboard_no=#{value}
+	</delete>
 	
 	<select id="getFreeboardComment" parameterType="commentVO" resultType="commentVO" resultMap="freeboardCommentRM">
 		select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboardcomment_timeposted from freeboardcomment 
@@ -115,8 +118,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateFreeboardComment" parameterType="commentVO">
 		update freeboardcomment set freeboardcomment_content=#{comment} where freeboardcomment_no=#{commentNo} and freeboard_no=#{contentNo}
 	</update>
-	
-	
+
 <!-- 강정호창업게시판 -->
 
 <resultMap type="boardVO" id="businessInfoBoardListRM">
@@ -265,7 +267,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select qna_no, id, qna_title, qna_content, to_char(qna_timeposted,'YYYY.MM.DD HH:mm:ss') as qna_timeposted,
 		qna_hits from qna where qna_no=#{value}
 	</select>
-	
+	<delete id="businessDeleteFile" parameterType="String">
+	delete informationfile where information_no=#{value}
+	</delete>
+	<update id="businessupdateBoard" parameterType="boardVO">
+		update information set information_title=#{title},information_content=#{content},information_timeposted=sysdate where information_no=#{no}
+	</update>
+	<delete id="qnaDeleteFile" parameterType="String">
+	delete qnafile where qna_no=#{value}
+	</delete>
+	<delete id="qnaDelete" parameterType="String">
+	delete qna where qna_no=#{value}
+	</delete>
+	<insert id="qnaupdateBoard" parameterType="boardVO">
+	update qna set qna_title=#{title},qna_content=#{content},qna_timeposted=sysdate where qna_no=#{no}
+	</insert>
+		<update id="updateHitsqna" parameterType="int">
+		update qna set qna_hits=qna_hits+1 where qna_no=#{value}
+	</update>	
 	<resultMap type="commentVO" id="qnaCommentRM">
 		<result property="commentNo" column="qnacomment_no"/>
 		<result property="id" column="id"/>
@@ -300,7 +319,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateqnaComment" parameterType="commentVO">
 		update qnacomment set qnacomment_content=#{comment} where qnacomment_no=#{commentNo} and qna_no=#{contentNo}
 	</update>
-
 </mapper>
  
  

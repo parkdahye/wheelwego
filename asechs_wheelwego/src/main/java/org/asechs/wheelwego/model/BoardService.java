@@ -37,7 +37,6 @@ public interface BoardService {
 	void updateBoard(BoardVO vo);
 
 	MemberVO getNameById(BoardVO bvo);
-	void business_updateBoard(BoardVO vo);
 
 	MemberVO business_getNameById(BoardVO bvo);
 
@@ -60,6 +59,14 @@ public interface BoardService {
 	List<CommentVO> getFreeboardCommentList(String no);
 
 	void deleteFreeboardComment(CommentVO cvo);
+
+	void businessupdateBoard(BoardVO vo);
+
+	void qnaDelete(String no);
+
+	void qnaupdateBoard(BoardVO vo);
+
+	void updateHitsqna(int hits);
 
 	CommentVO getFreeboardComment(CommentVO cvo);
 
