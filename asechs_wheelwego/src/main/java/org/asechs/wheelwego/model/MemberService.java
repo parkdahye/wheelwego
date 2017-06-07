@@ -22,4 +22,6 @@ public interface MemberService {
 	void deleteMember(String id);
 
 	String getMemberType(String id);
+
+	String findBusinessNumberById(String id);
 }

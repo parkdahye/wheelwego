@@ -27,6 +27,9 @@ public class MemberController {
 		else{
 			HttpSession session=request.getSession();
 			session.setAttribute("memberVO",memberVO);
+			if(memberVO.getMemberType().equals("seller")){
+				session.setAttribute("businessNumber", memberService.findBusinessNumberById(memberVO.getId()));
+			}
 			return "redirect:home.do";
 		}
 	}
@@ -46,7 +49,7 @@ public class MemberController {
 	public String updateMember(MemberVO vo, HttpServletRequest request) {
 		memberService.updateMember(vo);
 		request.getSession(false).setAttribute("memberVO", vo);
-		return "redirect:" + "/home.do";
+		return "mypage/updateMember_result.tiles";
 	}
 
 	// 정현지 id찾기

@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.MemberVO;
@@ -23,9 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MypageController {
 	@Resource
 	private MypageService mypageService;
-	@Resource
-	private FoodTruckService foodTruckService;
-
+	
 	@RequestMapping("afterLogin_mypage/wishlist.do")
 	// 세션이 없으면 홈으로 보냄
 	public ModelAndView myWishList(HttpServletRequest request, String id, String pageNo) {
@@ -152,5 +149,10 @@ public class MypageController {
 	public String updateMyReview(ReviewVO reviewVO){
 		mypageService.updateMyReview(reviewVO);
 		return"redirect:/afterLogin_mypage/showMyReviewList.do?customerId="+reviewVO.getCustomerId();
+	}
+	@RequestMapping("afterLogin_mypage/showMyFoodtruck.do")
+	public String showMyFoodtruck(String id){
+		String foodtruckNo=mypageService.findtruckNumberBySellerId(id);
+		return "redirect:../foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo;
 	}
 }

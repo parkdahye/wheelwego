@@ -45,19 +45,37 @@ input[name="grade"]:checked + .star_point~label{
 			<table>
 				<tr>
 					<td>
-					<input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}">
-					TruckNo <input type="text" name="foodtruckNumber" value="${reviewVO.foodtruckNumber}" readonly="readonly"></input>
-					| Writer <input type="text"  name="customerId" value="${reviewVO.customerId}" readonly="readonly"></input>	
-					| Date <input type="text"  name="reviewTimeposted" value="${reviewVO.reviewTimeposted}" readonly="readonly"></input>	
+					<div class="form-group row">
+					<%-- <input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}">
+					TruckNo <input type="text" class="form-control" name="foodtruckNumber" value="${reviewVO.foodtruckNumber}" readonly="readonly"></input>
+					| Writer <input type="text" class="form-control" name="customerId" value="${reviewVO.customerId}" readonly="readonly"></input>	
+					| Date <input type="text" class="form-contro " name="reviewTimeposted" value="${reviewVO.reviewTimeposted}" readonly="readonly"></input><br> --%>	
+					 <input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}">
+					 <div class="col-xs-2">
+					    <label for="ex1">TruckNo</label>
+					    <input class="form-control" id="ex1" type="text" name="foodtruckNumber" value="${reviewVO.foodtruckNumber}" readonly="readonly">
+					  </div>
+					  <div class="col-xs-3">
+					    <label for="ex2">Writer</label>
+					    <input class="form-control" id="ex2" type="text" name="customerId" value="${reviewVO.customerId}" readonly="readonly">
+					  </div>
+					  <div class="col-xs-4">
+					    <label for="ex3">Date</label>
+					    <input class="form-control" id="ex3" type="text" name="reviewTimeposted" value="${reviewVO.reviewTimeposted}" readonly="readonly">
+					  </div>
+					</div>
 					</td>
+				</tr>
+				<tr></tr>
 				<tr>
 					<td>						
-		<textarea rows="5" cols="100" id="content" class="form-control" name="reviewContent" required="required" style="resize: none;">${reviewVO.reviewContent}</textarea>
+		<textarea rows="5" cols="100" id="content" class="form-control" name="reviewContent" required="required" style="resize: none;" autofocus>${reviewVO.reviewContent}</textarea>
 					</td>
 				</tr>
 				<tr>
 				<td valign="middle">  
-					<input type="submit" value="Update" class="btn btn-default" style="float: right;"></input>			
+				<br>
+					<input type="submit" value="Update" class="btn" style="float: right;"></input>			
 					</td>				
 				</tr>
 			</table>

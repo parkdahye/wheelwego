@@ -2,36 +2,40 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <div class=" text-center"> <h1 class="page-header">MY TRUCK</h1> </div>
-    <a href="${pageContext.request.contextPath}/afterLogin_mypage/foodtruck" >푸드트럭 상세보기</a>
+   <div align="center">
+     <button type="button" id="deleteAccountBtn" class="btn btn-warning">회원탈퇴</button>&nbsp;&nbsp;
+ 	 <button type="button" id="updateBtn" class="btn btn-warning">회원정보수정</button>&nbsp;&nbsp;
+ 	<button type="button" id="updateTruckBtn"class="btn btn-warning">MY TRUCK 설정</button>&nbsp;&nbsp;
+	<button type="button" id="menuBtn"class="btn btn-warning">MENU</button>&nbsp;&nbsp;
+	<button type="button" id="myTruckBtn"class="btn btn-warning">MY TRUCK PAGE</button>&nbsp;&nbsp;
+</div>	
     <div class="_40h7m" >
     <form class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMyfoodtruck.do" method="post" enctype="multipart/form-data">
     <div class="_ljqf0 col-lg-12">
-    		<div  class="col-lg-6" style="margin-right: 5px">
-    		<button id="profileBtn" type="button" onclick=document.all.file.click(); >
+    		<div  class="col-lg-12" align="center">
+    		 <button id="profileBtn" type="button" onclick=document.all.file.click(); >
     			<c:choose>
     				<c:when test="${truckVO.fileVO.filepath!='defaultTruck.jpg'}">
-    			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}">    				
+    			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}" align="right">    				
     				</c:when>
     				<c:otherwise>
-    				<img id="profileImg"  src="${pageContext.request.contextPath}/resources/img/defaultTruck.jpg">
+    				<img id="profileImg"  src="${pageContext.request.contextPath}/resources/img/defaultTruck.jpg" align="middle">
     				</c:otherwise>
     			</c:choose>
     		</button>
+    </div>
 		<input type="file" name="foodtruckFile" id="file" style="display: none;"/> 
 		</div>
-				<div class="col-lg-6">
-					<h1>${sessionScope.memberVO.id }</h1>
-				</div>
-		</div>
  		<br><BR>
-    	<div>
+ 		<div>
     		<aside>
-    			<label for="foodtruckName">이름</label>
+    			<label for="foodtruckName">ID</label>
     		</aside>
     		<div>
-    				<input type="text" name="foodtruckName" placeholder="푸드트럭 이름을 입력해주세요" class="form-control" value="${truckVO.foodtruckName}" required="required">
+    				<input type="text" name="" class="form-control" value="${sessionScope.memberVO.id }" readonly="readonly">
     		</div>
     	</div>
+    	   <br>
     	<div>
     		<aside>
     			<label for="foodtruck">푸드트럭 넘버</label>
@@ -40,22 +44,23 @@
     				<input type="text" name="foodtruckNumber" placeholder="푸드트럭 넘버를 입력해주세요" class="form-control" value="${truckVO.foodtruckNumber}" readonly="readonly">
     		</div>
     	</div>
+    	<BR>
     	<div>
     		<aside>
-    			<label for="foodtruck">평점</label>
+    			<label for="foodtruckName">이름</label>
     		</aside>
     		<div>
-    				${truckVO.avgGrade}
+    				<input type="text" name="foodtruckName" placeholder="푸드트럭 이름을 입력해주세요" class="form-control" value="${truckVO.foodtruckName}" required="required">
     		</div>
     	</div>
+    		<br>
     	<div>
     		<aside>
-    			<label for="foodtruck">좋아요</label>
+    			<label for="foodtruck"><span class="glyphicon glyphicon-star" style="color:orange"> </span>&nbsp;&nbsp;${truckVO.avgGrade}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    		<label for="foodtruck"><span class="glyphicon glyphicon-heart" style="color:red"></span>&nbsp;&nbsp;${truckVO.wishlistCount}</label>
     		</aside>
-    		<div>
-    				${truckVO.wishlistCount}
-    		</div>
     	</div>
+	<br>
     	<div>
     		<aside>
     			<label for="foodtruck">푸드트럭 소개</label>
@@ -65,12 +70,14 @@
     		</div>
     	</div>
 	<br>
-    		<input type="submit"  value="수정"> 
-   			<input type="button" id="deleteTruckBtn" value="트럭 삭제"> 
+		<div align="center">
+    		<input type="submit"  class="btn btn-warning"  value="수정" > &nbsp;&nbsp;&nbsp;
+   			<input type="button" class="btn btn-warning"  id="deleteTruckBtn" value="트럭 삭제"> 
+   	</div>
    </form>
    </div>
    <br><br>
-   
+   <div id="insertForm"></div>
   <script type="text/javascript">
   $(document).ready(function(){
       function readURL(input) {
@@ -89,7 +96,6 @@
 
       //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
       $("#file").change(function(){
-          alert(this.value); //선택한 이미지 경로 표시
           readURL(this);
       });
 
@@ -98,6 +104,31 @@
     	  location.href="${pageContext.request.contextPath}/afterLogin_mypage/deleteMyTruck.do?foodtruckNumber=${truckVO.foodtruckNumber}";
     	  }
       });
+      
    });
+  
+  $(document).ready(function(){
+		$("#deleteAccountBtn").click(function(){
+			if(confirm("계정을 삭제하시겠습니까?")){
+				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
+			}
+		});
+		$("#updateBtn").click(function(){
+				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
+		});
+		$("#registerTruckBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/registerMyfoodtruck.do";
+	});
+		$("#updateTruckBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/myfoodtruck_page.do";
+	});
+		$("#menuBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/myfoodtruck_menuList.do";
+	});
+		$("#myTruckBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyFoodtruck.do?id=${sessionScope.memberVO.id}";
+	});
+	
+});
 </script>
 
