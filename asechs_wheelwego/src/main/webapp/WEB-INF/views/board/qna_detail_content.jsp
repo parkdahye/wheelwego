@@ -54,7 +54,7 @@
 	})//ready
 </script> 
 <div class="panel panel-default"> 
-<div class="panel-heading"><h3>자유게시판 상세보기</h3></div> 
+<div class="panel-heading"><h3>Q&A게시판 상세보기</h3></div> 
 <div class="panel-body">
 <div class="container"> 
 <%-- 상세보기--%>
