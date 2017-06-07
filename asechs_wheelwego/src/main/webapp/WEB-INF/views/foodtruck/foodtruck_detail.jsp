@@ -14,7 +14,7 @@ body, html {
 .bgimg {
     background-position: center;
     background-size: cover;
-    background-image: url("${pageContext.request.contextPath}/resources/img/foodtruck/${truckDetailInfo.fileVO.filepath}");
+    background-image: url("${pageContext.request.contextPath}/resources/upload/${truckDetailInfo.fileVO.filepath}");
     min-height: 75%;
 }
 .menu {
@@ -66,13 +66,13 @@ input[name="grade"]:checked + .star_point~label{
 <div class="w3-container" id="about">
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5>
-    <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br>
+    <%-- <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
 <p style="text-align:center;"><i>${truckDetailInfo.introduction}</i></p><br>
-<div class="w3-panel w3-leftbar w3-light-grey" >
-    <p><strong>Opening hours:</strong> everyday from 6am to 5pm.</p>
-    <p><strong>Address:</strong> 15 Adr street, 5015, NY</p>
-   <p><strong>Grade:</strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   <strong>WishList:</strong> ${requestScope.truckDetailInfo.wishlistCount}</p>
+<div class="w3-panel w3-leftbar w3-light-grey">
+    <p><strong><span class="glyphicon glyphicon-time"></span></strong> everyday from 6am to 5pm.</p>
+    <p><strong><span class="glyphicon glyphicon-map-marker"></span></strong> 15 Adr street, 5015, NY</p>
+   <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <strong><span class="glyphicon glyphicon-heart" style="color:red"></span> </strong>${requestScope.truckDetailInfo.wishlistCount}</p>
 </div>
   </div>
 </div>
@@ -92,8 +92,8 @@ input[name="grade"]:checked + .star_point~label{
     <div id="Eat" class="w3-container menu w3-padding-48 w3-card-2">
        <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
        <img src="${pageContext.request.contextPath}/resources/upload/${foodList.fileVO.filepath}" style="width:100%" ><br>
-      <h5 class="text-center">메뉴 : ${foodList.menuName }</h5>
-      <p class="w3-text-grey text-center">가격 : ${foodList.menuPrice}</p><br><br>
+      <h5 class="w3-text-grey text-center">${foodList.menuName}</h5>
+      <p class="w3-text-grey text-center">${foodList.menuPrice}</p><br><br>
       </c:forEach>
     </div>
 
@@ -106,7 +106,7 @@ input[name="grade"]:checked + .star_point~label{
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">WHERE TO FIND US</span></h5>
     <p style="text-align:center">Find us at some address at some place.</p>
-    <div id="googleMap" class="w3-sepia" style="width:100%;height:400px;"></div>
+    <div id="map" style="width:100%;height:400px;"></div>
 
     <c:if test="${sessionScope.memberVO!=null}">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW</span></h5>
@@ -274,7 +274,7 @@ input[name="grade"]:checked + .star_point~label{
 
 <!-- Add Google Maps -->
 <script>
-function myMap()
+/* function myMap()
 {
   myCenter=new google.maps.LatLng(41.878114, -87.629798);
   var mapOptions= {
@@ -288,7 +288,7 @@ function myMap()
     position: myCenter,
   });
   marker.setMap(map);
-}
+} */
 
 // Tabbed Menu
 function openMenu(evt, menuName) {
@@ -342,5 +342,122 @@ document.getElementById("myLink").click();
    });
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+<script>
+var HOME_PATH = window.HOME_PATH || '.';
+var position = new naver.maps.LatLng("${param.latitude}", "${param.longitude}");
+
+var map = new naver.maps.Map('map', {
+    center: position,
+    zoom: 8,
+    mapTypeId: naver.maps.MapTypeId.NORMAL    
+});
+
+var infowindow = new naver.maps.InfoWindow();
+
+var symbolMarker = new naver.maps.Marker({
+    position: position,
+    map: map,
+    icon: {
+        url: "${pageContext.request.contextPath}/resources/img/location.png",
+        size: new naver.maps.Size(40, 35),
+        origin: new naver.maps.Point(0, 0),
+        anchor: new naver.maps.Point(11, 35)        	
+    }
+});
+
+var foodTruckInfo = [
+	<c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo" varStatus="status">
+       {
+    	   latitude : "${truckInfo.latitude}",
+    	   longtitude : "${truckInfo.longitude}",
+    	   foodtruckName : "${truckInfo.foodtruckName}"
+       }
+       <c:if test="${not status.last}">,</c:if>
+    </c:forEach>
+];
+
+var latlngs = [
+];
+
+for (var i = 0; i < foodTruckInfo.length; i++)
+{
+	latlngs.push(new naver.maps.LatLng(foodTruckInfo[i].latitude, foodTruckInfo[i].longtitude));
+}	
+
+var markers = [];
+var infoWindows = [];
+
+for (var i=0, ii=latlngs.length; i<ii; i++) {
+    var icon = {
+            url: HOME_PATH +'/img/example/sp_pins_spot_v3.png',
+            size: new naver.maps.Size(24, 37),
+            anchor: new naver.maps.Point(12, 37),
+            origin: new naver.maps.Point(i * 29, 0)
+        },
+        marker = new naver.maps.Marker({
+            position: latlngs[i],
+            map: map,
+            icon: {
+                url: HOME_PATH +'/img/example/sp_pins_spot_v3.png',
+                size: new naver.maps.Size(24, 37),
+                anchor: new naver.maps.Point(12, 37),
+                origin: new naver.maps.Point(0, 0)
+            },
+            zIndex: 100
+        });
+    
+    var infoWindow = new naver.maps.InfoWindow({
+        content: '<div style="width:150px;text-align:center;padding:5px;">"' + foodTruckInfo[i].foodtruckName + '"</div>'
+    });    
+
+    markers.push(marker);
+    infoWindows.push(infoWindow);
+}
+
+function updateMarkers(map, markers) {
+
+    var mapBounds = map.getBounds();
+    var marker, position;
+
+    for (var i = 0; i < markers.length; i++) {
+
+        marker = markers[i]
+        position = marker.getPosition();
+
+        if (mapBounds.hasLatLng(position)) {
+            showMarker(map, marker);
+        } else {
+            hideMarker(map, marker);
+        }
+    }
+}
+
+function showMarker(map, marker) {
+
+    if (marker.setMap()) return;
+    marker.setMap(map);
+}
+
+function hideMarker(map, marker) {
+
+    if (!marker.setMap()) return;
+    marker.setMap(null);
+}
+
+function getClickHandler(seq) {
+    return function(e) {
+        var marker = markers[seq],
+            infoWindow = infoWindows[seq];
+
+        if (infoWindow.getMap()) {
+            infoWindow.close();
+        } else {
+            infoWindow.open(map, marker);
+        }
+    }
+}
+for (var i=0, ii=markers.length; i<ii; i++) {
+    naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+}
+</script>
 

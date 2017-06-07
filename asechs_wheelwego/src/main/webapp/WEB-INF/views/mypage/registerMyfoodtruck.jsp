@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <div class="_40h7m" >
-    <form id="registerForm" class="form-signin" action="${pageContext.request.contextPath}/afterLogin_mypage/registerFoodtruck.do" method="post" enctype="multipart/form-data">
+    <form id="registerForm" onsubmit="return checkProfile()" class="form-signin" 
+     action="${pageContext.request.contextPath}/afterLogin_mypage/registerFoodtruck.do" method="post" enctype="multipart/form-data">
     <div class="_ljqf0 col-lg-12">
     		<div  class="col-lg-6" style="margin-right: 5px">
     		<button id="profileBtn" type="button" onclick=document.all.file.click();>
-    			<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/defaultTruck.jpg">
+    			<img id="profileImg" src="${pageContext.request.contextPath}/resources/img/defaultTruck.jpg">
     		</button>
-		<input type="file" name="foodtruckFile" id="file" style="display: none;" /> 
+		<input type="file" name="foodtruckFile" id="file" style="display: none;"/> 
 		</div>
 				<div class="col-lg-6">
 					<h1>${sessionScope.memberVO.id }</h1>
@@ -41,7 +42,7 @@
     		</div>
     	</div>
 	<br><br>
-	<input type="submit" value="등록">
+	<input type="submit" id="registerBtn" value="등록">
 	</form>
 	</div>
 	<br><br>
@@ -65,8 +66,16 @@
 
       //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
       $("#file").change(function(){
-          alert(this.value); //선택한 이미지 경로 표시
           readURL(this);
       });
+
    });
+  
+  function checkProfile(){
+    	  var file=$("#file").val();
+    	  if(file==""){
+	    		alert("프로필 사진을 설정해주세요");
+	    		return false;
+    	  }
+  }
 </script>

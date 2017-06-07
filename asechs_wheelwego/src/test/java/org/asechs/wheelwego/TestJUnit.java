@@ -45,13 +45,16 @@ public class TestJUnit {
 	@Resource
 	private BoardDAO boardDAO;
 	@Resource
-	private FoodTruckDAO foodDAO;
+	private FoodTruckDAO foodTruckDAO;
 	@Resource
 	private MypageDAO mypageDAO;
 	
 	@Test
 	public void test(){
-		/*String id = "seller111";
+		System.out.println(foodtruckService.filtering("byWishlistCount", "", null));
+		System.out.println(foodtruckService.filtering("byAvgGrade", "", null));
+		System.out.println(foodtruckService.filtering("", "", null));
+/*		String id = "seller111";
 		String password = "1234";
 		String memberName = "김래발";
 		String postCode = "13437";
@@ -60,20 +63,20 @@ public class TestJUnit {
 		String phoneNumber = "01000000000";
 		String memberType = "customer";
 		String businessNumber = "0000000000";
-		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		
 		String name = "소시지";
 		//List<TruckVO> searchTruckList = foodtruckService.searchFoodTruckList(name);
 		
 		
-/*		ListVO listVO = foodtruckService.resultFoodTruckList("1", name);
+		ListVO listVO = foodtruckService.resultFoodTruckList("1", name);
 		System.out.println(listVO);
 		System.out.println(listVO.getPagingBean().getStartRowNumber());
 		System.out.println(listVO.getPagingBean().getEndRowNumber());
 		
 		for (int i = 0; i < listVO.getTruckList().size(); i++)
-			System.out.println(listVO.getTruckList().get(i));*/
 
+			System.out.println(listVO.getTruckList().get(i));*/
 	}
 }
 

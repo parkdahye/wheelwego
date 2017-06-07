@@ -10,14 +10,14 @@ drop sequence information_seq;
 drop sequence informationcomment_seq;
 drop sequence qna_seq;
 drop sequence qnacomment_seq;
-drop sequence freeboard_seq ;
+drop sequence freeboard_seq;
 drop sequence freeboardcomment_seq;
 
 create sequence survey_seq;
 create sequence customerpoint_seq;
 create sequence booking_seq;
-create sequence review_seq;
-create sequence menu_seq start with 123;;
+create sequence review_seq start with 200;
+create sequence menu_seq start with 123;
 
 create sequence information_seq start with 51;
 create sequence informationcomment_seq;
