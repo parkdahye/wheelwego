@@ -75,8 +75,9 @@ public class TestJUnit {
 		System.out.println(listVO.getPagingBean().getEndRowNumber());
 		
 		for (int i = 0; i < listVO.getTruckList().size(); i++)
-
+<<<<<<< HEAD
 			System.out.println(listVO.getTruckList().get(i));*/
+		
 	}
 }
 
