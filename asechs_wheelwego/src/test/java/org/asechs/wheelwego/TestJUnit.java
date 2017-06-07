@@ -7,8 +7,6 @@ import org.asechs.wheelwego.model.FoodTruckDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
-import org.asechs.wheelwego.model.vo.ListVO;
-import org.asechs.wheelwego.model.vo.PagingBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -53,7 +51,7 @@ public class TestJUnit {
 	
 	@Test
 	public void test(){
-		/*String id = "seller111";
+/*		String id = "seller111";
 		String password = "1234";
 		String memberName = "김래발";
 		String postCode = "13437";
@@ -62,21 +60,20 @@ public class TestJUnit {
 		String phoneNumber = "01000000000";
 		String memberType = "customer";
 		String businessNumber = "0000000000";
-		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);*/
+		service.registerMember(new MemberVO(id, password, memberName, postCode, address, addressDetail, phoneNumber, memberType), businessNumber);
 		
 		String name = "소시지";
 		//List<TruckVO> searchTruckList = foodtruckService.searchFoodTruckList(name);
 		
 		
-/*		ListVO listVO = foodtruckService.resultFoodTruckList("1", name);
+		ListVO listVO = foodtruckService.resultFoodTruckList("1", name);
 		System.out.println(listVO);
 		System.out.println(listVO.getPagingBean().getStartRowNumber());
 		System.out.println(listVO.getPagingBean().getEndRowNumber());
 		
 		for (int i = 0; i < listVO.getTruckList().size(); i++)
+
 			System.out.println(listVO.getTruckList().get(i));*/
-		
-	
 	}
 }
 

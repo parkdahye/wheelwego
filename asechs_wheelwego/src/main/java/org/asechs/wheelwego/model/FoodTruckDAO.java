@@ -25,4 +25,8 @@ public interface FoodTruckDAO {
 	int findTruckNumberInReview(String foodtruckNumber);
 	int getTruckListTotalContentCountByGPS(TruckVO gpsInfo);
 	List<TruckVO> getFoodTruckListByGPS(PagingBean pagingBean);
+	List<TruckVO> filteringByRegisterDate(PagingBean pagingbean);
+	List<TruckVO> filteringByWishlistCount(PagingBean pagingbean);
+	List<TruckVO> filteringByAvgGrade(PagingBean pagingbean);
+	int findAvgGradeByTruckNumber(String truckNumber);
 }
