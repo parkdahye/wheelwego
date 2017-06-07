@@ -38,20 +38,28 @@ select t.*, f.foodtruck_filepath
 from(select * from foodtruck)t, foodtruckfile f
 where t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' || #{value} || '%' and latitude is not null and longitude is not null
 </select>
+<select id="getTruckListTotalContentCountByName" resultType="Integer" parameterType="string">
+	select count(*) from foodtruck where foodtruck_name like '%' || #{value}|| '%' and latitude is not null and longitude is not null
+</select>	
 <select id="getTruckListTotalContentCount" resultType="Integer" parameterType="string">
 	select count(*) from foodtruck where foodtruck_name like '%' || #{value}|| '%' <!-- and latitude is not null and longitude is not null -->
 </select>
-
-<!-- <select id="pagingTruckList" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
-	select f.foodtruck_filepath, t.foodtruck_name, t.foodtruck_number FROM(
-	SELECT row_number() over(order by foodtruck_number desc) as rnum, foodtruck_name, foodtruck_number from foodtruck)t, foodtruckfile f
-	where t.foodtruck_number=f.foodtruck_number and rnum between #{startRowNumber} and #{endRowNumber}
-</select> -->
+<select id="getTruckListTotalContentCountByGPS" resultType="Integer" parameterType="truckVO">
+	select count(*) from foodtruck where (latitude between #{latitude}-0.009 and #{latitude}+0.009) and (longitude between #{longitude}-0.012 and #{longitude}+0.012)
+</select>
 
 <select id="getFoodTruckListByName" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
 	SELECT f.foodtruck_filepath, t.* FROM
 	(SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
 	from foodtruck fo where foodtruck_name like '%' || #{searchWord} || '%' and latitude is not null and longitude is not null)t, foodtruckfile f  
+	where t.foodtruck_number=f.foodtruck_number and rnum between #{startRowNumber} and #{endRowNumber}
+	order by t.foodtruck_number desc
+</select>
+
+<select id="getFoodTruckListByGPS" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
+	SELECT f.foodtruck_filepath, t.* FROM
+	(SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
+	from foodtruck fo where (latitude between #{gpsInfo.latitude}-0.009 and #{gpsInfo.latitude}+0.009) and (longitude between #{gpsInfo.longitude}-0.012 and #{gpsInfo.longitude}+0.012))t, foodtruckfile f  
 	where t.foodtruck_number=f.foodtruck_number and rnum between #{startRowNumber} and #{endRowNumber}
 	order by t.foodtruck_number desc
 </select>
@@ -69,11 +77,6 @@ select * from menu where foodtruck_number=#{value}
 select t.*, f.foodtruck_filepath, m.menu_filename
 		from(select * from foodtruck)t, foodtruckfile f, menu m
 		where t.foodtruck_number=f.foodtruck_number and t.foodtruck_number=m.foodtruck_number and t.foodtruck_number=#{value}
-</select>
-<select id="searchFoodTruckByGPS" resultMap="truckRM" parameterType="truckVO">
-select * from (
-select * from foodtruck
-where (latitude between #{latitude}-0.009 and #{latitude}+0.009) and (longitude between #{longitude}-0.012 and #{longitude}+0.012)) TMP 
 </select>
 
 <insert id="registerReview" parameterType="reviewVO">
@@ -100,9 +103,6 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 </insert>
 <select id="getBookMarkCount" parameterType="wishListVO" resultType="int">
 	select count(*) from wishlist where foodtruck_number = #{foodTruckNumber} and customer_id = #{customerId} 
-</select>
-<select id="getAvgGradeByTruckNumber" resultType="int">
-	select trunc(avg(grade),1) from review  where foodtruck_number=#{value} group by foodtruck_number
 </select>
 
 <select id="findTruckNumberInReview" resultType="int">

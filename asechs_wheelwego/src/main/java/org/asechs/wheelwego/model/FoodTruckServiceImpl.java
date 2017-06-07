@@ -69,8 +69,9 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		
 		return foodTruckDAO.getBookMarkCount(wishlistVO);
 	}
+	@Override
 	public ListVO getFoodTruckListByName(String pageNo, String name) {
-		int totalCount=foodTruckDAO.getTruckListTotalContentCount(name);
+		int totalCount=foodTruckDAO.getTruckListTotalContentCountByName(name);
 		PagingBean pagingBean=null;
 		
 		if(pageNo==null)
@@ -82,6 +83,21 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		
 		return new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByName(pagingBean));
 	}
+	@Override
+	public ListVO getFoodTruckListByGPS(String pageNo, TruckVO gpsInfo) {
+		int totalCount=foodTruckDAO.getTruckListTotalContentCountByGPS(gpsInfo);
+		PagingBean pagingBean=null;
+		
+		if(pageNo==null)
+			pagingBean=new PagingBean(totalCount);
+		else
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
+		
+		pagingBean.setGpsInfo(gpsInfo);
+				
+		return new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByGPS(pagingBean));
+	}
+
 
 	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
 		int avgGrade=0;
@@ -95,9 +111,10 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		if(nowPage==null)
 			nowPage="1";
 		ListVO pagingList=new ListVO();
-		int totalCount=foodTruckDAO.getTruckListTotalContentCount(searchWord);
+		int totalCount=foodTruckDAO.getTruckListTotalContentCountByName(searchWord);
 		PagingBean pagingbean=new PagingBean(Integer.parseInt(nowPage),totalCount,searchWord);
 		if(option.equals("byWishlistCount")){
+
 			truckList=foodTruckDAO.filteringByWishlistCount(pagingbean);
 		}else if(option.equals("byAvgGrade")){
 			truckList=foodTruckDAO.filteringByAvgGrade(pagingbean);
