@@ -47,9 +47,6 @@ $(document).ready(function(){
 </script>
 
 <form method="post" action="${pageContext.request.contextPath}/afterLogin_mypage/${param.command}.do" id="checkPwForm">
-   패스워드 확인 <input type="password" name="password" id="password" size="10" required="required"><br>
-   <input type="hidden" value="${param.command}">
-   <input type="button" value="확인" id = "inputForm">
  <div class="row">
  <div class="col-xs-5"></div>
  <div class="col-xs-2">
