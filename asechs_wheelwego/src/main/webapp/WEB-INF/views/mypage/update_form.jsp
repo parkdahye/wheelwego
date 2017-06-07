@@ -4,6 +4,11 @@
 <c:set var="customer" value="customer"/> 
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<style>
+#pwCheckView{
+	font-size: 15px;
+}
+</style>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -48,7 +53,7 @@
     }
 </script>
 
-<form method="post" id="updateForm" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMember.do">
+<%-- <form method="post" id="updateForm" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMember.do">
    아이디 <input type="text" name="id" maxlength="10" value="${sessionScope.memberVO.id}" readonly="readonly"><br>
    비밀번호  <input type="password" name="passwordPre" maxlength="10" id = "passwordPre" onkeypress="caps_lock(event)" required="required"><span id="capsLockCheckView"></span><br>
    비밀번호체크 <input type="password" name="password" maxlength="10" id = "password" onkeypress="caps_lock(event)" required="required"><span id="pwCheckView"></span><br>
@@ -67,14 +72,97 @@
     <c:otherwise>
    		<input type="radio" name="memberType" value="customer"> 일반회원&nbsp;
    		<input type="radio" name="memberType" value="seller" checked="checked"> 창업자회원<br>
-   		<%-- 사업자 번호 <input type='text' name = 'businessNumber' value = "${sessionScope.memberVO.businessNumber}" maxlength='10' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required='required'>" --%>   	
+   		사업자 번호 <input type='text' name = 'businessNumber' value = "${sessionScope.memberVO.businessNumber}" maxlength='10' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required='required'>"   	
    	</c:otherwise>
    </c:choose>
    <!-- <span id="businessNumberView"></span><span id='businessNumberCheckView'></span><br> -->
    <input type="submit" value="수정하기">
    <input type="button" id = "cancelBtn" value="취소하기">
-</form>
-
+</form> --%>
+ <div class="col-md-12" style="overflow:auto;">
+        <div class="page-header text-center">
+    	    <h1><small>회원정보 수정 </small></h1>
+        </div>
+	<form class="form-horizontal" method="post" id="updateForm" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMember.do">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="inputEmail">아이디</label>
+        <div class="col-sm-6">
+               <input type="text"  class="form-control" name="id"   id="InputEmail"  maxlength="10" value="${sessionScope.memberVO.id}" readonly="readonly"><span id="idCheckView"></span>
+        </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
+        <div class="col-sm-6">
+         <input type="password" class="form-control"  name="passwordPre" maxlength="10"  placeholder="비밀번호를 입력하세요" id = "passwordPre" onkeypress="caps_lock(event)" required="required"><span id="capsLockCheckView"></span>
+        </div>
+        </div>
+          <div class="form-group">
+              <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
+             <div class="col-sm-6">
+             <input type="password" class="form-control" name="password" maxlength="10" id = "password" onkeypress="caps_lock(event)" required="required">
+              <p id="pwCheckView"></p>
+             </div>
+          </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="inputName">이름</label>
+          <div class="col-sm-6">
+           <input type="text" class="form-control"  name="memberName" maxlength="10" value="${sessionScope.memberVO.memberName}" readonly="readonly">
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="inputAddress">주소</label>
+          <div class="col-sm-6">
+          	<div class="col-sm-9">
+            <input type="text"   class="form-control"  id="postCode" name = "postCode" placeholder="우편번호" value = "${sessionScope.memberVO.postCode}" readonly="readonly">
+      		 </div>
+      		 <div  class="col-sm-3">
+      		 <input type="button"   class="form-control"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+      		 </div>
+      		 <input type="text"   class="form-control"  id="address" name = "address" placeholder="주소" value = "${sessionScope.memberVO.address}" readonly="readonly"><br>
+      		 <input type="text"  class="form-control"  id="addressDetail" name = "addressDetail" maxlength="50" placeholder="상세주소" value = "${sessionScope.memberVO.addressDetail}" required="required"><br>
+          </div>
+          </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="inputNumber">휴대폰번호</label>
+              <div class="col-sm-6">
+                <input type="tel"   class="form-control" name = "phoneNumber"   value = "${sessionScope.memberVO.phoneNumber}" maxlength="11" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required="required"><span id="phoneNumberCheckView"></span>
+              </div>
+        </div>
+        
+            
+	<c:choose>
+   	<c:when test="${sessionScope.memberVO.memberType=='customer'}">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="inputNumberCheck">회원 타입</label>
+          <div class="col-sm-6">
+         	   <input type="radio" name="memberType" value="customer" checked="checked" > 일반회원&nbsp;
+         </div>
+         </div>
+   	</c:when>
+    <c:otherwise>
+              <div class="form-group">
+            <label class="col-sm-3 control-label" for="inputNumberCheck">회원 타입</label>
+              <div class="col-sm-6">
+       	   	   <input type="radio" name="memberType" value="seller" checked="checked" > 창업자회원<br>
+       	   	   </div>
+       	   	   </div>
+       	   	   <div class="form-group">
+          <label class="col-sm-3 control-label" for="inputPassword">사업자 번호</label>
+        	<div class="col-sm-6">
+            <input type="text"   class="form-control"  id="businessNumber" name = "businessNumber" placeholder="사업자번호" value = "${sessionScope.businessNumber}" readonly="readonly"><br>
+            </div>
+            </div>
+   	</c:otherwise>
+   </c:choose>
+        <div class="form-group">
+          <div class="col-sm-12 text-center">
+            <button class="btn btn-primary" type="submit">정보수정<i class="fa fa-check spaceLeft"></i></button>
+            <button class="btn btn-danger" type="button" id="cancelBtn">수정취소<i class="fa fa-times spaceLeft"></i></button>
+          </div>
+        </div>
+        </form>
+          <hr>
+        </div>
 <script type="text/javascript">
  
 function caps_lock(e) {
@@ -129,19 +217,7 @@ $(document).ready(function(){
          if ($("#address").val() == ""){
             alert("주소를 입력하세요.");
             return false;
-         }
-         if(checkResultPhone==""){
-            alert("휴대전화번호를 체크하세요");
-            return false;
-         }
-         /* if(memberType==""){
-            alert("회원타입을 체크하세요");
-            return false;
-         } */
-         /* if(memberType == "seller" && checkResultBusiness==""){
-            alert("사업자번호를 체크하세요");
-            return false;
-         }  */           
+         }  
       });
       
       $("#cancelBtn").click(function(){
@@ -154,7 +230,7 @@ $(document).ready(function(){
          var password = $(this).val().trim();
          
          if(password.length<4 || password.length>10){
-            $("#pwCheckView").html("비밀번호는 4자이상 10자 이하입니다").css("background","pink");
+            $("#pwCheckView").html("비밀번호는 4자이상 10자 이하입니다");
             checkResultPw="";
          }
          else
@@ -163,57 +239,20 @@ $(document).ready(function(){
             checkResultPw=password;
          }
       });
-      
-       $(":input[name=phoneNumber]").keyup(function(){
-         var phoheNumber = $(this).val().trim();
-         
-         if(phoheNumber.length == 10 || phoheNumber.length == 11){
-            $("#phoneNumberCheckView").html("");
-            checkResultPhone=phoheNumber;            
-         }
-         else
-         {
-            $("#phoneNumberCheckView").html("-를 제외한 휴대전화번호 10~11자리를 입력하세요").css("background","pink");
-            checkResultPhone="";
-         }
-      });   
+  
       
       $(":input[name=password]").keyup(function(){
          var password = $(this).val().trim();
          
          if($("#passwordPre").val() != password){
-            $("#pwCheckView").html("암호불일치!").css("background","red");
+            $("#pwCheckView").html("암호불일치!");
             checkResultPw="";
          }
          else{
-            $("#pwCheckView").html("암호일치!").css("background","green");
+            $("#pwCheckView").html("암호일치!");
             checkResultPw=password;
          }
       });
-      
-/*       $("input:radio[name=memberType]").click(function(){
-         memberType = $(":input[name=memberType]:checked").val();
-         
-         if (memberType == "seller")
-         {
-            $("#businessNumberView").html("사업자 번호 <input type='text' name = 'businessNumber' maxlength='10' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' required='required'>");
-            
-             $(":input[name=businessNumber]").keyup(function(){
-               var businessNumber = $(this).val().trim();
-               
-               if(businessNumber.length == 10){
-                  $("#businessNumberCheckView").html("");
-                  checkResultBusiness=businessNumber;            
-               }
-               else
-               {
-                  $("#businessNumberCheckView").html("-를 제외한 사업자번호 10자리를 입력하세요").css("background","pink");
-                  checkResultBusiness="";
-               }
-            });
-         }
-         else
-            $("#businessNumberView").html("");
-      }); */
+   
 });//ready
 </script>

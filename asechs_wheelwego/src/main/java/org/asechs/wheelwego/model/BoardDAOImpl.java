@@ -96,11 +96,22 @@ public class BoardDAOImpl implements BoardDAO {
 		template.delete("board.deleteFreeboardComment",cvo);
 		
 	}
+	
+	@Override
+	public CommentVO getFreeboardComment(CommentVO cvo) {
+		return template.selectOne("board.getFreeboardComment",cvo);
+	}
 
 	//게시물 사진 수정시 선삭제
 	@Override
 	public void freeboardDeleteFile(String no) {
 		template.delete("board.freeboardDeleteFile", no);
+	}
+
+	@Override
+	public void updateFreeboardComment(CommentVO cvo) {
+		template.update("board.updateFreeboardComment",cvo);
+
 		
 	}
 	
@@ -158,6 +169,35 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<FileVO> getBusinessFilePath(String no) {
 		 return template.selectList("board.getBusinessFilePath",no);
 	}
+	
+	@Override
+	public List<CommentVO> getbusinessCommentList(String no) {
+		return template.selectList("board.getbusinessCommentList",no);
+	}
+	
+	@Override
+	public void deletebusinessComment(CommentVO cvo) {
+		template.delete("board.deletebusinessComment", cvo);
+		
+	}
+	
+	@Override
+	public void writebusinessComment(CommentVO cvo) {
+		template.insert("board.writebusinessComment",cvo);
+		
+	}
+	
+	@Override
+	public CommentVO getbusinessComment(CommentVO cvo) {
+		return template.selectOne("board.getbusinessComment",cvo);
+	}
+	
+	@Override
+	public void updatebusinessComment(CommentVO cvo) {
+		template.update("board.updatebusinessComment",cvo);
+		
+	}
+
 
 
 	@Override
@@ -233,6 +273,43 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void updateHitsqna(int hits) {
 		template.update("board.updateHitsqna", hits);
+		
+	}
+
+
+	@Override
+	public List<CommentVO> getqnaCommentList(String no) {
+		return template.selectList("board.getqnaCommentList",no);
+	}
+
+
+
+	@Override
+	public void writeqnaComment(CommentVO cvo) {
+		template.insert("board.writeqnaComment",cvo);
+		
+	}
+
+
+
+	@Override
+	public void deleteqnaComment(CommentVO cvo) {
+		template.delete("board.deleteqnaComment",cvo);
+		
+	}
+
+
+
+	@Override
+	public CommentVO getqnaComment(CommentVO cvo) {
+		return template.selectOne("board.getqnaComment",cvo);
+	}
+
+
+
+	@Override
+	public void updateqnaComment(CommentVO cvo) {
+		template.update("board.updateqnaComment",cvo);
 		
 	}
 

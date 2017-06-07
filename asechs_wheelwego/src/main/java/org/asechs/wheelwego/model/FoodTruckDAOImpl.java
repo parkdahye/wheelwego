@@ -29,8 +29,8 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	}
 
 	@Override
-	public int getTruckListTotalContentCount(String name) {
-		return sqlSessionTemplate.selectOne("foodtruck.getTruckListTotalContentCount", name);
+	public int getTruckListTotalContentCountByName(String name) {
+		return sqlSessionTemplate.selectOne("foodtruck.getTruckListTotalContentCountByName", name);
 	}
 
 	@Override
@@ -81,15 +81,19 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	}
 	
 	@Override
-	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
-		return sqlSessionTemplate.selectOne("foodtruck.getAvgGradeByTruckNumber", foodtruckNumber);
-	}
-	@Override
 	public int findTruckNumberInReview(String foodtruckNumber) {
 		return sqlSessionTemplate.selectOne("foodtruck.findTruckNumberInReview", foodtruckNumber);
 	}
 
 	@Override
+	public int getTruckListTotalContentCountByGPS(TruckVO gpsInfo) {
+		return sqlSessionTemplate.selectOne("foodtruck.getTruckListTotalContentCountByGPS", gpsInfo);
+	}
+
+	@Override
+	public List<TruckVO> getFoodTruckListByGPS(PagingBean pagingBean) {
+		return sqlSessionTemplate.selectList("foodtruck.getFoodTruckListByGPS",pagingBean);
+	}
 	public List<TruckVO> filteringByRegisterDate(PagingBean pagingbean) {
 		return sqlSessionTemplate.selectList("foodtruck.filteringByRegisterDate", pagingbean);
 	}
@@ -107,5 +111,10 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	@Override
 	public int findAvgGradeByTruckNumber(String truckNumber) {
 		return sqlSessionTemplate.selectOne("foodtruck.findAvgGradeByTruckNumber", truckNumber);
+	}
+
+	@Override
+	public int findWishlistCountByTruckNumber(String foodtruckNumber) {
+		return sqlSessionTemplate.selectOne("foodtruck.findWishlistCountByTruckNumber", foodtruckNumber);
 	}
 }

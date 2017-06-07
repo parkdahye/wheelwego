@@ -48,7 +48,7 @@ input[name="grade"]:checked + .star_point~label{
    <div class="container" id="maincontent" tabindex="-1">
       <div class="row">
          <div class="col-lg-12">
-            <div class="intro-text">
+            <div class="w3-text-light-grey intro-text">
                <h1 class="name" style="color:light-grey">${truckDetailInfo.foodtruckName}</h1>
                </div>
          </div>
@@ -106,9 +106,10 @@ input[name="grade"]:checked + .star_point~label{
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">WHERE TO FIND US</span></h5>
     <p style="text-align:center">Find us at some address at some place.</p>
-    <div id="googleMap" class="w3-sepia" style="width:100%;height:400px;"></div>
+    <!-- <iframe src="http://map.naver.com/?elng=b481b050171860a69f8e9feaa83f5ce7&menu=route&etext=%EB%8F%84%EC%B0%A9%EC%A7%80%EC%9D%B4%EB%A6%84&elat=bde725fc7a337cbc16aedc4da72b54ae&pathType=1&slng=b5980529d9dd3d387c515f33c92a0f06&stext=%EC%B6%9C%EB%B0%9C%EC%A7%80%EC%9D%B4%EB%A6%84&slat=e50da12d3af9afe511ca714e39883728" style="width:100%;height:400px;"></iframe> -->
+    <div id="map" style="width:100%;height:400px;"></div>
 
-    <c:if test="${sessionScope.memberVO!=null}">
+    <c:if test="${sessionScope.memberVO!=null&&sessionScope.memberVO.memberType!='seller'}">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW</span></h5>
    <form action="${pageContext.request.contextPath}/afterLogin_foodtruck/registerReview.do" target="_blank" method="post">
     <input type="radio" name="grade" id="star-1" value="1"/>
@@ -274,7 +275,7 @@ input[name="grade"]:checked + .star_point~label{
 
 <!-- Add Google Maps -->
 <script>
-function myMap()
+/* function myMap()
 {
   myCenter=new google.maps.LatLng(41.878114, -87.629798);
   var mapOptions= {
@@ -288,7 +289,7 @@ function myMap()
     position: myCenter,
   });
   marker.setMap(map);
-}
+} */
 
 // Tabbed Menu
 function openMenu(evt, menuName) {
@@ -342,5 +343,118 @@ document.getElementById("myLink").click();
    });
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+<script>
+var HOME_PATH = window.HOME_PATH || '.';
+var position = new naver.maps.LatLng("${param.latitude}", "${param.longitude}");
+
+var map = new naver.maps.Map('map', {
+    center: position,
+    zoom: 8,
+    mapTypeId: naver.maps.MapTypeId.NORMAL    
+});
+
+var infowindow = new naver.maps.InfoWindow();
+
+var symbolMarker = new naver.maps.Marker({
+    position: position,
+    map: map,
+    icon: {
+        url: "${pageContext.request.contextPath}/resources/img/location.png",
+        size: new naver.maps.Size(40, 35),
+        origin: new naver.maps.Point(0, 0),
+        anchor: new naver.maps.Point(11, 35)        	
+    }
+});
+var foodTruckInfo = [
+       {
+     	   latitude : "${requestScope.truckDetailInfo.latitude}",
+    	   longtitude : "${requestScope.truckDetailInfo.longitude}",
+    	   foodtruckName : "${requestScope.truckDetailInfo.foodtruckName}" 	   
+       }
+];
+
+var latlngs = [
+];
+
+for (var i = 0; i < foodTruckInfo.length; i++)
+{
+	latlngs.push(new naver.maps.LatLng(foodTruckInfo[i].latitude, foodTruckInfo[i].longtitude));
+}	
+
+var markers = [];
+var infoWindows = [];
+
+for (var i=0, ii=latlngs.length; i<ii; i++) {
+    var icon = {
+            url: HOME_PATH +'/img/example/sp_pins_spot_v3.png',
+            size: new naver.maps.Size(24, 37),
+            anchor: new naver.maps.Point(12, 37),
+            origin: new naver.maps.Point(i * 29, 0)
+        },
+        marker = new naver.maps.Marker({
+            position: latlngs[i],
+            map: map,
+            icon: {
+                url: HOME_PATH +'/img/example/sp_pins_spot_v3.png',
+                size: new naver.maps.Size(24, 37),
+                anchor: new naver.maps.Point(12, 37),
+                origin: new naver.maps.Point(0, 0)
+            },
+            zIndex: 100
+        });
+    
+    var infoWindow = new naver.maps.InfoWindow({
+        content: '<div style="width:150px;text-align:center;padding:5px;">"' + foodTruckInfo[i].foodtruckName + '"</div>'
+    });    
+
+    markers.push(marker);
+    infoWindows.push(infoWindow);
+}
+
+function updateMarkers(map, markers) {
+
+    var mapBounds = map.getBounds();
+    var marker, position;
+
+    for (var i = 0; i < markers.length; i++) {
+
+        marker = markers[i]
+        position = marker.getPosition();
+
+        if (mapBounds.hasLatLng(position)) {
+            showMarker(map, marker);
+        } else {
+            hideMarker(map, marker);
+        }
+    }
+}
+
+function showMarker(map, marker) {
+
+    if (marker.setMap()) return;
+    marker.setMap(map);
+}
+
+function hideMarker(map, marker) {
+
+    if (!marker.setMap()) return;
+    marker.setMap(null);
+}
+
+function getClickHandler(seq) {
+    return function(e) {
+        var marker = markers[seq],
+            infoWindow = infoWindows[seq];
+
+        if (infoWindow.getMap()) {
+            infoWindow.close();
+        } else {
+            infoWindow.open(map, marker);
+        }
+    }
+}
+for (var i=0, ii=markers.length; i<ii; i++) {
+    naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+}
+</script>
 

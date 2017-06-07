@@ -153,6 +153,18 @@ public class BoardServiceImpl implements BoardService {
 	// 창업게시판 게시물 수정
 	
 	
+	//강정호작성. 댓글 수정시 1개의 댓글 가져오는 메서드
+	@Override
+	public CommentVO getFreeboardComment(CommentVO cvo) {
+		return boardDAO.getFreeboardComment(cvo);
+	}
+	
+	//강정호 작성. 댓글 업데이트 메서드
+	@Override
+	public void updateFreeboardComment(CommentVO cvo) {
+		boardDAO.updateFreeboardComment(cvo);
+	}
+	
 	
 	
 	
@@ -271,6 +283,34 @@ public class BoardServiceImpl implements BoardService {
 	public List<FileVO> getBusinessFilePath(String no) {
 		return boardDAO.getBusinessFilePath(no);
 	}
+	
+	@Override
+	public List<CommentVO> getbusinessCommentList(String no) {
+		return boardDAO.getbusinessCommentList(no);
+	}
+	
+	@Override
+	public void writebusinessComment(CommentVO cvo) {
+		boardDAO.writebusinessComment(cvo);
+		
+	}
+	
+	@Override
+	public void deletebusinessComment(CommentVO cvo) {
+		boardDAO.deletebusinessComment(cvo);
+		
+	}
+	
+	@Override
+	public CommentVO getbusinessComment(CommentVO cvo) {
+		return boardDAO.getbusinessComment(cvo);
+	}
+	
+	@Override
+	public void updatebusinessComment(CommentVO cvo) {
+		boardDAO.updatebusinessComment(cvo);
+	}
+
 
 
 //////////강정호. Q&A게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -395,21 +435,30 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.updateHitsqna(hits);
 		
 	}
+	public List<CommentVO> getqnaCommentList(String no) {
+		return boardDAO.getqnaCommentList(no);
+	}
 
+	@Override
+	public void writeqnaComment(CommentVO cvo) {
+		 boardDAO.writeqnaComment(cvo);
+	}
 
-	
+	@Override
+	public void deleteqnaComment(CommentVO cvo) {
+		boardDAO.deleteqnaComment(cvo);
+	}
 
+	@Override
+	public CommentVO getqnaComment(CommentVO cvo) {
+		return boardDAO.getqnaComment(cvo);
+	}
 
-
-	
-
-
-
-
-	
-
-
-
+	@Override
+	public void updateqnaComment(CommentVO cvo) {
+		boardDAO.updateqnaComment(cvo);
+		
+	}
 }
 
 

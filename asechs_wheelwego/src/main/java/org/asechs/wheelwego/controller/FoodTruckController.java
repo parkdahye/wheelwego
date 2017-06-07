@@ -1,5 +1,7 @@
 package org.asechs.wheelwego.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.FoodTruckService;
@@ -22,6 +24,13 @@ public class FoodTruckController {
 	@Resource
 	private MypageService mypageService; 
 
+	/* 현지 검색결과 테스트 */
+	@RequestMapping("searchFoodTruckList.do")
+	public ModelAndView searchFoodTruckList(String searchFoodtruckName){
+		List<TruckVO> searchList = foodTruckService.searchFoodTruckList(searchFoodtruckName);
+		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "pagingList", searchList);
+	}
+	
 	/* 검색 결과 푸드트럭 리스트 */
 	@RequestMapping("searchFoodTruckByName.do")
 	public ModelAndView searchFoodTruckByName(String name, String pageNo, String latitude, String longitude) {
@@ -41,7 +50,14 @@ public class FoodTruckController {
 		TruckVO gpsInfo = new TruckVO();
 		gpsInfo.setLatitude(Double.parseDouble(latitude));
 		gpsInfo.setLongitude(Double.parseDouble(longitude));
-		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "truckList", null);
+		
+		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");
+		ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
+		
+		modelAndView.addObject("pagingList", listVO);
+		modelAndView.addObject("gpsInfo", gpsInfo);
+		
+		return modelAndView;
 	}
 	/**
 	 * 정현지 푸드트럭 상세보기

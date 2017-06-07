@@ -107,13 +107,6 @@ public class BoardController {
 			return "redirect:board/freeboard_detail_content.do?no="+cvo.getContentNo();
 		}
 		
-		//강정호 작성. 자유게시판 댓글 수정.
-		@RequestMapping("updateFreeboardComment.do")
-		public String updateFreeboardComment(HttpServletRequest request){
-			System.out.println(request.getParameter("commentNo"));
-			System.out.println(request.getParameter("contentNo"));
-			return null;
-		}
 		
 		//강정호 작성. 자유게시판 댓글 삭제
 		@RequestMapping(value="deleteFreeboardComment.do", method=RequestMethod.POST)
@@ -125,6 +118,26 @@ public class BoardController {
 			
 		}
 		
+		//강정호 작성. 자유게시판 댓글 수정폼으로 이동
+		@RequestMapping("freeboard_update_comment.do")
+		public String updateFreeboardCommentForm(HttpServletRequest request, Model model){
+			String commentNo=request.getParameter("commentNo");
+			String contentNo=request.getParameter("contentNo");
+			CommentVO cvo=new CommentVO();
+			cvo.setCommentNo(Integer.parseInt(commentNo));
+			cvo.setContentNo(Integer.parseInt(contentNo));
+			model.addAttribute("freeboardComment", boardService.getFreeboardComment(cvo));
+			return "board/freeboard_update_comment.tiles";
+		}
+		
+		//강정호 작성. 자유게시판 댓글 수정
+		@RequestMapping(value="updateFreeboardComment.do",method=RequestMethod.POST)
+		@ResponseBody
+		public String updateFreeboardComment(CommentVO cvo){
+			boardService.updateFreeboardComment(cvo);
+			//ajax를 통해 가는 이 정보를 어떤 것으로 넣어줄까?
+			return "redirect:board/freeboard_detail_content.do?no="+cvo.getContentNo();
+		}
 ////////////강정호. 창업게시판 business/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 강정호 작성. 창업정보 게시판 리스트 보여주는 메서드
@@ -146,9 +159,12 @@ public class BoardController {
 			boardService.updateHitsBusiness(hits);
 			BoardVO bvo = boardService.getBusinessBoardDetail(no);
 			List<FileVO> fileNameList=boardService.getBusinessFilePath(no);
+			// 댓글 불러오는 메서
+			List<CommentVO> businessCommentList=boardService.getbusinessCommentList(no);
 			MemberVO name = boardService.business_getNameById(bvo);
 			model.addAttribute("detail_business", bvo);
 			model.addAttribute("fileNameList",fileNameList);
+			model.addAttribute("businessCommentList",businessCommentList);
 			model.addAttribute("name", name);
 			return "board/business_detail_content.tiles";
 		}
@@ -185,9 +201,43 @@ public class BoardController {
 			System.out.println(vo.getNo());
 			return "redirect:board/business_detail_content.do?no="+vo.getNo();
 		}
+		
+		@RequestMapping(value="writebusinessComment.do",method=RequestMethod.POST)
+		public String writebusinessComment(CommentVO cvo){
+			boardService.writebusinessComment(cvo);
+			return "redirect:board/business_detail_content.do?no="+cvo.getContentNo();
+		}
+		
+		@RequestMapping("deletebusinessComment.do")
+		@ResponseBody
+		public String deletebusinessComment(CommentVO cvo){
+			System.out.println(cvo);
+			boardService.deletebusinessComment(cvo);
+			return null;
+		}
+		
+		@RequestMapping("business_update_comment.do")
+		public String updatebusinessCommentForm(HttpServletRequest request, Model model){
+			String commentNo=request.getParameter("commentNo");
+			String contentNo=request.getParameter("contentNo");
+			CommentVO cvo=new CommentVO();
+			cvo.setCommentNo(Integer.parseInt(commentNo));
+			cvo.setContentNo(Integer.parseInt(contentNo));
+			model.addAttribute("businessComment", boardService.getbusinessComment(cvo));
+			System.out.println(boardService.getbusinessComment(cvo));
+			return "board/business_update_comment.tiles";
+		}
 
+		
+		@RequestMapping("updatebusinessComment.do")
+		@ResponseBody
+		public String updatebusinessComment(CommentVO cvo){
+			boardService.updatebusinessComment(cvo);
+			return "";
+		}
+		
 
-
+		
 ////////////강정호. Q&A게시판 business/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
@@ -205,12 +255,12 @@ public class BoardController {
 		BoardVO bvo = boardService.getqnaBoardDetail(no);
 		//System.out.println(bvo);
 		List<FileVO> fileNameList=boardService.getqnaFilePath(no);
-		//System.out.println("큐엔에이"+fileNameList);
+		List<CommentVO> qnaCommentList=boardService.getqnaCommentList(no);
 		MemberVO name = boardService.qna_getNameById(bvo);
-		//System.out.println("큐엔에이"+name);
 		model.addAttribute("detail_qna", bvo);
 		model.addAttribute("fileNameList",fileNameList);
 		model.addAttribute("name", name);
+		model.addAttribute("qnaCommentList", qnaCommentList);
 		return "board/qna_detail_content.tiles";
 	}
 
@@ -243,5 +293,40 @@ public class BoardController {
 			public String qnaupdateBoard(BoardVO vo) {
 				boardService.qnaupdateBoard(vo);
 				return "redirect:board/qna_detail_content.do?no="+vo.getNo();
-			}
-}
+			
+	}
+	
+	//강정호 Q&A 게시판 댓글 등록메서드
+	@RequestMapping("writeqnaComment.do")
+	public String writeqnaComment(CommentVO cvo){
+		boardService.writeqnaComment(cvo);
+		return "redirect:board/qna_detail_content.do?no="+cvo.getContentNo();
+	}
+	
+	//강정호. Q&A 댓글 삭제
+	@RequestMapping("deleteqnaComment.do")
+	@ResponseBody
+	public String deleteqnaComment(CommentVO cvo){
+		boardService.deleteqnaComment(cvo);
+		return null;
+	}
+	
+	@RequestMapping("qna_update_comment.do")
+	public String updateqnaCommentForm(HttpServletRequest request, Model model){
+		String commentNo=request.getParameter("commentNo");
+		String contentNo=request.getParameter("contentNo");
+		CommentVO cvo=new CommentVO();
+		cvo.setCommentNo(Integer.parseInt(commentNo));
+		cvo.setContentNo(Integer.parseInt(contentNo));
+		model.addAttribute("qnaComment", boardService.getqnaComment(cvo));
+		return "board/qna_update_comment.tiles";
+	}
+	
+	@RequestMapping(value="updateqnaComment.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateqnaComment(CommentVO cvo){
+		boardService.updateqnaComment(cvo);
+		return "";
+		}
+	}
+

@@ -87,6 +87,30 @@ public interface BoardDAO {
 
 	void updateHitsqna(int hits);
 
+	CommentVO getFreeboardComment(CommentVO cvo);
+
+	void updateFreeboardComment(CommentVO cvo);
+
+	List<CommentVO> getbusinessCommentList(String no);
+
+	void deletebusinessComment(CommentVO cvo);
+
+	void writebusinessComment(CommentVO cvo);
+
+	CommentVO getbusinessComment(CommentVO cvo);
+
+	void updatebusinessComment(CommentVO cvo);
+
+	List<CommentVO> getqnaCommentList(String no);
+
+	void writeqnaComment(CommentVO cvo);
+
+	void deleteqnaComment(CommentVO cvo);
+
+	CommentVO getqnaComment(CommentVO cvo);
+
+	void updateqnaComment(CommentVO cvo);
+
 
 
 }

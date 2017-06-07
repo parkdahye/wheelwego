@@ -48,4 +48,10 @@ public interface MypageDAO {
 	void deleteMyReview(String reviewNo); //리뷰 삭제하기
 
 	public ReviewVO findReviewInfoByReviewNo(String reviewNo);
+
+	public TruckVO getGPSInfo(String sellerId);
+
+	public void stayFoodtruck(TruckVO gpsInfo);
+
+	public void leaveFoodtruck(TruckVO gpsInfo);
 }
