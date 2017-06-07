@@ -152,4 +152,30 @@ public class MypageController {
 		mypageService.updateMyReview(reviewVO);
 		return"redirect:/afterLogin_mypage/showMyReviewList.do?customerId="+reviewVO.getCustomerId();
 	}
+	@RequestMapping("afterLogin_mypage/checkTruckGPS.do")
+	public ModelAndView checkTruckGPS(String sellerId){
+		TruckVO gpsInfo = mypageService.getGPSInfo(sellerId);
+		return new ModelAndView("mypage/checkTruckGPS.tiles","gpsInfo",gpsInfo);
+	}
+	@RequestMapping("afterLogin_mypage/setTruckGPS.do")
+	public String setTruckGPS(String sellerId, String latitude, String longitude){
+		System.out.println("실행됨");
+		
+		TruckVO gpsInfo = new TruckVO();
+		
+		gpsInfo.setSellerId(sellerId);
+		
+		if (latitude != null)
+		{
+			gpsInfo.setLatitude(Double.parseDouble(latitude));
+			gpsInfo.setLongitude(Double.parseDouble(longitude));
+		} 
+		mypageService.setGPSInfo(gpsInfo);
+		
+		return "redirect:" + "/home.do";
+	}	
+	@RequestMapping("afterLogin_mypage/test.do")
+	public String test(){
+		return "mypage/test";
+	}
 }

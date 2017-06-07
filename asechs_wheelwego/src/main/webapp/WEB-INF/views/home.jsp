@@ -51,12 +51,9 @@ function geoFindMe() {
 	  function success(position) {
 	    var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
-	    //location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
-	    
-	   //if (searchFoodtruckName != "")
-	    	location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
-	   //else
-	    	//location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
+
+	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
+	   
 	  };
 	  function error() {
 		  alert("사용자의 위치를 찾을 수 없습니다!");
@@ -75,12 +72,8 @@ function geoFindMe2() {
 	  function success(position) {
 	    var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
-	    //location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
 	    
-	    //if (searchFoodtruckName != "")
-	    	//location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
-	    //else
-	    	location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
+	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
 	  };
 	  function error() {
 		  alert("사용자의 위치를 찾을 수 없습니다!");
@@ -143,7 +136,20 @@ function geoFindMe2() {
     }
     // 현지 : hover + click text
     function hoverClick(val){
-        location.href ="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+val;
+    	if (!navigator.geolocation){
+    		alert("지오로케이션을 지원하지 않습니다!");
+    		return;
+    	}
+    	  function success(position) {
+    	    var latitude  = position.coords.latitude;
+    	    var longitude = position.coords.longitude;
+    	    
+    	    location.href = "${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+val+"&latitude="+latitude+"&longitude="+longitude;
+    	  };
+    	  function error() {
+    		  alert("사용자의 위치를 찾을 수 없습니다!");
+    	  };
+    	  navigator.geolocation.getCurrentPosition(success, error);
 	}
 </script>
 

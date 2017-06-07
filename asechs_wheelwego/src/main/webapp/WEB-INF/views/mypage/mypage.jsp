@@ -32,7 +32,8 @@ function checkDelete(){
 			<c:otherwise>
 				<a href="${pageContext.request.contextPath}/afterLogin_mypage/myfoodtruck_page.do" class="btn btn-warning" role="button">MYTRUCK 설정</a><br>
 				<a href="${pageContext.request.contextPath}/afterLogin_mypage/myfoodtruck_menuList.do" class="btn btn-warning" role="button">메뉴 관리</a><br>
-				<a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyfoodtruck.do" class="btn btn-warning" role="button">MYTRUCK 보기</a><br>	
+				<a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyfoodtruck.do" class="btn btn-warning" role="button">MYTRUCK 보기</a><br>
+				<a href="${pageContext.request.contextPath}/afterLogin_mypage/checkTruckGPS.do?sellerId=${sessionScope.memberVO.id}" class="btn btn-warning" role="button">TRUCK 위치 설정</a><br>	
 				<a href="">예약관리</a>
 			</c:otherwise>
 		</c:choose>

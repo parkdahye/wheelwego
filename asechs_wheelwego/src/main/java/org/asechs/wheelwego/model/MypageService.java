@@ -37,4 +37,8 @@ public interface MypageService {
 	void deleteMyReview(String reviewNo); //리뷰 삭제하기
 
 	public  ReviewVO findReviewInfoByReviewNo(String reviewNo);
+
+	public TruckVO getGPSInfo(String sellerId);
+
+	public void setGPSInfo(TruckVO gpsInfo);
 }
