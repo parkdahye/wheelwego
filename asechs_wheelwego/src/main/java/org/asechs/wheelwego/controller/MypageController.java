@@ -157,8 +157,8 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/afterLogin_mypage/showMyReviewList.do")
-	public ModelAndView showMyReiviewList(String customerId, HttpServletRequest request){
-		List<ReviewVO> reviewList=mypageService.showMyReviewList(customerId);
+	public ModelAndView showMyReiviewList(String customerId, String reviewPageNo, HttpServletRequest request){
+		ListVO reviewList=mypageService.showMyReviewList(customerId,reviewPageNo);
 		return new ModelAndView("mypage/mypage_review.tiles","reviewList",reviewList);
 	}
 	@RequestMapping("afterLogin_mypage/mypage_review_update.do")

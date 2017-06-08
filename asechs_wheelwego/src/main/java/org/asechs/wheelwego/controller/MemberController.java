@@ -40,7 +40,7 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			session.invalidate();
-		return "main_home.tiles";
+		return "redirect:home.do";
 	}
 
 

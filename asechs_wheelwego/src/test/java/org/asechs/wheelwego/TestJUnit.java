@@ -8,6 +8,7 @@ import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
 import org.asechs.wheelwego.model.MypageService;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -54,7 +55,7 @@ public class TestJUnit {
 	
 	@Test
 	public void test(){
-		System.out.println(foodtruckService.foodtruckList());
+		System.out.println(service.forgetMemberId(new MemberVO(null, null, "정현지", null, null, null, "01022552716", null)));
 	}
 }
 

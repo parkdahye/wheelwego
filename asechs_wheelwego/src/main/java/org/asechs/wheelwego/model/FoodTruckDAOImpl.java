@@ -109,7 +109,7 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 	}
 
 	@Override
-	public int findAvgGradeByTruckNumber(String truckNumber) {
+	public double findAvgGradeByTruckNumber(String truckNumber) {
 		return sqlSessionTemplate.selectOne("foodtruck.findAvgGradeByTruckNumber", truckNumber);
 	}
 
