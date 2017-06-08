@@ -183,9 +183,8 @@ public class MypageController {
 		return new ModelAndView("mypage/checkTruckGPS.tiles","gpsInfo",gpsInfo);
 	}
 	@RequestMapping("afterLogin_mypage/setTruckGPS.do")
+	@ResponseBody
 	public String setTruckGPS(String sellerId, String latitude, String longitude){
-		System.out.println("실행됨");
-		
 		TruckVO gpsInfo = new TruckVO();
 		
 		gpsInfo.setSellerId(sellerId);
@@ -197,7 +196,7 @@ public class MypageController {
 		} 
 		mypageService.setGPSInfo(gpsInfo);
 		
-		return "redirect:" + "/home.do";
+		return "설정 완료";
 	}	
 	@RequestMapping("afterLogin_mypage/test.do")
 	public String test(){
@@ -211,9 +210,7 @@ public class MypageController {
 	@RequestMapping("afterLogin_mypage/checkFoodtruckNumber.do")
 	@ResponseBody
 	public boolean checkFoodtruckNumber(String foodtruckNumber){
-		System.out.println(foodtruckNumber);
 		TruckVO truckVO=mypageService.findtruckInfoByTruckNumber(foodtruckNumber);
-		System.out.println(truckVO);
 		if(truckVO==null)
 			return false;
 		else
