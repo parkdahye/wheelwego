@@ -18,7 +18,7 @@
 	})//ready
 </script>
 <body>
-	<table class="table table-hover">
+	<table class="table table-hover" >
 		<caption>목록</caption>
 		<thead>
 			<tr>

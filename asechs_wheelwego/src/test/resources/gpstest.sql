@@ -173,5 +173,5 @@ from foodtruck fo where fo.foodtruck_number in (select foodtruck_number from wis
 where t.foodtruck_number=f.foodtruck_number and rnum between 1 and 9
 order by t.foodtruck_number desc
 
-
-
+update member set member_type='seller';
+select * from member where member_type = 'customer';
