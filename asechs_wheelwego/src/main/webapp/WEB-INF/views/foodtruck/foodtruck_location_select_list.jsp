@@ -90,10 +90,10 @@ $(document).ready(function(){
              style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" > --%>
     <div class="col-sm-6">
       <div class="thumbnail">
-      <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
+      <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
         </a>
-        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" >
+        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/heartoff.png" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
         <p id = "${truckInfo.foodtruckName}"></p>
         <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
@@ -105,6 +105,8 @@ $(document).ready(function(){
 
 <p class="paging text-center">
    <c:set var="pb" value="${requestScope.pagingList.pagingBean}"></c:set>
+   	sdfadsfadsfds${pb.startPageOfPageGroup}<br>
+   	sdfadsfadsfds${pb.startPageOfPageGroup}<br>
    <!-- 
          step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
                      페이징빈의 previousPageGroup 이용 
@@ -148,7 +150,6 @@ $(document).ready(function(){
    </c:forEach>
 
    <c:if test="${pb.nextPageGroup}">
-<<<<<<< HEAD
    		<c:choose>
 	   		<c:when test="${!empty param.name}">
 	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByName.do?pageNo=${pb.startPageOfPageGroup+1}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}">▶</a>
@@ -159,10 +160,3 @@ $(document).ready(function(){
    		</c:choose>   
    </c:if>   
 </p>
-=======
-   <a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.endPageOfPageGroup+1}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}">
-   ▶<!-- <img src="img/right_arrow_btn.gif"> --></a>
-   </c:if>
-   </p>
-   <br><br><Br>
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git

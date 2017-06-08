@@ -28,16 +28,17 @@ public class MypageController {
 	// 세션이 없으면 홈으로 보냄
 	public ModelAndView myWishList(HttpServletRequest request, String id, String pageNo) {
 		HttpSession session = request.getSession(false);
-		if (session == null) {
+		if (session == null) 
+		{
 			return new ModelAndView("main_home.tiles");
-		} else {			
+		} 
+		else 
+		{			
 			ModelAndView modelAndView = new ModelAndView("mypage/mypage_wishlist.tiles");
 			ListVO listVO = mypageService.getWishList(pageNo, id);
 			modelAndView.addObject("wishlist", listVO);
-			
-			System.out.println(listVO.getTruckList().size());
-			
-			modelAndView.addObject("id", id);	
+			MemberVO memberVO = (MemberVO)session.getAttribute("memberVO"); 
+			modelAndView.addObject("id", memberVO.getId());	
 			return modelAndView;
 		}
 	}
