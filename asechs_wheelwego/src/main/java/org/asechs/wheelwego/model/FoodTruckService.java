@@ -19,5 +19,7 @@ public interface FoodTruckService {
 	public ListVO getFoodTruckListByName(String pageNo, String name);
 	//int getAvgGradeByTruckNumber(String foodtruckNumber);
 	ListVO getFoodTruckListByGPS(String pageNo, TruckVO gpsInfo);
+	ListVO filtering(String option, String searchWord, String nowPage);
+
 /*	ListVO filtering(String option, String searchWord, String nowPage);*/
 }

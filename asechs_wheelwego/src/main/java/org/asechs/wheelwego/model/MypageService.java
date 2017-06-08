@@ -3,6 +3,7 @@ package org.asechs.wheelwego.model;
 import java.util.List;
 
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
@@ -41,4 +42,6 @@ public interface MypageService {
 	public TruckVO getGPSInfo(String sellerId);
 
 	public void setGPSInfo(TruckVO gpsInfo);
+
+	public ListVO getWishList(String pageNo, String id);
 }
