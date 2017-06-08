@@ -67,7 +67,7 @@ public class FoodTruckController {
 	 * @param foodtruck_number
 	 * @return TruckVO
 	 */
-	@RequestMapping("foodTruckAndMenuDetail.do")
+	@RequestMapping("foodtruck/foodTruckAndMenuDetail.do")
 	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo,String reviewPageNo){
 		TruckVO truckDetail = foodTruckService.foodTruckAndMenuDetail(foodtruckNo);
 		ModelAndView mv= new ModelAndView();
