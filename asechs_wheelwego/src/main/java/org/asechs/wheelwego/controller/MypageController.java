@@ -28,36 +28,18 @@ public class MypageController {
 	// 세션이 없으면 홈으로 보냄
 	public ModelAndView myWishList(HttpServletRequest request, String id, String pageNo) {
 		HttpSession session = request.getSession(false);
-		if (session == null) {
+		if (session == null) 
+		{
 			return new ModelAndView("main_home.tiles");
-		} else {
-			// 세션에 해당하는 아이디의 wishlist정보를 가져옴.
-			/*MemberVO sessionMemberVO = (MemberVO) session.getAttribute("memberVO");
-			
-			
-			List<TruckVO> wishlist = mypageService.myWishList(sessionMemberVO.getId());
-			for (int i = 0; i < wishlist.size(); i++)
-				System.out.println(wishlist.get(i));
-			return new ModelAndView("mypage/mypage_wishlist.tiles", "wishlist", wishlist);*/
-			
+		} 
+		else 
+		{		
 			ModelAndView modelAndView = new ModelAndView("mypage/mypage_wishlist.tiles");
 			ListVO listVO = mypageService.getWishList(pageNo, id);
 			modelAndView.addObject("wishlist", listVO);
-			
-			System.out.println(listVO.getTruckList().size());
-			
-			modelAndView.addObject("id", id);	
+			System.out.println(listVO.getTruckList());
 			return modelAndView;
 		}
-		
-/*		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");		
-		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
-		modelAndView.addObject("pagingList", listVO);
-		modelAndView.addObject("name", name);		
-		
-		System.out.println(name);
-		System.out.println(listVO);
-		return modelAndView;*/
 	}
 	
 	@RequestMapping(value = "afterLogin_mypage/deleteWishList.do", method = RequestMethod.POST)
@@ -157,8 +139,8 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/afterLogin_mypage/showMyReviewList.do")
-	public ModelAndView showMyReiviewList(String customerId, HttpServletRequest request){
-		List<ReviewVO> reviewList=mypageService.showMyReviewList(customerId);
+	public ModelAndView showMyReiviewList(String customerId, String reviewPageNo, HttpServletRequest request){
+		ListVO reviewList=mypageService.showMyReviewList(customerId,reviewPageNo);
 		return new ModelAndView("mypage/mypage_review.tiles","reviewList",reviewList);
 	}
 	@RequestMapping("afterLogin_mypage/mypage_review_update.do")
@@ -183,9 +165,8 @@ public class MypageController {
 		return new ModelAndView("mypage/checkTruckGPS.tiles","gpsInfo",gpsInfo);
 	}
 	@RequestMapping("afterLogin_mypage/setTruckGPS.do")
+	@ResponseBody
 	public String setTruckGPS(String sellerId, String latitude, String longitude){
-		System.out.println("실행됨");
-		
 		TruckVO gpsInfo = new TruckVO();
 		
 		gpsInfo.setSellerId(sellerId);
@@ -197,15 +178,24 @@ public class MypageController {
 		} 
 		mypageService.setGPSInfo(gpsInfo);
 		
-		return "redirect:" + "/home.do";
+		return "설정 완료";
 	}	
 	@RequestMapping("afterLogin_mypage/test.do")
 	public String test(){
 		return "mypage/test";
 	}
-	@RequestMapping("afterLogin_mypage/showMyFoodtruck.do")
-	public String showMyFoodtruck(String id){
-		String foodtruckNo=mypageService.findtruckNumberBySellerId(id);
-		return "redirect:../foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo;
+	 @RequestMapping("afterLogin_mypage/showMyFoodtruck.do")
+	   public ModelAndView showMyFoodtruck(String id){
+	      String foodtruckNo=mypageService.findtruckNumberBySellerId(id);
+	      return new ModelAndView("redirect:../foodtruck/foodTruckAndMenuDetail.do","foodtruckNo",foodtruckNo);
+	   }
+	@RequestMapping("afterLogin_mypage/checkFoodtruckNumber.do")
+	@ResponseBody
+	public boolean checkFoodtruckNumber(String foodtruckNumber){
+		TruckVO truckVO=mypageService.findtruckInfoByTruckNumber(foodtruckNumber);
+		if(truckVO==null)
+			return false;
+		else
+			return true;
 	}
 }

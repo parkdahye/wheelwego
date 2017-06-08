@@ -4,6 +4,7 @@
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <style>
 .w3-button {width:150px;}
 </style>
@@ -16,7 +17,19 @@ function geoFindMe() {
 	  function success(position) {
 	    var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
-	    location.href = "${pageContext.request.contextPath}/afterLogin_mypage/setTruckGPS.do?sellerId=${sessionScope.memberVO.id}&latitude="+latitude+"&longitude="+longitude;  
+
+	    $.ajax({
+	    	url:"${pageContext.request.contextPath}/afterLogin_mypage/setTruckGPS.do",
+	    	data:"sellerId=${sessionScope.memberVO.id}&latitude="+latitude+"&longitude="+longitude,
+	    	type:"post",
+	    	success:function(result){
+	    		alert(result);
+	    	}
+	    })
+	    //location.href = "${pageContext.request.contextPath}/afterLogin_mypage/setTruckGPS.do?sellerId=${sessionScope.memberVO.id}&latitude="+latitude+"&longitude="+longitude; 
+	    opener.location.href="${pageContext.request.contextPath}/home.do";
+	    self.close();
+
 	  };
 
 	  function error() {

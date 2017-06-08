@@ -178,7 +178,16 @@ from foodtruck fo where fo.foodtruck_number in (select foodtruck_number from wis
 where t.foodtruck_number=f.foodtruck_number and rnum between 1 and 9
 order by t.foodtruck_number desc
 
+<<<<<<< HEAD
 
 select count(*) from wishlist where foodtruck_number = '80나0099' and customer_id = 'customer01';
 
 select * from foodtruck;
+=======
+update member set member_type='seller';
+select * from member where member_type = 'customer';
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
+select * from member;
+delete from member;
+delete from foodtruck;

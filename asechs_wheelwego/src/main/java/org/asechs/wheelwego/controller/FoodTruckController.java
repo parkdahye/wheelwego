@@ -70,8 +70,9 @@ public class FoodTruckController {
 	 * @param foodtruck_number
 	 * @return TruckVO
 	 */
-	@RequestMapping("foodTruckAndMenuDetail.do")
+	@RequestMapping("foodtruck/foodTruckAndMenuDetail.do")
 	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo,String reviewPageNo){
+		System.out.println(foodtruckNo);
 		TruckVO truckDetail = foodTruckService.foodTruckAndMenuDetail(foodtruckNo);
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("foodtruck/foodtruck_detail.tiles");
@@ -88,18 +89,7 @@ public class FoodTruckController {
 		foodTruckService.registerReview(reviewVO); // 푸드 트럭 등록
 		return "foodtruck/foodtruck_detail.tiles";
 	}
-	/**
-	 * 리뷰 list 가져오기
-	 * @param reviewPageNo
-	 * @param foodtruckNumber
-	 * @return reviewVO
-	 */
-	@RequestMapping("getReviewListByTruckNumber.do")
-	public ModelAndView getReviewListByTruckNumber(String reviewPageNo, String foodtruckNumber){
-		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodtruckNumber);
-		System.out.println(reviewList);
-		return new ModelAndView("foodtruck/foodtruck_detail.tiles","reviewlist",reviewList);
-	}
+
 	@RequestMapping(value = "afterLogin_foodtruck/registerBookMark.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String registerBookMark(String id, String foodtruckNumber){

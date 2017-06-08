@@ -29,19 +29,17 @@
 		$("#cancelBtn").click(function(){
 			location.href="${pageContext.request.contextPath}/qna_list.do"
 		});//취소버튼 작동
-		
-		
 	});//ready
 </script>
 
 <div class="panel panel-default"> 
 <!-- Default panel contents --> 
-<div class="panel-heading"><h2>Q&A게시판 글쓰기</h2></div> 
+<div class="panel-heading"><h3>Q&A게시판 글쓰기</h3></div> 
 
 <div class="panel-body">
 
 <div class="container"> 
-<form enctype="multipart/form-data" action="${pageContext.request.contextPath }/qna_write.do" method="post">  
+<form enctype="multipart/form-data" action="${pageContext.request.contextPath }/afterLogin_/qna_write.do" method="post">  
 		<div class="row"> 
 			
 			<div class="col-md-6"> 
@@ -53,12 +51,12 @@
 			<input type="hidden" id="id" name="id" value="${sessionScope.memberVO.id }">
 		</div> 
 
-		<div class="form-group"> 
+		<div class="form-group" style="margin-right: 70px;"> 
 		<label for="title">글제목</label> 
 		<input type="text" class="form-control" name ="title" id="title" value="" required="required"> 
 		</div>  
 		
-		<div class="form-group"> 
+		<div class="form-group" style="margin-right: 70px;"> 
 		<label for="content">글내용</label> 
 		<textarea class="form-control" rows="10" name="content" id="content" required="required"></textarea> 
 		</div> 
@@ -76,10 +74,10 @@
 		<input type="file" name="file[2]"> 
 		</div> 
 		
-		<div class="center-block" style='width:200px'> 
-		<input type="submit" value="등록하기">
-		<input type="reset" value="다시쓰기">
-		<input type="button" value="취소" id="cancelBtn"></div> 
+		<div class="center-block" style='width:400px' align="center"> 
+		<input type="submit" value="등록하기" class="btn btn-info">&nbsp;&nbsp;
+		<input type="reset" value="다시쓰기" class="btn btn-info">&nbsp;&nbsp;
+		<input type="button" value="취소" id="cancelBtn" class="btn btn-info"></div> 
 </form> 
 
 

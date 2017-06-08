@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+.form-control-static{
+font-size: 15px;
+}
+</style>
+<div class="page-header text-center">
+	<h1><small>아이디 찾기</small></h1>
+	</div>
 
 <form id="find_id_form">
   <div class="form-group col-xs-3">
@@ -17,11 +25,12 @@
  <input type="button" class="btn btn-primary" id="findidBtn" value="Find ID"><br>
 <a href="${pageContext.request.contextPath}/member/find_password.do">forgot Password?</a>
 </form>
+
 <div class="form-group">
       <div class="col-sm-10">
         <p class="form-control-static" id="result_id"></p>
       </div>
-    </div>
+</div>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -33,7 +42,7 @@ $(document).ready(function(){
             url:"${pageContext.request.contextPath}/forgetMemberId.do",            
             data:"memberName="+name+"&phoneNumber="+tel, 
             success:function(result){    
-               if(result==""){
+                if(result==""){
                   alert("일치하는 정보가 없습니다. 다시 입력해주세요.");
                     $('form').each(function(){
                          this.reset();
@@ -41,9 +50,9 @@ $(document).ready(function(){
                     $(":input[name=memberName]").focus();
                }
                else
-                  $("#result_id").html("아이디는 "+ result + " 입니다.");   
+                  $("#result_id").html("아이디는 "+ result + " 입니다. 다시 로그인해주세요.");
                }
-            })//ajax                    
+            });//ajax                    
    }); // click
 }); // ready
 </script>

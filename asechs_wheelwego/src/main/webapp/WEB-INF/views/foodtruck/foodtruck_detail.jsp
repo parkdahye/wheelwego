@@ -20,6 +20,10 @@ body, html {
 .menu {
     display: none;
 }
+/* review button color */
+.btn-default{
+ background-color: #FDF5E6 !important;
+}
 /*별점*/
 input[name="grade"]{
   display:none;
@@ -38,6 +42,7 @@ input[name="grade"]{
 input[name="grade"]:checked + .star_point~label{
     color:lightgray;
 }
+
 </style>
 
 <!-- Header -->
@@ -91,13 +96,12 @@ input[name="grade"]:checked + .star_point~label{
 
     <div id="Eat" class="w3-container menu w3-padding-48 w3-card-2">
        <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
+       <br>
        <img src="${pageContext.request.contextPath}/resources/upload/${foodList.fileVO.filepath}" style="width:100%" ><br>
       <h5 class="w3-text-grey text-center">${foodList.menuName}</h5>
       <p class="w3-text-grey text-center">${foodList.menuPrice}</p><br><br>
       </c:forEach>
     </div>
-
-
   </div>
 </div>
 
@@ -146,14 +150,12 @@ input[name="grade"]:checked + .star_point~label{
                <input type="button" id="registerBtn" value="Register" class="btn btn-default" style="float: right;"/>                
             </tr>
          </table>
-         <hr>
       </td>
    </tr>
    </div>
 </table>
 </form>
 </c:if>
-    <form>
     <!-- review 결과 table -->
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">REVIEW LIST</span></h5>      
   <table class="table table-hover" id="table">
@@ -256,17 +258,64 @@ input[name="grade"]:checked + .star_point~label{
         <td>${reviewVO.reviewContent}</td>
         <td>${reviewVO.customerId}</td>
         <td>${reviewVO.reviewTimeposted}</td>
-        <c:if test="${sessionScope.memberVO.id!=null}">
-        <td><input type="hidden" value="${reviewVO.reviewNo}" name="reviewNo">
-        <input type="hidden" value="${truckDetailInfo.foodtruckNumber}" name="truckNo">
-        <span role="button" class="glyphicon glyphicon-remove" id="deleteBtn"></span></td>
+        <td>
+        <c:if test="${sessionScope.memberVO.id!=null && sessionScope.memberVO.id==reviewVO.customerId}">
+        <input type="hidden" value="${reviewVO.reviewNo}" name="reviewNo">
+          <input type="hidden" value="${truckDetailInfo.foodtruckNumber}" name="truckNo">
+          <button type="button" class="deleteBtn btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
         </c:if>
+        </td>
       </tr>
       </c:forEach>
     </tbody>
   </table>
 <!-- review 결과 테이블 -->
-</form>
+<p class="paging text-center">
+   <c:set var="pb" value="${reviewlist.pagingBean}"></c:set>
+   <!-- 
+         step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
+                     페이징빈의 previousPageGroup 이용 
+               2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+                      hint)   startPageOfPageGroup-1 하면 됨        
+    -->      
+   <c:if test="${pb.previousPageGroup}">
+   <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?reviewPageNo=${pb.startPageOfPageGroup-1}&foodtruckNo=${truckDetailInfo.foodtruckNumber}">
+   <!-- <img src="img/left_arrow_btn.gif"> -->
+   ◀&nbsp; </a>   
+   
+   </c:if>
+   <!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
+               2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
+                  현 페이지이면 링크를 처리하지 않는다.  
+                  PagingBean의 nowPage
+                  jstl choose 를 이용  
+                  예) <a href="list.do?pageNo=...">               
+    -->      
+   <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+   <c:choose>
+   <c:when test="${pb.nowPage!=i}">
+   <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?reviewPageNo=${i}&foodtruckNo=${truckDetailInfo.foodtruckNumber}">${i}</a> 
+   </c:when>
+   <c:otherwise>
+   ${i}
+   </c:otherwise>
+   </c:choose>
+   &nbsp;
+   </c:forEach>    
+   <!-- 
+         step3 1) 다음 페이지 그룹이 있으면 이미지(img/right_arrow_btn.gif) 보여준다. 
+                     페이징빈의 nextPageGroup 이용 
+               2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+                      hint)   endPageOfPageGroup+1 하면 됨        
+    -->   
+   <c:if test="${pb.nextPageGroup}">
+   <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?reviewPageNo=${pb.endPageOfPageGroup+1}&foodtruckNo=${truckDetailInfo.foodtruckNumber}">
+   ▶<!-- <img src="img/right_arrow_btn.gif"> --></a>
+   </c:if>
+   </p>
+
   </div>
 </div>
 
@@ -321,25 +370,29 @@ document.getElementById("myLink").click();
                 +"&reviewTimeposted="+d.toString(),
                 success:function(result){
                 	alert("등록되었습니다.");
-                	location.href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckDetailInfo.foodtruckNumber}";   	
+                	location.href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckDetailInfo.foodtruckNumber}";   	
                 }
             })
          }
       });  
-      $("#deleteBtn").click(function(){
-    	  var reviewNo=$(this).parent().parent().find(":input[name=reviewNo]").val();
-    	  var truckNo =$(this).parent().parent().find(":input[name=truckNo]").val();
-  		if(confirm("리뷰를 삭제하시겠습니까?")){
-  			$.ajax({
-  				url:"${pageContext.request.contextPath}/afterLogin_mypage/deleteMyReview.do",
-  				data:"reviewNo="+reviewNo,
-  				success:function(result){
-  					alert("삭제되었습니다.");
-  					location.href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+truckNo;   	
-  				}
-  			})
-  		}
-  	});
+
+		$(".deleteBtn").click(function(){
+			var reviewNo=$(this).parent().parent().find(":input[name=reviewNo]").val();
+	    	var truckNo =$(this).parent().parent().find(":input[name=truckNo]").val();
+ 			if(confirm("등록된 리뷰를 삭제하시겠습니까?")){
+ 				$.ajax({
+ 					url:"${pageContext.request.contextPath}/afterLogin_mypage/deleteMyReview.do",
+ 					type:"post",
+ 					data:"reviewNo="+reviewNo,
+ 					success:function(data){
+ 						if(data=="deleteOk"){
+ 							alert("삭제하였습니다.");
+ 							location.href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+truckNo;
+ 						}
+ 					} 					
+ 				});
+ 			}
+ 		});
    });
 </script>
 
