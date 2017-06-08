@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 import org.asechs.wheelwego.model.vo.FileManager;
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
@@ -174,5 +176,21 @@ public class MypageServiceImpl implements MypageService {
 			System.out.println("stay");
 			mypageDAO.stayFoodtruck(gpsInfo);
 		}
+	}
+	@Override
+	public ListVO getWishList(String pageNo, String id) {
+		int totalCount=mypageDAO.getWishListTotalContentCount(id);
+	
+		PagingBean pagingBean=null;
+		
+		if(pageNo==null)
+			pagingBean=new PagingBean(totalCount);
+		else
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
+		
+		pagingBean.setContentNumberPerPage(9);
+		pagingBean.setCustomerId(id);
+		
+		return new ListVO(pagingBean, mypageDAO.getWishList(pagingBean));
 	}
 }

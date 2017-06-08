@@ -61,7 +61,7 @@ $(document).ready(function(){
 			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyFoodtruck.do?id=${sessionScope.memberVO.id}";
 	});
 		$("#wishlistBtn").click(function(){
-			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do";
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
 	});
 		$("#reviewBtn").click(function(){
 			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";

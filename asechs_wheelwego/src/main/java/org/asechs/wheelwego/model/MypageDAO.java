@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
@@ -54,4 +55,8 @@ public interface MypageDAO {
 	public void stayFoodtruck(TruckVO gpsInfo);
 
 	public void leaveFoodtruck(TruckVO gpsInfo);
+
+	public int getWishListTotalContentCount(String id);
+
+	public List<TruckVO> getWishList(PagingBean pagingBean);
 }

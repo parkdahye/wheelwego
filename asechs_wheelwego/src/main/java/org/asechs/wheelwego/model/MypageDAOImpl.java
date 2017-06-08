@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.asechs.wheelwego.model.vo.FileVO;
 import org.asechs.wheelwego.model.vo.FoodVO;
+import org.asechs.wheelwego.model.vo.PagingBean;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
@@ -110,5 +111,13 @@ public class MypageDAOImpl implements MypageDAO {
 	public void leaveFoodtruck(TruckVO gpsInfo) {
 		System.out.println("leave 실행 " + gpsInfo);
 		sqlSessionTemplate.update("mypage.leaveFoodtruck", gpsInfo);
+	}
+	@Override
+	public int getWishListTotalContentCount(String id) {
+		return sqlSessionTemplate.selectOne("mypage.getWishListTotalContentCount", id);
+	}
+	@Override
+	public List<TruckVO> getWishList(PagingBean pagingBean) {
+		return sqlSessionTemplate.selectList("mypage.getWishList", pagingBean);
 	}
 }
