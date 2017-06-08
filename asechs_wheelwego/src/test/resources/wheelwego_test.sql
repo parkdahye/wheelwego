@@ -428,7 +428,7 @@ select * from menu;
 --해당 푸드트럭의 평점찾기
 select nvl(trunc(avg(r.grade),1),0) as grade
 from(select * from foodtruck)f, review r
-where f.foodtruck_number=r.foodtruck_number(+) and r.foodtruck_number='80나0001' group by f.foodtruck_number 
+where f.foodtruck_number=r.foodtruck_number(+) and f.foodtruck_number='80나0002' group by f.foodtruck_number 
 
 --해당 푸드트럭의 위시리스트수 찾기
 
@@ -468,6 +468,11 @@ select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboar
 		select * from foodtruckfile
 		delete foodtrucckfile 
 
+select review_no, foodtruck_number, customer_id, review_content, review_timeposted, grade from(
+select row_number() over(order by review_timeposted desc) as rnum,review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD HH24:MI:SS') as review_timeposted, grade
+	from review where customer_id='customer02' ) where rnum between 10 and 18
+
+	select count(*) from review where customer_id='customer02'
 -------------------------------------------------------------------------------
 
 update foodtruck set latitude=37.402403,longitude=127.106248 where foodtruck_number='80나0001';
