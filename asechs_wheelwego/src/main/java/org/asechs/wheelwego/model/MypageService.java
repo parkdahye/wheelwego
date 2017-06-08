@@ -31,7 +31,7 @@ public interface MypageService {
 
 	void deleteMyTruck(String foodtruckNumber);
 	
-	List<ReviewVO> showMyReviewList(String customerId); //리뷰 리스트보기
+	ListVO showMyReviewList(String customerId, String reviewPageNo); //리뷰 리스트보기
 	
 	void updateMyReview(ReviewVO reviewVO); //리뷰수정하기
 	

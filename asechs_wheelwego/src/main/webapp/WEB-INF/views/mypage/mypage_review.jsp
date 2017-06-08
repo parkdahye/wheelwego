@@ -8,6 +8,27 @@
   color:gold;
   cursor:pointer;
 }
+/* .paging {
+    display: inline-block;
+}
+
+.paging a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.paging a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.paging a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+} */
 </style>
 
 <jsp:include page="../mypage/mypage.jsp"/>
@@ -18,11 +39,11 @@
  <div class="col-sm-2"></div>
  <div class="container col-sm-8">
   <c:choose>
-		<c:when test="${reviewList!='[]'}">      
+		<c:when test="${reviewList.reviewList!='[]'}">      
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>No</th>
+      <th></th>
         <th>TruckNo</th>
         <th>Content</th>
         <th>Score</th>
@@ -31,9 +52,9 @@
       </tr>
     </thead>
     <tbody>
-    <c:forEach items="${reviewList}" var="reviewVO" varStatus="status">
+    <c:forEach items="${reviewList.reviewList}" var="reviewVO" varStatus="status">
       <tr>
-        <td>${status.index+1}<input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}"></td>
+        <td><input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}"></td>
         <td>${reviewVO.foodtruckNumber}</td>
         <td>${reviewVO.reviewContent}</td>
         <td>
@@ -131,6 +152,51 @@
 </div>
 <div class="col-sm-2"></div>
 </div>
+
+<p class="paging text-center">
+   <c:set var="pb" value="${requestScope.reviewList.pagingBean}"></c:set>
+   <!-- 
+         step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
+                     페이징빈의 previousPageGroup 이용 
+               2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+                      hint)   startPageOfPageGroup-1 하면 됨        
+    -->      
+   <c:if test="${pb.previousPageGroup}">
+   <a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?reviewPageNo=${pb.startPageOfPageGroup-1}&customerId=${sessionScope.memberVO.id}">
+   <!-- <img src="img/left_arrow_btn.gif"> -->
+   ◀&nbsp; </a>   
+   
+   </c:if>
+   <!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
+               2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
+                  현 페이지이면 링크를 처리하지 않는다.  
+                  PagingBean의 nowPage
+                  jstl choose 를 이용  
+                  예) <a href="list.do?pageNo=...">               
+    -->      
+   <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+   <c:choose>
+   <c:when test="${pb.nowPage!=i}">
+   <a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?reviewPageNo=${i}&customerId=${sessionScope.memberVO.id}"">${i}</a> 
+   </c:when>
+   <c:otherwise>
+   ${i}
+   </c:otherwise>
+   </c:choose>
+   &nbsp;
+   </c:forEach>    
+   <!-- 
+         step3 1) 다음 페이지 그룹이 있으면 이미지(img/right_arrow_btn.gif) 보여준다. 
+                     페이징빈의 nextPageGroup 이용 
+               2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+                      hint)   endPageOfPageGroup+1 하면 됨        
+    -->   
+   <c:if test="${pb.nextPageGroup}">
+   <a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?reviewPageNo=${pb.endPageOfPageGroup+1}&customerId=${sessionScope.memberVO.id}">
+   ▶<!-- <img src="img/right_arrow_btn.gif"> --></a>
+   </c:if>
+   </p>
+
 
  <Script type="text/javascript">
  	$(document).ready(function(){

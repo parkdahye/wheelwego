@@ -142,8 +142,15 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.deleteMyTruck(foodtruckNumber);
 	}
 	@Override
-	public List<ReviewVO> showMyReviewList(String customerId) {
-		return mypageDAO.showMyReviewList(customerId);
+	public ListVO showMyReviewList(String customerId, String reviewPageNo) {
+		if(reviewPageNo==null)
+			reviewPageNo="1";
+		PagingBean pagingBean = new PagingBean(Integer.parseInt(reviewPageNo), mypageDAO.getTotalReviewCount(customerId), customerId);
+		List<ReviewVO> reviewList=mypageDAO.showMyReviewList(pagingBean);
+		ListVO pagingReviewList = new ListVO();
+		pagingReviewList.setReviewList(reviewList);
+		pagingReviewList.setPagingBean(pagingBean);
+		return pagingReviewList;
 	}
 	@Override
 	public void updateMyReview(ReviewVO reviewVO) {
@@ -180,6 +187,7 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public ListVO getWishList(String pageNo, String id) {
 		int totalCount=mypageDAO.getWishListTotalContentCount(id);
+		System.out.println("토탈카운트"+totalCount);
 	
 		PagingBean pagingBean=null;
 		
@@ -188,8 +196,11 @@ public class MypageServiceImpl implements MypageService {
 		else
 			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
 		
-		pagingBean.setContentNumberPerPage(9);
+		pagingBean.setContentNumberPerPage(6);
 		pagingBean.setCustomerId(id);
+		
+		System.out.println("스타트"+pagingBean.getStartRowNumber());
+		System.out.println("엔드"+pagingBean.getEndRowNumber());
 		
 		return new ListVO(pagingBean, mypageDAO.getWishList(pagingBean));
 	}

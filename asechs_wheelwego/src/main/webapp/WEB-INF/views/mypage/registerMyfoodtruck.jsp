@@ -90,7 +90,6 @@
 			  url:"${pageContext.request.contextPath}/afterLogin_mypage/checkFoodtruckNumber.do",
 			  data:"foodtruckNumber="+foodtruckNumber,
 			  success:function(result){
-				  alert(result);
 				  if(result==true){
 					  alert("트럭번호가 이미 존재합니다!");
 					  return ;

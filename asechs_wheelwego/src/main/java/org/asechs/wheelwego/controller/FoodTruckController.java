@@ -67,8 +67,9 @@ public class FoodTruckController {
 	 * @param foodtruck_number
 	 * @return TruckVO
 	 */
-	@RequestMapping("foodTruckAndMenuDetail.do")
+	@RequestMapping("foodtruck/foodTruckAndMenuDetail.do")
 	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo,String reviewPageNo){
+		System.out.println(foodtruckNo);
 		TruckVO truckDetail = foodTruckService.foodTruckAndMenuDetail(foodtruckNo);
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("foodtruck/foodtruck_detail.tiles");

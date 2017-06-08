@@ -21,12 +21,12 @@
 			location.href="${pageContext.request.contextPath}/qna_list.do";
 		})//수정버튼
 		$("#modifyBtn").click(function()	{
-			location.href="${pageContext.request.contextPath}/qna_update_form.do?no="+${requestScope.detail_qna.no};
+			location.href="${pageContext.request.contextPath}/afterLogin_board/qna_update_form.do?no="+${requestScope.detail_qna.no};
 		})// 삭제버튼
 		$("#deleteBtn").click(function()	{
 			var info=confirm("게시물을 삭제합니까?");
 			if(info){				
-			location.href="${pageContext.request.contextPath}/qnaDelete.do?no="+${requestScope.detail_qna.no};
+			location.href="${pageContext.request.contextPath}/afterLogin_/qnaDelete.do?no="+${requestScope.detail_qna.no};
 			}else{
 			}
 		})// 삭제버튼 끝
@@ -54,20 +54,22 @@
 	})//ready
 </script> 
 <div class="panel panel-default"> 
-<div class="panel-heading"><h3>Q&A 상세보기</h3></div> 
-<div class="panel-body">
+<div class="panel-heading" style="background-color:#FBF8EF; ">
+<h3><b>Q&A 상세보기</b></h3></div> 
+<div class="panel-body" style="margin-left: 15px;">
 <div class="container"> 
 <%-- 상세보기--%>
 		<div class="row"> 
-			<div class="col-md-6">
-			<div class="form-group"> 
+			<div class="col-md-3">
+			<div class="form-group" style="margin-left: 15px;"> 
 			<label for="name">글번호</label> 
 			<input type="text" class="form-control" value="${requestScope.detail_qna.no}" readonly> 
 			</div> 
 			</div> 
 			
-			<div class="col-md-5"> 
-			<div class="form-group"> 
+
+			<div class="col-md-8" > 
+			<div class="form-group" style="margin-right: 15px;"> 
 			<label for="writer">작성자</label> 
 			<input type="text" class="form-control"value="${requestScope.name.memberName}" readonly> 
 			</div> 
@@ -88,22 +90,22 @@
 		<font size=2 >${requestScope.detail_qna.timePosted} &nbsp;&nbsp; 
 		조회수 : ${requestScope.detail_qna.hits}</font>
 		<textarea class="form-control" rows="10" readonly>${requestScope.detail_qna.content }</textarea> 
-		</div></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</div></div><br><br><br><br><br><br><br><br><br><br><br><br>
 		
 			<%-- 사진 들어갈 공간 임시로 올림 --%>
-		<div class="form-group,col-md-8"> 
+		<div class="form-group,col-md-8" style="left: 15px;"> 
 		<c:forEach items="${requestScope.fileNameList }" var="fileNameList">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<img class="img-rounded" src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="300px" height="200px">
 		</c:forEach>
-		</div>
+		</div><br><br>
 		
 		<%-- 목록, 수정 , 삭제 버튼  --%>
-		<div class="center-block" style='width:400px'> 
-		<button type="button" class="btn btn-info"  id="boardListBtn">목록</button>
+		<div class="center-block" style='width:400px' align="center"> 
+		<button type="button" class="btn btn-info"  id="boardListBtn">목록</button>&nbsp;&nbsp;
 			<%-- login 적용 시 위로 두칸 올린다 --%>
 			 <c:if test="${requestScope.detail_qna.id==sessionScope.memberVO.id}">
-			 <button type="button" class="btn btn-info"  id="modifyBtn">수정</button>
+			 <button type="button" class="btn btn-info"  id="modifyBtn"><b>수정</b></button>&nbsp;&nbsp;
 			<button type="button" class="btn btn-info"  id="deleteBtn">삭제</button>
 			 </c:if>
 			 </div> 

@@ -8,34 +8,12 @@ import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
 import org.asechs.wheelwego.model.MypageService;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-/*
- *    TDD : 테스트 주도 개발(test-driven development, TDD)은 
- *            매우 짧은 개발 사이클을 반복하는 소프트웨어 개발 프로세스
- *            
- *    JUnit: 자바 단위 테스트를 위한 TDD 프레임워크
- *    
- *    아래 라이브러리가 maven의 pom.xml에 추가되어야 한다. 
-       <!-- spring junit  -->
-  <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${org.springframework-version}</version>            
-        </dependency>
-        <!-- Test : 기존 4.7에서 4.9로 수정 -->
-  <dependency>
-   <groupId>junit</groupId>
-   <artifactId>junit</artifactId>
-   <version>4.9</version>
-   <scope>test</scope>
-  </dependency>  
-  
-  
- */  
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class TestJUnit {
@@ -52,28 +30,74 @@ public class TestJUnit {
 	@Resource
 	private MypageService mypageService;
 	
+	public void registerSeller(){
+		String id;
+		String _id = "seller";
+		String password = "1234";
+		String member_name;
+		String _member_name = "판매자";
+		String postcode = "13494";
+		String address = "경기 성남시 분당구 삼평동 682";
+		String addressdetail = "유스페이스2";
+		String phonenumber = "01012345678";
+		String member_type = "seller";
+		String businessNumber = "1111111111";
+		
+		MemberVO memberVO;
+		
+		for (int i = 1; i <= 56; i++)
+		{
+			if (i >=1 && i <= 9)
+			{
+				id = String.format("%s", _id + 0 + i);
+				member_name = String.format("%s", _member_name + 0 + i);
+			}
+			else
+			{
+				id = String.format("%s", _id + i);
+				member_name = String.format("%s", _member_name + i);				
+			}
+			memberVO = new MemberVO(id, password, member_name, postcode, address, addressdetail, phonenumber, member_type);
+			service.registerMember(memberVO, businessNumber);
+		}	
+	}
+	
+	public void registerCustomer(){
+		String id;
+		String _id = "customer";
+		String password = "1234";
+		String member_name;
+		String _member_name = "판매자";
+		String postcode = "13494";
+		String address = "경기 성남시 분당구 삼평동 682";
+		String addressdetail = "유스페이스2";
+		String phonenumber = "01012345678";
+		String member_type = "customer";
+		String businessNumber = null;
+		
+		MemberVO memberVO;
+		
+		for (int i = 1; i <= 10; i++)
+		{
+			if (i >=1 && i <= 9)
+			{
+				id = String.format("%s", _id + 0 + i);
+				member_name = String.format("%s", _member_name + 0 + i);
+			}
+			else
+			{
+				id = String.format("%s", _id + i);
+				member_name = String.format("%s", _member_name + i);				
+			}
+			memberVO = new MemberVO(id, password, member_name, postcode, address, addressdetail, phonenumber, member_type);
+			service.registerMember(memberVO, businessNumber);
+		}	
+	}
+	
 	@Test
 	public void test(){
-		System.out.println(foodtruckService.foodtruckList());
+		//registerCustomer();
+		registerSeller();
+		System.out.println(service.forgetMemberId(new MemberVO(null, null, "정현지", null, null, null, "01022552716", null)));
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

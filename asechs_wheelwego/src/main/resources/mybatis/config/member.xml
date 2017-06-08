@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="login" resultMap="memberRM" parameterType="memberVO">
 		select id,password,member_name,address,addressdetail,phonenumber,member_type,postcode from member where id=#{id}
 	</select>
-	<select id="forgetMemberId" resultType="String" parameterType="memberVO">
+	<select id="forgetMemberId" resultType="String">
 		select id from member where member_name=#{memberName} and
 		phonenumber=#{phoneNumber}
 	</select>
