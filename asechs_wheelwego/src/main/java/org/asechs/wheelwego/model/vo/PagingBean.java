@@ -36,7 +36,25 @@ public class PagingBean {
 	 */
 	private TruckVO gpsInfo;
 	
+	private String customerId;
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
 	public PagingBean() {
+	}
+
+	public int getContentNumberPerPage() {
+		return contentNumberPerPage;
+	}
+
+	public void setContentNumberPerPage(int contentNumberPerPage) {
+		this.contentNumberPerPage = contentNumberPerPage;
 	}
 
 	public PagingBean(int totalContents) {
@@ -48,7 +66,6 @@ public class PagingBean {
 		this.nowPage = nowPage;
 	}
 
-	
 	public PagingBean(int nowPage, int totalContents, String searchWord) {
 		super();
 		this.nowPage = nowPage;
@@ -71,10 +88,11 @@ public class PagingBean {
 	}
 
 	/**
-	 * 현재 페이지에서 보여줄 게시물 행(row)의 마지막 번호
-	 * 현재페이지*contentNumberPerPage 만약 총게시물수보다<br>
-	 * 연산결과의 번호가 클 경우 총게시물수가 마지막 번호가 되어야 한다 ex) 총게시물수 7 개 총페이지는 2페이지 : 1 2 3 4 5<br>
-	 * | 6 7 | 1page 2page 현재페이지는 2페이지이고 2*5(페이지당 게시물수) 는 10 이고 실제 마지막 번호 7이다 -><br>
+	 * 현재 페이지에서 보여줄 게시물 행(row)의 마지막 번호 현재페이지*contentNumberPerPage 만약 총게시물수보다<br>
+	 * 연산결과의 번호가 클 경우 총게시물수가 마지막 번호가 되어야 한다 ex) 총게시물수 7 개 총페이지는 2페이지 : 1 2 3 4
+	 * 5<br>
+	 * | 6 7 | 1page 2page 현재페이지는 2페이지이고 2*5(페이지당 게시물수) 는 10 이고 실제 마지막 번호 7이다
+	 * -><br>
 	 * 연산결과가 총게시물수보다 클 경우 총게시물수가 마지막번호가 되어야 함
 	 * 
 	 * @return
@@ -101,8 +119,8 @@ public class PagingBean {
 	 * @return
 	 */
 	public int getTotalPage() {
-		int num = this.totalContents % this.contentNumberPerPage;	
-		
+		int num = this.totalContents % this.contentNumberPerPage;
+
 		int totalPage = 0;
 		if (num == 0) {
 			totalPage = this.totalContents / this.contentNumberPerPage;
@@ -235,5 +253,5 @@ public class PagingBean {
 
 	public void setGpsInfo(TruckVO gpsInfo) {
 		this.gpsInfo = gpsInfo;
-	}	
+	}
 }

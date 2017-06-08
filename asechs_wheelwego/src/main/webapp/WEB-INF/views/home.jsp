@@ -142,7 +142,7 @@ function geoFindMe2() {
     	    var latitude  = position.coords.latitude;
     	    var longitude = position.coords.longitude;
     	    
-    	    location.href = "${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+val+"&latitude="+latitude+"&longitude="+longitude;
+    	    location.href = "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+val+"&latitude="+latitude+"&longitude="+longitude;
     	  };
     	  function error() {
     		  alert("사용자의 위치를 찾을 수 없습니다!");
@@ -220,9 +220,10 @@ function geoFindMe2() {
                      </div>
                      <div class="back cbx-back-side">
                         <div class="text-center back-single-text">
-                           <p>${truckVO.foodtruckName}</p><p class="truck-simple-info"><br><br><br>
-                           위치<br>
-                           평점 : ${truckVO.avgGrade }</p>
+                           <p>${truckVO.foodtruckName}</p>
+                           <p class="truck-simple-info"><br><br><br>
+           	<span class="glyphicon glyphicon-map-marker"></span> 경기도 하남시 학암동<br>
+            <span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade }</p>
                         </div>
                      </div>
                   </a>

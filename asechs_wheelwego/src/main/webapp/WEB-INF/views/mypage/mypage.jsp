@@ -12,8 +12,8 @@
 <c:choose>
 	<c:when test="${sessionScope.memberVO.memberType=='seller'}">
 		<c:choose>
-			<c:when test="${truckNumber==null }">
-				<button type="button" id="registerTruckBtn"=class="btn btn-warning">MY TRUCK 등록</button>&nbsp;&nbsp;
+			<c:when test="${truckNumber==null&&truckVO.foodtruckNumber==null && truckNumber==null}">
+				<button type="button" id="registerTruckBtn" class="btn btn-warning">MY TRUCK 등록</button>&nbsp;&nbsp;
 			</c:when>
 			<c:otherwise>
 			<button type="button" id="updateTruckBtn"class="btn btn-warning">MY TRUCK 설정</button>&nbsp;&nbsp;
@@ -61,7 +61,7 @@ $(document).ready(function(){
 			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyFoodtruck.do?id=${sessionScope.memberVO.id}";
 	});
 		$("#wishlistBtn").click(function(){
-			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do";
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
 	});
 		$("#reviewBtn").click(function(){
 			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";

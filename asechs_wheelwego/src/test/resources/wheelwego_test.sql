@@ -1,6 +1,11 @@
 
 ----------dbTEST---------------------
+select * from WISHLIST
+select * from foodtruckfile
+----------dbTEST---------------------
 select * from member
+delete from member where id='seller01'
+delete from member where id='customer01'
 delete from foodtruck where foodtruck_name='불빠닭'
 select * from seller
 select * from menu
@@ -12,7 +17,7 @@ select * from FOODTRUCK
 select * from REVIEW
 select * from FOODTRUCKFILE where foodtruck_number='80나0036'
 select * from FOODTRUCKFILE
-select * from menu
+select * from seller
 select * from menu where foodtruck_number='80나0001'
 insert into MEMBER values('customer01','1234','정현지','위례','경기도 하남시 학암동','01022552716','customer','12345');
 select t.*, f.foodtruck_filepath, m.menu_filename
@@ -39,8 +44,9 @@ SELECT f.foodtruck_filepath, t.foodtruck_name FROM(
 		f where rnum between #{startRowNumber} and #{endRowNumber}
 
 ----------dbTEST---------------------
+insert into member values ('seller07', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
 insert into member values ('seller01', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
 create table member(
    id varchar2(100) primary key,
    password varchar2(100) not null,
@@ -66,7 +72,7 @@ select * from seller;
 delete member where id='java'
 delete seller where seller_id='java'
 insert into customer values ('java01');
-insert into seller values ('seller01','1231');
+insert into seller values ('seller07','1231');
 delete from customer;
 select c.customer_id, m.password, m.member_name, m.address, m.phonenumber, m.member_type
 from customer c, member m
@@ -74,7 +80,7 @@ where c.customer_id = m.id;
 --로그인
 select id,password,member_name,address,phonenumber,member_type from member where id='java01' and password='java01'
 select * from member;
-
+select * from foodtruck;
 select * from seller;
 
 delete from member;
@@ -91,7 +97,7 @@ select * from member;
 
 select * from seller;
 select * from wishlist ;
-select * from wishlist where id = 'customer01';
+select * from wishlist where customer_id = 'customer01';
 -- 푸드트럭 위시리스트 sql문
 select * from foodtruck where foodtruck_number in (select w.foodtruck_number
 from customer c, wishlist w
@@ -334,17 +340,40 @@ delete freeboardfile where freeboard_no=93 and  freeboardfile_filepath='c.jpg'
 
 
 
+select id from member where seller_id='seller04';
+delete from foodtruck;
+select * from foodtruck;
 
 
 
 
+insert into foodtruck values('80나0001','seller01','프랑크소시지1000',	'두툼한 닭꼬치의 두께와 선홍빛의 양고기 꼬치','	37.399606',	'127.10853580');
+insert into foodtruck values('80나0002','seller02','그남자의소시지','크기도 엄청 크고 보기만 해도 군침이 도는 마약핫도그!','37.394921','127.111234');
+insert into foodtruck values('80나0003','seller03','프랑크소시지1001','100% 국내산 생고기를 사용하는 수제버거! 깡스푸드 푸드트럭입니다!','37.400375','127.110104');
+insert into foodtruck values('80나0004','seller04','프랑크소시지1002','고급 아이스크림을 먹고 싶은가? 이리로 오라 아이스크림으로 당신을 녹여주겠어',	'37.439793',	'127.127821');
+insert into foodtruck values('80나0006','seller06',	'프랑크소시지1004','츄러스를 소스에도 찍어먹고 아이스크림에도 찍어먹을수 있는 츄러스의 달인 나이스츄미츄!','	37.511074','127.073489');
+insert into foodtruck values('80나0007','seller07',	'프랑크소시지1005','이태리 거주 10년 본토의 맛을 푸드트럭에서 보여준다는 주인장! 날개없는 비행기 푸드트럭입니다!','	37.509873','	127.076533');
+insert into foodtruck values('80나0005','seller05',	'프랑크소시지1003','규동 가츠동 에비후라이동 등 대표일본음식이 푸짐한 양으로 제공되는 끼니 푸드트럭입니다!',	'37.438595',	'127.124501');
+
+select * from foodtruck where foodtruck_name like '%' || '푸드' || '%';
+select * from foodtruck;
+select * from foodtruckfile;
+
+insert into foodtruckfile values ('80나0001', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0002', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0003', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0004', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0005', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0006', '그남자의소시지_트럭1.PNG');
+insert into foodtruckfile values ('80나0007', '그남자의소시지_트럭1.PNG');
 
 
 
-
-
-
-
+SELECT f.foodtruck_filepath, t.* FROM
+(SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
+from foodtruck fo where foodtruck_name like '%' || '소시지' || '%' and latitude is not null and longitude is not null)t, foodtruckfile f  
+where t.foodtruck_number=f.foodtruck_number and rnum between 1 and 8
+order by t.foodtruck_number desc
 
 
 
@@ -384,7 +413,7 @@ select * from foodtruck;
 
 select * from freeboardfile
 
-insert into wishlist();
+insert into wishlist();      
 
 
 select * from wishlist;
@@ -435,3 +464,73 @@ select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboar
 		delete from information where informationcomment_no=1 and information_no=91
 		select * from informationcomment
 
+	
+		select * from foodtruckfile
+		delete foodtrucckfile 
+
+-------------------------------------------------------------------------------
+
+update foodtruck set latitude=37.402403,longitude=127.106248 where foodtruck_number='80나0001';
+update foodtruck set latitude=37.402238,longitude=127.106811 where foodtruck_number='80나0002';
+update foodtruck set latitude=37.402074,longitude=127.107874 where foodtruck_number='80나0003';
+update foodtruck set latitude=37.401800,longitude=127.106865 where foodtruck_number='80나0004';
+update foodtruck set latitude=37.402311,longitude=127.106394 where foodtruck_number='80나0005';
+update foodtruck set latitude=37.402359,longitude=127.106130 where foodtruck_number='80나0006';
+update foodtruck set latitude=37.401832,longitude=127.106011 where foodtruck_number='80나0007';
+update foodtruck set latitude=37.402365,longitude=127.105850 where foodtruck_number='80나0008';
+update foodtruck set latitude=37.402452,longitude=127.106786 where foodtruck_number='80나0009';
+---------------------------------------------------------------------------------------------판교--------------------------------------------------------------------------------------------------------------------------------
+update foodtruck set latitude=37.411823,longitude=127.129187 where foodtruck_number='80나0010';
+update foodtruck set latitude=37.411776,longitude=127.128522 where foodtruck_number='80나0011';
+update foodtruck set latitude=37.411197,longitude=127.128487 where foodtruck_number='80나0012';
+update foodtruck set latitude=37.411044,longitude=127.129037 where foodtruck_number='80나0013';
+update foodtruck set latitude=37.410991,longitude=127.128501 where foodtruck_number='80나0014';
+update foodtruck set latitude=37.411240,longitude=127.128579 where foodtruck_number='80나0015';
+update foodtruck set latitude=37.411451,longitude=127.129223 where foodtruck_number='80나0016';
+update foodtruck set latitude=37.410976,longitude=127.128296 where foodtruck_number='80나0018';
+----------------------------------------------------------------------------야탑------------------------------------------------------------------------------------------------------------------------------------------------
+update foodtruck set latitude=37.263289,longitude=127.032312 where foodtruck_number='80나0019';
+update foodtruck set latitude=37.263500,longitude=127.031848 where foodtruck_number='80나0020';
+update foodtruck set latitude=37.263641,longitude=127.031910 where foodtruck_number='80나0021';
+update foodtruck set latitude=37.263619,longitude=127.032323 where foodtruck_number='80나0022';
+update foodtruck set latitude=37.263391,longitude=127.031776 where foodtruck_number='80나0023';
+update foodtruck set latitude=37.263643,longitude=127.032591 where foodtruck_number='80나0024';
+update foodtruck set latitude=37.263430,longitude=127.031328 where foodtruck_number='80나0025';
+update foodtruck set latitude=37.263759,longitude=127.031449 where foodtruck_number='80나0026';
+update foodtruck set latitude=37.263774,longitude=127.031736 where foodtruck_number='80나0027';
+----------------------------------------------------------------------------------------------------수원---------------------------------------------------------------
+update foodtruck set latitude=37.440029,longitude=127.128465 where foodtruck_number='80나0028';
+update foodtruck set latitude=37.439867,longitude=127.127231 where foodtruck_number='80나0029';
+update foodtruck set latitude=37.439509,longitude=127.127413 where foodtruck_number='80나0030';
+update foodtruck set latitude=37.439654,longitude=127.128105 where foodtruck_number='80나0031';
+update foodtruck set latitude=37.439986,longitude=127.127059 where foodtruck_number='80나0032';
+update foodtruck set latitude=37.439441,longitude=127.127354 where foodtruck_number='80나0033';
+update foodtruck set latitude=37.439535,longitude=127.128019 where foodtruck_number='80나0034';
+
+--------------------------------------------------------------------------------------------------------------태평-----------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------잠실------------------------------------------------------------------------------
+update foodtruck set latitude=37.439211,longitude=127.127643 where foodtruck_number='80나0035';
+update foodtruck set latitude=37.439232,longitude=127.128067 where foodtruck_number='80나0036';
+update foodtruck set latitude=37.513423,longitude=127.099329 where foodtruck_number='80나0037';
+update foodtruck set latitude=37.513797,longitude=127.100852 where foodtruck_number='80나0038';
+update foodtruck set latitude=37.514052,longitude=127.100176 where foodtruck_number='80나0039';
+update foodtruck set latitude=37.514477,longitude=127.099361 where foodtruck_number='80나0040';
+update foodtruck set latitude=37.513958,longitude=127.098771 where foodtruck_number='80나0041';
+update foodtruck set latitude=37.512775,longitude=127.099490 where foodtruck_number='80나0042';
+update foodtruck set latitude=37.512511,longitude=127.100209 where foodtruck_number='80나0043';
+update foodtruck set latitude=37.512698,longitude=127.101099 where foodtruck_number='80나0044';
+update foodtruck set latitude=37.512238,longitude=127.100445 where foodtruck_number='80나0045';
+update foodtruck set latitude=37.661029,longitude=126.769129 where foodtruck_number='80나0046';
+update foodtruck set latitude=37.660774,longitude=126.768292 where foodtruck_number='80나0047';
+update foodtruck set latitude=37.660562,longitude=126.769869 where foodtruck_number='80나0048';--
+update foodtruck set latitude=37.660443,longitude=126.768453 where foodtruck_number='80나0048';
+update foodtruck set latitude=37.660536,longitude=126.770020 where foodtruck_number='80나0049';
+update foodtruck set latitude=37.662863,longitude=126.768303 where foodtruck_number='80나0050';
+update foodtruck set latitude=37.662133,longitude=126.767123 where foodtruck_number='80나0051';
+update foodtruck set latitude=37.661131,longitude=126.766672 where foodtruck_number='80나0052';
+update foodtruck set latitude=37.660587,longitude=126.767573 where foodtruck_number='80나0053';
+update foodtruck set latitude=37.659398,longitude=126.768700 where foodtruck_number='80나0054';
+update foodtruck set latitude=37.659729,longitude=126.770449 where foodtruck_number='80나0056';
+
+--------------------------------------------------------------------------------------------------------일산----------------------------------------------------------------------------------------------------------------------

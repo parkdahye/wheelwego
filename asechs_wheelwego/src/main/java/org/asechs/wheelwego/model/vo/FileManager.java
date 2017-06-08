@@ -46,7 +46,8 @@ public class FileManager {
 	}
 
 	public void uploadFile(MultipartFile imgFile,String renamedFile) throws IOException {
-		imgFile.transferTo(new File(newFilePath+renamedFile)); //서버에 전송하여 저장		
+		imgFile.transferTo(new File(renamedFile)); //서버에 전송하여 저장		
+		System.out.println("업로드 완료");
 	}
 	
 	// file upload method needed inner class

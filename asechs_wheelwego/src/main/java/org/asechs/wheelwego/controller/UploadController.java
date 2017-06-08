@@ -20,7 +20,7 @@ public class UploadController {
 	@RequestMapping(method=RequestMethod.POST,value="multi_fileupload.do")
 	public ModelAndView fileUpload(UploadTestVO vo, HttpServletRequest request){
 		//실제 운영시에 사용할 서버 업로드 경로
-		uploadPath=request.getSession().getServletContext().getRealPath("/resources/upload/"); 
+		uploadPath=request.getSession().getServletContext().getRealPath("/upload/"); 
 		//개발시에는 워크스페이스 업로드 경로로 준다.
 		//uploadPath="C:\\java-kosta\\framework-workspace2\\springmvc21-fileupload\\src\\main\\webapp\\resources\\upload\\";
 		List<MultipartFile> list=vo.getFile();

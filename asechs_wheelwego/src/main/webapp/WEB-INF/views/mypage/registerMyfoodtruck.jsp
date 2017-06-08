@@ -1,20 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:include page="../mypage/mypage.jsp"/>
+<br><br>
      <div class="_40h7m" >
-    <form id="registerForm" onsubmit="return checkProfile()" class="form-signin" 
+    <form id="registerForm" class="form-signin" 
      action="${pageContext.request.contextPath}/afterLogin_mypage/registerFoodtruck.do" method="post" enctype="multipart/form-data">
-    <div class="_ljqf0 col-lg-12">
-    		<div  class="col-lg-6" style="margin-right: 5px">
+    <div class="_ljqf0 col-lg-12" >
+    		<div  class="col-lg-12" style="margin-right: 5px" align="center">
     		<button id="profileBtn" type="button" onclick=document.all.file.click();>
-    			<img id="profileImg" src="${pageContext.request.contextPath}/resources/img/defaultTruck.jpg">
+    			<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/defaultTruck.jpg">
     		</button>
 		<input type="file" name="foodtruckFile" id="file" style="display: none;"/> 
 		</div>
-				<div class="col-lg-6">
-					<h1>${sessionScope.memberVO.id }</h1>
-				</div>
 		</div>
  		<br><BR>
+ 		 		<div>
+    		<aside>
+    			<label for="foodtruckName">ID</label>
+    		</aside>
+    		<div>
+    				<input type="text" name="" class="form-control" value="${sessionScope.memberVO.id }" readonly="readonly">
+    		</div>
+    	</div>
+    	   <br>
     	<div>
     		<aside>
     			<label for="foodtruckName">이름</label>
@@ -42,13 +50,15 @@
     		</div>
     	</div>
 	<br><br>
-	<input type="submit" id="registerBtn" value="등록">
+	<div align="center">
+	<input type="button" id="registerBtn" class="btn btn-warning" value="등록" >
+	</div>
 	</form>
 	</div>
 	<br><br>
 	
 	
-	  <script type="text/javascript">
+ <script type="text/javascript">
   $(document).ready(function(){
       function readURL(input) {
           if (input.files && input.files[0]) {
@@ -71,11 +81,27 @@
 
    });
   
-  function checkProfile(){
-    	  var file=$("#file").val();
+  $(document).ready(function(){
+	  $("#registerBtn").click(function(){
+		  var file=$("#file").val();
+		  var foodtruckNumber=$("input[name=foodtruckNumber]").val();
+		  $.ajax({
+			  type:"post",
+			  url:"${pageContext.request.contextPath}/afterLogin_mypage/checkFoodtruckNumber.do",
+			  data:"foodtruckNumber="+foodtruckNumber,
+			  success:function(result){
+				  if(result==true){
+					  alert("트럭번호가 이미 존재합니다!");
+					  return ;
+				  }
+			  }
+		  });
     	  if(file==""){
 	    		alert("프로필 사진을 설정해주세요");
-	    		return false;
+	    		return ;
     	  }
-  }
+    	  $("#registerForm").submit();
+	  });
+  })
+
 </script>

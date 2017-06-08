@@ -38,6 +38,9 @@ public class FoodTruckController {
 		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("name", name);		
+		
+		System.out.println(name);
+		System.out.println(listVO);
 		return modelAndView;
 	}
 	/**
@@ -64,15 +67,16 @@ public class FoodTruckController {
 	 * @param foodtruck_number
 	 * @return TruckVO
 	 */
-	@RequestMapping("foodTruckAndMenuDetail.do")
+	@RequestMapping("foodtruck/foodTruckAndMenuDetail.do")
 	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo,String reviewPageNo){
+		System.out.println(foodtruckNo);
 		TruckVO truckDetail = foodTruckService.foodTruckAndMenuDetail(foodtruckNo);
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("foodtruck/foodtruck_detail.tiles");
 		mv.addObject("truckDetailInfo", truckDetail);
 		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodtruckNo);
 		mv.addObject("reviewlist", reviewList);
-		mv.addObject("avgGrade",foodTruckService.getAvgGradeByTruckNumber(foodtruckNo));
+		//mv.addObject("avgGrade",foodTruckService.getAvgGradeByTruckNumber(foodtruckNo));
 		return mv;
 	}
 	@RequestMapping(value = "afterLogin_foodtruck/registerReview.do", method = RequestMethod.POST)

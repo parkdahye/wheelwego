@@ -150,4 +150,28 @@ select latitude, longitude from foodtruck where seller_id = 'seller01';
 update foodtruck set latitude=null, longitude = null where seller_id = 'seller01';
 update foodtruck set latitude=37.497904, longitude = 127.027657 where seller_id = 'seller01'
 
-commit
+
+select count(*) from wishlist where customer_id = 'customer01';
+
+select t.*, f.foodtruck_filepath from foodtruck t, foodtruckfile f 
+where f.foodtruck_number in 
+(select foodtruck_number from wishlist where customer_id = 'customer01')
+and t.foodtruck_number = f.foodtruck_number
+
+SELECT f.foodtruck_filepath, t.* FROM
+(SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
+from foodtruck fo where (latitude between #{gpsInfo.latitude}-0.009 
+and #{gpsInfo.latitude}+0.009) 
+and (longitude between #{gpsInfo.longitude}-0.012 
+and #{gpsInfo.longitude}+0.012))t, foodtruckfile f  
+where t.foodtruck_number=f.foodtruck_number and rnum between #{startRowNumber} and #{endRowNumber}
+order by t.foodtruck_number desc
+
+SELECT f.foodtruck_filepath, t.* FROM
+(SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
+from foodtruck fo where fo.foodtruck_number in (select foodtruck_number from wishlist where customer_id = 'customer01'))t, foodtruckfile f
+where t.foodtruck_number=f.foodtruck_number and rnum between 1 and 9
+order by t.foodtruck_number desc
+
+
+
