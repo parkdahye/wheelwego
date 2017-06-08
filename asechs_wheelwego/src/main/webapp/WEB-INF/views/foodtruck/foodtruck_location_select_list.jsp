@@ -48,7 +48,7 @@ $(document).ready(function(){
       success:function(data){
          if(data=="on"){
             alert("단골트럭으로 등록!");
-            $(this).css("background-image","${pageContext.request.contextPath}/upload/hearton.png");
+            $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
             location.reload();      
          }else{
             alert("단골트럭 등록해제");         
@@ -85,9 +85,9 @@ $(document).ready(function(){
     <div class="col-sm-6">
       <div class="thumbnail">
       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
-        <img src="${pageContext.request.contextPath}/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
+        <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
         </a>
-        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/upload/heartoff.png" >
+        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/heartoff.png" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
         <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
       </div>

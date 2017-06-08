@@ -36,7 +36,6 @@ public class MypageServiceImpl implements MypageService {
 	 */
 	@Override
 	public void registerFoodtruck(TruckVO tvo, String uploadPath) {
-		System.out.println("upload path:"+uploadPath);
 		MultipartFile truckFile=tvo.getFoodtruckFile(); 
 		FileManager fm=new FileManager();
 		String fileName=truckFile.getOriginalFilename();
