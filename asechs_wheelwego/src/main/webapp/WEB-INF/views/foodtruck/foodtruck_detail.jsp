@@ -321,7 +321,7 @@ document.getElementById("myLink").click();
                 +"&reviewTimeposted="+d.toString(),
                 success:function(result){
                 	alert("등록되었습니다.");
-                	location.href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckDetailInfo.foodtruckNumber}";   	
+                	location.href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckDetailInfo.foodtruckNumber}";   	
                 }
             })
          }
@@ -335,7 +335,7 @@ document.getElementById("myLink").click();
   				data:"reviewNo="+reviewNo,
   				success:function(result){
   					alert("삭제되었습니다.");
-  					location.href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+truckNo;   	
+  					location.href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+truckNo;   	
   				}
   			})
   		}

@@ -54,7 +54,8 @@ public class TestJUnit {
 	
 	@Test
 	public void test(){
-		System.out.println(foodtruckService.foodtruckList());
+		System.out.println(foodTruckDAO.findAvgGradeByTruckNumber("80나0002"));
+		System.out.println(foodtruckService.foodTruckAndMenuDetail("80나0002"));
 	}
 }
 

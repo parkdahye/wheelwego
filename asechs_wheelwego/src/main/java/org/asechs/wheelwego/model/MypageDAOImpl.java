@@ -82,8 +82,8 @@ public class MypageDAOImpl implements MypageDAO {
 		sqlSessionTemplate.delete("mypage.deleteMyTruck", foodtruckNumber);
 	}
 	@Override
-	public List<ReviewVO> showMyReviewList(String customerId) {
-		return sqlSessionTemplate.selectList("mypage.showMyReview", customerId);
+	public List<ReviewVO> showMyReviewList(PagingBean pagingBean) {
+		return sqlSessionTemplate.selectList("mypage.showMyReview", pagingBean);
 	}
 	@Override
 	public void updateMyReview(ReviewVO reviewVO) {
@@ -114,10 +114,16 @@ public class MypageDAOImpl implements MypageDAO {
 	}
 	@Override
 	public int getWishListTotalContentCount(String id) {
-		return sqlSessionTemplate.selectOne("mypage.getWishListTotalContentCount", id);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	@Override
 	public List<TruckVO> getWishList(PagingBean pagingBean) {
-		return sqlSessionTemplate.selectList("mypage.getWishList", pagingBean);
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getTotalReviewCount(String customerId) {
+		return sqlSessionTemplate.selectOne("mypage.getTotalReviewCount", customerId);
 	}
 }
