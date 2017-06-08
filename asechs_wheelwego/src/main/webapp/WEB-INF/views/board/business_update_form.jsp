@@ -23,7 +23,7 @@
 <div class="panel-body">
 
 <div class="container"> 
-<form action="business_updateBoard.do" method="post" enctype="multipart/form-data">  
+<form action="afterLogin_/business_updateBoard.do" method="post" enctype="multipart/form-data">  
 		<div class="row"> 
 			<div class="col-md-3">
 			<div class="form-group"> 
