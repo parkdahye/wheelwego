@@ -1,20 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:include page="../mypage/mypage.jsp"/>
+<br><br>
      <div class="_40h7m" >
     <form id="registerForm" onsubmit="return checkProfile()" class="form-signin" 
      action="${pageContext.request.contextPath}/afterLogin_mypage/registerFoodtruck.do" method="post" enctype="multipart/form-data">
-    <div class="_ljqf0 col-lg-12">
-    		<div  class="col-lg-6" style="margin-right: 5px">
+    <div class="_ljqf0 col-lg-12" >
+    		<div  class="col-lg-12" style="margin-right: 5px" align="center">
     		<button id="profileBtn" type="button" onclick=document.all.file.click();>
-    			<img id="profileImg" src="${pageContext.request.contextPath}/resources/img/defaultTruck.jpg">
+    			<img id="profileImg" src="${pageContext.request.contextPath}/upload/defaultTruck.jpg">
     		</button>
 		<input type="file" name="foodtruckFile" id="file" style="display: none;"/> 
 		</div>
-				<div class="col-lg-6">
-					<h1>${sessionScope.memberVO.id }</h1>
-				</div>
 		</div>
  		<br><BR>
+ 		 		<div>
+    		<aside>
+    			<label for="foodtruckName">ID</label>
+    		</aside>
+    		<div>
+    				<input type="text" name="" class="form-control" value="${sessionScope.memberVO.id }" readonly="readonly">
+    		</div>
+    	</div>
+    	   <br>
     	<div>
     		<aside>
     			<label for="foodtruckName">이름</label>
@@ -42,7 +50,9 @@
     		</div>
     	</div>
 	<br><br>
-	<input type="submit" id="registerBtn" value="등록">
+	<div align="center">
+	<input type="submit" id="registerBtn" class="btn btn-warning"   value="등록" >
+	</div>
 	</form>
 	</div>
 	<br><br>
@@ -78,4 +88,6 @@
 	    		return false;
     	  }
   }
+  
+
 </script>

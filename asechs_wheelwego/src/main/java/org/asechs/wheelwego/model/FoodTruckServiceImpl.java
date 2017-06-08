@@ -19,7 +19,13 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 
 	@Override
 	public List<TruckVO> foodtruckList() {
-		return foodTruckDAO.foodtruckList();
+		List<TruckVO> truckList=foodTruckDAO.foodtruckList();
+		for(int i=0; i<truckList.size();i++){
+			String foodtruckNumber=truckList.get(i).getFoodtruckNumber();
+			truckList.get(i).setAvgGrade(foodTruckDAO.findAvgGradeByTruckNumber(foodtruckNumber));
+			truckList.get(i).setWishlistCount(foodTruckDAO.findWishlistCountByTruckNumber(foodtruckNumber));
+		}
+		return truckList;
 	}
 	/* 검색 결과 푸드트럭 리스트 */
 	@Override
@@ -36,6 +42,8 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	@Override
 	public TruckVO foodTruckAndMenuDetail(String foodtruckNo){
 		TruckVO tvo = foodTruckDAO.foodtruckDetail(foodtruckNo);
+		tvo.setAvgGrade(foodTruckDAO.findAvgGradeByTruckNumber(tvo.getFoodtruckNumber()));
+		tvo.setWishlistCount(foodTruckDAO.findWishlistCountByTruckNumber(tvo.getFoodtruckNumber()));
 		List<FoodVO> fvo = foodTruckDAO.foodListDetail(foodtruckNo);
 		tvo.setFoodList(fvo);
 		return tvo;
@@ -99,13 +107,13 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	}
 
 
-	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
+/*	public int getAvgGradeByTruckNumber(String foodtruckNumber) {
 		int avgGrade=0;
 		if(foodTruckDAO.findTruckNumberInReview(foodtruckNumber)>0)
 			avgGrade=foodTruckDAO.findTruckNumberInReview(foodtruckNumber);
 		return avgGrade;
-	}
-	@Override
+	}*/
+/*	@Override
 	public ListVO filtering(String option, String searchWord, String nowPage) {
 		List<TruckVO> truckList=null;
 		if(nowPage==null)
@@ -128,5 +136,6 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		pagingList.setTruckList(truckList);
 		pagingList.setPagingBean(pagingbean);
 		return pagingList;
-	}
+	}*/
+
 }
