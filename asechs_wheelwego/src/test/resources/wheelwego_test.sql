@@ -1,4 +1,4 @@
-
+select * from foodtruck where seller_id='seller'
 ----------dbTEST---------------------
 select * from WISHLIST
 select * from foodtruckfile
