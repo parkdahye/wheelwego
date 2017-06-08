@@ -43,7 +43,6 @@
 <div class="container"> 
 <form enctype="multipart/form-data" action="${pageContext.request.contextPath }/freeboard_write.do" method="post">  
 		<div class="row"> 
-			
 			<div class="col-md-6"> 
 			<div class="form-group"> 
 			<label for="writer">작성자</label> 
@@ -52,17 +51,18 @@
 			</div>
 			<input type="hidden" id="id" name="id" value="${sessionScope.memberVO.id }">
 		</div> 
-
-		<div class="form-group"> 
+		
+		<div class="form-group" style="margin-right: 70px"> 
 		<label for="title">글제목</label> 
 		<input type="text" class="form-control" name ="title" id="title" value="" required="required"> 
-		</div>  
-		
-		<div class="form-group"> 
-		<label for="content">글내용</label> 
-		<textarea class="form-control" rows="10" name="content" id="content" required="required"></textarea> 
 		</div> 
 		
+		<div class="form-group" style="margin-right: 70px"> 
+		<label for="content">글내용</label> 
+		<textarea class="form-control" rows="10" name="content" id="content" required="required"></textarea> 
+		</div>
+		
+
 		<div class="form-group"> 
 		<label for="File">첨부파일 1</label> 
 		<input type="file" name="file[0]"> 
@@ -76,10 +76,11 @@
 		<input type="file" name="file[2]"> 
 		</div> 
 		
-		<div class="center-block" style='width:200px'> 
-		<input type="submit" value="등록하기">
-		<input type="reset" value="다시쓰기">
-		<input type="button" value="취소" id="cancelBtn"></div> 
+		<div class="center-block" style='width:400px' align="center"> 
+		<input type="submit" class="btn btn-info" value="등록하기">&nbsp;&nbsp;
+		<input type="reset" class="btn btn-info"  value="다시쓰기">&nbsp;&nbsp;
+		<input type="button" class="btn btn-info"  value="취소" id="cancelBtn">
+		</div>
 </form> 
 
 
