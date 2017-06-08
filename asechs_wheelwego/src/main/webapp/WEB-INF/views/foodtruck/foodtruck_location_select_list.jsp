@@ -92,7 +92,7 @@ $(document).ready(function(){
       <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
         </a>
-        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/heartoff.png" >
+        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
         <p id = "${truckInfo.foodtruckName}"></p>
         <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
