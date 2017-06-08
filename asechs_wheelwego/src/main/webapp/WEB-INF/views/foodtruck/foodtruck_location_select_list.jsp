@@ -145,3 +145,4 @@ $(document).ready(function(){
    ▶<!-- <img src="img/right_arrow_btn.gif"> --></a>
    </c:if>
    </p>
+   <br><br><Br>

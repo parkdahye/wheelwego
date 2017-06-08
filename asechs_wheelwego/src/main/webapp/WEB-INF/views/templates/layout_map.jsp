@@ -36,10 +36,12 @@
 	</div>
 	<div  class="container">
 	<div class="row">
-	<div id="page_main" class="col-sm-7">
+	<div id="wrapper" style="float: left;">
+	<div id="map_main" class="col-sm-6" >
 			<tiles:insertAttribute name="main" />
 	</div>
-	<div id="page_right" class="col-sm-5">
+	</div>
+	<div id="page_right" class="col-sm-5" style="float: right;">
 		<tiles:insertAttribute name="right" />
 	</div>
 	</div>

@@ -38,6 +38,7 @@ input[name="grade"]{
 input[name="grade"]:checked + .star_point~label{
     color:lightgray;
 }
+
 </style>
 
 <!-- Header -->
