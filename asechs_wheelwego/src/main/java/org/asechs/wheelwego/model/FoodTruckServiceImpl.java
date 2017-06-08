@@ -105,6 +105,10 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 				
 		return new ListVO(pagingBean, foodTruckDAO.getFoodTruckListByGPS(pagingBean));
 	}
+	public ListVO filtering(String option, String searchWord, String nowPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 /*	public int getAvgGradeByTruckNumber(String foodtruckNumber) {

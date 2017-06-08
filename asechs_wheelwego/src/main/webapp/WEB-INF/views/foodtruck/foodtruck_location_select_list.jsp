@@ -30,7 +30,8 @@
     filter: alpha(opacity=50); /* For IE8 and earlier */
 } */
 </style>
-<Script type="text/javascript">
+
+<script>
 
 $(document).ready(function(){
    $("input#insertBtn").click(function(){
@@ -48,7 +49,7 @@ $(document).ready(function(){
       success:function(data){
          if(data=="on"){
             alert("단골트럭으로 등록!");
-            $(this).css("background-image","${pageContext.request.contextPath}/upload/hearton.png");
+            $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
             location.reload();      
          }else{
             alert("단골트럭 등록해제");         
@@ -81,13 +82,22 @@ $(document).ready(function(){
   <h4>FOODTRUCK LIST</h4><br>
   <div class="row text-center" style="position:relative;">
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
+<<<<<<< HEAD
+=======
+   <%--  <div class="col-xs-6">
+      <div style="position:relative;" class="thumbnail">
+       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${param.latitude}&longitude=${param.longitude}"><img src="resources/img/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
+        <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" 
+			 	style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" > --%>
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
     <div class="col-sm-6">
       <div class="thumbnail">
       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
-        <img src="${pageContext.request.contextPath}/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
+        <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
         </a>
-        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/upload/heartoff.png" >
+        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/heartoff.png" >
         <p><strong>${truckInfo.foodtruckName}</strong></p>
+        <p id = "${truckInfo.foodtruckName}"></p>
         <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
       </div>
     </div>
@@ -134,7 +144,7 @@ $(document).ready(function(){
                       hint)   endPageOfPageGroup+1 하면 됨        
     -->   
    <c:if test="${pb.nextPageGroup}">
-   <a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.endPageOfPageGroup+1}">
+   <a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.endPageOfPageGroup+1}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}">
    ▶<!-- <img src="img/right_arrow_btn.gif"> --></a>
    </c:if>
    </p>

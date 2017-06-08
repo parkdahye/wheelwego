@@ -8,7 +8,7 @@
     <div class="_ljqf0 col-lg-12" >
     		<div  class="col-lg-12" style="margin-right: 5px" align="center">
     		<button id="profileBtn" type="button" onclick=document.all.file.click();>
-    			<img id="profileImg" src="${pageContext.request.contextPath}/upload/defaultTruck.jpg">
+    			<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/defaultTruck.jpg">
     		</button>
 		<input type="file" name="foodtruckFile" id="file" style="display: none;"/> 
 		</div>

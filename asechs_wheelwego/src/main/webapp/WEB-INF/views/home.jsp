@@ -215,7 +215,7 @@ function geoFindMe2() {
                      data-toggle="modal">
                      <div class="front" >
                         <img class="img-circle  center-block food-img img-responsive"
-                           src="${pageContext.request.contextPath}/upload/${truckVO.fileVO.filepath}"
+                           src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}"
                            alt="" >
                      </div>
                      <div class="back cbx-back-side">
