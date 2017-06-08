@@ -203,9 +203,20 @@ public class MypageController {
 	public String test(){
 		return "mypage/test";
 	}
-	@RequestMapping("afterLogin_mypage/showMyFoodtruck.do")
-	public ModelAndView showMyFoodtruck(String id){
-		String foodtruckNo=mypageService.findtruckNumberBySellerId(id);
-		return new ModelAndView("redirect:../foodtruck/foodTruckAndMenuDetail.do","foodtruckNo",foodtruckNo);
+	 @RequestMapping("afterLogin_mypage/showMyFoodtruck.do")
+	   public ModelAndView showMyFoodtruck(String id){
+	      String foodtruckNo=mypageService.findtruckNumberBySellerId(id);
+	      return new ModelAndView("redirect:../foodtruck/foodTruckAndMenuDetail.do","foodtruckNo",foodtruckNo);
+	   }
+	@RequestMapping("afterLogin_mypage/checkFoodtruckNumber.do")
+	@ResponseBody
+	public boolean checkFoodtruckNumber(String foodtruckNumber){
+		System.out.println(foodtruckNumber);
+		TruckVO truckVO=mypageService.findtruckInfoByTruckNumber(foodtruckNumber);
+		System.out.println(truckVO);
+		if(truckVO==null)
+			return false;
+		else
+			return true;
 	}
 }

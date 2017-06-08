@@ -142,7 +142,7 @@ function geoFindMe2() {
     	    var latitude  = position.coords.latitude;
     	    var longitude = position.coords.longitude;
     	    
-    	    location.href = "${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo="+val+"&latitude="+latitude+"&longitude="+longitude;
+    	    location.href = "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+val+"&latitude="+latitude+"&longitude="+longitude;
     	  };
     	  function error() {
     		  alert("사용자의 위치를 찾을 수 없습니다!");

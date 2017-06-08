@@ -47,7 +47,8 @@ public class BoardServiceImpl implements BoardService {
 		String contentNo=boardDAO.freeboardWrite(bvo);
 		// 강정호. 파일 업로드. 컨트롤러에 넣기에는 너무 길어서 서비스에 넣었습니다.
 		// 그 다음 파일 이름을 insert한다
-		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+		//String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+		String uploadPath=request.getSession().getServletContext().getRealPath("/resources/img/");
 		List<MultipartFile> fileList=bvo.getFile();
 		//ArrayList<String> filePath=new ArrayList<String>();
 		ArrayList<String> nameList=new ArrayList<String>();
@@ -194,7 +195,8 @@ public class BoardServiceImpl implements BoardService {
 		
 		// 강정호. 파일 업로드. 컨트롤러에 넣기에는 너무 길어서 서비스에 넣었습니다.
 		// 그 다음 파일 이름을 insert한다
-		String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+		//String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+		String uploadPath=request.getSession().getServletContext().getRealPath("/resources/img/");
 		List<MultipartFile> fileList=bvo.getFile();
 		//ArrayList<String> filePath=new ArrayList<String>();
 		ArrayList<String> nameList=new ArrayList<String>();
@@ -339,7 +341,8 @@ public class BoardServiceImpl implements BoardService {
 			
 			// 강정호. 파일 업로드. 컨트롤러에 넣기에는 너무 길어서 서비스에 넣었습니다.
 			// 그 다음 파일 이름을 insert한다
-			String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+			//String uploadPath="C:\\Users\\KOSTA\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\img\\";
+			String uploadPath=request.getSession().getServletContext().getRealPath("/resources/img/");
 			List<MultipartFile> fileList=bvo.getFile();
 			//ArrayList<String> filePath=new ArrayList<String>();
 			ArrayList<String> nameList=new ArrayList<String>();

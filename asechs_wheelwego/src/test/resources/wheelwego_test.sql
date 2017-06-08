@@ -465,6 +465,8 @@ select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboar
 		select * from informationcomment
 
 	
+		select * from foodtruckfile
+		delete foodtrucckfile 
 
 -------------------------------------------------------------------------------
 

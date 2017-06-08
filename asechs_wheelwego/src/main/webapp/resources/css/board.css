@@ -6,7 +6,7 @@
 	        -webkit-background-size: cover;
 	        -moz-background-size: cover;
 	        -o-background-size: cover;
-	        background-size: cover;		        		  	
+	        background-size: cover;	        		  	
 		}
 	/* 게시판 목록 테이블 설정 */
 	table.list{	    
@@ -38,7 +38,7 @@
     /* 상세 게시물보기  */
 	table.content{	    
 		width:50%;
-		text-align: left; /* 가운데로 정렬 */			
+		text-align: left; /* 가운데로 정렬 */		
 	}
 	.content caption{font-size:15px; padding:5px; margin-bottom: 15px}
 	.content th,td {padding:5px 10px} /* 상하 여백 5 좌우 여백 10 */
