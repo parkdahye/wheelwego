@@ -59,7 +59,7 @@
 <div class="panel panel-default"> 
 <div class="panel-heading"><h3>자유게시판 상세보기</h3></div> 
 <div class="panel-body">
-<div class="container"> 
+<div class="container" style="margin-left:60px"> 
 <%-- 상세보기--%>
 		<div class="row"> 
 			<div class="col-md-3">
@@ -82,7 +82,8 @@
 		<div class="form-group"> 
 		<label for="title">글제목</label> 
 		<input type="text" class="form-control" value="${requestScope.detail_freeboard.title}" readonly> 
-		</div> </div>
+		</div> 
+		</div>
 		 
 		 <%-- 글 내용--%>
 		<div class="col-md-8"> 
@@ -139,7 +140,7 @@
 <div class="container">
   <h2>댓글 게시판</h2>
   <p>여러분의 자유로운 의견을 올려주세요</p>            
-  <table class="table table-bordered">
+  <table class="table table-striped">
     <thead>
       <tr>
       	<th>댓글번호</th>
@@ -157,10 +158,10 @@
     		<td>${freeboardCommentList.timePosted }</td>
     		<c:if test="${sessionScope.memberVO.id==freeboardCommentList.id }">
     		<td>
-				<input type="button" name="updateCommentBtn" value="수정">
+				<input type="button" class="btn btn-success green" name="updateCommentBtn" value="수정">
 			</td>
 			<td>
-				<input type="button"  name="deleteCommentBtn" value="삭제">
+				<input type="button" class="btn btn-success green"  name="deleteCommentBtn" value="삭제">
 			</td>
 			</c:if>
     	</tr>

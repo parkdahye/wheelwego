@@ -3,12 +3,13 @@
 select * from WISHLIST
 select * from foodtruckfile
 ----------dbTEST---------------------
+		select id from member where member_name='정현지' and
+		phonenumber='01022552716'
 select * from member
+delete from member where id='seller01'
 delete from member where id='customer01'
-delete from seller
-delete from customer
-delete from foodtruck where foodtruck_name='불빠닭'
-select * from member
+delete from foodtruck where foodtruck_name='코알라트럭'
+select * from seller
 select * from menu
 select * from FOODTRUCK where foodtruck_name='불빠닭'
 select * from FOODTRUCKFILE where foodtruck_number='80나0019'
@@ -18,7 +19,8 @@ select * from FOODTRUCK
 select * from REVIEW
 select * from FOODTRUCKFILE where foodtruck_number='80나0036'
 select * from FOODTRUCKFILE
-select * from menu
+select * from seller
+
 select * from menu where foodtruck_number='80나0001'
 insert into MEMBER values('customer01','1234','정현지','위례','경기도 하남시 학암동','01022552716','customer','12345');
 select t.*, f.foodtruck_filepath, m.menu_filename
@@ -115,7 +117,7 @@ select * from foodtruck;
 delete from wishlist;
 
 select * from seller;
-
+update member set phonenumber='01012341234' where id='seller57'
 update member set password='1234' where id='java01' and member_name='김래발' and phonenumber='01000000000';
 
 select * from member;
@@ -429,7 +431,7 @@ select * from menu;
 --해당 푸드트럭의 평점찾기
 select nvl(trunc(avg(r.grade),1),0) as grade
 from(select * from foodtruck)f, review r
-where f.foodtruck_number=r.foodtruck_number(+) and r.foodtruck_number='80나0001' group by f.foodtruck_number 
+where f.foodtruck_number=r.foodtruck_number(+) and f.foodtruck_number='80나0002' group by f.foodtruck_number 
 
 --해당 푸드트럭의 위시리스트수 찾기
 
@@ -466,7 +468,14 @@ select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboar
 		select * from informationcomment
 
 	
+		select * from foodtruckfile
+		delete foodtrucckfile 
 
+select review_no, foodtruck_number, customer_id, review_content, review_timeposted, grade from(
+select row_number() over(order by review_timeposted desc) as rnum,review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD HH24:MI:SS') as review_timeposted, grade
+	from review where customer_id='customer02' ) where rnum between 10 and 18
+
+	select count(*) from review where customer_id='customer02'
 -------------------------------------------------------------------------------
 
 update foodtruck set latitude=37.402403,longitude=127.106248 where foodtruck_number='80나0001';

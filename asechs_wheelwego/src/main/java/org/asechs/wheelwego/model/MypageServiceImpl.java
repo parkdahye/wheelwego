@@ -142,8 +142,15 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.deleteMyTruck(foodtruckNumber);
 	}
 	@Override
-	public List<ReviewVO> showMyReviewList(String customerId) {
-		return mypageDAO.showMyReviewList(customerId);
+	public ListVO showMyReviewList(String customerId, String reviewPageNo) {
+		if(reviewPageNo==null)
+			reviewPageNo="1";
+		PagingBean pagingBean = new PagingBean(Integer.parseInt(reviewPageNo), mypageDAO.getTotalReviewCount(customerId), customerId);
+		List<ReviewVO> reviewList=mypageDAO.showMyReviewList(pagingBean);
+		ListVO pagingReviewList = new ListVO();
+		pagingReviewList.setReviewList(reviewList);
+		pagingReviewList.setPagingBean(pagingBean);
+		return pagingReviewList;
 	}
 	@Override
 	public void updateMyReview(ReviewVO reviewVO) {

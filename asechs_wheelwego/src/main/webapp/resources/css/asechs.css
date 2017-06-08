@@ -37,24 +37,41 @@
     width: 250px;
     height: 190px;    
 }
+#wrapper{  width: 100%; height: 100%; position: absolute; overflow-y:scroll; overflow-x:hidden; padding-bottom:15px; /*footer height*/}
 
 #page_main {
 	margin-top:100px;
 	min-height: 100%;
 	height: 100%;
-	/* margin-bottom: -30px */
+	margin-left: -17px; /* 우측 스크롤바가 보여야 하므로 17px만큼 외쪽으로 땡겨주기 */
+    padding-left: 17px; /* 좌측으로 들어간만큼 패딩값 지정 */
+    padding-bottom:30px; /*footer height*/
 	}
-/* #page_footer{
+#page_footer{
 	position: absolute;
-	bottom: 0;
+	bottom:0;
+	left:0;
 	width: 100%;
-	height: 30px;
-} */
+	margin-top:-30px;
+	height:30px;
+	font-family: "Inconsolata", sans-serif;
+	z-index: 100;
+}
+
+#map_main {
+	margin-top:100px;
+	min-height: 100%;
+	margin-left: -17px; /* 우측 스크롤바가 보여야 하므로 17px만큼 외쪽으로 땡겨주기 */
+    padding-left: 17px; /* 좌측으로 들어간만큼 패딩값 지정 */
+    padding-bottom:30px; /*footer height*/
+	}
+
 #page_right{
 	margin-top:100px;
 	min-height: 100%;
-	height: 100%;
-	margin-bottom: -50px
+	margin-left: -17px; /* 우측 스크롤바가 보여야 하므로 17px만큼 외쪽으로 땡겨주기 */
+    padding-left: 17px; /* 좌측으로 들어간만큼 패딩값 지정 */
+     padding-bottom:30px; /*footer height*/
 }
 /*네비게이션설정*/
 
@@ -513,7 +530,7 @@ footer {
 }
 footer .footer-below {
 	bottom:0;
-   padding: 25px 0;
+   padding: 5px 0;
    background-color: #555555
 }
 

@@ -96,7 +96,11 @@ public class TestJUnit {
 	
 	@Test
 	public void test(){
+<<<<<<< HEAD
 		//registerCustomer();
 		registerSeller();
+=======
+		System.out.println(service.forgetMemberId(new MemberVO(null, null, "정현지", null, null, null, "01022552716", null)));
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 	}
 }

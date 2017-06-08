@@ -150,7 +150,7 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 	avg_grade desc
 	)) where rnum between #{startRowNumber} and #{endRowNumber}
 </select> -->
-<select id="findAvgGradeByTruckNumber" resultType="int" >
+<select id="findAvgGradeByTruckNumber" resultType="double" >
 	select nvl(trunc(avg(r.grade),1),0) as grade
 	from(select * from foodtruck)f, review r
 	where f.foodtruck_number=r.foodtruck_number(+) and

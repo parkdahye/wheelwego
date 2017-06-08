@@ -21,12 +21,12 @@
          			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/upload/${foodVO.fileVO.filepath}">
          		</td>
          		<td>
-         			<button type="button" class="resetBtn">reset</button>
+         			<button type="button" class="resetBtn" class="btn btn-warning" >reset</button>
          		</td>
          	</tr>
          	</table>
          	</c:forEach>
-         		<button type="submit" class="checkBtn">수정</button>
+         		<button type="submit" class="checkBtn" class="btn btn-warning" >수정</button>
          	</form>
         	</c:when>
         	<c:otherwise>
@@ -61,7 +61,7 @@
          	</tr>
          
     			</table>
-    			<button type="submit" class="checkBtn">등록</button>
+    			<button type="submit" class="checkBtn" class="btn btn-warning" >등록</button>
     		</form>
         	</c:otherwise>
         </c:choose>

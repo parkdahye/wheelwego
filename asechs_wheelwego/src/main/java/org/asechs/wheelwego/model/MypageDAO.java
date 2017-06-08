@@ -42,7 +42,7 @@ public interface MypageDAO {
 
 	void deleteMyTruck(String foodtruckNumber);
 	
-	List<ReviewVO> showMyReviewList(String customerId); //리뷰 리스트보기
+	List<ReviewVO> showMyReviewList(PagingBean pagingBean); //리뷰 리스트보기
 	
 	void updateMyReview(ReviewVO reviewVO); //리뷰수정하기
 	
@@ -59,4 +59,6 @@ public interface MypageDAO {
 	public int getWishListTotalContentCount(String id);
 
 	public List<TruckVO> getWishList(PagingBean pagingBean);
+
+	public int getTotalReviewCount(String customerId);
 }

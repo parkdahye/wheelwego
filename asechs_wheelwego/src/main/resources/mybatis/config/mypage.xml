@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="findtruckInfoByTruckNumber" resultMap="truckpageRM">
 		select t.*, f.foodtruck_filepath
 		from(select * from foodtruck where foodtruck_number=#{value})t, foodtruckfile f
-		where t.foodtruck_number=f.foodtruck_number(+)
+		where t.foodtruck_number=f.foodtruck_number
 	</select>
 	<select id="findtruckNumberBySellerId" resultType="String">
 		select foodtruck_number from foodtruck where seller_id=#{value}
@@ -103,9 +103,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <delete id="deleteWishList" parameterType="wishListVO">
 	delete from wishlist where customer_id = #{customerId} and foodtruck_number = #{foodTruckNumber}
 </delete>
-<select id="showMyReview" resultMap="reviewRM">
-	select review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD HH24:MI:SS') as review_timeposted, grade
-	from review where customer_id=#{value}
+<select id="showMyReview" resultMap="reviewRM" parameterType="pagingBean">
+select review_no, foodtruck_number, customer_id, review_content, review_timeposted, grade from(
+select row_number() over(order by review_timeposted desc) as rnum,review_no,foodtruck_number,customer_id,review_content, to_char(review_timeposted,'YYYY.MM.DD HH24:MI:SS') as review_timeposted, grade
+	from review where customer_id=#{searchWord} ) where rnum between #{startRowNumber} and #{endRowNumber}
 </select>
 <update id="updateMyReview" parameterType="reviewVO"> 
 	update review set review_content=#{reviewContent}, grade=#{grade} where review_no=#{reviewNo}
@@ -128,6 +129,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <select id = "getWishListTotalContentCount" resultType="int">
 	select count(*) from wishlist where customer_id = #{value}
+</select>
+<select id="getTotalReviewCount" resultType="int">
+	select count(*) from review where customer_id=#{value}
 </select>
 </mapper>
  
