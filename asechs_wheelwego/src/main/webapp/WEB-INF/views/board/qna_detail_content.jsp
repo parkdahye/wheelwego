@@ -67,6 +67,7 @@
 			</div> 
 			</div> 
 			
+
 			<div class="col-md-8" > 
 			<div class="form-group" style="margin-right: 15px;"> 
 			<label for="writer">작성자</label> 
@@ -95,7 +96,7 @@
 		<div class="form-group,col-md-8" style="left: 15px;"> 
 		<c:forEach items="${requestScope.fileNameList }" var="fileNameList">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<img src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="300px" height="200px" class="img-rounded">
+		<img class="img-rounded" src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="300px" height="200px">
 		</c:forEach>
 		</div><br><br>
 		
@@ -123,7 +124,7 @@
     <div class="col-md-6">
     						<div class="widget-area no-padding blank">
 								<div class="status-upload">
-									<form method="post" action="${pageContext.request.contextPath }/writeqnaComment.do" id="qnaCommentForm">
+									<form method="post" action="${pageContext.request.contextPath }/afterLogin_/writeqnaComment.do" id="qnaCommentForm">
 										<textarea placeholder="댓글을 입력해주세요" name="comment" required="required"></textarea>
 										<input type="hidden" name="id" value="${sessionScope.memberVO.id }">
 										<input type="hidden" name="contentNo" value="${requestScope.detail_qna.no }">
@@ -137,7 +138,7 @@
 <div class="container">
   <h2>댓글 게시판</h2>
   <p>여러분의 자유로운 의견을 올려주세요</p>            
-  <table class="table table-bordered">
+  <table class="table table-striped">
     <thead>
       <tr>
       	<th>댓글번호</th>
@@ -155,10 +156,10 @@
     		<td>${qnaCommentList.timePosted }</td>
     		<c:if test="${sessionScope.memberVO.id==qnaCommentList.id }">
     		<td>
-				<input type="button" name="updateCommentBtn" value="수정">
+				<input type="button" class="btn btn-success green" name="updateCommentBtn" value="수정">
 			</td>
 			<td>
-				<input type="button"  name="deleteCommentBtn" value="삭제">
+				<input type="button" class="btn btn-success green" name="deleteCommentBtn" value="삭제">
 			</td>
 			</c:if>
     	</tr>

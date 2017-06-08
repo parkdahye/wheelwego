@@ -42,7 +42,7 @@ $(document).ready(function(){
 		</tbody>
 	</table>
 	<br></br>
-	<p class="paging">
+	<p class="paging" align="center">
 	<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
 	<c:set var="pb" value="${requestScope.businessInfoBoardList.pagingBean}"></c:set>
 	<!-- 
