@@ -102,10 +102,16 @@ public class BoardDAOImpl implements BoardDAO {
 		return template.selectOne("board.getFreeboardComment",cvo);
 	}
 
+	//게시물 사진 수정시 선삭제
+	@Override
+	public void freeboardDeleteFile(String no) {
+		template.delete("board.freeboardDeleteFile", no);
+	}
 
 	@Override
 	public void updateFreeboardComment(CommentVO cvo) {
 		template.update("board.updateFreeboardComment",cvo);
+
 		
 	}
 	
@@ -193,6 +199,20 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
+
+	@Override
+	public void businessDeleteFile(String no) {
+		template.delete("board.businessDeleteFile", no);
+		
+	}
+
+	@Override
+	public String businessupdateBoard(BoardVO vo) {
+		template.update("board.businessupdateBoard",vo);
+		return vo.getNo();
+	}
+
+
 //////////강정호. Q&A게시판 Service/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
@@ -233,6 +253,28 @@ public class BoardDAOImpl implements BoardDAO {
 		return template.selectOne("board.getqnaBoardDetail", no);
 	}
 
+	@Override
+	public void qnaDeleteFile(String no) {
+		template.delete("board.qnaDeleteFile", no);
+	}
+
+	@Override
+	public String qnaupdateBoard(BoardVO vo) {
+		template.update("board.qnaupdateBoard",vo);
+		return vo.getNo();
+	}
+
+	@Override
+	public void qnaDelete(String no) {
+		template.delete("board.qnaDelete", no);
+		
+	}
+
+	@Override
+	public void updateHitsqna(int hits) {
+		template.update("board.updateHitsqna", hits);
+		
+	}
 
 
 	@Override
@@ -271,30 +313,5 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-	
 
 }

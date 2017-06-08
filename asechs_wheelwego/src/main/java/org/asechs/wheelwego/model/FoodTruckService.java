@@ -17,8 +17,9 @@ public interface FoodTruckService {
 	void registerReview(ReviewVO reviewVO);
 	ListVO getReviewListByTruckNumber(String reviewPageNo, String foodTruckNumber);
 	public ListVO getFoodTruckListByName(String pageNo, String name);
-	int getAvgGradeByTruckNumber(String foodtruckNumber);
+	//int getAvgGradeByTruckNumber(String foodtruckNumber);
 	ListVO getFoodTruckListByGPS(String pageNo, TruckVO gpsInfo);
 	ListVO filtering(String option, String searchWord, String nowPage);
 
+/*	ListVO filtering(String option, String searchWord, String nowPage);*/
 }

@@ -19,11 +19,11 @@ create sequence booking_seq;
 create sequence review_seq start with 200;
 create sequence menu_seq start with 123;
 
-create sequence information_seq start with 51;
+create sequence information_seq ;
 create sequence informationcomment_seq;
-create sequence qna_seq start with 51;
+create sequence qna_seq ;
 create sequence qnacomment_seq;
-create sequence freeboard_seq start with 51;
+create sequence freeboard_seq;
 create sequence freeboardcomment_seq;
 -------------------------------------------------------------------------------
 
@@ -68,8 +68,6 @@ create table foodtruck(
     foodtruck_name varchar2(100) not null,
     introduction clob not null,
     register_timeposted date not null,
-    avg_grade BINARY_DOUBLE default 0,
-    wishlist_count number default 0,
     latitude BINARY_DOUBLE,
     longitude BINARY_DOUBLE,
     constraint foodtruck_id_fk foreign key(seller_id) references seller(seller_id) on delete cascade

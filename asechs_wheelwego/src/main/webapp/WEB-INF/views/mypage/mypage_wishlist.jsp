@@ -39,6 +39,18 @@
    <button type="button" id="wishlistBtn"class="btn btn-warning">단골트럭</button>&nbsp;&nbsp;
 <button type="button" id="reviewBtn"class="btn btn-warning">MY REVIEW</button>&nbsp;&nbsp;
 </div>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<style>
+img{
+    border-radius: 8px;
+}
+.overlay{
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+</style>
+<jsp:include page="../mypage/mypage.jsp"/>
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 <br><br>
 
 ${wishlist.truckList.size}
@@ -51,15 +63,13 @@ ${wishlist.truckList.size}
       <div class="w3-third col-sm-4" >    
          <div class="w3-one" align="center">
             <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
-               <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
+               <img height="250px" width="260px" src="${pageContext.request.contextPath}/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
                 </a>
-                  <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/hearton.png" 
+                  <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/upload/hearton.png" 
                       style="right:40px;opacity: 0.8; z-index: 2;" >
                <div class="overlay" >
                   <div class="txtOverLay">
                      <h4>${wishList.foodtruckName}</h4>
-                        판매자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${wishList.sellerId}<br>
-                        푸드트럭소개&nbsp;&nbsp;&nbsp;${wishList.introduction}<br>
                   </div>
                </div>
             </div>
@@ -71,6 +81,7 @@ ${wishlist.truckList.size}
       </c:otherwise>
    </c:choose>
 </div>
+<<<<<<< HEAD
 </div> --%>
 
 <%-- <p class="paging text-center">
@@ -155,7 +166,6 @@ $(document).ready(function(){
       $("#reviewBtn").click(function(){
          location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
    });
-});
 </script>
  
  

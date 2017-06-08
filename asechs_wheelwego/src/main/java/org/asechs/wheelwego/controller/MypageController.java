@@ -96,7 +96,8 @@ public class MypageController {
 	public String registerFoodtruck(TruckVO truckVO, HttpServletRequest request){
 		MemberVO memberVO=(MemberVO)request.getSession(false).getAttribute("memberVO");
 		truckVO.setSellerId(memberVO.getId());
-		mypageService.registerFoodtruck(truckVO);
+		String uploadPath=request.getSession().getServletContext().getRealPath("/resources/upload/"); 
+		mypageService.registerFoodtruck(truckVO,uploadPath);
 		return "mypage/registerMyfoodtruck_result.tiles";
 	}
 	/**
@@ -116,9 +117,9 @@ public class MypageController {
 	 */
 	@RequestMapping(method=RequestMethod.POST,value="afterLogin_mypage/updateMyfoodtruck.do")
 	public String updateMyfoodtruck(TruckVO truckVO, HttpServletRequest request){
-		System.out.println("update : "+truckVO);
-		mypageService.updateMyfoodtruck(truckVO);
-		return "redirect:/afterLogin_mypage/myfoodtruck_page.do";
+		String uploadPath=request.getSession().getServletContext().getRealPath("/resources/upload/"); 
+		mypageService.updateMyfoodtruck(truckVO,uploadPath);
+		return "mypage/myfoodtruck_page_result.tiles";
 	}
 	
 	@RequestMapping("afterLogin_mypage/myfoodtruck_menuList.do")
@@ -126,20 +127,26 @@ public class MypageController {
 		MemberVO memberVO=(MemberVO)request.getSession(false).getAttribute("memberVO");
 		String truckNumber=mypageService.findtruckNumberBySellerId(memberVO.getId());
 		List<FoodVO> menuList=mypageService.showMenuList(truckNumber);
-		return new ModelAndView("mypage/myfoodtruck_menuList.tiles","menuList",menuList);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("mypage/myfoodtruck_menuList.tiles");
+		mv.addObject("menuList", menuList);
+		mv.addObject("truckNumber", truckNumber);
+		return mv;
 	}
 	@RequestMapping(method=RequestMethod.POST,value="afterLogin_mypage/registerMenuList.do")
 	public String RegisterMenuList(HttpServletRequest request, TruckVO truckVO){
 		MemberVO memberVO=(MemberVO)request.getSession(false).getAttribute("memberVO");
 		String truckNumber=mypageService.findtruckNumberBySellerId(memberVO.getId());
-		mypageService.registerMenuList(truckVO.getFoodList(),truckNumber);
+		String uploadPath=request.getSession().getServletContext().getRealPath("/resources/upload/"); 
+		mypageService.registerMenuList(truckVO.getFoodList(),truckNumber,uploadPath);
 		return"redirect:/afterLogin_mypage/myfoodtruck_menuList.do";
 	}
 	@RequestMapping("afterLogin_mypage/updateMenu.do")
 	public String updateMenu(TruckVO truckVO, String sellerId,HttpServletRequest request){
 		String foodtruckNumber=mypageService.findtruckNumberBySellerId(sellerId);
 		truckVO.setFoodtruckNumber(foodtruckNumber);
-		mypageService.updateMenu(truckVO);
+		String uploadPath=request.getSession().getServletContext().getRealPath("/resources/upload/"); 
+		mypageService.updateMenu(truckVO,uploadPath);
 		return "mypage/updateMenu_result.tiles";
 	}
 	

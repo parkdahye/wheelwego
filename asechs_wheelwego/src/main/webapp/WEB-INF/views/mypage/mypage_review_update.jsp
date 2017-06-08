@@ -16,7 +16,9 @@ input[name="grade"]:checked + .star_point~label{
 }
 </style>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<div class="row">
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
 <form method="post" id="updateForm" action="${pageContext.request.contextPath}/afterLogin_mypage/updateMyReview.do">
     <input type="radio" name="grade" id="star-1" value="1"/>
     <label for="star-1" class="star_point" style="width:20px">
@@ -83,7 +85,9 @@ input[name="grade"]:checked + .star_point~label{
 	</tr>
 </table>
 </form>	
-
+</div>
+<div class="col-sm-2"></div>
+</div>
 <script>
 	var grade=	"${reviewVO.grade}";
 $(document).ready(function(){
