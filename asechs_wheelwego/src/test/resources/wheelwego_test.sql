@@ -1,8 +1,14 @@
+
+----------dbTEST---------------------
+select * from WISHLIST
 select * from foodtruckfile
 ----------dbTEST---------------------
 select * from member
+delete from member where id='customer01'
+delete from seller
+delete from customer
 delete from foodtruck where foodtruck_name='불빠닭'
-select * from seller
+select * from member
 select * from menu
 select * from FOODTRUCK where foodtruck_name='불빠닭'
 select * from FOODTRUCKFILE where foodtruck_number='80나0019'
@@ -40,7 +46,7 @@ SELECT f.foodtruck_filepath, t.foodtruck_name FROM(
 
 ----------dbTEST---------------------
 insert into member values ('seller01', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
 create table member(
    id varchar2(100) primary key,
    password varchar2(100) not null,
