@@ -51,6 +51,11 @@ insert into foodtruckfile values ('80나1009', '그남자의소시지_트럭1.PN
 insert into foodtruckfile values ('80나1010', '그남자의소시지_트럭1.PNG');
 insert into foodtruckfile values ('80나1011', '그남자의소시지_트럭1.PNG');
 
+delete from foodtruck;
+insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction, register_timeposted, latitude, longitude) values ('80나0010', 'seller10', '달콤크레페', '달콤하고 맛있는 크레페를 팔고 있습니다. ', sysdate, 37.411823, 127.129187);
+
+
+select * from foodtruck;
 select * from foodtruckfile;
 
 select t.*, f.foodtruck_filepath
