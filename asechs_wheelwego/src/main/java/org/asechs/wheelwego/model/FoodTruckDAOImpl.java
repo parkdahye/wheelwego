@@ -80,10 +80,10 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 		return sqlSessionTemplate.selectList("foodtruck.getFoodTruckListByName",pagingBean);
 	}
 	
-	@Override
+/*	@Override
 	public int findTruckNumberInReview(String foodtruckNumber) {
 		return sqlSessionTemplate.selectOne("foodtruck.findTruckNumberInReview", foodtruckNumber);
-	}
+	}*/
 
 	@Override
 	public int getTruckListTotalContentCountByGPS(TruckVO gpsInfo) {

@@ -13,17 +13,17 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#cancelBtn").click(function(){//취소버튼 작동
-			location.href="${pageContext.request.contextPath}/business_list.do";
+			location.href="${pageContext.request.contextPath}/board/business_detail_content.do?no="+${requestScope.detail_freeboard.no};
 		})
 	})//ready
 </script>
 <div class="panel panel-default"> 
-<div class="panel-heading"><h3>자유게시판 수정</h3></div> 
+<div class="panel-heading"><h3>창업게시판 수정</h3></div> 
 
 <div class="panel-body">
 
 <div class="container"> 
-<form action="business_updateBoard.do" method="post">  
+<form action="business_updateBoard.do" method="post" enctype="multipart/form-data">  
 		<div class="row"> 
 			<div class="col-md-3">
 			<div class="form-group"> 
@@ -35,7 +35,7 @@
 			<div class="col-md-4"> 
 			<div class="form-group"> 
 			<label for="writer">작성자</label> 
-			<input type="text" class="form-control" name="id" id="writer" value="${requestScope.detail_freeboard.id }" readonly> 
+			<input type="text" class="form-control" name="id" id="writer" value="${requestScope.name.memberName }" readonly> 
 			</div> 
 			</div> 
 		</div> 
@@ -55,15 +55,16 @@
 		
 		<div class="form-group,col-md-8"> 
 		<label for="File">첨부파일 1</label> 
-		<input type="file" id="File1"> 
+		<input type="file" name="file[0]"> 
+		
 		</div> 
 		<div class="form-group,col-md-8"> 
 		<label for="File">첨부파일 2</label> 
-		<input type="file" id="File2"> 
+		<input type="file" name="file[1]"> 
 		</div> 
 		<div class="form-group,col-md-8"> 
 		<label for="File">첨부파일 3</label> 
-		<input type="file" id="File3"> 
+		<input type="file" name="file[2]"> 
 		</div> 
 		
 		<div class="center-block" style='width:400px'> 

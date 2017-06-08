@@ -14,11 +14,10 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#cancelBtn").click(function(){//취소버튼 작동
-			location.href="${pageContext.request.contextPath}/freeboard_list.do";
+			location.href="${pageContext.request.contextPath}/board/freeboard_detail_content.do?no="+${requestScope.detail_freeboard.no};
 		})
 	})//ready
 </script>
-${requestScope.detail_freeboard}    ${requestScope.fileNameList }
 <div class="panel panel-default"> 
 <div class="panel-heading"><h3>자유게시판 수정</h3></div> 
 
@@ -68,8 +67,7 @@ ${requestScope.detail_freeboard}    ${requestScope.fileNameList }
 		<label for="File">첨부파일 3</label> 
 		<input type="file" name="file[2]" > 
 		</div> <br><br>
-		
-		${requestScope.fileNameList }
+
 		<!-- 버튼  -->
 		<div class="center-block" style='width:400px'> 
 		<input type="reset"  class="btn btn-info" value="다시작성">	

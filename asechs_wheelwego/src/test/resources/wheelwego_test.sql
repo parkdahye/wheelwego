@@ -1,11 +1,17 @@
 
 ----------dbTEST---------------------
+select * from WISHLIST
+select * from foodtruckfile
+----------dbTEST---------------------
 select * from member
-delete from foodtruck where foodtruck_name='현지네트럭'
-select * from seller
+delete from member where id='customer01'
+delete from seller
+delete from customer
+delete from foodtruck where foodtruck_name='불빠닭'
+select * from member
 select * from menu
-select * from FOODTRUCK where foodtruck_name='꼬부랑아이스크림'
-select * from FOODTRUCKFILE where foodtruck_number='80나0004'
+select * from FOODTRUCK where foodtruck_name='불빠닭'
+select * from FOODTRUCKFILE where foodtruck_number='80나0019'
 select * from FOODTRUCKFILE
 select * from customer
 select * from FOODTRUCK
@@ -40,7 +46,7 @@ SELECT f.foodtruck_filepath, t.foodtruck_name FROM(
 
 ----------dbTEST---------------------
 insert into member values ('seller01', '1234', '김래발', '판교','코스타', '010-1111-1111', 'seller','1234');
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
 create table member(
    id varchar2(100) primary key,
    password varchar2(100) not null,
@@ -322,6 +328,9 @@ select * from freeboardcomment
 insert into freeboardcomment(freeboardcomment_no, id, freeboardcomment_content, freeboard_no,freeboardcomment_timeposted, freeboardcomment_parent)
 values(freeboardcomment_seq.nextval,'java101','강정호 댓글시도',154,sysdate,0)
 
+delete freeboardfile where freeboard_no=115 
+delete freeboardfile where freeboard_no=93 and  freeboardfile_filepath='c.jpg'
+
 
 
 
@@ -465,3 +474,71 @@ select freeboardcomment_no, id, freeboard_no, freeboardcomment_content, freeboar
 		delete from information where informationcomment_no=1 and information_no=91
 		select * from informationcomment
 
+	
+
+-------------------------------------------------------------------------------
+
+update foodtruck set latitude=37.402403,longitude=127.106248 where foodtruck_number='80나0001';
+update foodtruck set latitude=37.402238,longitude=127.106811 where foodtruck_number='80나0002';
+update foodtruck set latitude=37.402074,longitude=127.107874 where foodtruck_number='80나0003';
+update foodtruck set latitude=37.401800,longitude=127.106865 where foodtruck_number='80나0004';
+update foodtruck set latitude=37.402311,longitude=127.106394 where foodtruck_number='80나0005';
+update foodtruck set latitude=37.402359,longitude=127.106130 where foodtruck_number='80나0006';
+update foodtruck set latitude=37.401832,longitude=127.106011 where foodtruck_number='80나0007';
+update foodtruck set latitude=37.402365,longitude=127.105850 where foodtruck_number='80나0008';
+update foodtruck set latitude=37.402452,longitude=127.106786 where foodtruck_number='80나0009';
+---------------------------------------------------------------------------------------------판교--------------------------------------------------------------------------------------------------------------------------------
+update foodtruck set latitude=37.411823,longitude=127.129187 where foodtruck_number='80나0010';
+update foodtruck set latitude=37.411776,longitude=127.128522 where foodtruck_number='80나0011';
+update foodtruck set latitude=37.411197,longitude=127.128487 where foodtruck_number='80나0012';
+update foodtruck set latitude=37.411044,longitude=127.129037 where foodtruck_number='80나0013';
+update foodtruck set latitude=37.410991,longitude=127.128501 where foodtruck_number='80나0014';
+update foodtruck set latitude=37.411240,longitude=127.128579 where foodtruck_number='80나0015';
+update foodtruck set latitude=37.411451,longitude=127.129223 where foodtruck_number='80나0016';
+update foodtruck set latitude=37.410976,longitude=127.128296 where foodtruck_number='80나0018';
+----------------------------------------------------------------------------야탑------------------------------------------------------------------------------------------------------------------------------------------------
+update foodtruck set latitude=37.263289,longitude=127.032312 where foodtruck_number='80나0019';
+update foodtruck set latitude=37.263500,longitude=127.031848 where foodtruck_number='80나0020';
+update foodtruck set latitude=37.263641,longitude=127.031910 where foodtruck_number='80나0021';
+update foodtruck set latitude=37.263619,longitude=127.032323 where foodtruck_number='80나0022';
+update foodtruck set latitude=37.263391,longitude=127.031776 where foodtruck_number='80나0023';
+update foodtruck set latitude=37.263643,longitude=127.032591 where foodtruck_number='80나0024';
+update foodtruck set latitude=37.263430,longitude=127.031328 where foodtruck_number='80나0025';
+update foodtruck set latitude=37.263759,longitude=127.031449 where foodtruck_number='80나0026';
+update foodtruck set latitude=37.263774,longitude=127.031736 where foodtruck_number='80나0027';
+----------------------------------------------------------------------------------------------------수원---------------------------------------------------------------
+update foodtruck set latitude=37.440029,longitude=127.128465 where foodtruck_number='80나0028';
+update foodtruck set latitude=37.439867,longitude=127.127231 where foodtruck_number='80나0029';
+update foodtruck set latitude=37.439509,longitude=127.127413 where foodtruck_number='80나0030';
+update foodtruck set latitude=37.439654,longitude=127.128105 where foodtruck_number='80나0031';
+update foodtruck set latitude=37.439986,longitude=127.127059 where foodtruck_number='80나0032';
+update foodtruck set latitude=37.439441,longitude=127.127354 where foodtruck_number='80나0033';
+update foodtruck set latitude=37.439535,longitude=127.128019 where foodtruck_number='80나0034';
+
+--------------------------------------------------------------------------------------------------------------태평-----------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------잠실------------------------------------------------------------------------------
+update foodtruck set latitude=37.439211,longitude=127.127643 where foodtruck_number='80나0035';
+update foodtruck set latitude=37.439232,longitude=127.128067 where foodtruck_number='80나0036';
+update foodtruck set latitude=37.513423,longitude=127.099329 where foodtruck_number='80나0037';
+update foodtruck set latitude=37.513797,longitude=127.100852 where foodtruck_number='80나0038';
+update foodtruck set latitude=37.514052,longitude=127.100176 where foodtruck_number='80나0039';
+update foodtruck set latitude=37.514477,longitude=127.099361 where foodtruck_number='80나0040';
+update foodtruck set latitude=37.513958,longitude=127.098771 where foodtruck_number='80나0041';
+update foodtruck set latitude=37.512775,longitude=127.099490 where foodtruck_number='80나0042';
+update foodtruck set latitude=37.512511,longitude=127.100209 where foodtruck_number='80나0043';
+update foodtruck set latitude=37.512698,longitude=127.101099 where foodtruck_number='80나0044';
+update foodtruck set latitude=37.512238,longitude=127.100445 where foodtruck_number='80나0045';
+update foodtruck set latitude=37.661029,longitude=126.769129 where foodtruck_number='80나0046';
+update foodtruck set latitude=37.660774,longitude=126.768292 where foodtruck_number='80나0047';
+update foodtruck set latitude=37.660562,longitude=126.769869 where foodtruck_number='80나0048';--
+update foodtruck set latitude=37.660443,longitude=126.768453 where foodtruck_number='80나0048';
+update foodtruck set latitude=37.660536,longitude=126.770020 where foodtruck_number='80나0049';
+update foodtruck set latitude=37.662863,longitude=126.768303 where foodtruck_number='80나0050';
+update foodtruck set latitude=37.662133,longitude=126.767123 where foodtruck_number='80나0051';
+update foodtruck set latitude=37.661131,longitude=126.766672 where foodtruck_number='80나0052';
+update foodtruck set latitude=37.660587,longitude=126.767573 where foodtruck_number='80나0053';
+update foodtruck set latitude=37.659398,longitude=126.768700 where foodtruck_number='80나0054';
+update foodtruck set latitude=37.659729,longitude=126.770449 where foodtruck_number='80나0056';
+
+--------------------------------------------------------------------------------------------------------일산----------------------------------------------------------------------------------------------------------------------
