@@ -10,10 +10,10 @@
     		 <button id="profileBtn" type="button" onclick=document.all.file.click(); >
     			<c:choose>
     				<c:when test="${truckVO.fileVO.filepath!='defaultTruck.jpg'}">
-    			<img id="profileImg"  src="${pageContext.request.contextPath}/upload/${truckVO.fileVO.filepath}" align="right">    				
+    			<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/${truckVO.fileVO.filepath}" align="right">    				
     				</c:when>
     				<c:otherwise>
-    				<img id="profileImg"  src="${pageContext.request.contextPath}/upload/defaultTruck.jpg" align="middle">
+    				<img id="profileImg"  src="${pageContext.request.contextPath}/resources/upload/defaultTruck.jpg" align="middle">
     				</c:otherwise>
     			</c:choose>
     		</button>

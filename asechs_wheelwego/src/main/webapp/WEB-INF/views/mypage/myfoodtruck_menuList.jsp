@@ -18,7 +18,7 @@
          		<td><input type="file" name="foodList[${status.index}].menuFile" class="menuFile" >
          		</td>
          		<td>
-         			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/upload/${foodVO.fileVO.filepath}">
+         			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/upload/${foodVO.fileVO.filepath}">
          		</td>
          		<td>
          			<button type="button" class="resetBtn">reset</button>
@@ -38,7 +38,7 @@
          		<td><input type="text" name="foodList[0].menuPrice" placeholder="가격" required="required"></td>
          		<td><input type="file" name="foodList[0].menuFile" required="required" class="menuFile"></td>
          		<td>
-         			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/upload/defaultMenu.jpg" >
+         			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/upload/defaultMenu.jpg" >
          		</td>
          	</tr>
          		<tr>
@@ -47,7 +47,7 @@
          		<td><input type="text" name="foodList[1].menuPrice" placeholder="가격" required="required"></td>
          		<td><input type="file" name="foodList[1].menuFile" required="required" class="menuFile"></td>
          		<td>
-         			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/upload/defaultMenu.jpg">
+         			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/upload/defaultMenu.jpg">
          		</td>
          	</tr>
          		<tr>
@@ -56,7 +56,7 @@
          		<td><input type="text" name="foodList[2].menuPrice" placeholder="가격" required="required"></td>
          		<td><input type="file" name="foodList[2].menuFile" required="required" class="menuFile"></td>
          		<td>
-         			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/upload/defaultMenu.jpg">
+         			<img style="width: 150px; height: 100px" class="menuImg" alt="" src="${pageContext.request.contextPath}/resources/upload/defaultMenu.jpg">
          		</td>
          	</tr>
          
