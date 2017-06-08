@@ -147,20 +147,20 @@ $(document).ready(function(){
    });   
 });
    $(document).ready(function(){
-      $("#deleteAccountBtn").click(function(){
-         if(confirm("계정을 삭제하시겠습니까?")){
-            location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
-         }
-      });
-      $("#updateBtn").click(function(){
-            location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
-      });
-      $("#wishlistBtn").click(function(){
-         location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do";
-   });
-      $("#reviewBtn").click(function(){
-         location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
-   });
+		$("#deleteAccountBtn").click(function(){
+			if(confirm("계정을 삭제하시겠습니까?")){
+				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
+			}
+		});
+		$("#updateBtn").click(function(){
+				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
+		});
+		$("#wishlistBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
+		});
+		$("#reviewBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
+		});
   });
 </script>
  
