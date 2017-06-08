@@ -32,11 +32,13 @@
 	<div id="header">
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div class="container">
+	<div id="wrapper">
+	<div  class="container">
 	<div id="page_main">
 			<tiles:insertAttribute name="main" />
 		</div>
-	</div><br><br><br><br>
+	</div>
+	</div>
 		<div id="page_footer">
 			<tiles:insertAttribute name="footer" />
 		</div>

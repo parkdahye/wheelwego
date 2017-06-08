@@ -30,8 +30,9 @@
 </head>
 <body id="page-top" class="index">
 	<div id="header"><tiles:insertAttribute name="header" /></div>
+	<div id="wrapper">
 	<div id="main" ><tiles:insertAttribute name="main" /></div>
-	<div id="footer"><tiles:insertAttribute name="footer" /></div>
-	
+	</div>
+	<div id="page_footer"><tiles:insertAttribute name="footer" /></div>
 </body>
 </html>

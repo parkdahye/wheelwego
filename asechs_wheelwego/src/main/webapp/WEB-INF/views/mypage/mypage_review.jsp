@@ -162,7 +162,7 @@
                       hint)   startPageOfPageGroup-1 하면 됨        
     -->      
    <c:if test="${pb.previousPageGroup}">
-   <a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?reviewPageNo=${pb.startPageOfPageGroup-1}">
+   <a href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?reviewPageNo=${pb.startPageOfPageGroup-1}&customerId=${sessionScope.memberVO.id}">
    <!-- <img src="img/left_arrow_btn.gif"> -->
    ◀&nbsp; </a>   
    
