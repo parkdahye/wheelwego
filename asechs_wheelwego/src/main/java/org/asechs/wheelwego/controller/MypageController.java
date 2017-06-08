@@ -204,8 +204,8 @@ public class MypageController {
 		return "mypage/test";
 	}
 	@RequestMapping("afterLogin_mypage/showMyFoodtruck.do")
-	public String showMyFoodtruck(String id){
+	public ModelAndView showMyFoodtruck(String id){
 		String foodtruckNo=mypageService.findtruckNumberBySellerId(id);
-		return "redirect:../foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo;
+		return new ModelAndView("redirect:../foodtruck/foodTruckAndMenuDetail.do","foodtruckNo",foodtruckNo);
 	}
 }
