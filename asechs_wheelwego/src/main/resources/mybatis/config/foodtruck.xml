@@ -88,10 +88,14 @@ values(#{reviewNo},#{foodtruckNumber},#{customerId},#{reviewContent},sysdate,#{g
 </insert>
 
 <select id="getReviewListByTruckNumber" resultMap="reviewRM" parameterType="pagingBean">
-select * from (select row_number() over(order by review_no desc) as rnum ,review_no,foodtruck_number,customer_id,
-review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
-where foodtruck_number=#{searchWord})
-where rnum between #{startRowNumber} and #{endRowNumber}
+	select review_no, foodtruck_number,customer_id,
+	review_content,review_timeposted,grade from(
+	select row_number() over(order by review_timeposted desc) as rnum, review_no,
+	foodtruck_number, customer_id, review_content,
+	to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade
+	from review
+	where foodtruck_number=#{searchWord})
+	where rnum between #{startRowNumber} and #{endRowNumber}
 </select>
 
 <select id="getReivewTotalCount" resultType="int">

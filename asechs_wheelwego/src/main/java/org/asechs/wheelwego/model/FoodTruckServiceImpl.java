@@ -57,11 +57,9 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	@Override
 	public ListVO getReviewListByTruckNumber(String reviewPageNo, String foodtruckNumber) {
 		int totalCount =foodTruckDAO.getReivewTotalCount(foodtruckNumber);
-		PagingBean pagingBean=null;
 		if(reviewPageNo==null)
-			pagingBean=new PagingBean(Integer.parseInt("1"),totalCount,foodtruckNumber);
-		else
-			pagingBean=new PagingBean( Integer.parseInt(reviewPageNo),totalCount,foodtruckNumber);
+			reviewPageNo="1";
+		PagingBean pagingBean=new PagingBean( Integer.parseInt(reviewPageNo),totalCount,foodtruckNumber);
 		ListVO pagingList=new ListVO();
 		pagingList.setReviewList(foodTruckDAO.getReviewListByTruckNumber(pagingBean));
 		pagingList.setPagingBean(pagingBean);
