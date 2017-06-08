@@ -90,10 +90,7 @@ img{
 				   	    hint)   startPageOfPageGroup-1 하면 됨 		 
 	 -->      
 	<c:if test="${pb.previousPageGroup}">
-	<a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.startPageOfPageGroup-1}">
-	<!-- <img src="img/left_arrow_btn.gif"> -->
-	◀&nbsp; </a>	
-	
+	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup-1}&id=${pb.customerId}">◀&nbsp; </a>
 	</c:if>
 	<!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
 				   2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
@@ -105,7 +102,6 @@ img{
 	<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 	<c:choose>
 	<c:when test="${pb.nowPage!=i}">
-	location.href="?id=${sessionScope.memberVO.id}";
 	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${i}&id=${pb.customerId}">${i}</a> 
 	</c:when>
 	<c:otherwise>
@@ -122,8 +118,8 @@ img{
 	 -->   
 	<c:if test="${pb.nextPageGroup}">
 	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}">${i}</a>
-	<%-- <a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.endPageOfPageGroup+1}"></a> --%>
-	▶<!-- <img src="img/right_arrow_btn.gif"> -->
+	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}">▶</a>
+	<!-- <img src="img/right_arrow_btn.gif"> -->
 	</c:if>
 </p>
 

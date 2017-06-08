@@ -68,10 +68,10 @@ function geoFindMe2() {
 	    
 	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
 
-	    if (searchFoodtruckName != "")
+	   /*  if (searchFoodtruckName != "")
 	    	location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
 	    else
-	    	location.href = "${pageContext.request.contextPath}/pagingTruckList.do?latitude="+latitude+"&longitude="+longitude;
+	    	location.href = "${pageContext.request.contextPath}/pagingTruckList.do?latitude="+latitude+"&longitude="+longitude; */
 	  };
 	  function error() {
 		  alert("사용자의 위치를 찾을 수 없습니다!");
@@ -170,7 +170,7 @@ function geoFindMe2() {
                  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;" id="roundCorner">
 	              <form>
 					   <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style="">
-					   <input class="btn btn-warning" onclick="geoFindMe()" style="width: 100%;" value="자동검색" style="">
+					   <input class="btn btn-warning" onclick="geoFindMe2()" style="width: 100%;" value="자동검색" style="">
 				  </form>			
 <!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
 					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
@@ -221,7 +221,7 @@ function geoFindMe2() {
                      <div class="back cbx-back-side">
                         <div class="text-center back-single-text">
                            <p>${truckVO.foodtruckName}</p>
-                           <p class="truck-simple-info"><br><br><br>
+                           <p class="truck-simple-info"><br><br><br><br>
            	<span class="glyphicon glyphicon-map-marker"></span> 경기도 하남시 학암동<br>
             <span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade }</p>
                         </div>

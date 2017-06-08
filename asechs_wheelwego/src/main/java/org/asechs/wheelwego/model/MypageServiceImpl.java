@@ -187,6 +187,7 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public ListVO getWishList(String pageNo, String id) {
 		int totalCount=mypageDAO.getWishListTotalContentCount(id);
+		System.out.println("토탈카운트"+totalCount);
 	
 		PagingBean pagingBean=null;
 		
@@ -195,8 +196,11 @@ public class MypageServiceImpl implements MypageService {
 		else
 			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
 		
-		pagingBean.setContentNumberPerPage(9);
+		pagingBean.setContentNumberPerPage(6);
 		pagingBean.setCustomerId(id);
+		
+		System.out.println("스타트"+pagingBean.getStartRowNumber());
+		System.out.println("엔드"+pagingBean.getEndRowNumber());
 		
 		return new ListVO(pagingBean, mypageDAO.getWishList(pagingBean));
 	}

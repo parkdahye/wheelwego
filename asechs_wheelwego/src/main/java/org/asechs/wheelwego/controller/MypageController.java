@@ -28,36 +28,19 @@ public class MypageController {
 	// 세션이 없으면 홈으로 보냄
 	public ModelAndView myWishList(HttpServletRequest request, String id, String pageNo) {
 		HttpSession session = request.getSession(false);
-		if (session == null) {
+		if (session == null) 
+		{
 			return new ModelAndView("main_home.tiles");
-		} else {
-			// 세션에 해당하는 아이디의 wishlist정보를 가져옴.
-			/*MemberVO sessionMemberVO = (MemberVO) session.getAttribute("memberVO");
-			
-			
-			List<TruckVO> wishlist = mypageService.myWishList(sessionMemberVO.getId());
-			for (int i = 0; i < wishlist.size(); i++)
-				System.out.println(wishlist.get(i));
-			return new ModelAndView("mypage/mypage_wishlist.tiles", "wishlist", wishlist);*/
-			
+		} 
+		else 
+		{			
 			ModelAndView modelAndView = new ModelAndView("mypage/mypage_wishlist.tiles");
 			ListVO listVO = mypageService.getWishList(pageNo, id);
 			modelAndView.addObject("wishlist", listVO);
-			
-			System.out.println(listVO.getTruckList().size());
-			
-			modelAndView.addObject("id", id);	
+			MemberVO memberVO = (MemberVO)session.getAttribute("memberVO"); 
+			modelAndView.addObject("id", memberVO.getId());	
 			return modelAndView;
 		}
-		
-/*		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");		
-		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
-		modelAndView.addObject("pagingList", listVO);
-		modelAndView.addObject("name", name);		
-		
-		System.out.println(name);
-		System.out.println(listVO);
-		return modelAndView;*/
 	}
 	
 	@RequestMapping(value = "afterLogin_mypage/deleteWishList.do", method = RequestMethod.POST)

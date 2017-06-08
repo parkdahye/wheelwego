@@ -96,13 +96,12 @@ input[name="grade"]:checked + .star_point~label{
 
     <div id="Eat" class="w3-container menu w3-padding-48 w3-card-2">
        <c:forEach items="${requestScope.truckDetailInfo.foodList}" var="foodList">
+       <br>
        <img src="${pageContext.request.contextPath}/resources/upload/${foodList.fileVO.filepath}" style="width:100%" ><br>
       <h5 class="w3-text-grey text-center">${foodList.menuName}</h5>
       <p class="w3-text-grey text-center">${foodList.menuPrice}</p><br><br>
       </c:forEach>
     </div>
-
-
   </div>
 </div>
 
@@ -151,7 +150,6 @@ input[name="grade"]:checked + .star_point~label{
                <input type="button" id="registerBtn" value="Register" class="btn btn-default" style="float: right;"/>                
             </tr>
          </table>
-         <hr>
       </td>
    </tr>
    </div>
@@ -262,7 +260,8 @@ input[name="grade"]:checked + .star_point~label{
         <td>${reviewVO.customerId}</td>
         <td>${reviewVO.reviewTimeposted}</td>
         <c:if test="${sessionScope.memberVO.id!=null && sessionScope.memberVO.id==reviewVO.customerId}">
-        <td><input type="hidden" value="${reviewVO.reviewNo}" name="reviewNo">
+        <td>
+        <input type="hidden" value="${reviewVO.reviewNo}" name="reviewNo">
           <input type="hidden" value="${truckDetailInfo.foodtruckNumber}" name="truckNo">
           <button type="button" class="deleteBtn btn btn-default btn-sm">
           <span class="glyphicon glyphicon-remove"></span>
