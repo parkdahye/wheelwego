@@ -3,10 +3,12 @@
 select * from WISHLIST
 select * from foodtruckfile
 ----------dbTEST---------------------
+		select id from member where member_name='정현지' and
+		phonenumber='01022552716'
 select * from member
 delete from member where id='seller01'
 delete from member where id='customer01'
-delete from foodtruck where foodtruck_name='불빠닭'
+delete from foodtruck where foodtruck_name='코알라트럭'
 select * from seller
 select * from menu
 select * from FOODTRUCK where foodtruck_name='불빠닭'
@@ -18,6 +20,7 @@ select * from REVIEW
 select * from FOODTRUCKFILE where foodtruck_number='80나0036'
 select * from FOODTRUCKFILE
 select * from seller
+
 select * from menu where foodtruck_number='80나0001'
 insert into MEMBER values('customer01','1234','정현지','위례','경기도 하남시 학암동','01022552716','customer','12345');
 select t.*, f.foodtruck_filepath, m.menu_filename
@@ -114,7 +117,7 @@ select * from foodtruck;
 delete from wishlist;
 
 select * from seller;
-
+update member set phonenumber='01012341234' where id='seller57'
 update member set password='1234' where id='java01' and member_name='김래발' and phonenumber='01000000000';
 
 select * from member;

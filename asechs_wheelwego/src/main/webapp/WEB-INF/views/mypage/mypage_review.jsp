@@ -8,6 +8,27 @@
   color:gold;
   cursor:pointer;
 }
+/* .paging {
+    display: inline-block;
+}
+
+.paging a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.paging a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.paging a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+} */
 </style>
 
 <jsp:include page="../mypage/mypage.jsp"/>

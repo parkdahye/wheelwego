@@ -221,7 +221,7 @@ function geoFindMe2() {
                      <div class="back cbx-back-side">
                         <div class="text-center back-single-text">
                            <p>${truckVO.foodtruckName}</p>
-                           <p class="truck-simple-info"><br><br><br>
+                           <p class="truck-simple-info"><br><br><br><br>
            	<span class="glyphicon glyphicon-map-marker"></span> 경기도 하남시 학암동<br>
             <span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade }</p>
                         </div>
