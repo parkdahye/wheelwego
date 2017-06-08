@@ -120,7 +120,7 @@ select * from seller;
 update member set phonenumber='01012341234' where id='seller57'
 update member set password='1234' where id='java01' and member_name='김래발' and phonenumber='01000000000';
 
-select * from member;
+select * from foodtruck where seller_id='seller60';
 
 delete from wishlist;
 

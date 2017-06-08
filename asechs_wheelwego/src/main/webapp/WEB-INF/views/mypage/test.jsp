@@ -17,6 +17,7 @@ function geoFindMe() {
 	    var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
 	    location.href = "${pageContext.request.contextPath}/afterLogin_mypage/setTruckGPS.do?sellerId=${sessionScope.memberVO.id}&latitude="+latitude+"&longitude="+longitude;  
+	    setTimeout(wait, 1000);
 	  };
 
 	  function error() {

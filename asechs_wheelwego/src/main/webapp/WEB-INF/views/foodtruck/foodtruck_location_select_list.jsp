@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <style>
  .container-fluid {
       padding: 40px 50px 30px 40px;
@@ -11,7 +12,7 @@
   .thumbnail {
       padding: 0 0 15px 0;
       border: 1px solid light grey;
-      height:280px;
+      height:310px;
       position: relative;
       display: block;
   }
@@ -23,12 +24,9 @@
   }
   .col-sm-6{
   width: 50%;
-  height: 300px;
+  height: 380px;
   }
-/*   img:hover {
-    opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
-} */
+
 </style>
 
 <script>
@@ -45,12 +43,13 @@ $(document).ready(function(){
      $.ajax({
       type:"post",
       url:"${pageContext.request.contextPath}/afterLogin_foodtruck/registerBookMark.do",
-      data: {id: id, foodtruckNumber: foodtruckNumber},
+      data: {id: id, foodtruckNumber: foodtruckNumber}, 
       success:function(data){
          if(data=="on"){
+            $("#insertBtn").attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png');
+           // $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
+           //location.reload();  
             alert("단골트럭으로 등록!");
-            $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
-            location.reload();      
          }else{
             alert("단골트럭 등록해제");         
             location.reload();
@@ -79,7 +78,8 @@ $(document).ready(function(){
    </c:forEach>
 </script>
 <div class="container-fluid text-center bg-grey">
-  <h4>FOODTRUCK LIST</h4><br>
+  <h3>FOODTRUCK LIST</h3><br>
+  <hr>
   <div class="row text-center" style="position:relative;">
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
    <%--  <div class="col-xs-6">
@@ -90,11 +90,11 @@ $(document).ready(function(){
     <div class="col-sm-6">
       <div class="thumbnail">
       <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
-        <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
+        <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
         </a>
-        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" >
-        <p><strong>${truckInfo.foodtruckName}</strong></p>
-        <p id = "${truckInfo.foodtruckName}"></p>
+        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/greyheart2.png">
+        <p><strong style="font-size:17px; ">${truckInfo.foodtruckName}</strong></p>
+        <p id = "${truckInfo.foodtruckName}" style="font-size:15px; color: grey;"></p>
         <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
       </div>
     </div>

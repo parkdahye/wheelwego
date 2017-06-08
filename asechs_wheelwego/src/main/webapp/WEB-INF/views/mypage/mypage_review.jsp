@@ -8,7 +8,7 @@
   color:gold;
   cursor:pointer;
 }
-/* .paging {
+/*  .paging {
     display: inline-block;
 }
 
@@ -28,7 +28,7 @@
 .paging a:hover:not(.active) {
     background-color: #ddd;
     border-radius: 5px;
-} */
+}  */
 </style>
 
 <jsp:include page="../mypage/mypage.jsp"/>
