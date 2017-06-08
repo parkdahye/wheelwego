@@ -26,7 +26,7 @@ create sequence qnacomment_seq;
 create sequence freeboard_seq;
 create sequence freeboardcomment_seq;
 -------------------------------------------------------------------------------
-
+select * from member;
 -------------------------------------------------------------------------------
 create table member(
    id varchar2(100) primary key,

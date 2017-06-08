@@ -179,4 +179,6 @@ where t.foodtruck_number=f.foodtruck_number and rnum between 1 and 9
 order by t.foodtruck_number desc
 
 
+select count(*) from wishlist where foodtruck_number = '80나0099' and customer_id = 'customer01';
 
+select * from foodtruck;

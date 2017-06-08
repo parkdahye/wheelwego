@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.asechs.wheelwego.model.FoodTruckDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.ListVO;
@@ -38,6 +39,8 @@ public class FoodTruckController {
 		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("name", name);		
+		
+
 		
 		System.out.println(name);
 		System.out.println(listVO);
@@ -100,22 +103,11 @@ public class FoodTruckController {
 	@RequestMapping(value = "afterLogin_foodtruck/registerBookMark.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String registerBookMark(String id, String foodtruckNumber){
-		
-	/*	System.out.println(id + "," + foodtruckNumber);
-	
-		
-		WishlistVO wishlistVO = new WishlistVO(foodtruckNumber, id);
-		foodTruckService.registerBookMark(wishlistVO);
-		return "success";
-		*/
 		String result = null;
-		System.out.println(id + "," + foodtruckNumber);
 
 		WishlistVO wishlistVO = new WishlistVO(foodtruckNumber, id);
 		int count = foodTruckService.getBookMarkCount(wishlistVO);
 
-		System.out.println("카운트" + count);
-		 
 		if(count != 0){
 			result = "off";
 			mypageService.deleteWishList(wishlistVO);
@@ -126,22 +118,20 @@ public class FoodTruckController {
 		return result;
 }
 
-
-	@RequestMapping("afterLogin_foodtruck/getBookMarkCount.do")
+	/*@RequestMapping("afterLogin_foodtruck/getBookMarkCount.do")
 	@ResponseBody
 	public String getBookMarkCount(WishlistVO wishlistVO){
 		String result = null;
 		int count = foodTruckService.getBookMarkCount(wishlistVO);
 		if(count != 0){
-			result = "off";
-
+			result = "off";			
 		}else{
-			foodTruckService.registerBookMark(wishlistVO);
 			result = "on";
 		}
+		System.out.println(result);
 		return result;
 	
-	}
+	}*/
 	
 	
 }

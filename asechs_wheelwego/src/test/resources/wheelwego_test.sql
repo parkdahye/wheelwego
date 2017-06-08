@@ -392,11 +392,12 @@ insert into foodtruckfile values ('80나0005', '그남자의소시지_트럭1.PN
 insert into foodtruckfile values ('80나0006', '그남자의소시지_트럭1.PNG');
 insert into foodtruckfile values ('80나0007', '그남자의소시지_트럭1.PNG');
 
+select * from member;
+
  37.660536, 126.770020
 
 37.662863, 126.768303
 
-<<<<<<< HEAD
 37.662133, 126.767123
 
 37.661131, 126.766672
@@ -407,14 +408,11 @@ insert into foodtruckfile values ('80나0007', '그남자의소시지_트럭1.PN
 
  37.659729, 126.770449
 
-
-=======
-SELECT f.foodtruck_filepath, t.* FROM
+ SELECT f.foodtruck_filepath, t.* FROM
 (SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
 from foodtruck fo where foodtruck_name like '%' || '소시지' || '%' and latitude is not null and longitude is not null)t, foodtruckfile f  
 where t.foodtruck_number=f.foodtruck_number and rnum between 1 and 8
 order by t.foodtruck_number desc
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 
 
 
