@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <style>
  .container-fluid {
@@ -49,23 +50,20 @@ img{
 	border-bottom-right-radius: 8px;
 }
 </style>
-<jsp:include page="../mypage/mypage.jsp"/>
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
 <br><br>
 
-${wishlist.truckList.size}
-
-<%-- <div class="row">
- <div class="container col-sm-12">
-  <c:choose>
-<c:when test="${requestScope.wishlist!='[]'}">  
-      <c:forEach items="${requestScope.wishlist}" var="wishList">
+<div class="row">
+<div class="container col-sm-12">
+<c:choose>
+<c:when test="${fn:length(wishlist.truckList) != 0}">
+  <c:forEach items="${wishlist.truckList}" var="wishList">
       <div class="w3-third col-sm-4" >    
          <div class="w3-one" align="center">
             <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
                <img height="250px" width="260px" src="${pageContext.request.contextPath}/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
                 </a>
-                  <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/upload/hearton.png" 
+                  <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/hearton.png" 
                       style="right:40px;opacity: 0.8; z-index: 2;" >
                <div class="overlay" >
                   <div class="txtOverLay">
@@ -74,18 +72,17 @@ ${wishlist.truckList.size}
                </div>
             </div>
           </div>
-             </c:forEach>
-  </c:when>
-        <c:otherwise>
+  </c:forEach>
+</c:when>
+<c:otherwise>
          등록된 단골트럭이 없습니다.
-      </c:otherwise>
-   </c:choose>
+</c:otherwise>
+</c:choose>
 </div>
-<<<<<<< HEAD
-</div> --%>
+</div>
 
-<%-- <p class="paging text-center">
-	<c:set var="pb" value="${requestScope.pagingList.pagingBean}"></c:set>
+<p class="paging text-center">
+	<c:set var="pb" value="${requestScope.wishlist.pagingBean}"></c:set>
 	<!-- 
 			step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
 				   		페이징빈의 previousPageGroup 이용 
@@ -108,7 +105,8 @@ ${wishlist.truckList.size}
 	<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 	<c:choose>
 	<c:when test="${pb.nowPage!=i}">
-	<a href="${pageContext.request.contextPath}/searchFoodTruckByName.do?pageNo=${i}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}">${i}</a> 
+	location.href="?id=${sessionScope.memberVO.id}";
+	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${i}&id=${pb.customerId}">${i}</a> 
 	</c:when>
 	<c:otherwise>
 	${i}
@@ -123,10 +121,11 @@ ${wishlist.truckList.size}
 				   	    hint)   endPageOfPageGroup+1 하면 됨 		 
 	 -->   
 	<c:if test="${pb.nextPageGroup}">
-	<a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.endPageOfPageGroup+1}">
-	▶<!-- <img src="img/right_arrow_btn.gif"> --></a>
+	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}">${i}</a>
+	<%-- <a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.endPageOfPageGroup+1}"></a> --%>
+	▶<!-- <img src="img/right_arrow_btn.gif"> -->
 	</c:if>
-</p> --%>
+</p>
 
  <script>
 $(document).ready(function(){
@@ -166,6 +165,7 @@ $(document).ready(function(){
       $("#reviewBtn").click(function(){
          location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
    });
+  });
 </script>
  
  

@@ -60,7 +60,6 @@ $(document).ready(function(){
     }
 });
 });
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
 </script>
 
 <script type="text/javascript">
@@ -142,7 +141,7 @@ $(document).ready(function(){
                       hint)   endPageOfPageGroup+1 하면 됨        
     -->   
    <c:if test="${pb.nextPageGroup}">
-   <a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.endPageOfPageGroup+1}">
+   <a href="${pageContext.request.contextPath}/pagingTruckList.do?pageNo=${pb.endPageOfPageGroup+1}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}">
    ▶<!-- <img src="img/right_arrow_btn.gif"> --></a>
    </c:if>
    </p>
