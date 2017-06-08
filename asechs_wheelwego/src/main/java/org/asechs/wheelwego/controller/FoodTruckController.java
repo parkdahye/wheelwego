@@ -38,6 +38,9 @@ public class FoodTruckController {
 		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("name", name);		
+		
+		System.out.println(name);
+		System.out.println(listVO);
 		return modelAndView;
 	}
 	/**
@@ -72,7 +75,7 @@ public class FoodTruckController {
 		mv.addObject("truckDetailInfo", truckDetail);
 		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodtruckNo);
 		mv.addObject("reviewlist", reviewList);
-		mv.addObject("avgGrade",foodTruckService.getAvgGradeByTruckNumber(foodtruckNo));
+		//mv.addObject("avgGrade",foodTruckService.getAvgGradeByTruckNumber(foodtruckNo));
 		return mv;
 	}
 	@RequestMapping(value = "afterLogin_foodtruck/registerReview.do", method = RequestMethod.POST)

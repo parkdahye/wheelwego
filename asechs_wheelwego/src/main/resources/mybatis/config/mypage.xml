@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="findtruckInfoByTruckNumber" resultMap="truckpageRM">
 		select t.*, f.foodtruck_filepath
 		from(select * from foodtruck where foodtruck_number=#{value})t, foodtruckfile f
-		where t.foodtruck_number=f.foodtruck_number(+)
+		where t.foodtruck_number=f.foodtruck_number
 	</select>
 	<select id="findtruckNumberBySellerId" resultType="String">
 		select foodtruck_number from foodtruck where seller_id=#{value}
@@ -93,11 +93,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteMyTruck">
 		delete from foodtruck where foodtruck_number=#{value}
 	</delete>
-	<select id="myWishList" resultMap="truckpageRM" parameterType="string">
-		select t.*, f.foodtruck_filepath from foodtruck t, foodtruckfile f 
-		where f.foodtruck_number in 
-		(select foodtruck_number from wishlist where customer_id = #{value})
-		and t.foodtruck_number = f.foodtruck_number
+	<select id="getWishList" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
+		SELECT f.foodtruck_filepath, t.* FROM
+		(SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
+		from foodtruck fo where fo.foodtruck_number in (select foodtruck_number from wishlist where customer_id = #{customerId}))t, foodtruckfile f
+		where t.foodtruck_number=f.foodtruck_number and rnum between #{startRowNumber} and #{endRowNumber}
+		order by t.foodtruck_number desc
 	</select>
 <delete id="deleteWishList" parameterType="wishListVO">
 	delete from wishlist where customer_id = #{customerId} and foodtruck_number = #{foodTruckNumber}
@@ -125,6 +126,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id = "leaveFoodtruck" parameterType="truckVO">
 	update foodtruck set latitude=null, longitude = null where seller_id=#{sellerId}
 </update>
+<select id = "getWishListTotalContentCount" resultType="int">
+	select count(*) from wishlist where customer_id = #{value}
+</select>
 </mapper>
  
 
