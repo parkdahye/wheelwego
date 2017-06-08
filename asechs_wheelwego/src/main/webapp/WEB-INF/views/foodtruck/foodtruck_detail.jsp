@@ -20,6 +20,10 @@ body, html {
 .menu {
     display: none;
 }
+/* review button color */
+.btn-default{
+ background-color: #FDF5E6 !important;
+}
 /*별점*/
 input[name="grade"]{
   display:none;
@@ -257,10 +261,13 @@ input[name="grade"]:checked + .star_point~label{
         <td>${reviewVO.reviewContent}</td>
         <td>${reviewVO.customerId}</td>
         <td>${reviewVO.reviewTimeposted}</td>
-        <c:if test="${sessionScope.memberVO.id!=null}">
+        <c:if test="${sessionScope.memberVO.id!=null && sessionScope.memberVO.id==reviewVO.customerId}">
         <td><input type="hidden" value="${reviewVO.reviewNo}" name="reviewNo">
-        <input type="hidden" value="${truckDetailInfo.foodtruckNumber}" name="truckNo">
-        <span role="button" class="glyphicon glyphicon-remove" id="deleteBtn"></span></td>
+          <input type="hidden" value="${truckDetailInfo.foodtruckNumber}" name="truckNo">
+          <button type="button" class="deleteBtn btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        </td>
         </c:if>
       </tr>
       </c:forEach>
@@ -327,20 +334,24 @@ document.getElementById("myLink").click();
             })
          }
       });  
-      $("#deleteBtn").click(function(){
-    	  var reviewNo=$(this).parent().parent().find(":input[name=reviewNo]").val();
-    	  var truckNo =$(this).parent().parent().find(":input[name=truckNo]").val();
-  		if(confirm("리뷰를 삭제하시겠습니까?")){
-  			$.ajax({
-  				url:"${pageContext.request.contextPath}/afterLogin_mypage/deleteMyReview.do",
-  				data:"reviewNo="+reviewNo,
-  				success:function(result){
-  					alert("삭제되었습니다.");
-  					location.href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+truckNo;   	
-  				}
-  			})
-  		}
-  	});
+
+		$(".deleteBtn").click(function(){
+			var reviewNo=$(this).parent().parent().find(":input[name=reviewNo]").val();
+	    	var truckNo =$(this).parent().parent().find(":input[name=truckNo]").val();
+ 			if(confirm("등록된 리뷰를 삭제하시겠습니까?")){
+ 				$.ajax({
+ 					url:"${pageContext.request.contextPath}/afterLogin_mypage/deleteMyReview.do",
+ 					type:"post",
+ 					data:"reviewNo="+reviewNo,
+ 					success:function(data){
+ 						if(data=="deleteOk"){
+ 							alert("삭제하였습니다.");
+ 							location.href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+truckNo;
+ 						}
+ 					} 					
+ 				});
+ 			}
+ 		});
    });
 </script>
 
