@@ -257,7 +257,6 @@ public class BoardController {
 		// 조회수 올리기
 		boardService.updateHitsqna(hits);
 		BoardVO bvo = boardService.getqnaBoardDetail(no);
-		//System.out.println(bvo);
 		List<FileVO> fileNameList=boardService.getqnaFilePath(no);
 		List<CommentVO> qnaCommentList=boardService.getqnaCommentList(no);
 		MemberVO name = boardService.qna_getNameById(bvo);
@@ -269,53 +268,52 @@ public class BoardController {
 	}
 
 	//강정호 Q&A 게시판 글 등록 메서드
-	@RequestMapping("qna_write.do")
+	@RequestMapping("afterLogin_board/qna_write.do")
 	public String qnaWrite(BoardVO bvo, HttpServletRequest request){
 		boardService.qnaWrite(bvo, request);
-		return "redirect:board/qna_detail_content.do?no="+bvo.getNo();
+		return "redirect:../board/qna_detail_content.do?no="+bvo.getNo();
 	}
 	// 호겸 작성. qna 게시물 삭제
-			@RequestMapping("qnaDelete.do")
+			@RequestMapping("afterLogin_board/qnaDelete.do")
 			public String qnaDelete(String no) {
 				boardService.qnaDelete(no);
-				return "redirect:qna_list.do";
+				return "redirect:../qna_list.do";
 			}
 
 			// 호겸 작성. qna 게시물 수정 폼으로 가기
-			@RequestMapping("qna_update_form.do")
+			@RequestMapping("afterLogin_board/qna_update_form.do")
 			public String qna_update_form(String no, Model model) {
 				BoardVO bvo = boardService.getqnaBoardDetail(no);
 				MemberVO name = boardService.qna_getNameById(bvo);
 				model.addAttribute("name", name);
 				model.addAttribute("detail_qna", bvo);
-				System.out.println(bvo);
 				return "board/qna_update_form.tiles";
 			}
 			
 			// 호겸 작성. qna게시물 수정 해버리기
-			@RequestMapping("qna_updateBoard.do")
+			@RequestMapping("afterLogin_board/qna_updateBoard.do")
 			public String qnaupdateBoard(BoardVO vo) {
 				boardService.qnaupdateBoard(vo);
-				return "redirect:board/qna_detail_content.do?no="+vo.getNo();
+				return "redirect:../board/qna_detail_content.do?no="+vo.getNo();
 			
 	}
 	
 	//강정호 Q&A 게시판 댓글 등록메서드
-	@RequestMapping("writeqnaComment.do")
+	@RequestMapping("afterLogin_board/writeqnaComment.do")
 	public String writeqnaComment(CommentVO cvo){
 		boardService.writeqnaComment(cvo);
-		return "redirect:board/qna_detail_content.do?no="+cvo.getContentNo();
+		return "redirect:../board/qna_detail_content.do?no="+cvo.getContentNo();
 	}
 	
 	//강정호. Q&A 댓글 삭제
-	@RequestMapping("deleteqnaComment.do")
+	@RequestMapping("afterLogin_board/deleteqnaComment.do")
 	@ResponseBody
 	public String deleteqnaComment(CommentVO cvo){
 		boardService.deleteqnaComment(cvo);
 		return null;
 	}
 	
-	@RequestMapping("qna_update_comment.do")
+	@RequestMapping("afterLogin_board/qna_update_comment.do")
 	public String updateqnaCommentForm(HttpServletRequest request, Model model){
 		String commentNo=request.getParameter("commentNo");
 		String contentNo=request.getParameter("contentNo");

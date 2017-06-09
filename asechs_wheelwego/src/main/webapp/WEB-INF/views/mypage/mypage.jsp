@@ -7,8 +7,8 @@
    <div class=" text-center"> <h1 class="page-header">MY Page</h1> </div>
    <div align="center">
   <button type="button" id="deleteAccountBtn" class="btn btn-warning">회원탈퇴</button>&nbsp;&nbsp;
-  <button type="button" id="updateBtn" class="btn btn-warning">회원정보수정</button>&nbsp;&nbsp;
-
+  <button type="button" id="updateBtn" class="btn btn-warning">회원정보수정</button>&nbsp;&nbsp; 
+ 
 <c:choose>
 	<c:when test="${sessionScope.memberVO.memberType=='seller'}">
 		<c:choose>
@@ -39,6 +39,25 @@ function checkDelete(){
 	    return false;
 	}
 }
+
+function geoFindMe() {
+	if (!navigator.geolocation){
+		alert("지오로케이션을 지원하지 않습니다!");
+		return;
+	}
+	  function success(position) {
+	    var latitude  = position.coords.latitude;
+	    var longitude = position.coords.longitude;
+	    location.href = "${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}&latitude="+latitude+"&longitude="+longitude;
+	    //location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
+	   
+	  };
+	  function error() {
+		  alert("사용자의 위치를 찾을 수 없습니다!");
+	  };
+	  navigator.geolocation.getCurrentPosition(success, error);
+}
+
 $(document).ready(function(){
 		$("#deleteAccountBtn").click(function(){
 			if(confirm("계정을 삭제하시겠습니까?")){
@@ -61,7 +80,8 @@ $(document).ready(function(){
 			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyFoodtruck.do?id=${sessionScope.memberVO.id}";
 	});
 		$("#wishlistBtn").click(function(){
-			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
+			geoFindMe();
+			//location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
 	});
 		$("#reviewBtn").click(function(){
 			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";

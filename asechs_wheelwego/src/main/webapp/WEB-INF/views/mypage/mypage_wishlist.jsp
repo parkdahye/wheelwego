@@ -60,14 +60,16 @@ img{
   <c:forEach items="${wishlist.truckList}" var="wishList">
       <div class="w3-third col-sm-4" >    
          <div class="w3-one" align="center">
-            <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
-               <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
-                </a>
+         	<%-- <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}&latitude=${param.latitude}&longitude=${param.longitude}"> --%>
+               <img class = "imgName" height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1;">
+                <!-- </a> -->
                   <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/hearton.png" 
                       style="right:40px;opacity: 0.8; z-index: 2;" >
                <div class="overlay" >
                   <div class="txtOverLay">
                      <h4>${wishList.foodtruckName}</h4>
+                     <h5 id = "${wishList.foodtruckName}" class="address"></h5>
+                     <input type="hidden" class="foodtruckNo" value="${wishList.foodtruckNumber}">
                   </div>
                </div>
             </div>
@@ -125,6 +127,19 @@ img{
 
  <script>
 $(document).ready(function(){
+
+	$(".imgName").click(function(){
+        var foodtruckNo=$(this).next().next().find(".foodtruckNo").val();
+        var address=$(this).next().next().find(".address").html();
+        
+
+        
+        location.href= "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude=${param.latitude}&longitude=${param.longitude}&address="+address;
+		//alert(address.html());foodturckNumber")
+	});
+	
+	
+	
    $("input#insertBtn").click(function(){
         var foodtruckNumber = $(this).attr('name');
         var id = "${sessionScope.memberVO.id}";
@@ -147,26 +162,41 @@ $(document).ready(function(){
    });   
 });
    $(document).ready(function(){
-      $("#deleteAccountBtn").click(function(){
-         if(confirm("계정을 삭제하시겠습니까?")){
-            location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
-         }
-      });
-      $("#updateBtn").click(function(){
-            location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
-      });
-      $("#wishlistBtn").click(function(){
-         location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do";
-   });
-      $("#reviewBtn").click(function(){
-         location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
-   });
+		$("#deleteAccountBtn").click(function(){
+			if(confirm("계정을 삭제하시겠습니까?")){
+				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
+			}
+		});
+		$("#updateBtn").click(function(){
+				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
+		});
+		$("#wishlistBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
+		});
+		$("#reviewBtn").click(function(){
+			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
+		});
   });
 </script>
+
+<script type="text/javascript">
+   <c:forEach items="${requestScope.wishlist.truckList}" var="wishList" varStatus="status">
+   var mapInfo = naver.maps.Service.reverseGeocode({
+        location: new naver.maps.LatLng("${wishList.latitude}", "${wishList.longitude}"),
+    }, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            //return alert('Something wrong!');
+        	document.getElementById("${wishList.foodtruckName}").innerHTML = "위치정보없음";
+        }
+
+        var result = response.result, // 검색 결과의 컨테이너
+            items = result.items; // 검색 결과의 배열     
+            document.getElementById("${wishList.foodtruckName}").innerHTML = items[0].address;
+    });
+   </c:forEach>
+</script>
  
- 
- 
- 
+
  
  
  

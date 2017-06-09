@@ -17,6 +17,7 @@ function geoFindMe() {
 	  function success(position) {
 	    var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
+
 	    $.ajax({
 	    	url:"${pageContext.request.contextPath}/afterLogin_mypage/setTruckGPS.do",
 	    	data:"sellerId=${sessionScope.memberVO.id}&latitude="+latitude+"&longitude="+longitude,
@@ -28,6 +29,7 @@ function geoFindMe() {
 	    //location.href = "${pageContext.request.contextPath}/afterLogin_mypage/setTruckGPS.do?sellerId=${sessionScope.memberVO.id}&latitude="+latitude+"&longitude="+longitude; 
 	    opener.location.href="${pageContext.request.contextPath}/home.do";
 	    self.close();
+
 	  };
 
 	  function error() {

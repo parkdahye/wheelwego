@@ -33,12 +33,11 @@ public class MypageController {
 			return new ModelAndView("main_home.tiles");
 		} 
 		else 
-		{			
+		{		
 			ModelAndView modelAndView = new ModelAndView("mypage/mypage_wishlist.tiles");
 			ListVO listVO = mypageService.getWishList(pageNo, id);
 			modelAndView.addObject("wishlist", listVO);
-			MemberVO memberVO = (MemberVO)session.getAttribute("memberVO"); 
-			modelAndView.addObject("id", memberVO.getId());	
+			System.out.println(listVO.getTruckList());
 			return modelAndView;
 		}
 	}
