@@ -141,21 +141,38 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	@Override
 	public ListVO filtering(String option, String searchWord, String pageNo, String latitude, String longitude, TruckVO gpsInfo) {
 		List<TruckVO> truckList=null;
+		
 		if(pageNo==null)
 			pageNo="1";
 		ListVO pagingList=new ListVO();
 		int totalCount=0;
 		if(searchWord!=null)
 			 totalCount=foodTruckDAO.getTruckListTotalContentCountByName(searchWord);
-		if(gpsInfo!=null)
+	
+		
+		
+		if(gpsInfo!=null){
 			totalCount=foodTruckDAO.getTruckListTotalContentCountByGPS(gpsInfo);
-		PagingBean pagingbean=new PagingBean(Integer.parseInt(pageNo),totalCount,searchWord);
+			//pagingbean.setGpsInfo(gpsInfo);
+		}
+		
+		PagingBean pagingbean = new PagingBean(Integer.parseInt(pageNo),totalCount,searchWord);
+		
+		if(gpsInfo!=null){
+			pagingbean.setGpsInfo(gpsInfo);
+		}
+		
 		if(option.equals("byAvgGrade")){
+			System.out.println("byAvgGrade");
 			truckList=foodTruckDAO.filteringByAvgGrade(pagingbean);
 		}else if(option.equals("byWishlist")){
+			System.out.println("byWishlist");
 			truckList=foodTruckDAO.filteringByWishlist(pagingbean);
 		}else{
+			System.out.println("최신");
+			System.out.println(pagingbean.getNowPage() + " " + pagingbean.getTotalContents() + " " + pagingbean.getSearchWord());
 			truckList=foodTruckDAO.filteringByDate(pagingbean);
+			System.out.println(truckList);
 		}
 		for(int i=0; i<truckList.size();i++){
 			truckList.get(i).setAvgGrade(foodTruckDAO.findAvgGradeByTruckNumber(truckList.get(i).getFoodtruckNumber()));

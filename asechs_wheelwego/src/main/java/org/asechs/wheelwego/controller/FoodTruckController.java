@@ -58,11 +58,15 @@ public class FoodTruckController {
 		if(option==null)
 			option="ByDate";
 		TruckVO gpsInfo = new TruckVO();
+		
 		gpsInfo.setLatitude(Double.parseDouble(latitude));
 		gpsInfo.setLongitude(Double.parseDouble(longitude));
+		
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");
-		//ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
+		//ListVO listVO1 = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
+		//System.out.println(listVO1);
 		ListVO listVO =foodTruckService.filtering(option,null, pageNo, latitude, longitude,gpsInfo);
+		System.out.println(listVO);
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("gpsInfo", gpsInfo);
 		modelAndView.addObject("option", option);	

@@ -39,6 +39,13 @@ $(document).ready(function(){
 			sel.options[i].selected = true;
 		}
 	}
+	
+	$(".imgName").click(function(){
+		var address=$(this).parent().find(".address").html();
+		var foodtruckNo=$(this).parent().find(".foodtruckNo").val();
+        location.href= "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude=${param.latitude}&longitude=${param.longitude}&address="+address;
+	});
+	
    $("input#insertBtn").click(function(){
      var foodtruckNumber = $(this).attr('name');
      var id = "${sessionScope.memberVO.id}";
@@ -89,7 +96,7 @@ $(document).ready(function(){
         location: new naver.maps.LatLng("${truckInfo.latitude}", "${truckInfo.longitude}"),
     }, function(status, response) {
         if (status !== naver.maps.Service.Status.OK) {
-            //return alert('Something wrong!');
+        	document.getElementById("${wishList.foodtruckName}").innerHTML = "위치정보없음";
         }
 
         var result = response.result, // 검색 결과의 컨테이너
@@ -116,9 +123,10 @@ $(document).ready(function(){
              style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" > --%>
     <div class="col-sm-6">
       <div class="thumbnail">
-      <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
+      <%-- <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
-        </a>
+        </a> --%>
+        <img class = "imgName" src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:180px;">
         <c:choose>
          <c:when test="${requestScope.getBookMarkCount=='off'}">
          <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/heartoff.png" >
@@ -128,9 +136,8 @@ $(document).ready(function(){
        	</c:otherwise>
        	</c:choose>
         <p><strong>${truckInfo.foodtruckName}</strong></p>
-        <p id = "${truckInfo.foodtruckName}"></p>
-        <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
-
+        <p id = "${truckInfo.foodtruckName}" class="address"></p>
+        <input type="hidden" class="foodtruckNo" value="${truckInfo.foodtruckNumber}">
 <%--       <div class="thumbnail">
       <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
 =======
@@ -141,7 +148,7 @@ $(document).ready(function(){
 <<<<<<< HEAD
         <p><strong style="font-size:17px; ">${truckInfo.foodtruckName}</strong></p>
         <p id = "${truckInfo.foodtruckName}" style="font-size:15px; color: grey;"></p> --%>
-        <strong style="font-size:15px; ">${truckInfo.foodtruckName}</strong><br>
+
         <strong style="font-size:15px; "><span class="glyphicon glyphicon-star" style="color:orange"> </span>&nbsp;&nbsp;${truckInfo.avgGrade}&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-heart" style="color:red"></span>&nbsp;&nbsp;${truckInfo.wishlistCount }</strong>
         <br><p id = "${truckInfo.foodtruckName}" style="font-size:13px; color: grey;"></p>
       </div>
