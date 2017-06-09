@@ -59,9 +59,9 @@ img{
   <c:forEach items="${wishlist.truckList}" var="wishList">
       <div class="w3-third col-sm-4" >    
          <div class="w3-one" align="center">
-            <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
+<%--             <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
                <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
-                </a>
+                </a> --%>
          	<%-- <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}&latitude=${param.latitude}&longitude=${param.longitude}"> --%>
                <img class = "imgName" height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1;">
                 <!-- </a> -->
@@ -94,7 +94,7 @@ img{
 				   	    hint)   startPageOfPageGroup-1 하면 됨 		 
 	 -->      
 	<c:if test="${pb.previousPageGroup}">
-	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup-1}&id=${pb.customerId}">◀&nbsp; </a>
+	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup-1}&id=${pb.customerId}&latitude=${param.latitude}&longitude=${param.longitude}">◀&nbsp; </a>
 	</c:if>
 	<!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
 				   2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
@@ -106,7 +106,7 @@ img{
 	<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 	<c:choose>
 	<c:when test="${pb.nowPage!=i}">
-	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${i}&id=${pb.customerId}">${i}</a> 
+	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${i}&id=${pb.customerId}&latitude=${param.latitude}&longitude=${param.longitude}">${i}</a> 
 	</c:when>
 	<c:otherwise>
 	${i}
@@ -121,8 +121,8 @@ img{
 				   	    hint)   endPageOfPageGroup+1 하면 됨 		 
 	 -->   
 	<c:if test="${pb.nextPageGroup}">
-	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}">${i}</a>
-	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}">▶</a>
+	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}&latitude=${param.latitude}&longitude=${param.longitude}">${i}</a>
+	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}&latitude=${param.latitude}&longitude=${param.longitude}">▶</a>
 	<!-- <img src="img/right_arrow_btn.gif"> -->
 	</c:if>
 </p>
@@ -133,9 +133,6 @@ $(document).ready(function(){
 	$(".imgName").click(function(){
         var foodtruckNo=$(this).next().next().find(".foodtruckNo").val();
         var address=$(this).next().next().find(".address").html();
-        
-
-        
         location.href= "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude=${param.latitude}&longitude=${param.longitude}&address="+address;
 		//alert(address.html());foodturckNumber")
 	});

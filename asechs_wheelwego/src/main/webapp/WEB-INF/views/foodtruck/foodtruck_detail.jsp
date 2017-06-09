@@ -66,7 +66,7 @@ $(document).ready(function(){
            // $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
            //location.reload();  
             alert("단골트럭으로 등록!");
-
+            location.reload();
          }else{
             alert("단골트럭 등록해제");         
             location.reload();
@@ -103,21 +103,22 @@ $(document).ready(function(){
 <div class="w3-container" id="about">
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5> 
- <c:when test="${requestScope.heartWishlist.foodtruckNumber eq truckInfo.foodtruckNumber}">
- 	<input type="image" id="insertBtn2"src="${pageContext.request.contextPath }/resources/upload/hearton.png" name = "${truckDetailInfo.foodtruckNumber}" style="width:45px;text-align: center; ">
- </c:when>
- <c:otherwise>
-  <div align="center"> 
-  	<input type="image" id="insertBtn2"src="${pageContext.request.contextPath }/resources/upload/greyheart2.png" name = "${truckDetailInfo.foodtruckNumber}" style="width:45px;text-align: center; ">
+  <c:choose>
+        <c:when test="${wishlistFlag==1}">
+	       	 	<input type="image" id="insertBtn2" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/hearton.png"  style="width:45px;text-align: center; z-index: 10; ">
+	        </c:when>
+	        <c:otherwise>
+	        	<input type="image" id="insertBtn2" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/greyheart2.png" style="width:45px;text-align: center; z-index: 10; ">
+	        </c:otherwise>
+        </c:choose>
    </div>
-   </c:otherwise>
     <%-- <input type="image" id="insertBtn" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/greyheart2.png"> --%>
    <%--  <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
 <p style="text-align:center;"><i>${truckDetailInfo.introduction}</i></p><br>
-<div class="w3-panel w3-leftbar w3-light-grey">
-    <p><strong><span class="glyphicon glyphicon-time"></span></strong> everyday from 6am to 5pm.</p>
-    <p><strong><span class="glyphicon glyphicon-map-marker"></span></strong> 15 Adr street, 5015, NY</p>
-   <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="w3-panel w3-leftbar w3-light-grey" align="center">
+	<p></p>
+    <p  style="font-size: 16px;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;${param.address}</p>
+   <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;
    <strong><span class="glyphicon glyphicon-heart" style="color:red"></span> </strong>${requestScope.truckDetailInfo.wishlistCount}</p>
 </div>
   </div>

@@ -153,4 +153,9 @@ public class MypageDAOImpl implements MypageDAO {
 	public int getTotalReviewCount(String customerId) {
 		return sqlSessionTemplate.selectOne("mypage.getTotalReviewCount", customerId);
 	}
+	
+	@Override
+	public int getWishListFlag(WishlistVO wishlistVO) {
+		return sqlSessionTemplate.selectOne("mypage.getWishListFlag", wishlistVO);
+	}
 }

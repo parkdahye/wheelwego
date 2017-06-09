@@ -63,4 +63,6 @@ public interface MypageDAO {
 	public List<TruckVO> getWishList(PagingBean pagingBean);
 
 	public int getTotalReviewCount(String customerId);
+	
+	public int getWishListFlag(WishlistVO wishlistVO);
 }
