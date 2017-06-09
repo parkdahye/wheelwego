@@ -27,10 +27,9 @@
   width: 50%;
   height: 300px;
   }
-/*   img:hover {
-    opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
-} */
+  .paging a {
+    color: grey; 
+	}
 </style>
 
 <div class=" text-center"> <h1 class="page-header">MY Page</h1> </div>
@@ -60,7 +59,9 @@ img{
   <c:forEach items="${wishlist.truckList}" var="wishList">
       <div class="w3-third col-sm-4" >    
          <div class="w3-one" align="center">
-
+            <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
+               <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
+                </a>
          	<%-- <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}&latitude=${param.latitude}&longitude=${param.longitude}"> --%>
                <img class = "imgName" height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1;">
                 <!-- </a> -->
@@ -84,7 +85,7 @@ img{
 </div>
 </div>
 
-<p class="paging text-center">
+<p class="paging text-center" style="font-size: 17px; color:black;">
 	<c:set var="pb" value="${requestScope.wishlist.pagingBean}"></c:set>
 	<!-- 
 			step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
