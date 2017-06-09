@@ -9,7 +9,6 @@ import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.ListVO;
 import org.asechs.wheelwego.model.vo.ReviewVO;
-//github.com/parkdahye/wheelwego.git
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
 import org.springframework.stereotype.Controller;
@@ -32,18 +31,21 @@ public class FoodTruckController {
 		return new ModelAndView("foodtruck/foodtruck_location_select_list.tiles", "pagingList", searchList);
 	}
 	
+	
 	/* 검색 결과 푸드트럭 리스트 */
 	@RequestMapping("searchFoodTruckByName.do")
-	public ModelAndView searchFoodTruckByName(String name, String pageNo, String latitude, String longitude) {
+	public ModelAndView searchFoodTruckByName(String name, String pageNo, String latitude, String longitude,String option) {
+		if(option==null)
+			option="ByDate";
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");		
-		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
+		ListVO listVO =foodTruckService.filtering(option, name, pageNo, latitude, longitude,null);
+		//ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("name", name);		
-		
-
-		
-		System.out.println(name);
-		System.out.println(listVO);
+		//System.out.println(name);
+		//System.out.println(listVO);
+		modelAndView.addObject("option", option);		
+		modelAndView.addObject("flag", "false");	
 		return modelAndView;
 	}
 	/**
@@ -52,17 +54,19 @@ public class FoodTruckController {
 	 * @return
 	 */
 	@RequestMapping("searchFoodTruckByGPS.do")
-	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String pageNo) {
+	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String pageNo,String option) {
+		if(option==null)
+			option="ByDate";
 		TruckVO gpsInfo = new TruckVO();
 		gpsInfo.setLatitude(Double.parseDouble(latitude));
 		gpsInfo.setLongitude(Double.parseDouble(longitude));
-		
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");
-		ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
-		
+		//ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
+		ListVO listVO =foodTruckService.filtering(option,null, pageNo, latitude, longitude,gpsInfo);
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("gpsInfo", gpsInfo);
-		
+		modelAndView.addObject("option", option);	
+		modelAndView.addObject("flag", "true");	
 		return modelAndView;
 	}
 	/**

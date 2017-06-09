@@ -39,7 +39,7 @@
 <div class="panel-body">
 
 <div class="container"> 
-<form enctype="multipart/form-data" action="${pageContext.request.contextPath }/afterLogin_/qna_write.do" method="post">  
+<form enctype="multipart/form-data" action="qna_write.do" method="post">  
 		<div class="row"> 
 			
 			<div class="col-md-6"> 
