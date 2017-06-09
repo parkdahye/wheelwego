@@ -32,6 +32,13 @@
 <script>
 
 $(document).ready(function(){
+	var option="${requestScope.option}";
+	var sel=document.getElementById("option");
+	for(var i=0; i<sel.options.length; i++){
+		if(sel.options[i].value==option){
+			sel.options[i].selected = true;
+		}
+	}
    $("input#insertBtn").click(function(){
      var foodtruckNumber = $(this).attr('name');
      var id = "${sessionScope.memberVO.id}";
@@ -60,6 +67,15 @@ $(document).ready(function(){
    });
     }
 });
+   $(":input[name=option]").change(function(){
+	   var optionVal=$(this).val();
+	   var flag="${requestScope.flag}";
+	   if(flag=="false"){
+	  		location.href="${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude=${param.latitude}&longitude=${param.longitude}&name=${param.name}&option="+optionVal;
+	   }else{
+		  	location.href="${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude=${param.latitude}&longitude=${param.longitude}&option="+optionVal;
+	   }
+   });
 });
 </script>
 
@@ -81,6 +97,11 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid text-center bg-grey">
   <h3>FOODTRUCK LIST</h3><br>
+  <select name="option" id="option">
+  	<option value="byDate">최신순</option>
+   	<option value="byAvgGrade">평점순</option>
+  	<option value="byWishlist">즐겨찾기순</option>
+  </select>
   <hr>
   <div class="row text-center" style="position:relative;">
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
@@ -95,8 +116,9 @@ $(document).ready(function(){
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
         </a>
         <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/greyheart2.png">
-        <p><strong style="font-size:17px; ">${truckInfo.foodtruckName}</strong></p>
-        <p id = "${truckInfo.foodtruckName}" style="font-size:15px; color: grey;"></p>
+        <strong style="font-size:15px; ">${truckInfo.foodtruckName}</strong><br>
+        <strong style="font-size:15px; "><span class="glyphicon glyphicon-star" style="color:orange"> </span>&nbsp;&nbsp;${truckInfo.avgGrade}&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-heart" style="color:red"></span>&nbsp;&nbsp;${truckInfo.wishlistCount }</strong>
+        <br><p id = "${truckInfo.foodtruckName}" style="font-size:13px; color: grey;"></p>
       </div>
     </div>
   </c:forEach>
@@ -105,8 +127,6 @@ $(document).ready(function(){
 
 <p class="paging text-center">
    <c:set var="pb" value="${requestScope.pagingList.pagingBean}"></c:set>
-   	sdfadsfadsfds${pb.startPageOfPageGroup}<br>
-   	sdfadsfadsfds${pb.startPageOfPageGroup}<br>
    <!-- 
          step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
                      페이징빈의 previousPageGroup 이용 
@@ -115,11 +135,11 @@ $(document).ready(function(){
     -->      
    <c:if test="${pb.previousPageGroup}">
    		<c:choose>
-	   		<c:when test="${!empty param.name}">
-	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByName.do?pageNo=${pb.startPageOfPageGroup-1}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}">◀&nbsp; </a>
+	   		<c:when test="${requestScope.flag==false}">
+	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByName.do?pageNo=${pb.startPageOfPageGroup-1}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}&option=${requestScope.option}">◀&nbsp; </a>
 	   		</c:when>
 	   		<c:otherwise>
-	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByGPS.do?pageNo=${pb.startPageOfPageGroup-1}&latitude=${param.latitude}&longitude=${param.longitude}">◀&nbsp; </a>
+	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByGPS.do?pageNo=${pb.startPageOfPageGroup-1}&latitude=${param.latitude}&longitude=${param.longitude}&option=${requestScope.option}">◀&nbsp; </a>
 	   		</c:otherwise>   		
    		</c:choose>   
    </c:if>
@@ -134,11 +154,11 @@ $(document).ready(function(){
    <c:choose>
    <c:when test="${pb.nowPage!=i}">
    		<c:choose>
-	   		<c:when test="${!empty param.name}">
-	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByName.do?pageNo=${i}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}">${i}</a>
+	   		<c:when test="${requestScope.flag==false}">
+	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByName.do?pageNo=${i}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}&option=${requestScope.option}">${i}</a>
 	   		</c:when>
 	   		<c:otherwise>
-	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByGPS.do?pageNo=${i}&latitude=${param.latitude}&longitude=${param.longitude}">${i}</a>
+	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByGPS.do?pageNo=${i}&latitude=${param.latitude}&longitude=${param.longitude}&option=${requestScope.option}">${i}</a>
 	   		</c:otherwise>   		
    		</c:choose> 
    </c:when>
@@ -151,12 +171,13 @@ $(document).ready(function(){
 
    <c:if test="${pb.nextPageGroup}">
    		<c:choose>
-	   		<c:when test="${!empty param.name}">
-	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByName.do?pageNo=${pb.startPageOfPageGroup+1}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}">▶</a>
+	   		<c:when test="${requestScope.flag==false}">
+	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByName.do?pageNo=${pb.endPageOfPageGroup+1}&latitude=${param.latitude}&longitude=${param.longitude}&name=${requestScope.name}&option=${requestScope.option}">▶</a>
 	   		</c:when>
 	   		<c:otherwise>
-	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByGPS.do?pageNo=${pb.startPageOfPageGroup+1}&latitude=${param.latitude}&longitude=${param.longitude}">▶</a>
+	   			<a href="${pageContext.request.contextPath}/searchFoodTruckByGPS.do?pageNo=${pb.endPageOfPageGroup+1}&latitude=${param.latitude}&longitude=${param.longitude}&option=${requestScope.option}">▶</a>
 	   		</c:otherwise>   		
    		</c:choose>   
    </c:if>   
 </p>
+<Br><br><br>
