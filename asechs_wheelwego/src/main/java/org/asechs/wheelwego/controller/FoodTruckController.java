@@ -55,6 +55,7 @@ public class FoodTruckController {
 				id = memberVO.getId();
 				heartWishList = mypageService.heartWishList(id);
 				modelAndView.addObject("heartWishlist",heartWishList);
+				System.out.println(heartWishList);
 			}
 		}
 		//System.out.println(name);
@@ -102,7 +103,9 @@ public class FoodTruckController {
 	 */
 	@RequestMapping("foodtruck/foodTruckAndMenuDetail.do")
 	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo,String reviewPageNo){
+	
 		System.out.println(foodtruckNo);
+		
 		TruckVO truckDetail = foodTruckService.foodTruckAndMenuDetail(foodtruckNo);
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("foodtruck/foodtruck_detail.tiles");
