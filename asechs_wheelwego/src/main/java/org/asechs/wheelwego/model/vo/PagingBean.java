@@ -14,6 +14,26 @@ public class PagingBean {
 	 * 현재 페이지
 	 */
 	private int nowPage = 1;
+	public int getPageNumberPerPageGroup() {
+		return pageNumberPerPageGroup;
+	}
+
+	public void setPageNumberPerPageGroup(int pageNumberPerPageGroup) {
+		this.pageNumberPerPageGroup = pageNumberPerPageGroup;
+	}
+
+	public int getTotalContents() {
+		return totalContents;
+	}
+
+	public void setTotalContents(int totalContents) {
+		this.totalContents = totalContents;
+	}
+
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+
 	/**
 	 * 페이지당 게시물수
 	 */
