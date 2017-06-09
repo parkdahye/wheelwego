@@ -137,8 +137,7 @@ $(document).ready(function(){
     </div>
   </c:forEach>
   </div>
-</div>
-<p class="paging text-center">
+  <p class="paging text-center" style="font-size: 17px; color:black;">
    <c:set var="pb" value="${requestScope.pagingList.pagingBean}"></c:set>
    <!-- 
          step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
@@ -193,5 +192,6 @@ $(document).ready(function(){
    		</c:choose>   
    </c:if>   
 </p>
+</div>
 <br><br>
 
