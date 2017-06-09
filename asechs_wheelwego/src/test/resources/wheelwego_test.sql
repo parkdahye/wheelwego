@@ -1,7 +1,11 @@
 select * from foodtruck where seller_id='seller'
 ----------dbTEST---------------------
-select * from WISHLIST
+select * from WISHLIST where customer_id='customer01'
+select * from foodtruck where foodtruck_name='카페브릭'
 select * from foodtruckfile
+select * from wishlist where customer_id='customer01'
+delete from wishlist 
+
 ----------dbTEST---------------------
 		select id from member where member_name='정현지' and
 		phonenumber='01022552716'

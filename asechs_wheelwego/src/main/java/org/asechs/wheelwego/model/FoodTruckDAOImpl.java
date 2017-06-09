@@ -101,6 +101,8 @@ public class FoodTruckDAOImpl implements FoodTruckDAO {
 
 	@Override
 	public List<TruckVO> filteringByWishlist(PagingBean pagingbean) {
+		System.out.println("DAO gpsInfo:"+pagingbean.getGpsInfo());
+		System.out.println("dao 결과 : "+sqlSessionTemplate.selectList("foodtruck.filteringByWishlist", pagingbean));
 		return sqlSessionTemplate.selectList("foodtruck.filteringByWishlist", pagingbean);
 	}
 
