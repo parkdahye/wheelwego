@@ -1,22 +1,22 @@
 package org.asechs.wheelwego.model.vo;
 
 public class WishlistVO {
-	private String foodTruckNumber;
+	private String foodtruckNumber;
 	private String customerId;
 	public WishlistVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public WishlistVO(String foodTruckNumber, String customerId) {
+	public WishlistVO(String foodtruckNumber, String customerId) {
 		super();
-		this.foodTruckNumber = foodTruckNumber;
+		this.foodtruckNumber = foodtruckNumber;
 		this.customerId = customerId;
 	}
-	public String getFoodTruckNumber() {
-		return foodTruckNumber;
+	public String getfoodtruckNumber() {
+		return foodtruckNumber;
 	}
-	public void setFoodtruckNumber(String foodTruckNumber) {
-		this.foodTruckNumber = foodTruckNumber;
+	public void setfoodtruckNumber(String foodtruckNumber) {
+		this.foodtruckNumber = foodtruckNumber;
 	}
 	public String getCustomerId() {
 		return customerId;
@@ -26,6 +26,6 @@ public class WishlistVO {
 	}
 	@Override
 	public String toString() {
-		return "WishlistVO [foodtruckNumber=" + foodTruckNumber + ", customerId=" + customerId + "]";
+		return "WishlistVO [foodtruckNumber=" + foodtruckNumber + ", customerId=" + customerId + "]";
 	}
 }

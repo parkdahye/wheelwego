@@ -20,9 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class MypageServiceImpl implements MypageService {
 	@Resource
 	private MypageDAO mypageDAO;
+	
+	@Override
+	public List<WishlistVO> heartWishList(String id){
+		return mypageDAO.heartWishList(id);
+	}
 	@Override
 	public List<TruckVO> myWishList(String id) {
-		System.out.println("서비스 실행");
 		return mypageDAO.myWishList(id);
 			
 	}

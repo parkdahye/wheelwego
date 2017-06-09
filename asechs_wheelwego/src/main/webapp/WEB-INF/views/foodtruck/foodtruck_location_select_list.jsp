@@ -34,11 +34,10 @@
 $(document).ready(function(){
    $("input#insertBtn").click(function(){
      var foodtruckNumber = $(this).attr('name');
+     var insertBtn=$(this);
      var id = "${sessionScope.memberVO.id}";
-     //var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
-       var src = ($(this).attr('src')) ==='hearton.png'
-     
-    if(id==""){
+     var src = $(this).attr('src');
+     if(id==""){
        alert("로그인이 필요합니다.");
     }else{
      $.ajax({
@@ -47,14 +46,12 @@ $(document).ready(function(){
       data: {id: id, foodtruckNumber: foodtruckNumber}, 
       success:function(data){
          if(data=="on"){
-            $("#insertBtn").attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png');
-           // $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
-           //location.reload();  
+			$(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png'); 
             alert("단골트럭으로 등록!");
 
          }else{
-            alert("단골트럭 등록해제");         
-            location.reload();
+        	 alert("단골트럭 등록해제");
+        	 $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png'); 
          }
       }
    });
@@ -84,17 +81,28 @@ $(document).ready(function(){
   <hr>
   <div class="row text-center" style="position:relative;">
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
-   <%--  <div class="col-xs-6">
-      <div style="position:relative;" class="thumbnail">
-       <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${param.latitude}&longitude=${param.longitude}"><img src="resources/img/${truckInfo.fileVO.filepath}" class="img-responsive"></a> 
-        <input  type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/img/heartoff.png" 
-             style=" position:absolute; width: 45px; left : 10px;top : 10px; cursor:pointer; opacity: 0.8; z-index: 1;" > --%>
-    <div class="col-sm-6">
+     <div class="col-sm-6">
       <div class="thumbnail">
       <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
         </a>
-        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/greyheart2.png">
+        <c:choose>
+        <c:when test="${requestScope.heartWishlist!='[]'&& requestScope.heartWishlist!=null}">
+        <c:forEach items="${requestScope.heartWishlist}" var="wishlistInfo">
+        <c:choose>
+	        <c:when test="${wishlistInfo.foodtruckNumber eq truckInfo.foodtruckNumber}">
+	       	 	<input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/hearton.png" style="z-index: 10;">
+	        </c:when>
+	        <c:otherwise>
+	        	<input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/greyheart2.png">
+	        </c:otherwise>
+        </c:choose>
+        </c:forEach>
+ 		</c:when>
+ 		<c:otherwise>
+ 			<input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/greyheart2.png">
+ 		</c:otherwise>
+ 		</c:choose>
         <p><strong style="font-size:17px; ">${truckInfo.foodtruckName}</strong></p>
         <p id = "${truckInfo.foodtruckName}" style="font-size:15px; color: grey;"></p>
       </div>
@@ -105,8 +113,6 @@ $(document).ready(function(){
 
 <p class="paging text-center">
    <c:set var="pb" value="${requestScope.pagingList.pagingBean}"></c:set>
-   	sdfadsfadsfds${pb.startPageOfPageGroup}<br>
-   	sdfadsfadsfds${pb.startPageOfPageGroup}<br>
    <!-- 
          step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
                      페이징빈의 previousPageGroup 이용 
@@ -160,3 +166,4 @@ $(document).ready(function(){
    		</c:choose>   
    </c:if>   
 </p>
+<br><br>

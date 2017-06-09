@@ -1,12 +1,16 @@
 package org.asechs.wheelwego.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 //github.com/parkdahye/wheelwego.git
 import org.asechs.wheelwego.model.vo.TruckVO;
@@ -33,12 +37,24 @@ public class FoodTruckController {
 	
 	/* 검색 결과 푸드트럭 리스트 */
 	@RequestMapping("searchFoodTruckByName.do")
-	public ModelAndView searchFoodTruckByName(String name, String pageNo, String latitude, String longitude) {
+	public ModelAndView searchFoodTruckByName(String name, String pageNo, String latitude, String longitude, HttpServletRequest request){
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");		
 		ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
 		modelAndView.addObject("pagingList", listVO);
-		modelAndView.addObject("name", name);		
-		
+		modelAndView.addObject("name", name);
+		HttpSession session=request.getSession(false);
+		String id=null;
+		List<WishlistVO> heartWishList=null;
+		if(session != null){
+			MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+			if(memberVO != null){
+				id = memberVO.getId();
+				heartWishList = mypageService.heartWishList(id);
+				modelAndView.addObject("heartWishlist",heartWishList);
+			}
+		}
+		System.out.println(id);
+		System.out.println(heartWishList);
 		System.out.println(name);
 		System.out.println(listVO);
 		return modelAndView;
@@ -101,14 +117,6 @@ public class FoodTruckController {
 	@RequestMapping(value = "afterLogin_foodtruck/registerBookMark.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String registerBookMark(String id, String foodtruckNumber){
-		
-	/*	System.out.println(id + "," + foodtruckNumber);
-	
-		
-		WishlistVO wishlistVO = new WishlistVO(foodtruckNumber, id);
-		foodTruckService.registerBookMark(wishlistVO);
-		return "success";
-		*/
 		String result = null;
 		System.out.println(id + "," + foodtruckNumber);
 

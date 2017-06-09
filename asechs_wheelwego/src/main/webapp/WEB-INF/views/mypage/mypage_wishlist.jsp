@@ -63,7 +63,7 @@ img{
             <a href="${pageContext.request.contextPath}/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
                <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
                 </a>
-                  <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/hearton.png" 
+                  <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/hearton.png" 
                       style="right:40px;opacity: 0.8; z-index: 2;" >
                <div class="overlay" >
                   <div class="txtOverLay">
