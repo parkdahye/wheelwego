@@ -103,10 +103,10 @@ values(#{reviewNo},#{foodtruckNumber},#{customerId},#{reviewContent},sysdate,#{g
 </select>
 <insert id="registerBookMark" parameterType="wishListVO">
 	insert into wishlist(customer_id,foodtruck_number )
-	  values(#{customerId},#{foodTruckNumber})
+	  values(#{customerId},#{foodtruckNumber})
 </insert>
 <select id="getBookMarkCount" parameterType="wishListVO" resultType="int">
-	select count(*) from wishlist where foodtruck_number = #{foodTruckNumber} and customer_id = #{customerId} 
+	select count(*) from wishlist where foodtruck_number = #{foodtruckNumber} and customer_id = #{customerId} 
 </select>
 
 <select id="findTruckNumberInReview" resultType="int">

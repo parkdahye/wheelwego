@@ -72,7 +72,6 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	}
 	@Override
 	public int getBookMarkCount(WishlistVO wishlistVO) {
-		
 		return foodTruckDAO.getBookMarkCount(wishlistVO);
 	}
 	@Override
