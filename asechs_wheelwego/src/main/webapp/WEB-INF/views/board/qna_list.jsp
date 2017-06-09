@@ -13,7 +13,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#writeBtn").click(function(){
-		location.href="${pageContext.request.contextPath}/board/qna_write_form.do";
+		location.href="${pageContext.request.contextPath}/afterLogin_board/qna_write_form.do";
 	})//click
 })//ready
 </script>
