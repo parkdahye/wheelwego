@@ -44,7 +44,39 @@ input[name="grade"]:checked + .star_point~label{
 }
 
 </style>
+<script>
 
+$(document).ready(function(){
+   $("input#insertBtn2").click(function(){
+     var foodtruckNumber = $(this).attr('name');
+     var id = "${sessionScope.memberVO.id}";
+     //var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
+       var src = ($(this).attr('src')) ==='hearton.png'
+     
+    if(id==""){
+       alert("로그인이 필요합니다.");
+    }else{
+     $.ajax({
+      type:"post",
+      url:"${pageContext.request.contextPath}/afterLogin_foodtruck/registerBookMark.do",
+      data: {id: id, foodtruckNumber: foodtruckNumber}, 
+      success:function(data){
+         if(data=="on"){
+            $("#insertBtn2").attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png');
+           // $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
+           //location.reload();  
+            alert("단골트럭으로 등록!");
+
+         }else{
+            alert("단골트럭 등록해제");         
+            location.reload();
+         }
+      }
+   });
+    }
+});
+});
+</script>
 <!-- Header -->
 <header class="bgimg w3-display-container" id="home">
   <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
@@ -70,13 +102,17 @@ input[name="grade"]:checked + .star_point~label{
 <!-- About Container -->
 <div class="w3-container" id="about">
   <div class="w3-content" style="max-width:700px">
-    <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5>
-    <%-- <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
+    <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5> 
+  <div align="center">
+  	<input type="image" id="insertBtn2"src="${pageContext.request.contextPath }/resources/upload/greyheart2.png" name = "${truckDetailInfo.foodtruckNumber}" style="width:45px;text-align: center; ">
+   </div>
+    <%-- <input type="image" id="insertBtn" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/greyheart2.png"> --%>
+   <%--  <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
 <p style="text-align:center;"><i>${truckDetailInfo.introduction}</i></p><br>
-<div class="w3-panel w3-leftbar w3-light-grey">
-    <p><strong><span class="glyphicon glyphicon-time"></span></strong> everyday from 6am to 5pm.</p>
-    <p><strong><span class="glyphicon glyphicon-map-marker"></span></strong> 15 Adr street, 5015, NY</p>
-   <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="w3-panel w3-leftbar w3-light-grey" align="center">
+	<p></p>
+    <p  style="font-size: 16px;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;${param.address}</p>
+   <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;
    <strong><span class="glyphicon glyphicon-heart" style="color:red"></span> </strong>${requestScope.truckDetailInfo.wishlistCount}</p>
 </div>
   </div>
@@ -90,7 +126,7 @@ input[name="grade"]:checked + .star_point~label{
   
     <div class="w3-row w3-center w3-card-2 w3-padding">
       <a href="javascript:void(0)" onclick="openMenu(event, 'Eat');" id="myLink">
-        <div class="w3-col s12 tablink">Eat</div>
+        <div class="w3-col s12 tablink">Eat</div> 
       </a>
     </div>
 

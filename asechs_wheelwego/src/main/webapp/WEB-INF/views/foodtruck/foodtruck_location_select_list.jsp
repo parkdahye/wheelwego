@@ -49,10 +49,21 @@ $(document).ready(function(){
 			sel.options[i].selected = true;
 		}
 	}
+	$(".detailLink").bind("click",function(){
+		var address=$(this).parent().find(".address").text();
+		var foodtruckNo=$(this).parent().find(":input[name=foodtruckNo]").val();
+		var latitude=$(this).parent().find(":input[name=latitude]").val();
+		var longitude=$(this).parent().find(":input[name=longitude]").val();
+		$(this).attr("href","${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address);
+	});
+
    $("input#insertBtn").click(function(){
      var foodtruckNumber = $(this).attr('name');
      var insertBtn=$(this);
      var id = "${sessionScope.memberVO.id}";
+     //var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
+       var src = ($(this).attr('src')) ==='hearton.png'
+    	   var insertBtn = $(this);
     if(id==""){
        alert("로그인이 필요합니다.");
     }else{
@@ -62,11 +73,14 @@ $(document).ready(function(){
       data: {id: id, foodtruckNumber: foodtruckNumber}, 
       success:function(data){
          if(data=="on"){
+            $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png');
+           // $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
+           //location.reload();  
 			$(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png'); 
             alert("단골트럭으로 등록!");
          }else{
-        	 alert("단골트럭 등록해제");
-        	 $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png'); 
+        	 $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png');
+            alert("단골트럭 등록해제");         
          }
       }
    });
@@ -118,8 +132,10 @@ $(document).ready(function(){
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-sm-6">
       <div class="thumbnail">
-
-      <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
+	<input type="hidden" name="foodtruckNo" value="${truckInfo.foodtruckNumber}">
+		<input type="hidden" name="latitude" value="${truckInfo.latitude}">
+		<input type="hidden" name="longitude" value="${truckInfo.longitude}">
+      <a class="detailLink" href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
 
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
         </a>
@@ -142,7 +158,7 @@ $(document).ready(function(){
  		</c:choose>
         <strong style="font-size:15px; ">${truckInfo.foodtruckName}</strong><br>
         <strong style="font-size:15px; "><span class="glyphicon glyphicon-star" style="color:orange"> </span>&nbsp;&nbsp;${truckInfo.avgGrade}&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-heart" style="color:red"></span>&nbsp;&nbsp;${truckInfo.wishlistCount }</strong>
-        <br><p id = "${truckInfo.foodtruckName}" style="font-size:13px; color: grey;"></p>
+        <br><p id = "${truckInfo.foodtruckName}" style="font-size:13px; color: grey;" class="address"></p>
       </div>
     </div>
   </c:forEach>
@@ -205,3 +221,23 @@ $(document).ready(function(){
 </div>
 <br><br>
 
+
+<script type="text/javascript">
+   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo" varStatus="status">
+   var mapInfo = naver.maps.Service.reverseGeocode({
+        location: new naver.maps.LatLng("${truckInfo.latitude}", "${truckInfo.longitude}"),
+    }, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            //return alert('Something wrong!');
+        }
+
+        var result = response.result, // 검색 결과의 컨테이너
+            items = result.items; // 검색 결과의 배열
+            if(items[0].address=="" || items[0].address==null){
+            	document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
+            }else{
+            document.getElementById("${truckInfo.foodtruckName}").innerHTML = items[0].address;
+            }
+    });
+   </c:forEach>
+</script>
