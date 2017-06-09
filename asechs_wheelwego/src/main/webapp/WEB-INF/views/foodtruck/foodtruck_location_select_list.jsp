@@ -76,7 +76,7 @@ $(document).ready(function(){
             alert("단골트럭으로 등록!");
            location.reload();  
          }else{
-        	 $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png');
+            $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png');
             alert("단골트럭 등록해제");         
             location.reload();  
          }
@@ -114,14 +114,13 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid text-center bg-grey">
   <h3>FOODTRUCK LIST</h3><br>
-
   <div class="row">
   <div class="col-xs-4"></div>
   <div class="col-xs-4">
   <select name="option" id="option" class="form-control">
-  	<option value="byDate" class="selected">최신순</option>
-   	<option value="byAvgGrade" class="selected">평점순</option>
-  	<option value="byWishlist" class="selected">즐겨찾기순</option>
+     <option value="byDate" class="selected">최신순</option>
+      <option value="byAvgGrade" class="selected">평점순</option>
+     <option value="byWishlist" class="selected">즐겨찾기순</option>
   </select>
 </div>
 <div class="col-xs-4"></div>
@@ -132,9 +131,10 @@ $(document).ready(function(){
     <div class="col-sm-6">
       <div class="thumbnail">
 
-	<input type="hidden" name="foodtruckNo" value="${truckInfo.foodtruckNumber}">
-		<input type="hidden" name="latitude" value="${truckInfo.latitude}">
-		<input type="hidden" name="longitude" value="${truckInfo.longitude}">
+
+   <input type="hidden" name="foodtruckNo" value="${truckInfo.foodtruckNumber}">
+      <input type="hidden" name="latitude" value="${truckInfo.latitude}">
+      <input type="hidden" name="longitude" value="${truckInfo.longitude}">
       <a class="detailLink" href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
 
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
@@ -218,6 +218,7 @@ $(document).ready(function(){
          </c:choose>   
    </c:if>   
 </p>
+
 </div>
 <br><br>
 
@@ -234,10 +235,11 @@ $(document).ready(function(){
         var result = response.result, // 검색 결과의 컨테이너
             items = result.items; // 검색 결과의 배열
             if(items[0].address=="" || items[0].address==null){
-            	document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
+               document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
             }else{
             document.getElementById("${truckInfo.foodtruckName}").innerHTML = items[0].address;
             }
     });
    </c:forEach>
+
 </script>
