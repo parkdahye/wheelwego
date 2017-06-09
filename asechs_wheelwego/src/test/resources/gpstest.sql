@@ -51,6 +51,11 @@ insert into foodtruckfile values ('80나1009', '그남자의소시지_트럭1.PN
 insert into foodtruckfile values ('80나1010', '그남자의소시지_트럭1.PNG');
 insert into foodtruckfile values ('80나1011', '그남자의소시지_트럭1.PNG');
 
+delete from foodtruck;
+insert into foodtruck (foodtruck_number, seller_id, foodtruck_name, introduction, register_timeposted, latitude, longitude) values ('80나0010', 'seller10', '달콤크레페', '달콤하고 맛있는 크레페를 팔고 있습니다. ', sysdate, 37.411823, 127.129187);
+
+
+select * from foodtruck;
 select * from foodtruckfile;
 
 select t.*, f.foodtruck_filepath
@@ -173,5 +178,19 @@ from foodtruck fo where fo.foodtruck_number in (select foodtruck_number from wis
 where t.foodtruck_number=f.foodtruck_number and rnum between 1 and 9
 order by t.foodtruck_number desc
 
+<<<<<<< HEAD
+
+select count(*) from wishlist where foodtruck_number = '80나0099' and customer_id = 'customer01';
+
+select * from foodtruck;
+=======
 update member set member_type='seller';
 select * from member where member_type = 'customer';
+>>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+
+select * from member;
+delete from member;
+delete from foodtruck;
+
+select * from foodtruck where foodtruck_name = '오로드푸드';
+update foodtruck set latitude=null, longitude = null where seller_id='seller36'

@@ -72,7 +72,6 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	}
 	@Override
 	public int getBookMarkCount(WishlistVO wishlistVO) {
-		
 		return foodTruckDAO.getBookMarkCount(wishlistVO);
 	}
 	@Override
@@ -139,5 +138,31 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 		pagingList.setPagingBean(pagingbean);
 		return pagingList;
 	}*/
-
+	@Override
+	public ListVO filtering(String option, String searchWord, String pageNo, String latitude, String longitude, TruckVO gpsInfo) {
+		List<TruckVO> truckList=null;
+		if(pageNo==null)
+			pageNo="1";
+		ListVO pagingList=new ListVO();
+		int totalCount=0;
+		if(searchWord!=null)
+			 totalCount=foodTruckDAO.getTruckListTotalContentCountByName(searchWord);
+		if(gpsInfo!=null)
+			totalCount=foodTruckDAO.getTruckListTotalContentCountByGPS(gpsInfo);
+		PagingBean pagingbean=new PagingBean(Integer.parseInt(pageNo),totalCount,searchWord);
+		if(option.equals("byAvgGrade")){
+			truckList=foodTruckDAO.filteringByAvgGrade(pagingbean);
+		}else if(option.equals("byWishlist")){
+			truckList=foodTruckDAO.filteringByWishlist(pagingbean);
+		}else{
+			truckList=foodTruckDAO.filteringByDate(pagingbean);
+		}
+		for(int i=0; i<truckList.size();i++){
+			truckList.get(i).setAvgGrade(foodTruckDAO.findAvgGradeByTruckNumber(truckList.get(i).getFoodtruckNumber()));
+			truckList.get(i).setWishlistCount(foodTruckDAO.findWishlistCountByTruckNumber(truckList.get(i).getFoodtruckNumber()));
+		}
+		pagingList.setTruckList(truckList);
+		pagingList.setPagingBean(pagingbean);
+		return pagingList;
+	}
 }
