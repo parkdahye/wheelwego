@@ -27,10 +27,9 @@
   width: 50%;
   height: 300px;
   }
-/*   img:hover {
-    opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
-} */
+  .paging a {
+    color: grey; 
+	}
 </style>
 
 <div class=" text-center"> <h1 class="page-header">MY Page</h1> </div>

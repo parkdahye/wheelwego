@@ -26,7 +26,9 @@
   width: 50%;
   height: 380px;
   }
-
+.paging a {
+    color: grey; 
+}
 </style>
 
 <script>
