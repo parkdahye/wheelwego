@@ -191,3 +191,6 @@ select * from member where member_type = 'customer';
 select * from member;
 delete from member;
 delete from foodtruck;
+
+select * from foodtruck where foodtruck_name = '오로드푸드';
+update foodtruck set latitude=null, longitude = null where seller_id='seller36'
