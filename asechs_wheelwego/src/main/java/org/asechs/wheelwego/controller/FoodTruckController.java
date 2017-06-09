@@ -3,11 +3,13 @@ package org.asechs.wheelwego.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.asechs.wheelwego.model.FoodTruckDAO;
 import org.asechs.wheelwego.model.FoodTruckService;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.ListVO;
+import org.asechs.wheelwego.model.vo.MemberVO;
 import org.asechs.wheelwego.model.vo.ReviewVO;
 import org.asechs.wheelwego.model.vo.TruckVO;
 import org.asechs.wheelwego.model.vo.WishlistVO;
@@ -34,14 +36,27 @@ public class FoodTruckController {
 	
 	/* 검색 결과 푸드트럭 리스트 */
 	@RequestMapping("searchFoodTruckByName.do")
-	public ModelAndView searchFoodTruckByName(String name, String pageNo, String latitude, String longitude,String option) {
+
+	public ModelAndView searchFoodTruckByName(String name, String pageNo, String latitude, String longitude,HttpServletRequest request,String option) {
 		if(option==null)
 			option="ByDate";
+
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");		
 		ListVO listVO =foodTruckService.filtering(option, name, pageNo, latitude, longitude,null);
 		//ListVO listVO = foodTruckService.getFoodTruckListByName(pageNo, name);	
 		modelAndView.addObject("pagingList", listVO);
-		modelAndView.addObject("name", name);		
+		modelAndView.addObject("name", name);
+		HttpSession session=request.getSession(false);
+		String id=null;
+		List<WishlistVO> heartWishList=null;
+		if(session != null){
+			MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+			if(memberVO != null){
+				id = memberVO.getId();
+				heartWishList = mypageService.heartWishList(id);
+				modelAndView.addObject("heartWishlist",heartWishList);
+			}
+		}
 		//System.out.println(name);
 		//System.out.println(listVO);
 		modelAndView.addObject("option", option);		
@@ -54,7 +69,7 @@ public class FoodTruckController {
 	 * @return
 	 */
 	@RequestMapping("searchFoodTruckByGPS.do")
-	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String pageNo,String option) {
+	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String pageNo,String option,HttpServletRequest request) {
 		if(option==null)
 			option="ByDate";
 		TruckVO gpsInfo = new TruckVO();
@@ -63,6 +78,17 @@ public class FoodTruckController {
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");
 		//ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
 		ListVO listVO =foodTruckService.filtering(option,null, pageNo, latitude, longitude,gpsInfo);
+		HttpSession session=request.getSession(false);
+		String id=null;
+		List<WishlistVO> heartWishList=null;
+		if(session != null){
+			MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+			if(memberVO != null){
+				id = memberVO.getId();
+				heartWishList = mypageService.heartWishList(id);
+				modelAndView.addObject("heartWishlist",heartWishList);
+			}
+		}
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("gpsInfo", gpsInfo);
 		modelAndView.addObject("option", option);	
@@ -112,7 +138,7 @@ public class FoodTruckController {
 		return result;
 }
 
-	/*@RequestMapping("afterLogin_foodtruck/getBookMarkCount.do")
+	@RequestMapping("afterLogin_foodtruck/getBookMarkCount.do")
 	@ResponseBody
 	public String getBookMarkCount(WishlistVO wishlistVO){
 		String result = null;
@@ -125,7 +151,7 @@ public class FoodTruckController {
 		System.out.println(result);
 		return result;
 	
-	}*/
+	}
 	
 	
 }

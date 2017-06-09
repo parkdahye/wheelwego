@@ -132,7 +132,7 @@ function geoFindMe2() {
             }
         }).open();
     }
-    // 현지 : hover + click text
+    // 현지 : hover + click test
     function hoverClick(val){
     	if (!navigator.geolocation){
     		alert("지오로케이션을 지원하지 않습니다!");
@@ -172,14 +172,6 @@ function geoFindMe2() {
 					   <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style="">
 					   <input class="btn btn-warning" onclick="geoFindMe2()" style="width: 100%;" value="자동검색" style="">
 				  </form>			
-<!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
-					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
-					  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
-					  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
-					  <label class="string optional" for="user_remember_me"> Remember me</label>
-					  <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="TEST" />
-				  </form> -->
-
 	            </div>
                 </li>
               </ul>

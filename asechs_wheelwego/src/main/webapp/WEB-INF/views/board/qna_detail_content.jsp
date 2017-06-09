@@ -71,7 +71,7 @@
 			<div class="col-md-8" > 
 			<div class="form-group" style="margin-right: 15px;"> 
 			<label for="writer">작성자</label> 
-			<input type="text" class="form-control"value="${requestScope.name.memberName}" readonly> 
+			<input type="text" class="form-control"value="${requestScope.name.memberName}" readonly > 
 			</div> 
 			</div> 
 		</div> 
@@ -93,9 +93,9 @@
 		</div></div><br><br><br><br><br><br><br><br><br><br><br><br>
 		
 			<%-- 사진 들어갈 공간 임시로 올림 --%>
-		<div class="form-group,col-md-8" style="left: 15px;"> 
+		<div class="form-group,col-md-8" style="left: 15px; margin-left: 15px;"> 
 		<c:forEach items="${requestScope.fileNameList }" var="fileNameList">
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<img class="img-rounded" src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="300px" height="200px">
 		</c:forEach>
 		</div><br><br>

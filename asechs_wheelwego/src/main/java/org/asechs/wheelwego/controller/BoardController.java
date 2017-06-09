@@ -285,7 +285,9 @@ public class BoardController {
 			public String qna_update_form(String no, Model model) {
 				BoardVO bvo = boardService.getqnaBoardDetail(no);
 				MemberVO name = boardService.qna_getNameById(bvo);
+				List<FileVO> fileNameList=boardService.getqnaFilePath(no);
 				model.addAttribute("name", name);
+				model.addAttribute("fileNameList",fileNameList);
 				model.addAttribute("detail_qna", bvo);
 				return "board/qna_update_form.tiles";
 			}

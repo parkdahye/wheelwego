@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.FoodVO;
 import org.asechs.wheelwego.model.vo.ListVO;
@@ -23,6 +24,19 @@ import org.springframework.web.servlet.ModelAndView;
 public class MypageController {
 	@Resource
 	private MypageService mypageService;
+	@Resource
+	private MemberService memberService;
+	
+	/**
+	 *  현지: myWishList 푸드트럭 리스트에서 heart 표시
+	 * @param id
+	 */
+/*	@RequestMapping("heartWishList.do")
+	public ModelAndView heartWishList(HttpServletRequest request, String id){
+		id = request.getSession().getId();
+		List<WishlistVO> heartWishList = mypageService.heartWishList(id);
+		return new ModelAndView("../foodtruck/foodtruck_location_select_list.tiles","heartWishlist",heartWishList);
+	}*/
 	
 	@RequestMapping("afterLogin_mypage/wishlist.do")
 	// 세션이 없으면 홈으로 보냄
@@ -37,7 +51,7 @@ public class MypageController {
 			ModelAndView modelAndView = new ModelAndView("mypage/mypage_wishlist.tiles");
 			ListVO listVO = mypageService.getWishList(pageNo, id);
 			modelAndView.addObject("wishlist", listVO);
-			System.out.println(listVO.getTruckList());
+			//System.out.println(listVO.getTruckList());
 			return modelAndView;
 		}
 	}
@@ -45,7 +59,7 @@ public class MypageController {
 	@RequestMapping(value = "afterLogin_mypage/deleteWishList.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteWishList(String id, String foodtruckNumber){
-		System.out.println(id + "," + foodtruckNumber);
+		//System.out.println(id + "," + foodtruckNumber);
 		WishlistVO wishlistVO = new WishlistVO(foodtruckNumber, id);
 		mypageService.deleteWishList(wishlistVO);
 		return "success";
