@@ -137,6 +137,9 @@ select row_number() over(order by review_timeposted desc) as rnum,review_no,food
 <select id="getTotalReviewCount" resultType="int">
 	select count(*) from review where customer_id=#{value}
 </select>
+<select id="getWishListFlag" resultType="int" parameterType="wishlistVO">
+select count(*) from wishlist where customer_id=#{customerId} and foodtruck_number=#{foodtruckNumber}
+</select>
 </mapper>
  
 

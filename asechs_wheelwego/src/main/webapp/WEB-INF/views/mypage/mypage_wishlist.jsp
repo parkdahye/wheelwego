@@ -29,7 +29,7 @@
   }
   .paging a {
     color: grey; 
-	}
+   }
 </style>
 
 <div class=" text-center"> <h1 class="page-header">MY Page</h1> </div>
@@ -45,8 +45,8 @@ img{
     border-radius: 8px;
 }
 .overlay{
-	border-bottom-left-radius: 8px;
-	border-bottom-right-radius: 8px;
+   border-bottom-left-radius: 8px;
+   border-bottom-right-radius: 8px;
 }
 </style>
 
@@ -59,10 +59,12 @@ img{
   <c:forEach items="${wishlist.truckList}" var="wishList">
       <div class="w3-third col-sm-4" >    
          <div class="w3-one" align="center">
-
-         	<a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}&latitude=${param.latitude}&longitude=${param.longitude}">
+<%--             <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}">
+               <img height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1; ">
+                </a> --%>
+            <%-- <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${wishList.foodtruckNumber}&latitude=${param.latitude}&longitude=${param.longitude}"> --%>
                <img class = "imgName" height="250px" width="260px" src="${pageContext.request.contextPath}/resources/upload/${wishList.fileVO.filepath}" style="position:relative;  z-index: 1;">
-                </a>
+                <!-- </a> -->
                   <input  type="image" id="insertBtn" name = "${wishList.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/hearton.png" 
                       style="right:40px;opacity: 0.8; z-index: 2;" >
                <div class="overlay" >
@@ -84,62 +86,59 @@ img{
 </div>
 
 <p class="paging text-center" style="font-size: 17px; color:black;">
-	<c:set var="pb" value="${requestScope.wishlist.pagingBean}"></c:set>
-	<!-- 
-			step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
-				   		페이징빈의 previousPageGroup 이용 
-				   2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
-				   	    hint)   startPageOfPageGroup-1 하면 됨 		 
-	 -->      
-	<c:if test="${pb.previousPageGroup}">
-	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup-1}&id=${pb.customerId}">◀&nbsp; </a>
-	</c:if>
-	<!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
-				   2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
-				      현 페이지이면 링크를 처리하지 않는다.  
-				      PagingBean의 nowPage
-				      jstl choose 를 이용  
-				      예) <a href="list.do?pageNo=...">				   
-	 -->		
-	<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
-	<c:choose>
-	<c:when test="${pb.nowPage!=i}">
-	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${i}&id=${pb.customerId}">${i}</a> 
-	</c:when>
-	<c:otherwise>
-	${i}
-	</c:otherwise>
-	</c:choose>
-	&nbsp;
-	</c:forEach>	 
-	<!-- 
-			step3 1) 다음 페이지 그룹이 있으면 이미지(img/right_arrow_btn.gif) 보여준다. 
-				   		페이징빈의 nextPageGroup 이용 
-				   2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
-				   	    hint)   endPageOfPageGroup+1 하면 됨 		 
-	 -->   
-	<c:if test="${pb.nextPageGroup}">
-	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}">${i}</a>
-	<a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}">▶</a>
-	<!-- <img src="img/right_arrow_btn.gif"> -->
-	</c:if>
+   <c:set var="pb" value="${requestScope.wishlist.pagingBean}"></c:set>
+   <!-- 
+         step2 1) 이전 페이지 그룹이 있으면 이미지 보여준다. (img/left_arrow_btn.gif)
+                     페이징빈의 previousPageGroup 이용 
+               2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+                      hint)   startPageOfPageGroup-1 하면 됨        
+    -->      
+   <c:if test="${pb.previousPageGroup}">
+   <a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup-1}&id=${pb.customerId}&latitude=${param.latitude}&longitude=${param.longitude}">◀&nbsp; </a>
+   </c:if>
+   <!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
+               2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
+                  현 페이지이면 링크를 처리하지 않는다.  
+                  PagingBean의 nowPage
+                  jstl choose 를 이용  
+                  예) <a href="list.do?pageNo=...">               
+    -->      
+   <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+   <c:choose>
+   <c:when test="${pb.nowPage!=i}">
+   <a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${i}&id=${pb.customerId}&latitude=${param.latitude}&longitude=${param.longitude}">${i}</a> 
+   </c:when>
+   <c:otherwise>
+   ${i}
+   </c:otherwise>
+   </c:choose>
+   &nbsp;
+   </c:forEach>    
+   <!-- 
+         step3 1) 다음 페이지 그룹이 있으면 이미지(img/right_arrow_btn.gif) 보여준다. 
+                     페이징빈의 nextPageGroup 이용 
+               2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+                      hint)   endPageOfPageGroup+1 하면 됨        
+    -->   
+   <c:if test="${pb.nextPageGroup}">
+   <a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}&latitude=${param.latitude}&longitude=${param.longitude}">${i}</a>
+   <a href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?pageNo=${pb.endPageOfPageGroup+1}&id=${pb.customerId}&latitude=${param.latitude}&longitude=${param.longitude}">▶</a>
+   <!-- <img src="img/right_arrow_btn.gif"> -->
+   </c:if>
 </p>
 
  <script>
 $(document).ready(function(){
 
-	$(".imgName").click(function(){
+   $(".imgName").click(function(){
         var foodtruckNo=$(this).next().next().find(".foodtruckNo").val();
         var address=$(this).next().next().find(".address").html();
-        
-
-        
         location.href= "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude=${param.latitude}&longitude=${param.longitude}&address="+address;
-		//alert(address.html());foodturckNumber")
-	});
-	
-	
-	
+      //alert(address.html());foodturckNumber")
+   });
+   
+   
+   
    $("input#insertBtn").click(function(){
         var foodtruckNumber = $(this).attr('name');
         var id = "${sessionScope.memberVO.id}";
@@ -162,20 +161,20 @@ $(document).ready(function(){
    });   
 });
    $(document).ready(function(){
-		$("#deleteAccountBtn").click(function(){
-			if(confirm("계정을 삭제하시겠습니까?")){
-				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
-			}
-		});
-		$("#updateBtn").click(function(){
-				location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
-		});
-		$("#wishlistBtn").click(function(){
-			location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
-		});
-		$("#reviewBtn").click(function(){
-			location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
-		});
+      $("#deleteAccountBtn").click(function(){
+         if(confirm("계정을 삭제하시겠습니까?")){
+            location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
+         }
+      });
+      $("#updateBtn").click(function(){
+            location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
+      });
+      $("#wishlistBtn").click(function(){
+         location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
+      });
+      $("#reviewBtn").click(function(){
+         location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
+      });
   });
 </script>
 
@@ -186,7 +185,7 @@ $(document).ready(function(){
     }, function(status, response) {
         if (status !== naver.maps.Service.Status.OK) {
             //return alert('Something wrong!');
-        	document.getElementById("${wishList.foodtruckName}").innerHTML = "위치정보없음";
+           document.getElementById("${wishList.foodtruckName}").innerHTML = "위치정보없음";
         }
 
         var result = response.result, // 검색 결과의 컨테이너
