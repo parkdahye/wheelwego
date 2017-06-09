@@ -21,7 +21,7 @@
 			location.href="${pageContext.request.contextPath}/qna_list.do";
 		})//수정버튼
 		$("#modifyBtn").click(function()	{
-			location.href="${pageContext.request.contextPath}/qna_update_form.do?no="+${requestScope.detail_qna.no};
+			location.href="${pageContext.request.contextPath}/afterLogin_board/qna_update_form.do?no="+${requestScope.detail_qna.no};
 		})// 삭제버튼
 		$("#deleteBtn").click(function()	{
 			var info=confirm("게시물을 삭제합니까?");
