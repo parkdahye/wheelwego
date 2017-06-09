@@ -78,9 +78,11 @@ $(document).ready(function(){
            //location.reload();  
 			$(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png'); 
             alert("단골트럭으로 등록!");
+            location.reload();
          }else{
         	 $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png');
-            alert("단골트럭 등록해제");         
+            alert("단골트럭 등록해제");  
+            location.reload();
          }
       }
    });
