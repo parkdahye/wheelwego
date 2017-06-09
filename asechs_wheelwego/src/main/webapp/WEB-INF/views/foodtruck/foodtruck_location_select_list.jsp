@@ -29,6 +29,14 @@
 .paging a {
     color: grey; 
 }
+select{
+text-align-last:center;
+}
+
+select .selected{
+text-indent: center;
+}
+
 </style>
 
 <script>
@@ -94,11 +102,17 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid text-center bg-grey">
   <h3>FOODTRUCK LIST</h3><br>
-  <select name="option" id="option">
-  	<option value="byDate">최신순</option>
-   	<option value="byAvgGrade">평점순</option>
-  	<option value="byWishlist">즐겨찾기순</option>
+  <div class="row">
+  <div class="col-xs-4"></div>
+  <div class="col-xs-4">
+  <select name="option" id="option" class="form-control">
+  	<option value="byDate" class="selected">최신순</option>
+   	<option value="byAvgGrade" class="selected">평점순</option>
+  	<option value="byWishlist" class="selected">즐겨찾기순</option>
   </select>
+</div>
+<div class="col-xs-4"></div>
+</div>
   <hr>
   <div class="row text-center" style="position:relative;">
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
