@@ -40,6 +40,7 @@
 
 <div class="container"> 
 <form enctype="multipart/form-data" action="afterLogin_board/qna_write.do" method="post">  
+
 		<div class="row"> 
 			
 			<div class="col-md-6"> 

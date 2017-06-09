@@ -26,7 +26,7 @@
 		$("#deleteBtn").click(function()	{
 			var info=confirm("게시물을 삭제합니까?");
 			if(info){				
-			location.href="${pageContext.request.contextPath}/afterLogin_/businessDelete.do?no="+${requestScope.detail_business.no};
+			location.href="${pageContext.request.contextPath}/afterLogin_board/businessDelete.do?no="+${requestScope.detail_business.no};
 			}else{
 			}
 		})// 삭제버튼 끝
@@ -36,7 +36,7 @@
 			var commentNo=$(this).parent().parent().find(".commentNo").text();
 			var contentNo=${requestScope.detail_business.no};
 			window.name="parentForm";
-			window.open("${pageContext.request.contextPath}/afterLogin_/business_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
+			window.open("${pageContext.request.contextPath}/afterLogin_board/business_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
 					,"commentUpdateForm", "width=570, height=350, resizable=no, scrollbars=no");
 			
 		});
@@ -45,7 +45,7 @@
 			var commentNo=$(this).parent().parent().find(".commentNo").text();
 			$.ajax({
 				type:"post",
-				url:"${pageContext.request.contextPath}/afterLogin_/deletebusinessComment.do",
+				url:"${pageContext.request.contextPath}/afterLogin_board/deletebusinessComment.do",
 				data:"commentNo="+commentNo+"&contentNo=${requestScope.detail_business.no}",
 				success:function(data){
 					location.href="${pageContext.request.contextPath}/board/business_detail_content.do?no=${requestScope.detail_business.no}";
@@ -92,7 +92,7 @@
 		</div></div><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		
 			<%-- 사진 들어갈 공간 임시로 올림 --%>
-		<div class="form-group,col-md-8"> 
+		<div class="form-group,col-md-8" style="margin-left:15px"> 
 		<c:forEach items="${requestScope.fileNameList }" var="fileNameList">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<img class="img-rounded"  src="${pageContext.request.contextPath }/resources/img/${fileNameList.filepath}" width="300px" height="200px">
@@ -125,7 +125,7 @@
     <div class="col-md-6">
     						<div class="widget-area no-padding blank">
 								<div class="status-upload">
-									<form method="post" action="${pageContext.request.contextPath }/afterLogin_/writebusinessComment.do" id="businessCommentForm">
+									<form method="post" action="${pageContext.request.contextPath }/afterLogin_board/writebusinessComment.do" id="businessCommentForm">
 										<textarea placeholder="댓글을 입력해주세요" name="comment" required="required"></textarea>
 										<input type="hidden" name="id" value="${sessionScope.memberVO.id }">
 										<input type="hidden" name="contentNo" value="${requestScope.detail_business.no }">

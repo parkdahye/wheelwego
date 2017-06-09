@@ -124,21 +124,6 @@ $(document).ready(function(){
  			<input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/greyheart2.png">
  		</c:otherwise>
  		</c:choose>
-        <p><strong>${truckInfo.foodtruckName}</strong></p>
-        <p id = "${truckInfo.foodtruckName}"></p>
-        <p style="font-size:17px;" id="${truckInfo.foodtruckName}"></p>
-
-<%--       <div class="thumbnail">
-      <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
-=======
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
-        <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
-        </a>
-        <input type="image" id="insertBtn" name = "${truckInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/greyheart2.png">
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
-        <p><strong style="font-size:17px; ">${truckInfo.foodtruckName}</strong></p>
-        <p id = "${truckInfo.foodtruckName}" style="font-size:15px; color: grey;"></p> --%>
         <strong style="font-size:15px; ">${truckInfo.foodtruckName}</strong><br>
         <strong style="font-size:15px; "><span class="glyphicon glyphicon-star" style="color:orange"> </span>&nbsp;&nbsp;${truckInfo.avgGrade}&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-heart" style="color:red"></span>&nbsp;&nbsp;${truckInfo.wishlistCount }</strong>
         <br><p id = "${truckInfo.foodtruckName}" style="font-size:13px; color: grey;"></p>
