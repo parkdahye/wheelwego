@@ -26,7 +26,7 @@
 		$("#deleteBtn").click(function()	{
 			var info=confirm("게시물을 삭제합니까?");
 			if(info){				
-			location.href="${pageContext.request.contextPath}/afterLogin_/qnaDelete.do?no="+${requestScope.detail_qna.no};
+			location.href="${pageContext.request.contextPath}/afterLogin_board/qnaDelete.do?no="+${requestScope.detail_qna.no};
 			}else{
 			}
 		})// 삭제버튼 끝
@@ -35,7 +35,7 @@
 			var commentNo=$(this).parent().parent().find(".commentNo").text();
 			$.ajax({
 				type:"post",
-				url:"${pageContext.request.contextPath}/deleteqnaComment.do",
+				url:"${pageContext.request.contextPath}/afterLogin_board/deleteqnaComment.do",
 				data:"commentNo="+commentNo+"&contentNo=${requestScope.detail_qna.no}",
 				success:function(data){
 					location.href="${pageContext.request.contextPath}/board/qna_detail_content.do?no=${requestScope.detail_qna.no}";
@@ -48,7 +48,7 @@
 			var contentNo=${requestScope.detail_qna.no};
 			alert(commentNo);
 			window.name="parentForm";
-			window.open("${pageContext.request.contextPath}/qna_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
+			window.open("${pageContext.request.contextPath}/afterLogin_board/qna_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
 					,"commentUpdateForm", "width=570, height=350, resizable=no, scrollbars=no");
 		});
 	})//ready
@@ -124,7 +124,7 @@
     <div class="col-md-6">
     						<div class="widget-area no-padding blank">
 								<div class="status-upload">
-									<form method="post" action="${pageContext.request.contextPath }/afterLogin_/writeqnaComment.do" id="qnaCommentForm">
+									<form method="post" action="${pageContext.request.contextPath }/afterLogin_board/writeqnaComment.do" id="qnaCommentForm">
 										<textarea placeholder="댓글을 입력해주세요" name="comment" required="required"></textarea>
 										<input type="hidden" name="id" value="${sessionScope.memberVO.id }">
 										<input type="hidden" name="contentNo" value="${requestScope.detail_qna.no }">

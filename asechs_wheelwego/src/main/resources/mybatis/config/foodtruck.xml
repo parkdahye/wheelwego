@@ -88,10 +88,14 @@ values(#{reviewNo},#{foodtruckNumber},#{customerId},#{reviewContent},sysdate,#{g
 </insert>
 
 <select id="getReviewListByTruckNumber" resultMap="reviewRM" parameterType="pagingBean">
-select * from (select row_number() over(order by review_no desc) as rnum ,review_no,foodtruck_number,customer_id,
-review_content,to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade from review
-where foodtruck_number=#{searchWord})
-where rnum between #{startRowNumber} and #{endRowNumber}
+	select review_no, foodtruck_number,customer_id,
+	review_content,review_timeposted,grade from(
+	select row_number() over(order by review_timeposted desc) as rnum, review_no,
+	foodtruck_number, customer_id, review_content,
+	to_char(review_timeposted,'YYYY.MM.DD') as review_timeposted, grade
+	from review
+	where foodtruck_number=#{searchWord})
+	where rnum between #{startRowNumber} and #{endRowNumber}
 </select>
 
 <select id="getReivewTotalCount" resultType="int">
@@ -108,31 +112,41 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 <select id="findTruckNumberInReview" resultType="int">
 	select count(*) from review where foodtruck_number=#{value}
 </select>
-<!-- 
-<select id="filteringByRegisterDate" resultMap="truckRM" parameterType="pagingBean">
+<select id="filteringByDate" resultMap="truckRM" parameterType="pagingBean">
 	select * from(
 	select row_number() over(order by register_timeposted desc) as rnum,
-	t.foodtruck_name, t.foodtruck_number, t.register_timeposted,
+	t.foodtruck_name, t.foodtruck_number, t.register_timeposted,t.latitude,t.longitude,
 	f.foodtruck_filepath
 	from foodtruck t, foodtruckfile f where
-	f.foodtruck_number=t.foodtruck_number and t.foodtruck_name like '%' ||
-	#{searchWord} || '%' order by register_timeposted desc
+	f.foodtruck_number(+)=t.foodtruck_number 
+	<if test='searchWord != null'>
+	and t.foodtruck_name like '%' || #{searchWord}  || '%' and latitude is not null and longitude is not null
+	</if>
+	<if test='gpsInfo !=null'>
+	and (latitude between #{gpsInfo.latitude}-0.009 and #{gpsInfo.latitude}+0.009) and (longitude between #{gpsInfo.longitude}-0.012 and #{gpsInfo.longitude}+0.012)
+	</if>
+ 	order by register_timeposted desc
 	) where rnum between #{startRowNumber} and #{endRowNumber}
 </select>
 
-<select id="filteringByWishlistCount" resultMap="truckRM"
+<select id="filteringByWishlist" resultMap="truckRM"
 	parameterType="pagingBean">
 	select foodtruck_number, foodtruck_name, wishlist_cnt,foodtruck_filepath from(
 	select row_number() over(order by wishlist_cnt desc) as
 	rnum,foodtruck_number, foodtruck_name, wishlist_cnt,
 	foodtruck_filepath from(
 	select t.foodtruck_number, t.foodtruck_name, count(customer_id) as
-	wishlist_cnt, f.foodtruck_filepath from foodtruck t, wishlist w,
+	wishlist_cnt, f.foodtruck_filepath,t.latitude,t.longitude from foodtruck t, wishlist w, 
 	foodtruckfile f
 	where t.foodtruck_number=w.foodtruck_number(+) and
-	t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' ||
-	#{searchWord}  || '%'
-	group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath order by
+	t.foodtruck_number=f.foodtruck_number 
+	<if test='searchWord != null'>
+	and t.foodtruck_name like '%' || #{searchWord}  || '%' and latitude is not null and longitude is not null
+	</if>
+	<if test='gpsInfo !=null'>
+	and (latitude between #{gpsInfo.latitude}-0.009 and #{gpsInfo.latitude}+0.009) and (longitude between #{gpsInfo.longitude}-0.012 and #{gpsInfo.longitude}+0.012)
+	</if>
+	group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath,t.latitude,t.longitude order by
 	wishlist_cnt desc
 	)) where rnum between #{startRowNumber} and #{endRowNumber}
 </select>
@@ -140,16 +154,20 @@ where rnum between #{startRowNumber} and #{endRowNumber}
 <select id="filteringByAvgGrade" resultMap="truckRM" parameterType="pagingBean">
 	select * from(
 	select row_number() over(order by avg_grade desc) as rnum,foodtruck_number,
-	foodtruck_name, avg_grade, foodtruck_filepath from(
+	foodtruck_name, avg_grade, foodtruck_filepath,latitude,longitude from(
 	select t.foodtruck_number, t.foodtruck_name, nvl(trunc(avg(r.grade),1),0) as
-	avg_grade, f.foodtruck_filepath from foodtruck t, review r, foodtruckfile f
+	avg_grade, f.foodtruck_filepath,t.latitude,t.longitude from foodtruck t, review r, foodtruckfile f
 	where t.foodtruck_number=r.foodtruck_number(+) and
-	t.foodtruck_number=f.foodtruck_number and t.foodtruck_name like '%' ||
-	#{searchWord} || '%'
-	group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath order by
-	avg_grade desc
+	t.foodtruck_number=f.foodtruck_number 
+	<if test='searchWord != null'>
+		and t.foodtruck_name like '%' || #{searchWord}  || '%' and latitude is not null and longitude is not null
+	</if>
+	<if test='gpsInfo !=null'>
+	and (latitude between #{gpsInfo.latitude}-0.009 and #{gpsInfo.latitude}+0.009) and (longitude between #{gpsInfo.longitude}-0.012 and #{gpsInfo.longitude}+0.012)
+	</if>
+	group by t.foodtruck_number,t.foodtruck_name,f.foodtruck_filepath,t.latitude,t.longitude order by avg_grade desc
 	)) where rnum between #{startRowNumber} and #{endRowNumber}
-</select> -->
+</select>
 <select id="findAvgGradeByTruckNumber" resultType="double" >
 	select nvl(trunc(avg(r.grade),1),0) as grade
 	from(select * from foodtruck)f, review r

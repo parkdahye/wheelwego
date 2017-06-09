@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class TestJUnit {
+
 	@Resource
 	private MemberService service;
 	@Resource
@@ -34,4 +35,6 @@ public class TestJUnit {
 	public void test(){
 		System.out.println(mypageDAO.heartWishList("customer01"));
 	}
+
+  
 }
