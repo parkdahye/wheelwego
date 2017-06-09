@@ -53,6 +53,9 @@ $(document).ready(function(){
      var foodtruckNumber = $(this).attr('name');
      var insertBtn=$(this);
      var id = "${sessionScope.memberVO.id}";
+     //var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
+       var src = ($(this).attr('src')) ==='hearton.png'
+    	   var insertBtn = $(this);
     if(id==""){
        alert("로그인이 필요합니다.");
     }else{
@@ -62,11 +65,14 @@ $(document).ready(function(){
       data: {id: id, foodtruckNumber: foodtruckNumber}, 
       success:function(data){
          if(data=="on"){
+            $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png');
+           // $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
+           //location.reload();  
 			$(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png'); 
             alert("단골트럭으로 등록!");
          }else{
-        	 alert("단골트럭 등록해제");
-        	 $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png'); 
+        	 $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png');
+            alert("단골트럭 등록해제");         
          }
       }
    });
