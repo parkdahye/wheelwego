@@ -8,7 +8,7 @@ public class CommentVO {
 	private String timePosted;
 	private int parentNo;
 	public CommentVO() {
-		super();
+		super(); 
 	}
 	public CommentVO(int commentNo, String id, int contentNo, String comment, String timePosted, int parentNo) {
 		super();
