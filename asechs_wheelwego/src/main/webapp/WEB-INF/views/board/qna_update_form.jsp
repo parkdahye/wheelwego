@@ -24,16 +24,16 @@
 <div class="panel-body">
 
 <div class="container"> 
-<form action="afterLogin_/qna_updateBoard.do" method="post" enctype="multipart/form-data">  
+<form action="qna_updateBoard.do" method="post" enctype="multipart/form-data">  
 		<div class="row"> 
-			<div class="col-md-3">
-			<div class="form-group"> 
+			<div class="col-md-6">
+			<div class="form-group" style="margin-left:7px"> 
 			<label for="name">글번호</label> 
 			<input type="text" class="form-control" name="no" id="no" value="${requestScope.detail_qna.no}" readonly> 
 			</div> 
 			</div> 
 			
-			<div class="col-md-4"> 
+			<div class="col-md-5"> 
 			<div class="form-group"> 
 			<label for="writer">작성자</label> 
 			<input type="text" class="form-control" name="id" id="writer" value="${requestScope.name.memberName }" readonly> 
@@ -41,13 +41,13 @@
 			</div> 
 		</div> 
 		
-		<div class="col-md-8"> 
+		<div class="col-md-11"> 
 		<div class="form-group"> 
 		<label for="title">글제목</label> 
 		<input type="text" class="form-control" name ="title" id="title" value="${requestScope.detail_qna.title }" required="required"> 
 		</div> </div>
 		 
-		<div class="col-md-8"> 
+		<div class="col-md-11" style="margin-right: 70px"> 
 		<div class="form-group"> 
 		<label for="content">글내용</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<font size=2 >${requestScope.detail_qna.timePosted} &nbsp;&nbsp; 

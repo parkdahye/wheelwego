@@ -21,12 +21,12 @@
 			location.href="${pageContext.request.contextPath}/qna_list.do";
 		})//수정버튼
 		$("#modifyBtn").click(function()	{
-			location.href="${pageContext.request.contextPath}/afterLogin_board/qna_update_form.do?no="+${requestScope.detail_qna.no};
+			location.href="${pageContext.request.contextPath}/qna_update_form.do?no="+${requestScope.detail_qna.no};
 		})// 삭제버튼
 		$("#deleteBtn").click(function()	{
 			var info=confirm("게시물을 삭제합니까?");
 			if(info){				
-			location.href="${pageContext.request.contextPath}/afterLogin_/qnaDelete.do?no="+${requestScope.detail_qna.no};
+			location.href="${pageContext.request.contextPath}/qnaDelete.do?no="+${requestScope.detail_qna.no};
 			}else{
 			}
 		})// 삭제버튼 끝
@@ -124,7 +124,7 @@
     <div class="col-md-6">
     						<div class="widget-area no-padding blank">
 								<div class="status-upload">
-									<form method="post" action="${pageContext.request.contextPath }/afterLogin_/writeqnaComment.do" id="qnaCommentForm">
+									<form method="post" action="${pageContext.request.contextPath }/writeqnaComment.do" id="qnaCommentForm">
 										<textarea placeholder="댓글을 입력해주세요" name="comment" required="required"></textarea>
 										<input type="hidden" name="id" value="${sessionScope.memberVO.id }">
 										<input type="hidden" name="contentNo" value="${requestScope.detail_qna.no }">
