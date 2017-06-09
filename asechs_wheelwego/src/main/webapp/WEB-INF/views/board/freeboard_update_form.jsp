@@ -24,16 +24,16 @@
 <div class="panel-body">
 
 <div class="container"> 
-<form action="updateBoard.do" method="post" enctype="multipart/form-data">  
+<form action="${pageContext.request.contextPath}/afterLogin_board/updateBoard.do" method="post" enctype="multipart/form-data">  
 		<div class="row"> 
-			<div class="col-md-3">
-			<div class="form-group"> 
+			<div class="col-md-6">
+			<div class="form-group" style="margin-left:10px"> 
 			<label for="name">글번호</label> 
 			<input type="text" class="form-control" name="no" id="no" value="${requestScope.detail_freeboard.no}" readonly> 
 			</div> 
 			</div> 
 			
-			<div class="col-md-4"> 
+			<div class="col-md-5" > 
 			<div class="form-group"> 
 			<label for="writer">작성자</label> 
 			<input type="text" class="form-control" name="id" id="writer" value="${requestScope.name.memberName }" readonly> 
@@ -41,13 +41,13 @@
 			</div> 
 		</div> 
 		
-		<div class="col-md-8"> 
+		<div class="col-md-11"> 
 		<div class="form-group"> 
 		<label for="title">글제목</label> 
 		<input type="text" class="form-control" name ="title" id="title" value="${requestScope.detail_freeboard.title }" required="required"> 
 		</div> </div>
 		 
-		<div class="col-md-8"> 
+		<div class="col-md-11" style="margin-right: 70px"> 
 		<div class="form-group"> 
 		<label for="content">글내용</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<font size=2 >${requestScope.detail_freeboard.timePosted} &nbsp;&nbsp; 
@@ -55,21 +55,21 @@
 		<textarea class="form-control" rows="10" name="content" id="content" required="required">${requestScope.detail_freeboard.content }</textarea> 
 		</div></div><br><br><br><br>
 		
-			<div class="form-group"> 
+			<div class="form-group" style="margin-left:20px"> 
 		<label for="File">첨부파일 1</label> 
 		<input type="file" name="file[0]" > 
 		</div> 
-		<div class="form-group"> 
+		<div class="form-group" style="margin-left:20px"> 
 		<label for="File">첨부파일 2</label> 
 		<input type="file" name="file[1]"> 
 		</div> 
-		<div class="form-group"> 
+		<div class="form-group" style="margin-left:20px"> 
 		<label for="File">첨부파일 3</label> 
 		<input type="file" name="file[2]" > 
 		</div> <br><br>
 
 		<!-- 버튼  -->
-		<div class="center-block" style='width:400px'> 
+		<div class="center-block" style='width:400px' align="center"> 
 		<input type="reset"  class="btn btn-info" value="다시작성">	
 		<input type="submit"  class="btn btn-info" value="수정" >
 		<input type="button"  class="btn btn-info" value="취소" id="cancelBtn"></div> 

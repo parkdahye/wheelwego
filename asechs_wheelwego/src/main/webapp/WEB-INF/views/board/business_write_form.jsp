@@ -41,7 +41,7 @@
 <div class="panel-body">
 
 <div class="container"> 
-<form enctype="multipart/form-data" action="${pageContext.request.contextPath }/business_write.do" method="post">  
+<form enctype="multipart/form-data" action="${pageContext.request.contextPath }/afterLogin_board/business_write.do" method="post">  
 		<div class="row"> 
 			
 			<div class="col-md-6"> 

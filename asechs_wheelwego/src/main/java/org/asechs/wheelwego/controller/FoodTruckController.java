@@ -57,7 +57,6 @@ public class FoodTruckController {
 				modelAndView.addObject("heartWishlist",heartWishList);
 			}
 		}
-		modelAndView.addObject("name", name);		
 		//System.out.println(name);
 		//System.out.println(listVO);
 		modelAndView.addObject("option", option);		
@@ -70,7 +69,7 @@ public class FoodTruckController {
 	 * @return
 	 */
 	@RequestMapping("searchFoodTruckByGPS.do")
-	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String pageNo,String option) {
+	public ModelAndView searchFoodTruckByGPS(String latitude, String longitude, String pageNo,String option,HttpServletRequest request) {
 		if(option==null)
 			option="ByDate";
 		TruckVO gpsInfo = new TruckVO();
@@ -79,6 +78,17 @@ public class FoodTruckController {
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");
 		//ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
 		ListVO listVO =foodTruckService.filtering(option,null, pageNo, latitude, longitude,gpsInfo);
+		HttpSession session=request.getSession(false);
+		String id=null;
+		List<WishlistVO> heartWishList=null;
+		if(session != null){
+			MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+			if(memberVO != null){
+				id = memberVO.getId();
+				heartWishList = mypageService.heartWishList(id);
+				modelAndView.addObject("heartWishlist",heartWishList);
+			}
+		}
 		modelAndView.addObject("pagingList", listVO);
 		modelAndView.addObject("gpsInfo", gpsInfo);
 		modelAndView.addObject("option", option);	

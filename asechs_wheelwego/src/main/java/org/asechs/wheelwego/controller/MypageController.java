@@ -1,7 +1,5 @@
 package org.asechs.wheelwego.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.List;
 
 import javax.annotation.Resource;

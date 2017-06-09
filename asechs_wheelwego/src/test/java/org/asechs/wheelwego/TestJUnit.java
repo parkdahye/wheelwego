@@ -9,6 +9,8 @@ import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.MemberVO;
+import org.asechs.wheelwego.model.vo.PagingBean;
+import org.asechs.wheelwego.model.vo.TruckVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,6 +35,7 @@ public class TestJUnit {
 	
 	@Test
 	public void test(){
+
 		System.out.println(mypageDAO.heartWishList("customer01"));
 	}
 

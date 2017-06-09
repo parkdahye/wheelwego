@@ -132,7 +132,7 @@ function geoFindMe2() {
             }
         }).open();
     }
-    // 현지 : hover + click test
+    // 현지 : hover + click text
     function hoverClick(val){
     	if (!navigator.geolocation){
     		alert("지오로케이션을 지원하지 않습니다!");
@@ -172,6 +172,14 @@ function geoFindMe2() {
 					   <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style="">
 					   <input class="btn btn-warning" onclick="geoFindMe2()" style="width: 100%;" value="자동검색" style="">
 				  </form>			
+<!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
+					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
+					  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
+					  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+					  <label class="string optional" for="user_remember_me"> Remember me</label>
+					  <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="TEST" />
+				  </form> -->
+
 	            </div>
                 </li>
               </ul>
@@ -213,9 +221,9 @@ function geoFindMe2() {
                      <div class="back cbx-back-side">
                         <div class="text-center back-single-text">
                            <p>${truckVO.foodtruckName}</p>
-                           <p class="truck-simple-info"><br><br><br><br>
-           	<span class="glyphicon glyphicon-map-marker"></span> 경기도 하남시 학암동<br>
-            <span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade }</p>
+                           <p class="truck-simple-info"><br><br><br>
+           	<span class="glyphicon glyphicon-map-marker"></span> <span id="${truckVO.foodtruckName}"></span><br>
+            <Br><span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade }</p>
                         </div>
                      </div>
                   </a>
@@ -229,3 +237,24 @@ function geoFindMe2() {
    </div>
    <!-- container -->
 </section>
+
+
+<script type="text/javascript">
+   <c:forEach items="${requestScope.trucklist}" var="truckInfo" varStatus="status">
+   var mapInfo = naver.maps.Service.reverseGeocode({
+        location: new naver.maps.LatLng("${truckInfo.latitude}", "${truckInfo.longitude}"),
+    }, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            //return alert('Something wrong!');
+        }
+
+        var result = response.result, // 검색 결과의 컨테이너
+            items = result.items; // 검색 결과의 배열
+            if(items[0].address=="" || items[0].address==null){
+            	document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
+            }else{
+            document.getElementById("${truckInfo.foodtruckName}").innerHTML = items[0].address;
+            }
+    });
+   </c:forEach>
+</script>
