@@ -73,10 +73,10 @@ input[name="grade"]:checked + .star_point~label{
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5>
     <%-- <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
 <p style="text-align:center;"><i>${truckDetailInfo.introduction}</i></p><br>
-<div class="w3-panel w3-leftbar w3-light-grey">
-    <p><strong><span class="glyphicon glyphicon-time"></span></strong> everyday from 6am to 5pm.</p>
-    <p><strong><span class="glyphicon glyphicon-map-marker"></span></strong> 15 Adr street, 5015, NY</p>
-   <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="w3-panel w3-leftbar w3-light-grey" align="center">
+	<p></p>
+    <p  style="font-size: 16px;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;${param.address}</p>
+   <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;
    <strong><span class="glyphicon glyphicon-heart" style="color:red"></span> </strong>${requestScope.truckDetailInfo.wishlistCount}</p>
 </div>
   </div>
