@@ -28,7 +28,7 @@
 		$("#deleteBtn").click(function()	{
 			var info=confirm("게시물을 삭제합니까?");
 			if(info){				
-			location.href="${pageContext.request.contextPath}/afterLogin_/freeboardDelete.do?no="+${requestScope.detail_freeboard.no};
+			location.href="${pageContext.request.contextPath}/afterLogin_board/freeboardDelete.do?no="+${requestScope.detail_freeboard.no};
 			}else{
 			}
 		})// 삭제버튼 끝
@@ -38,7 +38,7 @@
 			var commentNo=$(this).parent().parent().find(".commentNo").text();
 				$.ajax({
 					type:"post",
-					url:"${pageContext.request.contextPath}/afterLogin_/deleteFreeboardComment.do",
+					url:"${pageContext.request.contextPath}/afterLogin_board/deleteFreeboardComment.do",
 					data:"commentNo="+commentNo+"&contentNo=${requestScope.detail_freeboard.no}",
 					success:function(data){
 						location.href="${pageContext.request.contextPath}/board/freeboard_detail_content.do?no=${requestScope.detail_freeboard.no}";
@@ -51,13 +51,13 @@
 			var contentNo=${requestScope.detail_freeboard.no};
 			alert(commentNo);
 			window.name="parentForm";
-			window.open("${pageContext.request.contextPath}/afterLogin_/freeboard_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
+			window.open("${pageContext.request.contextPath}/afterLogin_board/freeboard_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
 					,"commentUpdateForm", "width=570, height=350, resizable=no, scrollbars=no");
 		});//ajax
 	})//ready
 </script> 
 <div class="panel panel-default"> 
-<div class="panel-heading" ><h3>자유게시판 상세보기</h3></div> 
+<div class="panel-heading" style="background-color: #F79F81"><h3>자유게시판 상세보기</h3></div> 
 <div class="panel-body">
 <div class="container"> 
 <%-- 상세보기--%>
@@ -65,7 +65,7 @@
 			<div class="col-md-6">
 			<div class="form-group" style="margin-left: 15px"> 
 			<label for="name">글번호</label> 
-			<input type="text" class="form-control" value="${requestScope.detail_freeboard.no}" readonly> 
+			<input type="text" class="form-control" value="${requestScope.detail_freeboard.no}"> 
 			</div> 
 			</div> 
 			
@@ -128,7 +128,7 @@
     <div class="col-md-6">
     						<div class="widget-area no-padding blank">
 								<div class="status-upload">
-									<form method="post" action="${pageContext.request.contextPath }/afterLogin_/writeFreeboardComment.do" id="freeboardCommentForm">
+									<form method="post" action="${pageContext.request.contextPath }/afterLogin_board/writeFreeboardComment.do" id="freeboardCommentForm">
 										<textarea placeholder="댓글을 입력해주세요" name="comment" required="required"></textarea>
 										<input type="hidden" name="id" value="${sessionScope.memberVO.id }">
 										<input type="hidden" name="contentNo" value="${requestScope.detail_freeboard.no }">
