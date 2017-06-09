@@ -58,6 +58,7 @@ public class FoodTruckController {
 		TruckVO gpsInfo = new TruckVO();
 		gpsInfo.setLatitude(Double.parseDouble(latitude));
 		gpsInfo.setLongitude(Double.parseDouble(longitude));
+		System.out.println("controller: "+gpsInfo);
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");
 		//ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
 		ListVO listVO =foodTruckService.filtering(option,null, pageNo, latitude, longitude,gpsInfo);

@@ -9,6 +9,8 @@ import org.asechs.wheelwego.model.MemberService;
 import org.asechs.wheelwego.model.MypageDAO;
 import org.asechs.wheelwego.model.MypageService;
 import org.asechs.wheelwego.model.vo.MemberVO;
+import org.asechs.wheelwego.model.vo.PagingBean;
+import org.asechs.wheelwego.model.vo.TruckVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -96,8 +98,16 @@ public class TestJUnit {
 	
 	@Test
 	public void test(){
-		//registerCustomer();
+/*		//registerCustomer();
 		registerSeller();
-		System.out.println(service.forgetMemberId(new MemberVO(null, null, "정현지", null, null, null, "01022552716", null)));
+		System.out.println(service.forgetMemberId(new MemberVO(null, null, "정현지", null, null, null, "01022552716", null)));*/
+		String latitude="37.4056318";
+		String longitude="127.11512630000001";
+		TruckVO gpsInfo=new TruckVO();
+		gpsInfo.setLatitude(Double.parseDouble(latitude));
+		gpsInfo.setLongitude(Double.parseDouble(longitude));
+		PagingBean pagingBean = new PagingBean(foodTruckDAO.getTruckListTotalContentCountByGPS(gpsInfo), 1);
+		System.out.println(foodTruckDAO.filteringByWishlist(pagingBean));
+		System.out.println(foodtruckService.filtering("byWishlist", null, null, latitude, longitude, gpsInfo));
 	}
 }
