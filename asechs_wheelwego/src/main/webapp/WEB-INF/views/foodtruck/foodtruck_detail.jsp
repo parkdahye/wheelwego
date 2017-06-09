@@ -66,7 +66,7 @@ $(document).ready(function(){
            // $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
            //location.reload();  
             alert("단골트럭으로 등록!");
-
+            location.reload();
          }else{
             alert("단골트럭 등록해제");         
             location.reload();
@@ -104,7 +104,14 @@ $(document).ready(function(){
   <div class="w3-content" style="max-width:700px">
     <h5 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">ABOUT US</span></h5> 
   <div align="center">
-  	<input type="image" id="insertBtn2"src="${pageContext.request.contextPath }/resources/upload/greyheart2.png" name = "${truckDetailInfo.foodtruckNumber}" style="width:45px;text-align: center; ">
+  <c:choose>
+        <c:when test="${wishlistFlag==1}">
+	       	 	<input type="image" id="insertBtn2" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/hearton.png"  style="width:45px;text-align: center; z-index: 10; ">
+	        </c:when>
+	        <c:otherwise>
+	        	<input type="image" id="insertBtn2" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/greyheart2.png" style="width:45px;text-align: center; z-index: 10; ">
+	        </c:otherwise>
+        </c:choose>
    </div>
     <%-- <input type="image" id="insertBtn" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/greyheart2.png"> --%>
    <%--  <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>

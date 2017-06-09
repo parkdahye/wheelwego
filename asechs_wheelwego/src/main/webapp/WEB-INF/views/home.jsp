@@ -134,7 +134,7 @@ function geoFindMe2() {
         }).open();
     }
     // 현지 : hover + click text
-/*     function hoverClick(val){
+    function hoverClick(foodtruckNo,address,location){
     	if (!navigator.geolocation){
     		alert("지오로케이션을 지원하지 않습니다!");
     		return;
@@ -142,24 +142,23 @@ function geoFindMe2() {
     	  function success(position) {
     	    var latitude  = position.coords.latitude;
     	    var longitude = position.coords.longitude;
-    		var address=$(this).children().find(".address").text();
-    		alert(address);
-    	    location.href = "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+val+"&latitude="+latitude+"&longitude="+longitude;
+    		location.attr("href","${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address);
+    	    //location.href = "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address;
     	  };
     	  function error() {
     		  alert("사용자의 위치를 찾을 수 없습니다!");
     	  };
     	  navigator.geolocation.getCurrentPosition(success, error);
-	} */
+	} 
     
     $(document).ready(function(){
     	$(".detailLink").bind("click",function(){
+    		var location=$(this);
     		var address=$(this).find(".address").text();
     		var foodtruckNo=$(this).find(":input[name=foodturckNo]").val();
     		var latitude=$(this).find(":input[name=latitude]").val();
     		var longitude=$(this).find(":input[name=longitude]").val();
-
-    		$(this).attr("href","${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address);
+			hoverClick(foodtruckNo,address,location);
     	});
     });
 </script>
@@ -226,7 +225,7 @@ function geoFindMe2() {
                <div class="flipper">  
 <!--                   <a href="#portfolioModal1" onclick="hoverClick(this.id)" id=${truckVO.foodtruckNumber} class="portfolio-link"
  	                    data-toggle="modal"> -->
- 	                    <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do" class="detailLink">
+ 	                    <a href="#portfolioModal1" class="detailLink">
                      <input type="hidden" name="foodturckNo" value="${truckVO.foodtruckNumber}">
                       <input type="hidden" name="latitude" value="${truckVO.latitude}">
                        <input type="hidden" name="longitude" value="${truckVO.longitude}">

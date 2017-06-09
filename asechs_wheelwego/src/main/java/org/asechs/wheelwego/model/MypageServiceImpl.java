@@ -208,4 +208,9 @@ public class MypageServiceImpl implements MypageService {
 		
 		return new ListVO(pagingBean, mypageDAO.getWishList(pagingBean));
 	}
+	@Override
+	public int getWishListFlag(String customerId, String foodtruckNumber) {
+		WishlistVO wishlistVO=new WishlistVO(foodtruckNumber,customerId); 
+		return mypageDAO.getWishListFlag(wishlistVO);
+	}
 }
