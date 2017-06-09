@@ -221,9 +221,9 @@ function geoFindMe2() {
                      <div class="back cbx-back-side">
                         <div class="text-center back-single-text">
                            <p>${truckVO.foodtruckName}</p>
-                           <p class="truck-simple-info"><br><br><br><br>
-           	<span class="glyphicon glyphicon-map-marker"></span> 경기도 하남시 학암동<br>
-            <span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade }</p>
+                           <p class="truck-simple-info"><br><br><br>
+           	<span class="glyphicon glyphicon-map-marker"></span> <span id="${truckVO.foodtruckName}"></span><br>
+            <Br><span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade }</p>
                         </div>
                      </div>
                   </a>
@@ -237,3 +237,24 @@ function geoFindMe2() {
    </div>
    <!-- container -->
 </section>
+
+
+<script type="text/javascript">
+   <c:forEach items="${requestScope.trucklist}" var="truckInfo" varStatus="status">
+   var mapInfo = naver.maps.Service.reverseGeocode({
+        location: new naver.maps.LatLng("${truckInfo.latitude}", "${truckInfo.longitude}"),
+    }, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            //return alert('Something wrong!');
+        }
+
+        var result = response.result, // 검색 결과의 컨테이너
+            items = result.items; // 검색 결과의 배열
+            if(items[0].address=="" || items[0].address==null){
+            	document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
+            }else{
+            document.getElementById("${truckInfo.foodtruckName}").innerHTML = items[0].address;
+            }
+    });
+   </c:forEach>
+</script>

@@ -36,6 +36,7 @@ public class BoardController {
 	// 강정호 작성. 자유게시판 리스트 보여주는 메서드
 	@RequestMapping("freeboard_list.do")
 	public ModelAndView freeBoardList(String pageNo) {
+		System.out.println("리스트 테스트");
 		/*
 		 * System.out.println("보드컨트롤러 자유게시판 메핑 통과"); ListVO
 		 * freeBoardList=boardService.getFreeBoardList(pageNo);
@@ -47,7 +48,7 @@ public class BoardController {
 	}
 	
 	// 호겸 작성. 자유게시판 상세보기 and 조회수
-		@RequestMapping("board/freeboard_detail_content.do")
+		@RequestMapping("/board/freeboard_detail_content.do")
 		public String freeboard_detail_content(String no, Model model) {
 			System.out.println("자유게시판 상세보기 : 컨트롤러 시작");
 			int hits = Integer.parseInt(no);
@@ -76,16 +77,19 @@ public class BoardController {
 		}
 		
 		// 호겸 작성. 자유게시판 게시물 삭제
-		@RequestMapping("freeboardDelete.do")
+		@RequestMapping("afterLogin_board/freeboardDelete.do")
 		public String freeboardDelete(String no) {
+			System.out.println("삭제전");
 			boardService.freeboardDelete(no);
-			return "redirect:freeboard_list.do";
+			System.out.println("삭제후");
+			return "redirect:../freeboard_list.do";
 		}
 		
 		// 호겸 작성. 자유게시판 게시물 수정 폼으로 가기
-		@RequestMapping("freeboard_update_form.do")
+		@RequestMapping("afterLogin_board/freeboard_update_form.do")
 		public String freeboard_update_form(String no, Model model,HttpServletRequest request) {
 			//아이디를 받아와서 작성자를 뽑아야된다
+			System.out.println("freeboard_update_form 통과");
 			BoardVO bvo = boardService.getFreeBoardDetail(no);
 			MemberVO name = boardService.getNameById(bvo);
 			model.addAttribute("name", name);
@@ -94,22 +98,22 @@ public class BoardController {
 		}
 		
 		// 호겸 작성. 자유게시판 게시물 수정 해버리기
-		@RequestMapping("updateBoard.do")
+		@RequestMapping("afterLogin_board/updateBoard.do")
 		public String updateBoard(BoardVO vo) {
 			boardService.updateBoard(vo);
-			return "redirect:board/freeboard_detail_content.do?no=" + vo.getNo();
+			return "redirect:../board/freeboard_detail_content.do?no=" + vo.getNo();
 		}
 		
 		//강정호 작성. 자유게시판 댓글 작성
-		@RequestMapping(value="writeFreeboardComment.do",method=RequestMethod.POST)
+		@RequestMapping(value="afterLogin_board/writeFreeboardComment.do",method=RequestMethod.POST)
 		public String writeFreeboardComment(CommentVO cvo){
 			boardService.writeFreeboardComment(cvo);
-			return "redirect:board/freeboard_detail_content.do?no="+cvo.getContentNo();
+			return "redirect:../board/freeboard_detail_content.do?no="+cvo.getContentNo();
 		}
 		
 		
 		//강정호 작성. 자유게시판 댓글 삭제
-		@RequestMapping(value="deleteFreeboardComment.do", method=RequestMethod.POST)
+		@RequestMapping(value="afterLogin_board/deleteFreeboardComment.do", method=RequestMethod.POST)
 		@ResponseBody
 		public String deleteFreeboardComment(CommentVO cvo){
 			System.out.println(cvo);
@@ -119,7 +123,7 @@ public class BoardController {
 		}
 		
 		//강정호 작성. 자유게시판 댓글 수정폼으로 이동
-		@RequestMapping("freeboard_update_comment.do")
+		@RequestMapping("afterLogin_board/freeboard_update_comment.do")
 		public String updateFreeboardCommentForm(HttpServletRequest request, Model model){
 			String commentNo=request.getParameter("commentNo");
 			String contentNo=request.getParameter("contentNo");
@@ -170,21 +174,21 @@ public class BoardController {
 		}
 		
 		//강정호 창업 게시판 글 등록 메서드
-		@RequestMapping("business_write.do")
+		@RequestMapping(value="afterLogin_board/business_write.do",method=RequestMethod.POST)
 		public String buesinessWrite(BoardVO bvo, HttpServletRequest request){
 			boardService.businessWrite(bvo, request);
-			return "redirect:board/business_detail_content.do?no="+bvo.getNo();
+			return "redirect:../board/business_detail_content.do?no="+bvo.getNo();
 		}
 		
 		// 호겸 작성. 창업 게시물 삭제
-		@RequestMapping("businessDelete.do")
+		@RequestMapping("afterLogin_board/businessDelete.do")
 		public String businessDelete(String no) {
 			boardService.businessDelete(no);
-			return "redirect:business_list.do";
+			return "redirect:../business_list.do";
 		}
 
 		// 호겸 작성. 창업 게시물 수정 폼으로 가기
-		@RequestMapping("business_update_form.do")
+		@RequestMapping("afterLogin_board/business_update_form.do")
 		public String business_update_form(String no, Model model) {
 			System.out.println(no);
 			BoardVO bvo = boardService.getBusinessBoardDetail(no);
@@ -195,20 +199,20 @@ public class BoardController {
 		}
 		
 		// 호겸 작성. 창업게시물 수정 해버리기
-		@RequestMapping("business_updateBoard.do")
+		@RequestMapping(value="afterLogin_board/business_updateBoard.do",method=RequestMethod.POST)
 		public String businessupdateBoard(BoardVO vo) {
 			boardService.businessupdateBoard(vo);
 			System.out.println(vo.getNo());
-			return "redirect:board/business_detail_content.do?no="+vo.getNo();
+			return "redirect:../board/business_detail_content.do?no="+vo.getNo();
 		}
 		
-		@RequestMapping(value="writebusinessComment.do",method=RequestMethod.POST)
+		@RequestMapping(value="afterLogin_board/writebusinessComment.do",method=RequestMethod.POST)
 		public String writebusinessComment(CommentVO cvo){
 			boardService.writebusinessComment(cvo);
-			return "redirect:board/business_detail_content.do?no="+cvo.getContentNo();
+			return "redirect:../board/business_detail_content.do?no="+cvo.getContentNo();
 		}
 		
-		@RequestMapping("deletebusinessComment.do")
+		@RequestMapping(value="afterLogin_board/deletebusinessComment.do",method=RequestMethod.POST)
 		@ResponseBody
 		public String deletebusinessComment(CommentVO cvo){
 			System.out.println(cvo);
@@ -216,7 +220,7 @@ public class BoardController {
 			return null;
 		}
 		
-		@RequestMapping("business_update_comment.do")
+		@RequestMapping("afterLogin_board/business_update_comment.do")
 		public String updatebusinessCommentForm(HttpServletRequest request, Model model){
 			String commentNo=request.getParameter("commentNo");
 			String contentNo=request.getParameter("contentNo");
@@ -253,7 +257,6 @@ public class BoardController {
 		// 조회수 올리기
 		boardService.updateHitsqna(hits);
 		BoardVO bvo = boardService.getqnaBoardDetail(no);
-		//System.out.println(bvo);
 		List<FileVO> fileNameList=boardService.getqnaFilePath(no);
 		List<CommentVO> qnaCommentList=boardService.getqnaCommentList(no);
 		MemberVO name = boardService.qna_getNameById(bvo);
@@ -265,53 +268,54 @@ public class BoardController {
 	}
 
 	//강정호 Q&A 게시판 글 등록 메서드
-	@RequestMapping("qna_write.do")
+	@RequestMapping("afterLogin_board/qna_write.do")
 	public String qnaWrite(BoardVO bvo, HttpServletRequest request){
 		boardService.qnaWrite(bvo, request);
-		return "redirect:board/qna_detail_content.do?no="+bvo.getNo();
+		return "redirect:../board/qna_detail_content.do?no="+bvo.getNo();
 	}
 	// 호겸 작성. qna 게시물 삭제
-			@RequestMapping("qnaDelete.do")
+			@RequestMapping("afterLogin_board/qnaDelete.do")
 			public String qnaDelete(String no) {
 				boardService.qnaDelete(no);
-				return "redirect:qna_list.do";
+				return "redirect:../qna_list.do";
 			}
 
 			// 호겸 작성. qna 게시물 수정 폼으로 가기
-			@RequestMapping("qna_update_form.do")
+			@RequestMapping("afterLogin_board/qna_update_form.do")
 			public String qna_update_form(String no, Model model) {
 				BoardVO bvo = boardService.getqnaBoardDetail(no);
 				MemberVO name = boardService.qna_getNameById(bvo);
+				List<FileVO> fileNameList=boardService.getqnaFilePath(no);
 				model.addAttribute("name", name);
+				model.addAttribute("fileNameList",fileNameList);
 				model.addAttribute("detail_qna", bvo);
-				System.out.println(bvo);
 				return "board/qna_update_form.tiles";
 			}
 			
 			// 호겸 작성. qna게시물 수정 해버리기
-			@RequestMapping("qna_updateBoard.do")
+			@RequestMapping("afterLogin_board/qna_updateBoard.do")
 			public String qnaupdateBoard(BoardVO vo) {
 				boardService.qnaupdateBoard(vo);
-				return "redirect:board/qna_detail_content.do?no="+vo.getNo();
+				return "redirect:../board/qna_detail_content.do?no="+vo.getNo();
 			
 	}
 	
 	//강정호 Q&A 게시판 댓글 등록메서드
-	@RequestMapping("writeqnaComment.do")
+	@RequestMapping("afterLogin_board/writeqnaComment.do")
 	public String writeqnaComment(CommentVO cvo){
 		boardService.writeqnaComment(cvo);
-		return "redirect:board/qna_detail_content.do?no="+cvo.getContentNo();
+		return "redirect:../board/qna_detail_content.do?no="+cvo.getContentNo();
 	}
 	
 	//강정호. Q&A 댓글 삭제
-	@RequestMapping("deleteqnaComment.do")
+	@RequestMapping("afterLogin_board/deleteqnaComment.do")
 	@ResponseBody
 	public String deleteqnaComment(CommentVO cvo){
 		boardService.deleteqnaComment(cvo);
 		return null;
 	}
 	
-	@RequestMapping("qna_update_comment.do")
+	@RequestMapping("afterLogin_board/qna_update_comment.do")
 	public String updateqnaCommentForm(HttpServletRequest request, Model model){
 		String commentNo=request.getParameter("commentNo");
 		String contentNo=request.getParameter("contentNo");

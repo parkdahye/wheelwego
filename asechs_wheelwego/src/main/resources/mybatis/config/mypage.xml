@@ -34,6 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="menu_price" property="menuPrice"/>
 		<result column="menu_filename" property="fileVO.filepath"/>
 	</resultMap>
+	<select id="heartWishList" resultMap="wishlistRM">
+	select * from wishlist where customer_id=#{value}
+	</select>
 	<insert id="registerFoodtruck" parameterType="truckVO">
 		insert into foodtruck(foodtruck_number,seller_id,foodtruck_name,introduction,register_timeposted)
 		 values(#{foodtruckNumber},#{sellerId},#{foodtruckName},#{introduction},sysdate)
@@ -100,8 +103,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where t.foodtruck_number=f.foodtruck_number and rnum between #{startRowNumber} and #{endRowNumber}
 		order by t.foodtruck_number desc
 	</select>
+
 <delete id="deleteWishList" parameterType="wishListVO">
-	delete from wishlist where customer_id = #{customerId} and foodtruck_number = #{foodTruckNumber}
+	delete from wishlist where customer_id = #{customerId} and foodtruck_number = #{foodtruckNumber}
 </delete>
 <select id="showMyReview" resultMap="reviewRM" parameterType="pagingBean">
 select review_no, foodtruck_number, customer_id, review_content, review_timeposted, grade from(
