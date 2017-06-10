@@ -31,8 +31,7 @@
     color: grey; 
    }
 </style>
-
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <style>
 img{
     border-radius: 8px;
