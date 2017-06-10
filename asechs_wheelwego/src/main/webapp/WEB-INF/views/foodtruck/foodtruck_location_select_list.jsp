@@ -50,13 +50,13 @@ $(document).ready(function(){
       }
    }
 
-   $(".detailLink").bind("click",function(){
-      var address=$(this).parent().find(".address").text();
-      var foodtruckNo=$(this).parent().find(":input[name=foodtruckNo]").val();
-      var latitude=$(this).parent().find(":input[name=latitude]").val();
-      var longitude=$(this).parent().find(":input[name=longitude]").val();
-      $(this).attr("href","${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address);
-   });
+	$(".detailLink").bind("click",function(){
+		var address=$(this).parent().find(".address").text();
+		var foodtruckNo=$(this).parent().find(":input[name=foodtruckNo]").val();
+		var latitude=$(this).parent().find(":input[name=latitude]").val();
+		var longitude=$(this).parent().find(":input[name=longitude]").val();
+		$(this).attr("href","${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address);
+	});
 
    $("input#insertBtn").click(function(){
      var foodtruckNumber = $(this).attr('name');
@@ -114,7 +114,6 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid text-center bg-grey">
   <h3>FOODTRUCK LIST</h3><br>
-
   <div class="row">
   <div class="col-xs-4"></div>
   <div class="col-xs-4">
@@ -131,6 +130,7 @@ $(document).ready(function(){
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-sm-6">
       <div class="thumbnail">
+
 
    <input type="hidden" name="foodtruckNo" value="${truckInfo.foodtruckNumber}">
       <input type="hidden" name="latitude" value="${truckInfo.latitude}">
@@ -218,6 +218,7 @@ $(document).ready(function(){
          </c:choose>   
    </c:if>   
 </p>
+
 </div>
 <br><br>
 
@@ -240,4 +241,5 @@ $(document).ready(function(){
             }
     });
    </c:forEach>
+
 </script>

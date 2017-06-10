@@ -37,47 +37,47 @@ function showError(error) {
 <!-- GPS(위도, 경도) 가져오기 --- by 황윤상 -->
 <script type="text/javascript">
 function geoFindMe() {
-	var searchFoodtruckName = document.getElementById("searchFoodtruckName").value;
-	if (!navigator.geolocation){
-		alert("지오로케이션을 지원하지 않습니다!");
-		return;
-	}
-	  function success(position) {
-	    var latitude  = position.coords.latitude;
-	    var longitude = position.coords.longitude;
-	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
-	   
-	  };
-	  function error() {
-		  alert("사용자의 위치를 찾을 수 없습니다!");
-	  };
-	  navigator.geolocation.getCurrentPosition(success, error);
+   var searchFoodtruckName = document.getElementById("searchFoodtruckName").value;
+   if (!navigator.geolocation){
+      alert("지오로케이션을 지원하지 않습니다!");
+      return;
+   }
+     function success(position) {
+       var latitude  = position.coords.latitude;
+       var longitude = position.coords.longitude;
+       location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
+      
+     };
+     function error() {
+        alert("사용자의 위치를 찾을 수 없습니다!");
+     };
+     navigator.geolocation.getCurrentPosition(success, error);
 }
 </script>
 <script type="text/javascript">
 function geoFindMe2() {
-	//var searchFoodtruckName = document.getElementById("searchFoodtruckName").value;	
-	
-	if (!navigator.geolocation){
-		alert("지오로케이션을 지원하지 않습니다!");
-		return;
-	}
-	  function success(position) {
-	    var latitude  = position.coords.latitude;
-	    var longitude = position.coords.longitude;
+   //var searchFoodtruckName = document.getElementById("searchFoodtruckName").value;   
+   
+   if (!navigator.geolocation){
+      alert("지오로케이션을 지원하지 않습니다!");
+      return;
+   }
+     function success(position) {
+       var latitude  = position.coords.latitude;
+       var longitude = position.coords.longitude;
 
 
-	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
+       location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
 
-	   /*  if (searchFoodtruckName != "")
-	    	location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
-	    else
-	    	location.href = "${pageContext.request.contextPath}/pagingTruckList.do?latitude="+latitude+"&longitude="+longitude; */
-	  };
-	  function error() {
-		  alert("사용자의 위치를 찾을 수 없습니다!");
-	  };
-	  navigator.geolocation.getCurrentPosition(success, error);
+      /*  if (searchFoodtruckName != "")
+          location.href = "${pageContext.request.contextPath}/searchFoodTruckByName.do?latitude="+latitude+"&longitude="+longitude+"&name="+searchFoodtruckName;
+       else
+          location.href = "${pageContext.request.contextPath}/pagingTruckList.do?latitude="+latitude+"&longitude="+longitude; */
+     };
+     function error() {
+        alert("사용자의 위치를 찾을 수 없습니다!");
+     };
+     navigator.geolocation.getCurrentPosition(success, error);
 }
 </script>
 
@@ -114,52 +114,49 @@ function geoFindMe2() {
                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                 }
-                	
-            	var mapInfo = naver.maps.Service.geocode({
-            	    address: fullAddr
-            	}, function(status, response) {
-            	    if (status !== naver.maps.Service.Status.OK) {
-            	    	alert('입력한 주소를 찾을 수 없습니다.');
-            	    	return;
-            	    }
-            	    var result = response.result, // 검색 결과의 컨테이너
-            	        items = result.items; // 검색 결과의 배열
-            	        
-            	    var latitude  = items[0].point.y;
-            	    var longitude = items[0].point.x;
-            	    
-            	    location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
-            	});                
+                   
+               var mapInfo = naver.maps.Service.geocode({
+                   address: fullAddr
+               }, function(status, response) {
+                   if (status !== naver.maps.Service.Status.OK) {
+                      alert('입력한 주소를 찾을 수 없습니다.');
+                      return;
+                   }
+                   var result = response.result, // 검색 결과의 컨테이너
+                       items = result.items; // 검색 결과의 배열
+                       
+                   var latitude  = items[0].point.y;
+                   var longitude = items[0].point.x;
+                   
+                   location.href = "${pageContext.request.contextPath}/searchFoodTruckByGPS.do?latitude="+latitude+"&longitude="+longitude;
+               });                
             }
         }).open();
     }
     // 현지 : hover + click text
-    function hoverClick(foodtruckNo,address,location){
-    	if (!navigator.geolocation){
-    		alert("지오로케이션을 지원하지 않습니다!");
-    		return;
-    	}
-    	  function success(position) {
-    	    var latitude  = position.coords.latitude;
-    	    var longitude = position.coords.longitude;
-    		location.attr("href","${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address);
-    	    //location.href = "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address;
-    	  };
-    	  function error() {
-    		  alert("사용자의 위치를 찾을 수 없습니다!");
-    	  };
-    	  navigator.geolocation.getCurrentPosition(success, error);
-	} 
+    function hoverClick(foodtruckNo,address){
+       if (!navigator.geolocation){
+          alert("지오로케이션을 지원하지 않습니다!");
+          return;
+       }
+         function success(position) {
+           var latitude  = position.coords.latitude;
+           var longitude = position.coords.longitude;
+          //location.attr("href","${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address);
+           location.href = "${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address;
+         };
+         function error() {
+            alert("사용자의 위치를 찾을 수 없습니다!");
+         };
+         navigator.geolocation.getCurrentPosition(success, error);
+   } 
     
     $(document).ready(function(){
-    	$(".detailLink").bind("click",function(){
-    		var location=$(this);
-    		var address=$(this).find(".address").text();
-    		var foodtruckNo=$(this).find(":input[name=foodturckNo]").val();
-    		var latitude=$(this).find(":input[name=latitude]").val();
-    		var longitude=$(this).find(":input[name=longitude]").val();
-			hoverClick(foodtruckNo,address,location);
-    	});
+       $(".detailLink").click(function(){
+          var address=$(this).find(".address").text();
+          var foodtruckNo=$(this).find(":input[name=foodturckNo]").val();
+         hoverClick(foodtruckNo,address);
+       });
     });
 </script>
 
@@ -180,25 +177,25 @@ function geoFindMe2() {
                 <li>
                  <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-map-marker fa-3x"></i></a>
                  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 15px;" id="roundCorner">
-	              <form>
-					   <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style="">
-					   <input class="btn btn-warning" onclick="geoFindMe2()" style="width: 100%;" value="자동검색" style="">
-				  </form>			
-<!-- 	              <form accept-charset="UTF-8" onsubmit="geoFindMe()">
-					  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
-					  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
-					  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
-					  <label class="string optional" for="user_remember_me"> Remember me</label>
-					  <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="TEST" />
-				  </form> -->
+                 <form>
+                  <input class="btn btn-warning" onclick="sample6_execDaumPostcode()" style="width: 100%;" value="수동검색" style="">
+                  <input class="btn btn-warning" onclick="geoFindMe2()" style="width: 100%;" value="자동검색" style="">
+              </form>         
+<!--                  <form accept-charset="UTF-8" onsubmit="geoFindMe()">
+                 <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
+                 <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
+                 <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+                 <label class="string optional" for="user_remember_me"> Remember me</label>
+                 <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="TEST" />
+              </form> -->
 
-	            </div>
+               </div>
                 </li>
               </ul>
             </div>
                <div class="col-lg-4">
-			  <!-- 푸드트럭 검색 폼 -->
-			<form class="subscribe_form">
+           <!-- 푸드트럭 검색 폼 -->
+         <form class="subscribe_form">
               <input type="text" placeholder="Search foodtruck!" class="email" id="searchFoodtruckName" name="searchFoodtruckName" required="required">
               <input type="button" class="subscribe" name="search" value="Search" onclick="geoFindMe()">
             </form>
@@ -224,8 +221,8 @@ function geoFindMe2() {
                ontouchstart="this.classList.toggle('hover');" style="margin: 0 auto;">
                <div class="flipper">  
 <!--                   <a href="#portfolioModal1" onclick="hoverClick(this.id)" id=${truckVO.foodtruckNumber} class="portfolio-link"
- 	                    data-toggle="modal"> -->
- 	                 <a href="#getLocation" class="detailLink">
+                        data-toggle="modal"> -->
+               <div style="CURSOR:pointer" class="detailLink">
                      <input type="hidden" name="foodturckNo" value="${truckVO.foodtruckNumber}">
                       <input type="hidden" name="latitude" value="${truckVO.latitude}">
                        <input type="hidden" name="longitude" value="${truckVO.longitude}">
@@ -238,11 +235,13 @@ function geoFindMe2() {
                         <div class="text-center back-single-text">
                            <p>${truckVO.foodtruckName}</p>
                            <p class="truck-simple-info"><br><br><br>
-           	<span class="glyphicon glyphicon-map-marker"></span> <span id="${truckVO.foodtruckName}" class="address"></span><br>
+
+              <span class="glyphicon glyphicon-map-marker"></span> <span id="${truckVO.foodtruckName}" class="address"></span><br>
+
             <Br><span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade}</p>
                         </div>
                      </div>
-                  </a>
+                  </div>
                </div>
             </div>
          </div>
@@ -267,7 +266,7 @@ function geoFindMe2() {
         var result = response.result, // 검색 결과의 컨테이너
             items = result.items; // 검색 결과의 배열
             if(items[0].address=="" || items[0].address==null){
-            	document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
+               document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
             }else{
             document.getElementById("${truckInfo.foodtruckName}").innerHTML = items[0].address;
             }
