@@ -32,13 +32,7 @@
    }
 </style>
 
-<div class=" text-center"> <h1 class="page-header">MY Page</h1> </div>
-<div align="center">
-  <button type="button" id="deleteAccountBtn" class="btn btn-warning">회원탈퇴</button>&nbsp;&nbsp;
-  <button type="button" id="updateBtn" class="btn btn-warning">회원정보수정</button>&nbsp;&nbsp;
-   <button type="button" id="wishlistBtn"class="btn btn-warning">단골트럭</button>&nbsp;&nbsp;
-<button type="button" id="reviewBtn"class="btn btn-warning">MY REVIEW</button>&nbsp;&nbsp;
-</div>
+
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <style>
 img{
@@ -49,7 +43,7 @@ img{
    border-bottom-right-radius: 8px;
 }
 </style>
-
+<jsp:include page="../mypage/mypage.jsp"/>
 <br><br>
 
 <div class="row">
@@ -160,22 +154,7 @@ $(document).ready(function(){
           });
    });   
 });
-   $(document).ready(function(){
-      $("#deleteAccountBtn").click(function(){
-         if(confirm("계정을 삭제하시겠습니까?")){
-            location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=deleteAccount";
-         }
-      });
-      $("#updateBtn").click(function(){
-            location.href="${pageContext.request.contextPath}/afterLogin_mypage/checkPasswordForm.do?command=update_form";
-      });
-      $("#wishlistBtn").click(function(){
-         location.href="${pageContext.request.contextPath}/afterLogin_mypage/wishlist.do?id=${sessionScope.memberVO.id}";
-      });
-      $("#reviewBtn").click(function(){
-         location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
-      });
-  });
+   
 </script>
 
 <script type="text/javascript">

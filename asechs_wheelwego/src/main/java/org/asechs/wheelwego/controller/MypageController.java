@@ -53,6 +53,7 @@ public class MypageController {
          gpsInfo.setLongitude(Double.parseDouble(longitude));
          ModelAndView modelAndView = new ModelAndView("mypage/mypage_wishlist.tiles");
          ListVO listVO = mypageService.getWishList(pageNo, id);
+         System.out.println(listVO);
          modelAndView.addObject("wishlist", listVO);
          modelAndView.addObject("gpsInfo", gpsInfo);
          // System.out.println(listVO.getTruckList());
