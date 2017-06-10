@@ -225,7 +225,7 @@ function geoFindMe2() {
                <div class="flipper">  
 <!--                   <a href="#portfolioModal1" onclick="hoverClick(this.id)" id=${truckVO.foodtruckNumber} class="portfolio-link"
  	                    data-toggle="modal"> -->
- 	                    <a href="#portfolioModal1" class="detailLink">
+ 	                 <a href="#getLocation" class="detailLink">
                      <input type="hidden" name="foodturckNo" value="${truckVO.foodtruckNumber}">
                       <input type="hidden" name="latitude" value="${truckVO.latitude}">
                        <input type="hidden" name="longitude" value="${truckVO.longitude}">
@@ -239,7 +239,7 @@ function geoFindMe2() {
                            <p>${truckVO.foodtruckName}</p>
                            <p class="truck-simple-info"><br><br><br>
            	<span class="glyphicon glyphicon-map-marker"></span> <span id="${truckVO.foodtruckName}" class="address"></span><br>
-            <Br><span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade }</p>
+            <Br><span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade}</p>
                         </div>
                      </div>
                   </a>
