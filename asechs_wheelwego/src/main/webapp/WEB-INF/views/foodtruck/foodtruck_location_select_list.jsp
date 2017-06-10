@@ -139,12 +139,6 @@ $(document).ready(function(){
 </script>
 <div class="container-fluid text-center bg-grey">
   <h3>FOODTRUCK LIST</h3><br>
-<<<<<<< HEAD
-  <select name="option" id="option">
-     <option value="byDate">최신순</option>
-      <option value="byAvgGrade">평점순</option>
-     <option value="byWishlist">즐겨찾기순</option>
-=======
   <div class="row">
   <div class="col-xs-4"></div>
   <div class="col-xs-4">
@@ -152,7 +146,6 @@ $(document).ready(function(){
   	<option value="byDate" class="selected">최신순</option>
    	<option value="byAvgGrade" class="selected">평점순</option>
   	<option value="byWishlist" class="selected">즐겨찾기순</option>
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
   </select>
 </div>
 <div class="col-xs-4"></div>
@@ -162,19 +155,12 @@ $(document).ready(function(){
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-sm-6">
       <div class="thumbnail">
-<<<<<<< HEAD
-
-      <a href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
-
-        <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
-=======
 	<input type="hidden" name="foodtruckNo" value="${truckInfo.foodtruckNumber}">
 		<input type="hidden" name="latitude" value="${truckInfo.latitude}">
 		<input type="hidden" name="longitude" value="${truckInfo.longitude}">
       <a class="detailLink" href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
 
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
         </a>
         <c:choose>
         <c:when test="${requestScope.heartWishlist!='[]'&& requestScope.heartWishlist!=null}">
@@ -255,9 +241,7 @@ $(document).ready(function(){
          </c:choose>   
    </c:if>   
 </p>
-<<<<<<< HEAD
 <br><br>
-=======
 </div>
 <br><br>
 
