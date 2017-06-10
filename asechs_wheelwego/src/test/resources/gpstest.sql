@@ -194,3 +194,35 @@ delete from foodtruck;
 
 select * from foodtruck where foodtruck_name = '오로드푸드';
 update foodtruck set latitude=null, longitude = null where seller_id='seller36'
+
+
+select * from(
+select row_number() over(order by register_timeposted desc) as rnum,
+t.foodtruck_name, t.foodtruck_number, t.register_timeposted,t.latitude,t.longitude,
+f.foodtruck_filepath
+from foodtruck t, foodtruckfile f where
+f.foodtruck_number(+)=t.foodtruck_number 
+and (latitude between 37.402199599999996-0.009 and 37.402199599999996+0.009) and (longitude between 127.1074088-0.012 and 127.1074088+0.012)
+order by register_timeposted desc
+) where rnum between 1 and 20
+
+
+
+select * from(
+select row_number() over(order by register_timeposted desc) as rnum,
+t.foodtruck_name, t.foodtruck_number, t.register_timeposted,t.latitude,t.longitude,
+f.foodtruck_filepath
+from foodtruck t, foodtruckfile f where
+f.foodtruck_number(+)=t.foodtruck_number 
+<if test='searchWord != null'>
+and t.foodtruck_name like '%' || #{searchWord}  || '%' and latitude is not null and longitude is not null
+</if>
+<if test='gpsInfo !=null'>
+and (latitude between #{gpsInfo.latitude}-0.009 and #{gpsInfo.latitude}+0.009) and (longitude between #{gpsInfo.longitude}-0.012 and #{gpsInfo.longitude}+0.012)
+</if>
+order by register_timeposted desc
+) where rnum between #{startRowNumber} and #{endRowNumber}
+
+select count(*) from foodtruck where foodtruck_name like '%' || #{value}|| '%' and latitude is not null and longitude is not null
+
+select * from foodtruck where seller_id = 'seller01';

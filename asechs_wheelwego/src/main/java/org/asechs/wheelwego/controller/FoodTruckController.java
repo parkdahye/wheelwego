@@ -73,10 +73,13 @@ public class FoodTruckController {
 		if(option==null)
 			option="ByDate";
 		TruckVO gpsInfo = new TruckVO();
+		
 		gpsInfo.setLatitude(Double.parseDouble(latitude));
 		gpsInfo.setLongitude(Double.parseDouble(longitude));
+		
 		ModelAndView modelAndView = new ModelAndView("foodtruck/foodtruck_location_select_list.tiles");
-		//ListVO listVO = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
+		//ListVO listVO1 = foodTruckService.getFoodTruckListByGPS(pageNo, gpsInfo);
+		//System.out.println(listVO1);
 		ListVO listVO =foodTruckService.filtering(option,null, pageNo, latitude, longitude,gpsInfo);
 		HttpSession session=request.getSession(false);
 		String id=null;
@@ -101,11 +104,23 @@ public class FoodTruckController {
 	 * @return TruckVO
 	 */
 	@RequestMapping("foodtruck/foodTruckAndMenuDetail.do")
-	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo,String reviewPageNo){
+	public ModelAndView foodTruckAndMenuDetail(String foodtruckNo,String reviewPageNo,HttpServletRequest request){
 		System.out.println(foodtruckNo);
 		TruckVO truckDetail = foodTruckService.foodTruckAndMenuDetail(foodtruckNo);
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("foodtruck/foodtruck_detail.tiles");
+		HttpSession session=request.getSession(false);
+		String id=null;
+		List<WishlistVO> heartWishList=null;
+		if(session != null){
+			MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+			if(memberVO != null){
+				id = memberVO.getId();
+				int wishlistFlag=mypageService.getWishListFlag(id, foodtruckNo);
+				mv.addObject("wishlistFlag",wishlistFlag);
+			}
+		}
+		System.out.println(heartWishList);
 		mv.addObject("truckDetailInfo", truckDetail);
 		ListVO reviewList = foodTruckService.getReviewListByTruckNumber(reviewPageNo, foodtruckNo);
 		mv.addObject("reviewlist", reviewList);

@@ -47,4 +47,6 @@ public interface MypageService {
 	public void setGPSInfo(TruckVO gpsInfo);
 
 	public ListVO getWishList(String pageNo, String id);
+	
+	public int getWishListFlag(String customerId, String foodtruckNumber);
 }
