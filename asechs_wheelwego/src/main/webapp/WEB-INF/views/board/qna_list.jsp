@@ -88,5 +88,5 @@ $(document).ready(function(){
 	</p>
 	<table align="right"><tr>
 	<td><button type="button" class="btn btn-info" id="writeBtn" style="background-color: #2dcb73">글쓰기</button></td></tr>
-	</table>
+	</table><br><br>
 </body>
