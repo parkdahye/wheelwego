@@ -21,12 +21,12 @@
  <div class="col-sm-2"></div>
  <div class="container col-sm-8">
   <c:choose>
-		<c:when test="${reviewList.reviewList!='[]'}">      
+      <c:when test="${reviewList.reviewList!='[]'}">      
   <table class="table table-hover">
     <thead>
       <tr>
       <th></th>
-        <th>TruckNo</th>
+        <th>FoodTruck</th>
         <th>Content</th>
         <th>Score</th>
         <th>Date</th>
@@ -37,7 +37,7 @@
     <c:forEach items="${reviewList.reviewList}" var="reviewVO" varStatus="status">
       <tr>
         <td><input type="hidden" name="reviewNo" value="${reviewVO.reviewNo}"></td>
-        <td>${reviewVO.foodtruckNumber}</td>
+        <td>${reviewVO.foodtruckName}</td>
         <td>${reviewVO.reviewContent}</td>
         <td>
     <c:choose>
@@ -116,21 +116,21 @@
         <td>${reviewVO.reviewTimeposted}</td>
         <td>
         <button type="button" class="updateBtn btn btn-default btn-sm">
-          <span class="	glyphicon glyphicon-pencil"></span>
+          <span class="   glyphicon glyphicon-pencil"></span>
         </button>
          <button type="button" class="deleteBtn btn btn-default btn-sm">
           <span class="glyphicon glyphicon-remove"></span>
         </button>
-		</td>
+      </td>
       </tr>
      </c:forEach>
     </tbody>
   </table>
   </c:when>
-  		<c:otherwise>
-			등록된 리뷰가 없습니다.
-		</c:otherwise>
-	</c:choose>
+        <c:otherwise>
+         등록된 리뷰가 없습니다.
+      </c:otherwise>
+   </c:choose>
 </div>
 <div class="col-sm-2"></div>
 </div>
@@ -182,31 +182,31 @@
 
 
  <Script type="text/javascript">
- 	$(document).ready(function(){
- 		$(".updateBtn").click(function(){
- 			var reviewNo=$(this).parent().parent().find("input[name=reviewNo]").val();
- 			if(confirm("등록된 리뷰를 수정하시겠습니까?")){
- 				location.href="${pageContext.request.contextPath}/afterLogin_mypage/mypage_review_update.do?reviewNo="+reviewNo;
- 			}
- 		});
- 		$(".deleteBtn").click(function(){
- 			var reviewNo=$(this).parent().parent().find("input[name=reviewNo]").val();
- 			var row=$(this).parent().parent();
- 			if(confirm("등록된 리뷰를 삭제하시겠습니까?")){
- 				$.ajax({
- 					url:"${pageContext.request.contextPath}/afterLogin_mypage/deleteMyReview.do",
- 					type:"post",
- 					data:"reviewNo="+reviewNo,
- 					success:function(data){
- 						if(data=="deleteOk"){
- 							alert("삭제하였습니다.");
- 							//row.remove();
- 							location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
- 						}
- 					} 					
- 				});
- 			}
- 		});
- 	});
+    $(document).ready(function(){
+       $(".updateBtn").click(function(){
+          var reviewNo=$(this).parent().parent().find("input[name=reviewNo]").val();
+          if(confirm("등록된 리뷰를 수정하시겠습니까?")){
+             location.href="${pageContext.request.contextPath}/afterLogin_mypage/mypage_review_update.do?reviewNo="+reviewNo;
+          }
+       });
+       $(".deleteBtn").click(function(){
+          var reviewNo=$(this).parent().parent().find("input[name=reviewNo]").val();
+          var row=$(this).parent().parent();
+          if(confirm("등록된 리뷰를 삭제하시겠습니까?")){
+             $.ajax({
+                url:"${pageContext.request.contextPath}/afterLogin_mypage/deleteMyReview.do",
+                type:"post",
+                data:"reviewNo="+reviewNo,
+                success:function(data){
+                   if(data=="deleteOk"){
+                      alert("삭제하였습니다.");
+                      //row.remove();
+                      location.href="${pageContext.request.contextPath}/afterLogin_mypage/showMyReviewList.do?customerId=${sessionScope.memberVO.id}";
+                   }
+                }                
+             });
+          }
+       });
+    });
 
  </Script>

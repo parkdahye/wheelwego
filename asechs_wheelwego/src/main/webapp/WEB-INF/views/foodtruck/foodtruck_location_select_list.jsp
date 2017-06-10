@@ -42,7 +42,6 @@ text-indent: center;
 <script>
 
 $(document).ready(function(){
-<<<<<<< HEAD
    var option="${requestScope.option}";
    var sel=document.getElementById("option");
    for(var i=0; i<sel.options.length; i++){
@@ -50,14 +49,7 @@ $(document).ready(function(){
          sel.options[i].selected = true;
       }
    }
-=======
-	var option="${requestScope.option}";
-	var sel=document.getElementById("option");
-	for(var i=0; i<sel.options.length; i++){
-		if(sel.options[i].value==option){
-			sel.options[i].selected = true;
-		}
-	}
+
 	$(".detailLink").bind("click",function(){
 		var address=$(this).parent().find(".address").text();
 		var foodtruckNo=$(this).parent().find(":input[name=foodtruckNo]").val();
@@ -66,19 +58,12 @@ $(document).ready(function(){
 		$(this).attr("href","${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo="+foodtruckNo+"&latitude="+latitude+"&longitude="+longitude+"&address="+address);
 	});
 
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
    $("input#insertBtn").click(function(){
      var foodtruckNumber = $(this).attr('name');
      var insertBtn=$(this);
      var id = "${sessionScope.memberVO.id}";
-<<<<<<< HEAD
+
     if(id==""){
-=======
-     //var img1=document.getElementById("${pageContext.request.contextPath }/resources/img/foodtruck/heartoff.png");
-       var src = ($(this).attr('src')) ==='hearton.png'
-    	   var insertBtn = $(this);
-    if(id==""){
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
        alert("로그인이 필요합니다.");
     }else{
      $.ajax({
@@ -87,23 +72,13 @@ $(document).ready(function(){
       data: {id: id, foodtruckNumber: foodtruckNumber}, 
       success:function(data){
          if(data=="on"){
-<<<<<<< HEAD
          $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png'); 
-=======
-            $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png');
-           // $(this).css("background-image","${pageContext.request.contextPath}/resources/upload/hearton.png");
-           //location.reload();  
-			$(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/hearton.png'); 
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
             alert("단골트럭으로 등록!");
+           location.reload();  
          }else{
-<<<<<<< HEAD
-            alert("단골트럭 등록해제");
-            $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png'); 
-=======
-        	 $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png');
+            $(insertBtn).attr('src','${pageContext.request.contextPath}/resources/upload/greyheart2.png');
             alert("단골트럭 등록해제");         
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git
+            location.reload();  
          }
       }
    });
@@ -143,9 +118,9 @@ $(document).ready(function(){
   <div class="col-xs-4"></div>
   <div class="col-xs-4">
   <select name="option" id="option" class="form-control">
-  	<option value="byDate" class="selected">최신순</option>
-   	<option value="byAvgGrade" class="selected">평점순</option>
-  	<option value="byWishlist" class="selected">즐겨찾기순</option>
+     <option value="byDate" class="selected">최신순</option>
+      <option value="byAvgGrade" class="selected">평점순</option>
+     <option value="byWishlist" class="selected">즐겨찾기순</option>
   </select>
 </div>
 <div class="col-xs-4"></div>
@@ -155,11 +130,10 @@ $(document).ready(function(){
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-sm-6">
       <div class="thumbnail">
-	<input type="hidden" name="foodtruckNo" value="${truckInfo.foodtruckNumber}">
-		<input type="hidden" name="latitude" value="${truckInfo.latitude}">
-		<input type="hidden" name="longitude" value="${truckInfo.longitude}">
+   <input type="hidden" name="foodtruckNo" value="${truckInfo.foodtruckNumber}">
+      <input type="hidden" name="latitude" value="${truckInfo.latitude}">
+      <input type="hidden" name="longitude" value="${truckInfo.longitude}">
       <a class="detailLink" href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
-
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
         </a>
         <c:choose>
@@ -244,6 +218,7 @@ $(document).ready(function(){
 <br><br>
 </div>
 <br><br>
+<br><br>
 
 
 <script type="text/javascript">
@@ -258,11 +233,11 @@ $(document).ready(function(){
         var result = response.result, // 검색 결과의 컨테이너
             items = result.items; // 검색 결과의 배열
             if(items[0].address=="" || items[0].address==null){
-            	document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
+               document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
             }else{
             document.getElementById("${truckInfo.foodtruckName}").innerHTML = items[0].address;
             }
     });
    </c:forEach>
+
 </script>
->>>>>>> branch 'master' of https://github.com/parkdahye/wheelwego.git

@@ -1,15 +1,15 @@
 select * from foodtruck where seller_id='seller'
 ----------dbTEST---------------------
 select * from WISHLIST where customer_id='customer01'
-select * from foodtruck where foodtruck_name='카페브릭'
-select * from foodtruckfile
+select * from foodtruck where foodtruck_name='현지트럭'
+select * from foodtruck
 select * from wishlist where customer_id='customer01'
 delete from wishlist 
-
 ----------dbTEST---------------------
 		select id from member where member_name='정현지' and
 		phonenumber='01022552716'
 select * from member
+delete from review
 delete from member where id='seller01'
 delete from member where id='customer01'
 delete from foodtruck where foodtruck_name='코알라트럭'

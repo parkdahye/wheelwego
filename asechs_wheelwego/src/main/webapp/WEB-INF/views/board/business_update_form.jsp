@@ -18,7 +18,7 @@
 	})//ready
 </script>
 <div class="panel panel-default"> 
-<div class="panel-heading"><h3>창업게시판 수정</h3></div> 
+<div class="panel-heading" style="background-color: #F6E3CE"><h3>창업게시판 수정</h3></div> 
 
 <div class="panel-body">
 
@@ -68,9 +68,9 @@
 		</div> 
 		
 		<div class="center-block" style='width:400px' align=	"center"> 
-		<input type="reset"  class="btn btn-info" value="다시작성">&nbsp;&nbsp;
-		<input type="submit"  class="btn btn-info" value="수정" >&nbsp;&nbsp;
-		<input type="button"  class="btn btn-info" value="취소" id="cancelBtn"></div> 
+		<input type="reset"  class="btn btn-info" value="다시작성" style="background-color: #2dcb73">&nbsp;&nbsp;
+		<input type="submit"  class="btn btn-info" value="수정" style="background-color: #2dcb73">&nbsp;&nbsp;
+		<input type="button"  class="btn btn-info" value="취소" id="cancelBtn" style="background-color: #2dcb73"></div> 
 </form> 
 </div> 
 </div> <!--panel end--> 
