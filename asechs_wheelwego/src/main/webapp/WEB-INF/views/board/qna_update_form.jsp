@@ -17,7 +17,7 @@
 			location.href="${pageContext.request.contextPath}/board/qna_detail_content.do?no="+${requestScope.detail_qna.no};
 		})
 		$("input[name='file[0]']").click(function(){
-			alert(1);
+			//
 		})
 	})//ready
 </script>
