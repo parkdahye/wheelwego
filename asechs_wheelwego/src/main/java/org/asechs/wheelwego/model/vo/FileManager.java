@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileManager {
    private MultipartFile imgFile;
    //private String newFilePath="C:\\Users\\User\\AppData\\Roaming\\SPB_16.6\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
-   private String newFilePath="C:\\java-kosta\\WAS\\wheelwego-tomcat\\webapps\\asechs_wheelwego\\resources\\upload\\";
+   private String newFilePath="C:\\Users\\Administrator\\git\\wheelwego\\asechs_wheelwego\\src\\main\\webapp\\resources\\upload\\";
    private String newFileFullName;
    private  String newFileName;
 

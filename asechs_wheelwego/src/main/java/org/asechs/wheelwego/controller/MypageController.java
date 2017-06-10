@@ -207,6 +207,16 @@ public class MypageController {
       mypageService.setGPSInfo(gpsInfo);
 
       return "설정 완료";
+   }   
+   @RequestMapping("afterLogin_mypage/set_TruckGPS.do")
+   public String setTruckGPS(String sellerId){
+      TruckVO gpsInfo = new TruckVO();
+      
+      gpsInfo.setSellerId(sellerId);
+      
+      mypageService.setGPSInfo(gpsInfo);
+      
+      return "redirect:../afterLogin_mypage/mypage.do";
    }
 
    @RequestMapping("afterLogin_mypage/test.do")

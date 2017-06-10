@@ -147,6 +147,7 @@ public class MypageDAOImpl implements MypageDAO {
 
 	@Override
 	public List<TruckVO> getWishList(PagingBean pagingBean) {
+		System.out.println("dao: "+sqlSessionTemplate.selectList("mypage.getWishList", pagingBean));
 		return sqlSessionTemplate.selectList("mypage.getWishList", pagingBean);
 	}
 	@Override

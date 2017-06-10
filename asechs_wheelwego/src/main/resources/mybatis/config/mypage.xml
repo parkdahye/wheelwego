@@ -97,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <delete id="deleteMyTruck">
       delete from foodtruck where foodtruck_number=#{value}
    </delete>
-   <select id="getWishList" parameterType="pagingBean" resultMap="truckRM" resultType="truckVO">
+   <select id="getWishList" parameterType="pagingBean" resultMap="truckpageRM" resultType="truckVO">
       SELECT f.foodtruck_filepath, t.* FROM
       (SELECT fo.*, row_number() over(order by foodtruck_number desc) as rnum 
       from foodtruck fo where fo.foodtruck_number in (select foodtruck_number from wishlist where customer_id = #{customerId}))t, foodtruckfile f
