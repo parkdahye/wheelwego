@@ -19,7 +19,7 @@
 	})//ready
 </script>
 <div class="panel panel-default"> 
-<div class="panel-heading"><h3>자유게시판 수정</h3></div> 
+<div class="panel-heading" style="background-color: #F6E3CE"><h3>자유게시판 수정</h3></div> 
 
 <div class="panel-body">
 
@@ -45,7 +45,8 @@
 		<div class="form-group"> 
 		<label for="title">글제목</label> 
 		<input type="text" class="form-control" name ="title" id="title" value="${requestScope.detail_freeboard.title }" required="required"> 
-		</div> </div>
+		</div> 
+		</div>
 		 
 		<div class="col-md-11" style="margin-right: 70px"> 
 		<div class="form-group"> 
@@ -56,7 +57,7 @@
 		</div></div><br><br><br><br>
 		
 			<div class="form-group" style="margin-left:20px"> 
-		<label for="File">첨부파일 1</label> 
+		<label for="File">첨부파일 1</label>
 		<input type="file" name="file[0]" > 
 		</div> 
 		<div class="form-group" style="margin-left:20px"> 
@@ -70,9 +71,9 @@
 
 		<!-- 버튼  -->
 		<div class="center-block" style='width:400px' align="center"> 
-		<input type="reset"  class="btn btn-info" value="다시작성">	
-		<input type="submit"  class="btn btn-info" value="수정" >
-		<input type="button"  class="btn btn-info" value="취소" id="cancelBtn"></div> 
+		<input type="reset"  class="btn btn-info" value="다시작성" style="background-color: #2dcb73">	
+		<input type="submit"  class="btn btn-info" value="수정" style="background-color: #2dcb73">
+		<input type="button"  class="btn btn-info" value="취소" id="cancelBtn" style="background-color: #2dcb73"></div> 
 </form> 
 </div>
 </div> <!--panel end--> 

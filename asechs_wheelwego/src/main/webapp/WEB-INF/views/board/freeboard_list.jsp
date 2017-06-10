@@ -19,7 +19,7 @@
 </script>
 <body>
 	<table class="table table-hover" >
-		<caption>목록</caption>
+		<caption><h3>자유게시판 목록</h3></caption>
 		<thead>
 			<tr>
 				<th class="no">NO</th>
@@ -87,6 +87,42 @@
 	</c:if>
 	</p>
 	<table align="right"><tr>
-	<td><button type="button" class="btn btn-info" id="writeBtn">글쓰기</button></td></tr>
+	<td><button type="button" class="btn btn-info" id="writeBtn" style="background-color: #2dcb73">글쓰기</button></td></tr>
 	</table>
+	
+	<!-- 게시판 검색 기능 -->
+	<form action="" align="center" style="margin-left: 55px">
+		<select>
+			<option>
+		</select>
+		<input type="text" name="search">
+		<input type="submit" value="검색">
+	</form>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

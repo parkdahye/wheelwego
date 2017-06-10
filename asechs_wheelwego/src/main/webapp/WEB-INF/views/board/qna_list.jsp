@@ -19,7 +19,7 @@ $(document).ready(function(){
 </script>
 <body>
 	<table class="table table-hover">
-		<caption>목록</caption>
+		<caption><h3>Q&A게시판 목록</h3></caption>
 		<thead>
 			<tr>
 				<th class="no">NO</th>
@@ -87,6 +87,6 @@ $(document).ready(function(){
 	</c:if>
 	</p>
 	<table align="right"><tr>
-	<td><button type="button" class="btn btn-info" id="writeBtn">글쓰기</button></td></tr>
+	<td><button type="button" class="btn btn-info" id="writeBtn" style="background-color: #2dcb73">글쓰기</button></td></tr>
 	</table>
 </body>

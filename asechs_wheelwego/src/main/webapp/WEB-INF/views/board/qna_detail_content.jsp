@@ -53,8 +53,8 @@
 		});
 	})//ready
 </script> 
-<div class="panel panel-default"> 
-<div class="panel-heading" style="background-color:#FBF8EF; ">
+<div class="panel panel-default" style="background-color: "> 
+<div class="panel-heading" style="background-color: #F6E3CE">
 <h3><b>Q&A 상세보기</b></h3></div> 
 <div class="panel-body" style="margin-left: 15px;">
 <div class="container"> 
@@ -63,7 +63,7 @@
 			<div class="col-md-3">
 			<div class="form-group" style="margin-left: 15px;"> 
 			<label for="name">글번호</label> 
-			<input type="text" class="form-control" value="${requestScope.detail_qna.no}" readonly> 
+			<input type="text" class="form-control" value="${requestScope.detail_qna.no}" readonly style="background-color: white"> 
 			</div> 
 			</div> 
 			
@@ -71,7 +71,7 @@
 			<div class="col-md-8" > 
 			<div class="form-group" style="margin-right: 15px;"> 
 			<label for="writer">작성자</label> 
-			<input type="text" class="form-control"value="${requestScope.name.memberName}" readonly > 
+			<input type="text" class="form-control"value="${requestScope.name.memberName}" readonly style="background-color: white"> 
 			</div> 
 			</div> 
 		</div> 
@@ -80,7 +80,7 @@
 		<div class="col-md-11"> 
 		<div class="form-group"> 
 		<label for="title">글제목</label> 
-		<input type="text" class="form-control" value="${requestScope.detail_qna.title }" readonly> 
+		<input type="text" class="form-control" value="${requestScope.detail_qna.title }" readonly style="background-color: white"> 
 		</div> </div>
 		 
 		 <%-- 글 내용--%>
@@ -89,7 +89,7 @@
 		<label for="content">글내용</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<font size=2 >${requestScope.detail_qna.timePosted} &nbsp;&nbsp; 
 		조회수 : ${requestScope.detail_qna.hits}</font>
-		<textarea class="form-control" rows="10" readonly>${requestScope.detail_qna.content }</textarea> 
+		<textarea class="form-control" rows="10" readonly style="background-color: white">${requestScope.detail_qna.content }</textarea> 
 		</div></div><br><br><br><br><br><br><br><br><br><br><br><br>
 		
 			<%-- 사진 들어갈 공간 임시로 올림 --%>
@@ -102,11 +102,11 @@
 		
 		<%-- 목록, 수정 , 삭제 버튼  --%>
 		<div class="center-block" style='width:400px' align="center"> 
-		<button type="button" class="btn btn-info"  id="boardListBtn">목록</button>&nbsp;&nbsp;
+		<button type="button" class="btn btn-info"  id="boardListBtn" style="background-color: #2dcb73">목록</button>&nbsp;&nbsp;
 			<%-- login 적용 시 위로 두칸 올린다 --%>
 			 <c:if test="${requestScope.detail_qna.id==sessionScope.memberVO.id}">
-			 <button type="button" class="btn btn-info"  id="modifyBtn"><b>수정</b></button>&nbsp;&nbsp;
-			<button type="button" class="btn btn-info"  id="deleteBtn">삭제</button>
+			 <button type="button" class="btn btn-info"  id="modifyBtn" style="background-color: #2dcb73"><b>수정</b></button>&nbsp;&nbsp;
+			<button type="button" class="btn btn-info"  id="deleteBtn" style="background-color: #2dcb73">삭제</button>
 			 </c:if>
 			 </div> 
 </div> 
@@ -121,7 +121,7 @@
     
     <div class="row">
     
-    <div class="col-md-6">
+    <div class="col-md-12">
     						<div class="widget-area no-padding blank">
 								<div class="status-upload">
 									<form method="post" action="${pageContext.request.contextPath }/afterLogin_board/writeqnaComment.do" id="qnaCommentForm">
