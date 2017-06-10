@@ -235,7 +235,9 @@ function geoFindMe2() {
                         <div class="text-center back-single-text">
                            <p>${truckVO.foodtruckName}</p>
                            <p class="truck-simple-info"><br><br><br>
+
               <span class="glyphicon glyphicon-map-marker"></span> <span id="${truckVO.foodtruckName}" class="address"></span><br>
+
             <Br><span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade}</p>
                         </div>
                      </div>
