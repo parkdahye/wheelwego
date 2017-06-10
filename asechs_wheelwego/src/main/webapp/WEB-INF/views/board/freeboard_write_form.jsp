@@ -36,7 +36,7 @@
 
 <div class="panel panel-default"> 
 <!-- Default panel contents --> 
-<div class="panel-heading"><h2>자유게시판 글쓰기</h2></div> 
+<div class="panel-heading" style="background-color: #F6E3CE"><h2>자유게시판 글쓰기</h2></div> 
 
 <div class="panel-body">
 
@@ -77,9 +77,9 @@
 		</div> 
 		
 		<div class="center-block" style='width:400px' align="center"> 
-		<input type="submit" class="btn btn-info" value="등록하기">&nbsp;&nbsp;
-		<input type="reset" class="btn btn-info"  value="다시쓰기">&nbsp;&nbsp;
-		<input type="button" class="btn btn-info"  value="취소" id="cancelBtn">
+		<input type="submit" class="btn btn-info" value="등록하기" style="background-color: #2dcb73">&nbsp;&nbsp;
+		<input type="reset" class="btn btn-info"  value="다시쓰기" style="background-color: #2dcb73">&nbsp;&nbsp;
+		<input type="button" class="btn btn-info"  value="취소" id="cancelBtn" style="background-color: #2dcb73">
 		</div>
 </form> 
 
