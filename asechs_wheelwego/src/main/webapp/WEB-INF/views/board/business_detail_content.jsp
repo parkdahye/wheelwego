@@ -32,7 +32,7 @@
 		})// 삭제버튼 끝
 		
 		$(":input[name=updateCommentBtn]").click(function(){
-			alert($(this).parent().parent().find(".comment").text());
+			//alert($(this).parent().parent().find(".comment").text());
 			var commentNo=$(this).parent().parent().find(".commentNo").text();
 			var contentNo=${requestScope.detail_business.no};
 			window.name="parentForm";
