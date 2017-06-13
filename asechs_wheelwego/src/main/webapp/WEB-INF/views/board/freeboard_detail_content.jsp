@@ -56,7 +56,11 @@
 			window.open("${pageContext.request.contextPath}/afterLogin_board/freeboard_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
 					,"commentUpdateForm", "width=570, height=350, resizable=no, scrollbars=no");
 		});//ajax
+		
 	})//ready
+	
+
+
 </script> 
 <div class="panel panel-default" style="background-color: "> 
 <div class="panel-heading" style="background-color: #F6E3CE"><h3><b>자유게시판 상세보기</b></h3></div> 
@@ -130,8 +134,8 @@
     <div class="col-md-12">
     						<div class="widget-area no-padding blank">
 								<div class="status-upload">
-									<form method="post" action="${pageContext.request.contextPath }/afterLogin_board/writeFreeboardComment.do" id="freeboardCommentForm">
-										<textarea placeholder="댓글을 입력해주세요" name="comment" required="required"></textarea>
+									<form method="post" action="${pageContext.request.contextPath }/afterLogin_board/writeFreeboardComment.do" id="freeboardCommentForm" >
+										<textarea placeholder="댓글을 입력해주세요" id="commentId" name="comment" required="required"></textarea>
 										<input type="hidden" name="id" value="${sessionScope.memberVO.id }">
 										<input type="hidden" name="contentNo" value="${requestScope.detail_freeboard.no }">
 										<button type="submit" class="btn btn-success green" id="submitBtn"><i class="fa fa-share"></i> Share</button>
