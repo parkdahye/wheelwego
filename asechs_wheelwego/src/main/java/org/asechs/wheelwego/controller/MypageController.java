@@ -53,6 +53,7 @@ public class MypageController {
          gpsInfo.setLongitude(Double.parseDouble(longitude));
          ModelAndView modelAndView = new ModelAndView("mypage/mypage_wishlist.tiles");
          ListVO listVO = mypageService.getWishList(pageNo, id);
+         System.out.println(listVO);
          modelAndView.addObject("wishlist", listVO);
          modelAndView.addObject("gpsInfo", gpsInfo);
          // System.out.println(listVO.getTruckList());
@@ -207,6 +208,16 @@ public class MypageController {
       mypageService.setGPSInfo(gpsInfo);
 
       return "설정 완료";
+   }   
+   @RequestMapping("afterLogin_mypage/set_TruckGPS.do")
+   public String setTruckGPS(String sellerId){
+      TruckVO gpsInfo = new TruckVO();
+      
+      gpsInfo.setSellerId(sellerId);
+      
+      mypageService.setGPSInfo(gpsInfo);
+      
+      return "redirect:../afterLogin_mypage/mypage.do";
    }
 
    @RequestMapping("afterLogin_mypage/test.do")

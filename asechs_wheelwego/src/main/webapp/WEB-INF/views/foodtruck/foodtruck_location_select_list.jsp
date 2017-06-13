@@ -130,13 +130,10 @@ $(document).ready(function(){
   <c:forEach items="${requestScope.pagingList.truckList}" var="truckInfo">
     <div class="col-sm-6">
       <div class="thumbnail">
-
-
    <input type="hidden" name="foodtruckNo" value="${truckInfo.foodtruckNumber}">
       <input type="hidden" name="latitude" value="${truckInfo.latitude}">
       <input type="hidden" name="longitude" value="${truckInfo.longitude}">
       <a class="detailLink" href="${pageContext.request.contextPath}/foodtruck/foodTruckAndMenuDetail.do?foodtruckNo=${truckInfo.foodtruckNumber}&latitude=${truckInfo.latitude}&longitude=${truckInfo.longitude}">
-
         <img src="${pageContext.request.contextPath}/resources/upload/${truckInfo.fileVO.filepath}" style="width:300px;height:220px;">
         </a>
         <c:choose>
@@ -218,8 +215,9 @@ $(document).ready(function(){
          </c:choose>   
    </c:if>   
 </p>
-
+<br><br>
 </div>
+<br><br>
 <br><br>
 
 

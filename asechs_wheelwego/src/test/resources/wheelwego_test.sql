@@ -3,8 +3,7 @@ select * from foodtruck where seller_id='seller'
 select * from WISHLIST where customer_id='customer01'
 select * from foodtruck where foodtruck_name='현지트럭'
 select * from foodtruck
-select * from wishlist where customer_id='customer01'
-delete from wishlist 
+select * from wishlist
 ----------dbTEST---------------------
 		select id from member where member_name='정현지' and
 		phonenumber='01022552716'

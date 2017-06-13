@@ -98,7 +98,6 @@ $(document).ready(function(){
 
 <!-- Add a background color and large text to the whole page -->
 <div class="w3-sand w3-large">
-
 <!-- About Container -->
 <div class="w3-container" id="about">
   <div class="w3-content" style="max-width:700px">
@@ -112,18 +111,20 @@ $(document).ready(function(){
 	        	<input type="image" id="insertBtn2" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath}/resources/upload/greyheart2.png" style="width:45px;text-align: center; z-index: 10; ">
 	        </c:otherwise>
         </c:choose>
-   </div>
+    </div>
+  
     <%-- <input type="image" id="insertBtn" name = "${truckDetailInfo.foodtruckNumber}" src = "${pageContext.request.contextPath }/resources/upload/greyheart2.png"> --%>
    <%--  <img src="${pageContext.request.contextPath}/resources/upload/${requestScope.truckDetailInfo.fileVO.filepath}" style="width:100%" ><br><br><br> --%>
 <p style="text-align:center;"><i>${truckDetailInfo.introduction}</i></p><br>
-<div class="w3-panel w3-leftbar w3-light-grey" align="center">
+<div class="w3-panel w3-leftbar w3-light-grey" align="center" >
 	<p></p>
     <p  style="font-size: 16px;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;${param.address}</p>
    <p><strong><span class="glyphicon glyphicon-star" style="color:orange"></span></strong> ${requestScope.truckDetailInfo.avgGrade} &nbsp;&nbsp;&nbsp;&nbsp;
    <strong><span class="glyphicon glyphicon-heart" style="color:red"></span> </strong>${requestScope.truckDetailInfo.wishlistCount}</p>
 </div>
+ </div>
   </div>
-</div>
+
 
 <!-- Menu Container -->
 <div class="w3-container" id="menu">
@@ -362,9 +363,9 @@ $(document).ready(function(){
 
   </div>
 </div>
-
-<!-- End page content -->
 </div>
+<!-- End page content -->
+
 
 <!-- Add Google Maps -->
 <script>

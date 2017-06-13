@@ -46,7 +46,7 @@
 		$(":input[name=updateCommentBtn]").click(function(){
 			var commentNo=$(this).parent().parent().find(".commentNo").text();
 			var contentNo=${requestScope.detail_qna.no};
-			alert(commentNo);
+			//alert(commentNo);
 			window.name="parentForm";
 			window.open("${pageContext.request.contextPath}/afterLogin_board/qna_update_comment.do?commentNo="+commentNo+"&contentNo="+contentNo
 					,"commentUpdateForm", "width=570, height=350, resizable=no, scrollbars=no");

@@ -235,9 +235,7 @@ function geoFindMe2() {
                         <div class="text-center back-single-text">
                            <p>${truckVO.foodtruckName}</p>
                            <p class="truck-simple-info"><br><br><br>
-
               <span class="glyphicon glyphicon-map-marker"></span> <span id="${truckVO.foodtruckName}" class="address"></span><br>
-
             <Br><span class="glyphicon glyphicon-star" style="color:orange"></span> ${truckVO.avgGrade}</p>
                         </div>
                      </div>
@@ -261,12 +259,12 @@ function geoFindMe2() {
     }, function(status, response) {
         if (status !== naver.maps.Service.Status.OK) {
             //return alert('Something wrong!');
+               document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
         }
 
         var result = response.result, // 검색 결과의 컨테이너
             items = result.items; // 검색 결과의 배열
             if(items[0].address=="" || items[0].address==null){
-               document.getElementById("${truckInfo.foodtruckName}").innerHTML="위치 정보 없음";
             }else{
             document.getElementById("${truckInfo.foodtruckName}").innerHTML = items[0].address;
             }
